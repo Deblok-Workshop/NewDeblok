@@ -1,5 +1,5 @@
 export default {
-    port: 3030
+    port: 8080
 } as {
     port: number;
 };
