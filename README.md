@@ -1,4 +1,4 @@
-# <img src="assets/banner.png" alt="banner" width="256">
+# <img src="assets/banner.png" alt="banner" width="320">
 
 > [!IMPORTANT]
 > ❗ Please read

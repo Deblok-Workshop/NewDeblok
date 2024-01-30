@@ -4,7 +4,7 @@ import config from "./config";
 const server = new Elysia();
 
 server.get("/", () => {
-    return "Hello!";
+    return "Welcome to Deblok!";
 })
 
 server.listen(config);
