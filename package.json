@@ -9,6 +9,7 @@
   },
   "type": "module",
   "dependencies": {
-    "elysia": "^0.8.15"
+    "elysia": "^0.8.15",
+    "elysia-rate-limit": "^2.0.1"
   }
 }
