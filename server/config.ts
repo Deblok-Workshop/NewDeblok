@@ -1,5 +1,3 @@
 export default {
-    port: 8080
-} as {
-    port: number;
-};
+    ratelimit: {duration: 300*1000, max:100, responseMessage:"Global rate limit reached"}
+}

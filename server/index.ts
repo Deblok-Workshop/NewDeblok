@@ -1,11 +1,12 @@
 import { Elysia } from "elysia";
+import wsconfig from "./wsconfig";
 import config from "./config";
 import { rateLimit } from "elysia-rate-limit";
 const server = new Elysia();
-server.use(rateLimit({duration: 300000, max:100, responseMessage:"Global rate limit reached"}))
+server.use(rateLimit(config.ratelimit))
 
 server.get("/", () => {
     return "Welcome to Deblok!";
 })
 
-server.listen(config);
+server.listen(wsconfig);
