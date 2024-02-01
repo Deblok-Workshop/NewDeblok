@@ -12,6 +12,7 @@
     "@elysiajs/cors": "^0.8.0",
     "@elysiajs/static": "^0.8.1",
     "elysia": "^0.8.15",
-    "elysia-rate-limit": "^2.0.1"
+    "elysia-rate-limit": "^2.0.1",
+    "tailwindcss": "^3.4.1"
   }
 }
