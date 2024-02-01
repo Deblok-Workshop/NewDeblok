@@ -1,6 +1,5 @@
 # SQL excludes
-db/
-db/db.sql
+db.sql
 
 # Logs
 
