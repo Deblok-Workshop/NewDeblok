@@ -1,4 +1,6 @@
-# Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
+# SQL excludes
+db/
+db/db.sql
 
 # Logs
 
@@ -174,12 +176,3 @@ dist
 # Finder (MacOS) folder config
 .DS_Store
 
-
-
-###############################
-# SQL excludes                #
-###############################
-
-db/*
-db/
-db/db.sql
