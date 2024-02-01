@@ -19,15 +19,15 @@ server.get("/api/__healthcheck", () => { // using /api/__healthcheck to be compa
 })
 
 server.get("/testing/dbopen", () => {
-  return helper.sql.open('./db/db.sql',true);
+  return helper.sql.open('./db.sql',true);
 })
 server.get("/testing/dbwrite", () => {
-  let db = helper.sql.open('./db/db.sql',true);
+  let db = helper.sql.open('./db.sql',true);
   let dbwr = helper.sql.write(db,'test','test','1234','append');
   return dbwr;
 })
 server.get("/testing/dbread", () => {
-  let db = helper.sql.open('./db/db.sql',true);
+  let db = helper.sql.open('./db.sql',true);
   let dbrd = helper.sql.read(db,'test','test');
   return dbrd;
 })
