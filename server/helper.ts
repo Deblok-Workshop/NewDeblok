@@ -11,35 +11,35 @@ function dbmaketable(db: sqllite, table: string) {
     if (!result) {
       db.exec(`CREATE TABLE ${table} (name TEXT PRIMARY KEY, value TEXT)`);
     }
+    
   }
 function dbwrite(db: sqllite, table: string, name: string, value: string, mode: string = "overwrite") {
-    dbmaketable(db,table) // incase if it doesn't exist
+    dbmaketable(db, table);
+    
     const sql = `SELECT * FROM ${table} WHERE name = ?`;
     const stmt = db.prepare(sql);
     const result = stmt.get(name);
-    
+
+    if (!result) {
+        const stmtInsert = db.prepare(`INSERT INTO ${table} (name, value) VALUES (?, ?)`);
+        stmtInsert.run(name, value);
+        // return;
+    }
+
     if (mode == "overwrite") {
-      if (result) {
-        stmt.run(`UPDATE ${table} SET value = ? WHERE name = ?`, value, name);
-      } else {
-        stmt.run(`INSERT INTO ${table} (name, value) VALUES (?, ?)`, name, value);
-      }
+        const stmtUpdate = db.prepare(`UPDATE ${table} SET value = ? WHERE name = ?`);
+        stmtUpdate.run(value, name);
     } else if (mode == "append") {
-      if (result) {
-        stmt.run(`UPDATE ${table} SET value = value || ? WHERE name = ?`, value, name);
-      }
+        const stmtAppend = db.prepare(`UPDATE ${table} SET value = value || ? WHERE name = ?`);
+        stmtAppend.run(value, name);
     }
 }
 function dbread(db: sqllite, table: string, name: string) {
     const sql = `SELECT value FROM ${table} WHERE name = ?`;
     const stmt = db.prepare(sql);
     const result = stmt.get(name);
-  
-    if (result) {
-      return result;
-    } else {
-      return null;
-    }
+    return result;
+    
   }
 
 
