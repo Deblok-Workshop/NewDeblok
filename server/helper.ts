@@ -1,5 +1,5 @@
 import sqllite from "bun:sqlite";
-
+import * as cgraphy from "node:crypto";
 function dbopen(addr: string, create: boolean = false): sqllite {
     return new sqllite(addr, {create:create})
 }
@@ -43,9 +43,62 @@ function dbread(db: sqllite, table: string, name: string) {
   }
 
 
+  function aesEncrypt(mode: string, text: string, key: string, iv: string = "deblokDefaultIV"): string {
+    let keySize: number;
+    let ivSize: number;
+    
+    switch(mode) {
+        case 'aes-128-cbc':
+            keySize = 16;
+            ivSize = 16;
+            break;
+        case 'aes-192-cbc':
+            keySize = 24;
+            ivSize = 16;
+            break;
+        case 'aes-256-cbc':
+            keySize = 32;
+            ivSize = 16;
+            break;
+        default:
+            throw new Error("Unsupported AES mode");
+    }
+
+    const cipher = cgraphy.createCipheriv(mode, key.slice(0, keySize), iv.slice(0, ivSize));
+    let encrypted = cipher.update(text, 'utf8', 'hex');
+    encrypted += cipher.final('hex');
+    return encrypted;
+}
+
+function aesDecrypt(mode: string, text: string, key: string, iv: string = "deblokDefaultIV"): string {
+    let keySize: number;
+    let ivSize: number;
+    
+    switch(mode) {
+        case 'aes-128':
+            keySize = 16;
+            ivSize = 16;
+            break;
+        case 'aes-192':
+            keySize = 24;
+            ivSize = 16;
+            break;
+        case 'aes-256':
+            keySize = 32;
+            ivSize = 16;
+            break;
+        default:
+            throw new Error("Unsupported AES mode");
+    }
+    mode = mode + '-cbc'
+    const decipher = cgraphy.createDecipheriv(mode, key.slice(0, keySize), iv.slice(0, ivSize));
+    let decrypted = decipher.update(text, 'hex', 'utf8');
+    decrypted += decipher.final('utf8');
+    return decrypted;
+}
 
 const sql = {open:dbopen,write:dbwrite,read:dbread}
-const crypto = {}
+const crypto = {aes:{decrypt:aesDecrypt,encrypt:aesEncrypt}}
 
 export default { 
     sql:sql,crypto:crypto
