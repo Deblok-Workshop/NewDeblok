@@ -4,7 +4,7 @@
 > ❗ Please read
 > [the message from rare](https://s.deblok.me)
 
-The New Deblok is a project developed by [Rare](https://github.com/uhidontkno), [Yusof](https://github.com/yoloyusof), [John](https://github.com/Notplayingallday383), and [Isaiah](https://github.com/QuartzWarrior).
+The New Deblok is a project developed by [Rare](https://github.com/uhidontkno), ~~[Yusof](https://github.com/yoloyusof)~~, [John](https://github.com/Notplayingallday383), and [Isaiah](https://github.com/QuartzWarrior).
 
 ## What is Deblok?
 Want complete privacy, well here's Deblok. Instead of using some shitty proxy like [Surfskip](https://rare1k.dev/surfskipisass) and others (no disrespect to Nebula and TN ❤️)
