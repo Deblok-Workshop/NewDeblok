@@ -1,17 +1,18 @@
 import sharp from 'sharp';
 function translateMathFuck(mathFuckCode: string): string {
     const translation: {[key: string]: string} = {
-        'ඞ?': '+',
-        'ඞ.': '-',
-        'ඞ-': '×',  
-        'ඞ;': '/',
-        'ඞ!': '^',
-        'ඞ=': '√',
-        'ඞ#': '=',
-        '_ඞ': '(',
-        'ඞ_': ')'
+        'O..': '+',
+        'o..': '-',
+        'Oo.': '×',  
+        'oO.': '/',
+        'oOO': '^',
+        'OoO': '√',
+        'OOo': '=',
+        'oo.': '(',
+        'OO.': ')'
     };
-    return mathFuckCode.replaceAll(/ඞ[?.;!=#_-]|_ඞ/g, match => translation[match] || match);
+    const pattern = new RegExp(Object.keys(translation).join('|'), 'g');
+    return mathFuckCode.replaceAll(pattern, match => translation[match] || match);
 }
 
 function shift(inputString: string, flipbit: number = 1) {

@@ -18,9 +18,14 @@ server.get("/api/", () => {
 server.get("/api/__healthcheck", () => { // using /api/__healthcheck to be compatible with Kasmweb's API format
   return {};
 })
-server.get("/api/testing/captcha", async ({ params: { dense } }) => {
+server.get("/api/captcha/:query/result.gif", async ({ params: { query } }) => {
   try {
-      const imageBuffer = await captcha.mathfuck.img('ඞ=_ඞ6ඞ-6ඞ_ඞ?_ඞ6ඞ-6ඞ_ඞ?3ඞ.3',72);
+      var q:any = query
+      q = new Buffer(query, 'hex')
+      q = q.toString('utf8')
+      console.log(q)
+      // q = captcha.mathfuck.shift(q,-1)
+      const imageBuffer = await captcha.mathfuck.img(q,72);
       return new Blob([imageBuffer]);
   } catch (error) {
       console.error('Error generating captcha:', error);
