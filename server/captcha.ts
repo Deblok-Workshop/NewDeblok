@@ -16,6 +16,9 @@ function translateMathFuck(mathFuckCode: string): string {
 }
 
 function shift(inputString: string, flipbit: number = 1) {
+    /* 
+     @deprecated 
+     */
     let shiftedString = '';
     if (flipbit == -1 || flipbit == 1) {} else {flipbit = 1}
     for (let i = 0; i < inputString.length; i++) {
