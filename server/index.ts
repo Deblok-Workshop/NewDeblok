@@ -5,6 +5,8 @@ import captcha from "./captcha";
 import { rateLimit } from "elysia-rate-limit";
 import { staticPlugin } from '@elysiajs/static'
 import { cors } from '@elysiajs/cors'
+let netaddr = '[::1]'
+netaddr = require('node:os').hostname()
 
 const server = new Elysia();
 
@@ -18,22 +20,16 @@ server.get("/api/", () => {
 server.get("/api/__healthcheck", () => { // using /api/__healthcheck to be compatible with Kasmweb's API format
   return {};
 })
-server.get("/api/captcha/:query/result.gif", async ({ params: { query } }) => {
-  try {
-      var q:any = query
-      q = new Buffer(query, 'hex')
-      q = q.toString('utf8')
-      console.log(q)
-      // q = captcha.mathfuck.shift(q,-1)
-      const imageBuffer = await captcha.mathfuck.img(q,72);
-      return new Blob([imageBuffer]);
-  } catch (error) {
-      console.error('Error generating captcha:', error);
-      return {
-          status: 500,
-          error: error,
-      };
-  }
+server.get("/api/captcha/:query/image.gif", async ({ params: { query } }) => {
+ // reimplement later
 });
-
+server.get("/api/captcha/request", async ({ params: { query } }) => {
+  var tempdbfile:Blob = Bun.file('tempcaptcha.db')
+  var tempdb = JSON.parse(await tempdbfile.text())
+ });
+console.log(`Listening on port ${config.webserver.port} or`)
+console.log(` │ 0.0.0.0:${config.webserver.port}`)
+console.log(` │ 127.0.0.1:${config.webserver.port}`)
+console.log(` │ ${netaddr}:${config.webserver.port}`)
+console.log(` └─────────────────────────>`)
 server.listen(config.webserver);
