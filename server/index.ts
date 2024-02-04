@@ -5,6 +5,9 @@ import captcha from "./captcha";
 import { rateLimit } from "elysia-rate-limit";
 import { staticPlugin } from '@elysiajs/static'
 import { cors } from '@elysiajs/cors'
+
+Bun.write('tempcaptcha.db',"{}")
+
 let netaddr = '[::1]'
 netaddr = require('node:os').hostname()
 
@@ -20,12 +23,25 @@ server.get("/api/", () => {
 server.get("/api/__healthcheck", () => { // using /api/__healthcheck to be compatible with Kasmweb's API format
   return {};
 })
-server.get("/api/captcha/:query/image.gif", async ({ params: { query } }) => {
- // reimplement later
-});
-server.get("/api/captcha/request", async ({ params: { query } }) => {
+server.get("/api/captcha/:query/image.gif", async ({ params: { query },set }) => {
+  
   var tempdbfile:Blob = Bun.file('tempcaptcha.db')
   var tempdb = JSON.parse(await tempdbfile.text())
+  if (tempdb[query] != undefined) {
+   var buf = await captcha.mathfuck.img(tempdb[query])
+   return new Blob([buf])
+  } else {
+    set.status = 404
+    return "CAPTCHA not found"
+  }
+});
+server.get("/api/captcha/request", async () => {
+  var tempdbfile:Blob = Bun.file('tempcaptcha.db')
+  var tempdb = JSON.parse(await tempdbfile.text())
+  var randuuid = crypto.randomUUID();
+  tempdb[randuuid] = captcha.mathfuck.random()
+  Bun.write('./tempcaptcha.db',JSON.stringify(tempdb))
+  return randuuid
  });
 console.log(`Listening on port ${config.webserver.port} or`)
 console.log(` │ 0.0.0.0:${config.webserver.port}`)

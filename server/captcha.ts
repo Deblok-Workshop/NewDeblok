@@ -20,7 +20,8 @@ function genMathFuck(mfk: string): string {
         '(': 'oo.',
         ')': 'OO.'
     };
-    const pattern = new RegExp(Object.keys(translation).join('|'), 'g');
+    const escapedKeys = Object.keys(translation).map(key => key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    const pattern = new RegExp(escapedKeys.join('|'), 'g');
     const rvmfk = mfk.replaceAll(pattern, match => translation[match] || match);
     return toHex(rvmfk);
 }
@@ -107,7 +108,8 @@ function makerandmfk() {
         '(': 'oo.',
         ')': 'OO.'
     };
-    const pattern = new RegExp(Object.keys(translation).join('|'), 'g');
+    const escapedKeys = Object.keys(translation).map(key => key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    const pattern = new RegExp(escapedKeys.join('|'), 'g');
     const rvmfk = math.replaceAll(pattern, match => translation[match] || match);
     return rvmfk;
     
