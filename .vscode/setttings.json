@@ -1,9 +1,0 @@
-{
-    "bun.runtime": "bun",
-  
-    "bun.debugTerminal": {
-      "enabled": true,
-      "stopOnEntry": false
-    }
-  }
-  

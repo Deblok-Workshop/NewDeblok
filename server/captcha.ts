@@ -96,6 +96,21 @@ function makerandmfk() {
             math = '1+1'
             break;
     }
+    const translation: {[key: string]: string} = {
+        '+': 'O..',
+        '-': 'o..',
+        '*': 'Oo.',
+        '/': 'oO.',
+        '^': 'oOO',
+        'sqrt': 'OoO',
+        '=': 'OOo',
+        '(': 'oo.',
+        ')': 'OO.'
+    };
+    const pattern = new RegExp(Object.keys(translation).join('|'), 'g');
+    const rvmfk = math.replaceAll(pattern, match => translation[match] || match);
+    return rvmfk;
+    
 }
 
 export default {
