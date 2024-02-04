@@ -80,11 +80,11 @@ function makerandmfk() {
             math = `${Math.floor(Math.random()*9)}${choices[Math.floor(Math.random()*choices.length)]}${Math.floor(Math.random()*9)}`
             break;
         case 1:
-            var choices = ['+','*','-']
+            var choices = ['+','-']
             math = `${Math.floor(Math.random()*127)}${choices[Math.floor(Math.random()*choices.length)]}${Math.floor(Math.random()*5)}0`
             break;
         case 2:
-            var choices = ['12*(3*4)','9*(3*3)','((7^2)+1)*(1/2)','((9*11)/3)*(1/100)',"((8*8)*(128*8))-1","(2*3*2)*(2*3*2)"]
+            var choices = ['12*12','9*9','(49+1)*(1/2)','(99/3)/100',"(128*8)-1","(2*3*2)*(2*3*2)"]
             math = `${choices[Math.floor(Math.random()*choices.length)]}`
             break;
         case 3:
