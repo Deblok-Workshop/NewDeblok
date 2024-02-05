@@ -53,8 +53,8 @@ server.post("/api/captcha/:query/validate", async ({body ,params: { query },set 
     set.status = 404
     return "CAPTCHA not found"
   }
-});
-server.post("/api/captcha/:query/void", async ({params: { query },set }) => {
+}); 
+server.get("/api/captcha/:query/void", async ({params: { query },set }) => {
   var tempdbfile:Blob = Bun.file('tempcaptcha.db')
   var tempdb = JSON.parse(await tempdbfile.text())
   if (tempdb[query] != undefined) {
