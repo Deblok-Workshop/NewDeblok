@@ -105,11 +105,11 @@ server.post("/api/auth/login", async ({body,set}) => {
 // find out what the argon hash validation function is because
 // I don't know it off of the top of my head.
 
-},
+});
 console.log(`Listening on port ${config.webserver.port} or`),
 console.log(` │ 0.0.0.0:${config.webserver.port}`),
 console.log(` │ 127.0.0.1:${config.webserver.port}`),
 console.log(` │ ${netaddr}:${config.webserver.port}`),
 console.log(` └─────────────────────────>`),
-server.listen(config.webserver)
-);
+server.listen(config.webserver);
+
