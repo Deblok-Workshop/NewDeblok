@@ -81,12 +81,17 @@ server.post("/api/auth/signup", async ({body,set}) => {
   bjson=JSON.parse(b)
   } catch {set.status = 400; return "ERR: Bad JSON"}
 
+
   const usr:string = bjson["usr"]
-  const pwd:string = bjson["pwd"]
+  var pwd:string = bjson["pwd"]
   const email:string = bjson["em"]
   if (usr == "" || !usr || pwd == "" || !pwd || email == "" || !email) {
     set.status = 400; return "ERR: One or more fields are missing."
   }
+  if (!String(pwd).startsWith('sha256:') || !String(usr).startsWith('md5:')) {
+    set.status = 400; return "ERR: Invalid input."
+  }
+  pwd = await Bun.password.hash(pwd)
 
 // TODO:
 // Read the body JSON (which is the bjson variable), then
