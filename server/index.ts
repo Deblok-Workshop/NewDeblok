@@ -76,7 +76,9 @@ server.get("/api/captcha/request", async () => {
  });
 server.post("/api/auth/signup", async ({body,set}) => {
   const b:any=body // the body variable is actually a string, this is here to fix a ts error
+  try {
   const bjson:Object=JSON.parse(b)
+  } catch {set.status = 400; return "Bad JSON"}
 // TODO:
 // Read the body JSON (which is the bjson variable), then
 // Accept a sha256 hash (must start with "sha256:") for the password
