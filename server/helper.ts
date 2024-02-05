@@ -1,6 +1,6 @@
 import sqllite from "bun:sqlite";
 import * as cgraphy from "node:crypto";
-function dbopen(addr: string, create: boolean = false): sqllite {
+function dbopen(addr: string, create: boolean = true): sqllite {
     return new sqllite(addr, {create:create})
 }
 function dbmaketable(db: sqllite, table: string) {
@@ -35,6 +35,7 @@ function dbwrite(db: sqllite, table: string, name: string, value: string, mode: 
     }
 }
 function dbread(db: sqllite, table: string, name: string) {
+    dbmaketable(db, table);
     const sql = `SELECT value FROM ${table} WHERE name = ?`;
     const stmt = db.prepare(sql);
     const result = stmt.get(name);

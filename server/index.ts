@@ -1,4 +1,4 @@
-import { Elysia } from "elysia";
+import { Elysia, error } from "elysia";
 import config from "./config";
 import helper from "./helper";
 import captcha from "./captcha";
@@ -79,7 +79,7 @@ server.post("/api/auth/signup", async ({body,set}) => {
   let bjson:any = {"usr":"","pwd":"","em":""}
   try {
   bjson=JSON.parse(b)
-  } catch {set.status = 400; return "ERR: Bad JSON"}
+  } catch (e) {console.error(e);set.status = 400; return "ERR: Bad JSON"}
 
 
   const usr:string = bjson["usr"]
@@ -91,7 +91,8 @@ server.post("/api/auth/signup", async ({body,set}) => {
   if (!String(pwd).startsWith('sha256:') || !String(usr).startsWith('md5:')) {
     set.status = 400; return "ERR: Invalid input."
   }
-  var db = helper.sql.open('db.sql')
+  try {
+  var db = helper.sql.open('db.sql',true)
   var exists = helper.sql.read(db,'credentials',usr)
   if (exists) {set.status = 400; return "ERR: Username already exists"}
   // TODO: prevent email sharing
@@ -99,6 +100,8 @@ server.post("/api/auth/signup", async ({body,set}) => {
   var guid = crypto.randomUUID()
   helper.sql.write(db,'credentials',usr,`u/${usr}/p/${pwd}/e/${btoa(email)}|guid/${guid}`)
   return guid
+  } catch (e) {console.error(e);set.status = 500;return e;}
+  
 
 // TODO:
 // Read the body JSON (which is the bjson variable), then
