@@ -32,7 +32,7 @@ server.get("/api/captcha/:query/image.gif", async ({ params: { query },set }) =>
    return new Blob([buf])
   } else {
     set.status = 404
-    return "CAPTCHA not found"
+    return "ERR: CAPTCHA not found"
   }
 });
 server.post("/api/captcha/:query/validate", async ({body ,params: { query },set }) => {
@@ -51,7 +51,7 @@ server.post("/api/captcha/:query/validate", async ({body ,params: { query },set 
     return rv
   } else {
     set.status = 404
-    return "CAPTCHA not found"
+    return "ERR: CAPTCHA not found"
   }
 }); 
 server.get("/api/captcha/:query/void", async ({params: { query },set }) => {
@@ -63,7 +63,7 @@ server.get("/api/captcha/:query/void", async ({params: { query },set }) => {
     return "";
   } else {
     set.status = 404
-    return "CAPTCHA not found"
+    return "ERR: CAPTCHA not found"
   }
 });
 server.get("/api/captcha/request", async () => {
@@ -76,9 +76,18 @@ server.get("/api/captcha/request", async () => {
  });
 server.post("/api/auth/signup", async ({body,set}) => {
   const b:any=body // the body variable is actually a string, this is here to fix a ts error
+  let bjson:any = {"usr":"","pwd":"","em":""}
   try {
-  const bjson:Object=JSON.parse(b)
-  } catch {set.status = 400; return "Bad JSON"}
+  bjson=JSON.parse(b)
+  } catch {set.status = 400; return "ERR: Bad JSON"}
+
+  const usr:string = bjson["usr"]
+  const pwd:string = bjson["pwd"]
+  const email:string = bjson["em"]
+  if (usr == "" || !usr || pwd == "" || !pwd || email == "" || !email) {
+    set.status = 400; return "ERR: One or more fields are missing."
+  }
+
 // TODO:
 // Read the body JSON (which is the bjson variable), then
 // Accept a sha256 hash (must start with "sha256:") for the password
