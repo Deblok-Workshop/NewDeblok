@@ -103,24 +103,6 @@ server.post("/api/auth/signup", async ({body,set}) => {
   } catch (e) {console.error(e);set.status = 500;return e;}
   
 
-// TODO:
-// Read the body JSON (which is the bjson variable), then
-// Accept a sha256 hash (must start with "sha256:") for the password
-// then securely hash that using Bun.password.hash for secure double
-// hashing. Once it is hashed, add the entry to the hcreds table in
-// the SQL database. The username will be MD5 hashed in the db and
-// will be used as a user ID. The entry name will be the uid, and
-// the entry value will be the double hashed password.
-
-// Use helper.sql.open('db.sql') to open the database
-// Use helper.sql.read(db, 'tablename','name') to read
-// Use helper.sql.write(db,'tablename','name','value') to write
-// Use helper.crypto.aes.encrypt(mode,'text','key') to AES encrypt
-// Use helper.crypto.aes.decrypt(mode,'text','key') to AES decrypt
-
-// Do something similar for the login endpoint. 
-// I don't feel like writing a whole another paragraph rn bc 
-// im on mobile and i need to fix ssh 😞
  });
 
 server.post("/api/auth/login", async ({body,set}) => {
