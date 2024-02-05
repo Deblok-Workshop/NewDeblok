@@ -91,7 +91,14 @@ server.post("/api/auth/signup", async ({body,set}) => {
   if (!String(pwd).startsWith('sha256:') || !String(usr).startsWith('md5:')) {
     set.status = 400; return "ERR: Invalid input."
   }
+  var db = helper.sql.open('db.sql')
+  var exists = helper.sql.read(db,'credentials',usr)
+  if (exists) {set.status = 400; return "ERR: Username already exists"}
+  // TODO: prevent email sharing
   pwd = await Bun.password.hash(pwd)
+  var guid = crypto.randomUUID()
+  helper.sql.write(db,'credentials',usr,`u/${usr}/p/${pwd}/e/${btoa(email)}|guid/${guid}`)
+  return guid
 
 // TODO:
 // Read the body JSON (which is the bjson variable), then
