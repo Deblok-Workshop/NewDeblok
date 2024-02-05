@@ -107,11 +107,28 @@ server.post("/api/auth/signup", async ({body,set}) => {
 
 server.post("/api/auth/login", async ({body,set}) => {
   const b:any=body // the body variable is actually a string, this is here to fix a ts error
-  const bjson:Object=JSON.parse(b)
-// Please see the TODO message above to see what to do.
-// The login endpoint will be similar. Please read Bun docs to
-// find out what the argon hash validation function is because
-// I don't know it off of the top of my head.
+  var bjson:any={"usr":"","pwd":"","em":""}
+  try {
+    bjson=JSON.parse(b)
+    } catch (e) {console.error(e);set.status = 400; return "ERR: Bad JSON"}
+  const usr:string = bjson["usr"]
+  var pwd:string = bjson["pwd"]
+  const email:string = bjson["em"]
+  if (usr == "" || !usr || pwd == "" || !pwd || email == "" || !email) {
+    set.status = 400; return "ERR: One or more fields are missing."
+  }
+  if (!String(pwd).startsWith('sha256:') || !String(usr).startsWith('md5:')) {
+    set.status = 400; return "ERR: Invalid input."
+  }
+  var db = helper.sql.open('db.sql',true)
+  var entry = helper.sql.read(db,'credentials',usr)
+  if (entry) {
+
+    // TODO: make the rest of the login function
+
+  } else {
+    set.status = 400; return "ERR: Username does not exist."
+  }
 
 });
 console.log(`Listening on port ${config.webserver.port} or`),
