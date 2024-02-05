@@ -43,6 +43,36 @@ function translateMathFuck(mathFuckCode: string): string {
     return mathFuckCode.replaceAll(pattern, match => translation[match] || match);
 }
 
+function evaluateMathFuck(mathFuckCode: string): number {
+
+    if (!/^[0-9Oo.\-+*/^=()]+$/.test(mathFuckCode)) {
+        console.error('Invalid input: Input contains invalid characters.');
+        return NaN;
+    }
+
+    const translation: {[key: string]: string} = {
+        'O..': '+',
+        'o..': '-',
+        'Oo.': '*',
+        'oO.': '/',
+        'oOO': '^',
+        'OoO': 'Math.sqrt',
+        'OOo': '=',
+        'oo.': '(',
+        'OO.': ')'
+    };
+
+    const pattern = new RegExp(Object.keys(translation).join('|'), 'g');
+    const translatedCode = mathFuckCode.replaceAll(pattern, match => translation[match] || match);
+
+    try {
+        return eval(translatedCode);
+    } catch (error) {
+        console.error('Error during evaluation:', error);
+        return NaN; 
+    }
+}
+
 function shift(inputString: string, flipbit: number = 1) {
     /* 
      @deprecated 
@@ -73,7 +103,7 @@ async function makemfk_img(mfk: string,dense: number = 72): Promise<Buffer> {
 }
 
 function makerandmfk() {
-    var level:number = Math.floor(Math.random()*4)
+    var level:number = Math.floor(Math.random()*5)
     var math :string = "";
     switch (level) {
         case 0:
@@ -92,9 +122,12 @@ function makerandmfk() {
             var choices = ['9+10','21+17','8*37','1024/8','65536*0.01','(8^3)*2']
             math = `${choices[Math.floor(Math.random()*choices.length)]}`
             break;
-    
+        case 4:
+            var choices = ['sqrt(144)','sqrt(16384)','(sqrt(144))+25','(sqrt(16384))*2']
+            math = `${choices[Math.floor(Math.random()*choices.length)]}`
+            break;
         default:
-            math = '1+1'
+            math = '11*(3*3)'
             break;
     }
     const translation: {[key: string]: string} = {
@@ -116,5 +149,5 @@ function makerandmfk() {
 }
 
 export default {
-    mathfuck:{translate:translateMathFuck,img:makemfk_img,shift:shift,random:makerandmfk,gen:genMathFuck}
+    mathfuck:{translate:translateMathFuck,img:makemfk_img,shift:shift,random:makerandmfk,gen:genMathFuck,eval:evaluateMathFuck}
 }
