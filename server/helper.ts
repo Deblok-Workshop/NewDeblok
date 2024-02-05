@@ -1,5 +1,6 @@
 import sqllite from "bun:sqlite";
 import * as cgraphy from "node:crypto";
+// database operations
 function dbopen(addr: string, create: boolean = true): sqllite {
     return new sqllite(addr, {create:create})
 }
@@ -43,8 +44,9 @@ function dbread(db: sqllite, table: string, name: string) {
     
   }
 
+// AES operations
 
-  function aesEncrypt(mode: string, text: string, key: string, iv: string = "deblokDefaultIV"): string {
+function aesEncrypt(mode: string, text: string, key: string, iv: string = "deblokDefaultIV"): string {
     let keySize: number;
     let ivSize: number;
     
@@ -97,6 +99,8 @@ function aesDecrypt(mode: string, text: string, key: string, iv: string = "deblo
     decrypted += decipher.final('utf8');
     return decrypted;
 }
+
+// Exports
 
 const sql = {open:dbopen,write:dbwrite,read:dbread}
 const crypto = {aes:{decrypt:aesDecrypt,encrypt:aesEncrypt}}

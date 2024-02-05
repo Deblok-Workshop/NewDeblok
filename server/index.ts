@@ -17,12 +17,17 @@ server.use(rateLimit(config.ratelimit))
 server.use(staticPlugin({assets:"static/",prefix:"/"}))
 server.use(cors()) // ElysiaJS cors plugin
 
+// general
+
 server.get("/api/", () => {
     return "Welcome to Deblok!";
 })
 server.get("/api/__healthcheck", () => { // using /api/__healthcheck to be compatible with Kasmweb's API format
   return {};
 })
+
+// captcha
+
 server.get("/api/captcha/:query/image.gif", async ({ params: { query },set }) => {
   
   var tempdbfile:Blob = Bun.file('tempcaptcha.db')
@@ -104,6 +109,8 @@ server.post("/api/auth/signup", async ({body,set}) => {
   
 
  });
+
+ // authentication
 
 server.post("/api/auth/login", async ({body,set}) => {
   const b:any=body // the body variable is actually a string, this is here to fix a ts error

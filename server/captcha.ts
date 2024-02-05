@@ -148,6 +148,8 @@ function makerandmfk() {
     
 }
 
+// Exports
+
 export default {
     mathfuck:{translate:translateMathFuck,img:makemfk_img,shift:shift,random:makerandmfk,gen:genMathFuck,eval:evaluateMathFuck}
 }
