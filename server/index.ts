@@ -37,12 +37,10 @@ server.get("/api/captcha/:query/image.gif", async ({ params: { query },set }) =>
 });
 server.post("/api/captcha/:query/validate", async ({body ,params: { query },set }) => {
   var b:any = body
-  console.log(body)
   var rv = false
   var tempdbfile:Blob = Bun.file('tempcaptcha.db')
   var tempdb = JSON.parse(await tempdbfile.text())
   if (tempdb[query] != undefined) {
-    console.log(captcha.mathfuck.eval(tempdb[query]))
     if (b != captcha.mathfuck.eval(tempdb[query])) {
       rv = false
     } else {
@@ -51,6 +49,18 @@ server.post("/api/captcha/:query/validate", async ({body ,params: { query },set 
     tempdb[query] = undefined
     Bun.write('./tempcaptcha.db',JSON.stringify(tempdb))
     return rv
+  } else {
+    set.status = 404
+    return "CAPTCHA not found"
+  }
+});
+server.post("/api/captcha/:query/void", async ({params: { query },set }) => {
+  var tempdbfile:Blob = Bun.file('tempcaptcha.db')
+  var tempdb = JSON.parse(await tempdbfile.text())
+  if (tempdb[query] != undefined) {
+    tempdb[query] = undefined
+    set.status = 204
+    return "";
   } else {
     set.status = 404
     return "CAPTCHA not found"
