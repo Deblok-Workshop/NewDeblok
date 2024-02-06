@@ -95,6 +95,7 @@ server.post("/api/auth/signup", async ({body,set}) => {
   }
   if (!String(pwd).startsWith('sha256:') || !String(usr).startsWith('md5:')) {
     set.status = 400; return "ERR: Invalid input."
+    // TODO: actually validate the hashes
   }
   try {
   var db = helper.sql.open('db.sql',true)
@@ -126,18 +127,29 @@ server.post("/api/auth/login", async ({body,set}) => {
   }
   if (!String(pwd).startsWith('sha256:') || !String(usr).startsWith('md5:')) {
     set.status = 400; return "ERR: Invalid input."
+     // TODO: actually validate the hashes
   }
   var db = helper.sql.open('db.sql',true)
   var entry = helper.sql.read(db,'credentials',usr)
   if (entry) {
 
-    // TODO: make the rest of the login function
+    var e:any = entry.toString() // DB entries should be strings
+    e = e.split('|')
+    e[0] = e[0].split('/')
+    let v:any = false
+    try {v = Bun.password.verify(usr,e[1]) } catch (e) {return e;}
+    if (v) {
+      return `NewDeblok.${Date.now().toString(16)}.${}`
+    } else {set.status = 400; return "ERR: Password is incorrect."}
 
   } else {
-    set.status = 400; return "ERR: Username does not exist."
+    set.status = 400; return "ERR: Username is incorrect."
   }
 
 });
+
+// startup
+
 console.log(`Listening on port ${config.webserver.port} or`),
 console.log(` │ 0.0.0.0:${config.webserver.port}`),
 console.log(` │ 127.0.0.1:${config.webserver.port}`),
