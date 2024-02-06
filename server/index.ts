@@ -139,7 +139,7 @@ server.post("/api/auth/login", async ({body,set}) => {
     let v:any = false
     try {v = Bun.password.verify(usr,e[1]) } catch (e) {return e;}
     if (v) {
-      return `NewDeblok.${Date.now().toString(16)}.${}`
+      return btoa(`NewDeblok.${Date.now().toString(20)}.ex${(Date.now() + (43200 * 1000)).toString(20)}.${usr.substring(6)}.`)
     } else {set.status = 400; return "ERR: Password is incorrect."}
 
   } else {
