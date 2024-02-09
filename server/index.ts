@@ -37,21 +37,24 @@ async function ping(url: string): Promise<string> {
 server.get("/api/", () => {
     return "Welcome to Deblok!";
 })
+
 async function healthcheck() {
   let bak = await ping('https://bak-backend.deblok.me')
   let main = await ping('https://main-backend.deblok.me')
   return {"api":"up","backup-backend":bak,"main-backend":main};
 }
+
 server.get("/api/__healthcheck", async () => { // using /api/__healthcheck to be compatible with Kasmweb's API format
 return await healthcheck()
 })
+
 server.get("/api/healthcheck", async () => { // alias
   return await healthcheck()
   })
+
 // captcha
 
 server.get("/api/captcha/:query/image.gif", async ({ params: { query },set }) => {
-  
   var tempdbfile:Blob = Bun.file('tempcaptcha.db')
   var tempdb = JSON.parse(await tempdbfile.text())
   if (tempdb[query] != undefined) {
@@ -107,8 +110,6 @@ server.post("/api/auth/signup", async ({body,set}) => {
   try {
   bjson=JSON.parse(b)
   } catch (e) {console.error(e);set.status = 400; return "ERR: Bad JSON"}
-
-
   const usr:string = bjson["usr"]
   var pwd:string = bjson["pwd"]
   const email:string = bjson["em"]
@@ -170,6 +171,19 @@ server.post("/api/auth/login", async ({body,set}) => {
     set.status = 400; return "ERR: Username is incorrect."
   }
 
+});
+
+
+
+server.post("/api/auth/tokenvalidate", async ({body,set}) => {
+  const b:any=body // the body variable is actually a string, this is here to fix a ts error
+  let authtoken = b.split('.')
+  let errors = false
+
+  if (!b.startsWith('@dblok.')) {errors = true}
+  if (!authtoken[1].startsWith('cr')) {errors = true}
+
+  return !errors
 });
 
 // TODO for anyone who comes across here:
