@@ -99,12 +99,33 @@ function aesDecrypt(mode: string, text: string, key: string, iv: string = "deblo
     decrypted += decipher.final('utf8');
     return decrypted;
 }
+const decodeauthpart = (encoded: string): string => parseInt(encoded, 20).toString();
+function auth_tokenvalidate_endpoint(body:any){
+    try {
+        const b:any=body // the body variable is actually a string, this is here to fix a ts error
+        let authtoken = b.split('.')
+        let error = false
+        let errors:any[] = []
+        if (!authtoken[1] || !authtoken[2] || !authtoken[3]) {error=true; errors[errors.length]="Bad auth token format"}
+        if (!b.startsWith('@dblok.')) {error = true; errors[errors.length]="Invalid prefix"}
+        if (!authtoken[1].startsWith('cr')) {error = true; errors[errors.length]="No created time"}
+        let exptime = decodeauthpart(authtoken[2].substring(1))
+        let crtime = decodeauthpart(authtoken[1].substring(1))
+        
+        let now = Date.now()
+        if (now > Number(exptime) || now > Number(crtime)) {
+        // All good
+        } else {
+        error = true; errors[errors.length] = "The creation time and/or the expiry time is invalid.";
+        }
+        return [error,errors]} catch (e) {return [true,e]}
+}
 
 // Exports
 
 const sql = {open:dbopen,write:dbwrite,read:dbread}
 const crypto = {aes:{decrypt:aesDecrypt,encrypt:aesEncrypt}}
-
+const auth = {validate:auth_tokenvalidate_endpoint}
 export default { 
-    sql:sql,crypto:crypto
+    sql:sql,crypto:crypto,auth:auth
 }

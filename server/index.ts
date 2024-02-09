@@ -184,30 +184,14 @@ server.post("/api/auth/login", async ({body,set}) => {
 
 });
 
-const decodeauthpart = (encoded: string): string => parseInt(encoded, 20).toString();
+
 
 // this needs testing 
 server.post("/api/auth/tokenvalidate", async ({body,set}) => {
-  try {
-  const b:any=body // the body variable is actually a string, this is here to fix a ts error
-  let authtoken = b.split('.')
-  let error = false
-  let errors:any[] = []
-  if (!authtoken[1] || !authtoken[2] || !authtoken[3]) {error=true; errors[errors.length]="Bad auth token format"}
-  if (!b.startsWith('@dblok.')) {error = true; errors[errors.length]="Invalid prefix"}
-  if (!authtoken[1].startsWith('cr')) {error = true; errors[errors.length]="No created time"}
-  let exptime = decodeauthpart(authtoken[2].substring(1))
-  let crtime = decodeauthpart(authtoken[1].substring(1))
-  
-  let now = Date.now()
-  if (now > Number(exptime) || now > Number(crtime)) {
-  // All good
-  } else {
-  error = true; errors[errors.length] = "The creation time and/or the expiry time is invalid.";
-  }
-  if (error) {
-    set.status = 400; return JSON.stringify(errors);
-  } else {return "OK"} } catch (e) {return e;}
+ let out = helper.auth.validate(body)
+ if (out[0]) {
+  set.status = 400; return `ERR: ${out[1]}`
+ } else {return "OK"}
 });
 
 // TODO for anyone who comes across here:
