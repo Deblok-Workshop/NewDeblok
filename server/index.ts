@@ -18,6 +18,13 @@ server.use(rateLimit(config.ratelimit))
 server.use(staticPlugin({assets:"static/",prefix:"/"}))
 server.use(cors()) // ElysiaJS cors plugin
 
+// initial startup stuff
+let endpoints:any = process.env.ENDPOINTS
+if (!endpoints) {throw new ReferenceError('Cannot find Neko Rooms endpoints (check .env)')}
+let dbpwd = process.env.DBPWD
+if (!dbpwd) {throw new ReferenceError('No Database Password')}
+endpoints = endpoints.split(',')
+
 // general
 
 async function ping(url: string): Promise<string> {
