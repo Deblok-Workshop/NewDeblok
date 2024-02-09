@@ -155,6 +155,7 @@ server.post("/api/auth/login", async ({body,set}) => {
 // - above but for removing containers
 // - i will give a n.eko deployment link so yall can work
 //   on it!
+// - healthcheck which also checks neko rooms deployments (assigned: rare, or spark)
 
 // left by rare1k
 
