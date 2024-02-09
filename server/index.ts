@@ -47,9 +47,12 @@ server.get("/api/", () => {
 })
 
 async function healthcheck() {
-  let bak = await ping('https://bak-backend.deblok.me')
-  let main = await ping('https://main-backend.deblok.me')
-  return {"api":"up","backup-backend":bak,"main-backend":main};
+  let backendstat:any[] = []
+  for (let i = 0; i < endpoints.length; i++) {
+    console.log(endpoints[i])
+    backendstat[backendstat.length] = await ping("https://"+endpoints[i])
+  }
+  return {"api":"up","backend":backendstat};
 }
 
 server.get("/api/__healthcheck", async () => { // using /api/__healthcheck to be compatible with Kasmweb's API format
