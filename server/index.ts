@@ -5,6 +5,7 @@ import captcha from "./captcha";
 import { rateLimit } from "elysia-rate-limit";
 import { staticPlugin } from '@elysiajs/static'
 import { cors } from '@elysiajs/cors'
+import fetch from 'node-fetch';
 
 Bun.write('tempcaptcha.db',"{}")
 
@@ -19,11 +20,27 @@ server.use(cors()) // ElysiaJS cors plugin
 
 // general
 
+async function ping(url: string): Promise<string> {
+  try {
+    const response = await fetch(url);
+    if (response.status >= 200 && response.status < 400) {
+      return 'up';
+    } else {
+      return 'down';
+    }
+  } catch (error) {
+    return 'down';
+  }
+
+}
+
 server.get("/api/", () => {
     return "Welcome to Deblok!";
 })
-server.get("/api/__healthcheck", () => { // using /api/__healthcheck to be compatible with Kasmweb's API format
-  return {};
+server.get("/api/__healthcheck", async () => { // using /api/__healthcheck to be compatible with Kasmweb's API format
+  let bak = await ping('https://bak-backend.deblok.me')
+  let main = await ping('https://main-backend.deblok.me')
+  return {"api":"up","backup-backend":bak,"main-backend":main};
 })
 
 // captcha
