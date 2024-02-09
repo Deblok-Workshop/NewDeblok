@@ -137,7 +137,7 @@ server.post("/api/auth/login", async ({body,set}) => {
     e = e.split('|')
     e[0] = e[0].split('/')
     let v:any = false
-    try {v = Bun.password.verify(usr,e[1]) } catch (e) {return e;}
+    try {v = Bun.password.verify(pwd,e[1]) } catch (e) {return e;}
     if (v) {
       return btoa(`@dblok.cr${Date.now().toString(20)}.ex${(Date.now() + (43200 * 1000)).toString(20)}.${btoa(`${usr.substring(6)}.${e[1].split('/')[1]}`)}`)
     } else {set.status = 400; return "ERR: Password is incorrect."}
