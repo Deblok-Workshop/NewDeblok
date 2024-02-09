@@ -173,16 +173,17 @@ server.post("/api/auth/login", async ({body,set}) => {
 
 });
 
-
+const decodeauthpart = (encoded: string): string => parseInt(encoded, 20).toString();
 
 server.post("/api/auth/tokenvalidate", async ({body,set}) => {
   const b:any=body // the body variable is actually a string, this is here to fix a ts error
   let authtoken = b.split('.')
   let errors = false
-
+  if (!authtoken[1] || !authtoken[2] || !authtoken[3]) {errors=true}
   if (!b.startsWith('@dblok.')) {errors = true}
   if (!authtoken[1].startsWith('cr')) {errors = true}
-
+  let exptime = decodeauthpart(authtoken[2].substring(1))
+  let crtime = decodeauthpart(authtoken[1].substring(1))
   return !errors
 });
 
