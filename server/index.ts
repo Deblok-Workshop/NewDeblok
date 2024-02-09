@@ -125,14 +125,14 @@ server.post("/api/auth/login", async ({body,set}) => {
   if (usr == "" || !usr || pwd == "" || !pwd || email == "" || !email) {
     set.status = 400; return "ERR: One or more fields are missing."
   }
+  if (pwd.length != 71) {set.status = 400; return "ERR: Invalid input."}
+  if (usr.length != 36) {set.status = 400; return "ERR: Invalid input."}
   if (!String(pwd).startsWith('sha256:') || !String(usr).startsWith('md5:')) {
     set.status = 400; return "ERR: Invalid input."
-     // TODO: actually validate the hashes
   }
   var db = helper.sql.open('db.sql',true)
   var entry:any = helper.sql.read(db,'credentials',usr)
   if (entry) {
-
     var e:any = entry["value"] // oohhhhhh
     e = e.split('|')
     e[0] = e[0].split('/')
