@@ -132,13 +132,15 @@ server.post("/api/auth/login", async ({body,set}) => {
   var db = helper.sql.open('db.sql',true)
   var entry = helper.sql.read(db,'credentials',usr)
   if (entry) {
-
+    console.log(entry)
     var e:any = entry.toString() // DB entries should be strings
     e = e.split('|')
     e[0] = e[0].split('/')
     let v:any = false
     try {v = Bun.password.verify(pwd,e[1]) } catch (e) {return e;}
     if (v) {
+
+      console.log(e)
       return btoa(`@dblok.cr${Date.now().toString(20)}.ex${(Date.now() + (43200 * 1000)).toString(20)}.${btoa(`${usr.substring(6)}.${e[1].split('/')[1]}`)}`)
     } else {set.status = 400; return "ERR: Password is incorrect."}
 
