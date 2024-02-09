@@ -37,12 +37,17 @@ async function ping(url: string): Promise<string> {
 server.get("/api/", () => {
     return "Welcome to Deblok!";
 })
-server.get("/api/__healthcheck", async () => { // using /api/__healthcheck to be compatible with Kasmweb's API format
+async function healthcheck() {
   let bak = await ping('https://bak-backend.deblok.me')
   let main = await ping('https://main-backend.deblok.me')
   return {"api":"up","backup-backend":bak,"main-backend":main};
+}
+server.get("/api/__healthcheck", async () => { // using /api/__healthcheck to be compatible with Kasmweb's API format
+return await healthcheck()
 })
-
+server.get("/api/healthcheck", async () => { // alias
+  return await healthcheck()
+  })
 // captcha
 
 server.get("/api/captcha/:query/image.gif", async ({ params: { query },set }) => {
