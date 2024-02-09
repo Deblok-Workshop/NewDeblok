@@ -130,10 +130,10 @@ server.post("/api/auth/login", async ({body,set}) => {
      // TODO: actually validate the hashes
   }
   var db = helper.sql.open('db.sql',true)
-  var entry = helper.sql.read(db,'credentials',usr)
+  var entry:any = helper.sql.read(db,'credentials',usr)
   if (entry) {
     console.log(entry)
-    var e:any = entry.toString() // DB entries should be strings
+    var e:any = entry["value"] // oohhhhhh
     e = e.split('|')
     e[0] = e[0].split('/')
     let v:any = false
