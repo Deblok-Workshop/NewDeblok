@@ -6,3 +6,4 @@
   src: url(https://unpkg.com/lucide-static@latest/font/Lucide.ttf)
     format("truetype");
 }
+.deblok-logo {background-image:url('assets/favicon.png');background-size:cover;}

@@ -12,12 +12,13 @@ Bun.write("tempcaptcha.db", "{}");
 let netaddr = "[::1]";
 netaddr = require("node:os").hostname();
 
-if (require('os').platform() != "linux") {
-  console.error('FATAL: Incompatibility detected!')
-  console.error('        - A hard dependency DeblokManager can only run on Linux devices.')
-  process.exit(2)
+if (require("os").platform() != "linux") {
+  console.error("FATAL: Incompatibility detected!");
+  console.error(
+    "        - A hard dependency DeblokManager can only run on Linux devices.",
+  );
+  process.exit(2);
 }
-
 
 const server = new Elysia();
 

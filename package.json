@@ -3,7 +3,7 @@
   "module": "server/index.ts",
   "scripts": {
     "preinstall": "npx only-allow bun",
-    "build": "tailwindcss -i tw.css -o static/app.css -m -w",
+    "build": "tailwindcss -i static/tw.css -o static/app.css -m -w",
     "start": "bun server/index.ts",
     "dev": "concurrently \"bun run build\" \"bun run start\"",
     "deploy": "bash scripts/deploy.sh",
