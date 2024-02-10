@@ -11,8 +11,9 @@ Bun.write("tempcaptcha.db", "{}");
 
 let netaddr = "[::1]";
 netaddr = require("node:os").hostname();
-
-if (require("os").platform() != "linux") {
+if (require("os").platform() == "darwin") {
+  console.warn("WARNING: DeblokManager will not run.");
+} else if (require("os").platform() != "linux") {
   console.error("FATAL: Incompatibility detected!");
   console.error(
     "        - A hard dependency DeblokManager can only run on Linux devices.",
