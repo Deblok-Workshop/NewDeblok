@@ -1,7 +1,7 @@
 {
-    "firefox": {
-        "title":"Firefox",
-        "specs": {"ram":"1G","cores":"1.25"},
-        "image": "lscr.io/linuxserver/firefox:latest"
-    }
+  "firefox": {
+    "title": "Firefox",
+    "specs": { "ram": "1G", "cores": "1.25" },
+    "image": "lscr.io/linuxserver/firefox:latest"
+  }
 }

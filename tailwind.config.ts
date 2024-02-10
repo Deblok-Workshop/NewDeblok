@@ -1,11 +1,16 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 export default {
   content: ["./static/**/*.html"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        lucide: ["LucideIcons"],
+      },
+    },
   },
-  plugins: [require("@catppuccin/tailwindcss")({
-    prefix: false
-  })],
+  plugins: [
+    require("@catppuccin/tailwindcss")({
+      prefix: false,
+    }),
+  ],
 } satisfies Config;
-

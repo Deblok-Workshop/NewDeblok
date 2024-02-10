@@ -1,5 +1,5 @@
 {
-    "bun.runtime": "bun",
-    "bun.debugTerminal.enabled": true,
-    "bun.debugTerminal.stopOnEntry": false,
-  }
+  "bun.runtime": "bun",
+  "bun.debugTerminal.enabled": true,
+  "bun.debugTerminal.stopOnEntry": false
+}

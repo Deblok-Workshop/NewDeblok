@@ -1,12 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="mocha">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Deblok</title>
-    <link rel="stylesheet" href="app.css">
-</head>
-<body class="bg-base">
-    <p class="text-lg text-mauve">test</p>
-</body>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body class="bg-base">
+    <div class="nav flex flex-row p-5">
+      <div class="">
+        <i data-lucide="home" class="text-mauve w-7 h-7"></i>
+        <i data-lucide="menu" class="text-mauve w-7 h-7"></i>
+      </div>
+    </div>
+  </body>
+  <script>
+    lucide.createIcons();
+  </script>
 </html>
