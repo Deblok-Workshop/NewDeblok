@@ -12,21 +12,23 @@ Bun.write("tempcaptcha.db", "{}");
 let netaddr = "[::1]";
 netaddr = require("node:os").hostname();
 
-if (process.argv.includes('--ignore-linux-check') && require("os").platform() != "linux") {
-  console.warn('WARN: Incompatibility detected!')
+if (
+  process.argv.includes("--ignore-linux-check") &&
+  require("os").platform() != "linux"
+) {
+  console.warn("WARN: Incompatibility detected!");
   console.warn(
-      "        - A hard dependency DeblokManager can only run on Linux devices.",
+    "        - A hard dependency DeblokManager can only run on Linux devices.",
   );
-  console.warn("          This warning is being ignored due to --ignore-linux-check.")
-} else
-if (require("os").platform() != "linux") {
+  console.warn(
+    "          This warning is being ignored due to --ignore-linux-check.",
+  );
+} else if (require("os").platform() != "linux") {
   console.error("FATAL: Incompatibility detected!");
   console.error(
     "        - A hard dependency DeblokManager can only run on Linux devices.",
   );
-  console.error(
-    "          Pass --ignore-linux-check to ignore this warning",
-  );
+  console.error("          Pass --ignore-linux-check to ignore this warning");
   process.exit(2);
 }
 const server = new Elysia();
