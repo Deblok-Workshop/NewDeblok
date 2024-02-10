@@ -32,4 +32,4 @@ sleep 1
 cd ..
 bun run server/index.ts &
 sleep 1
-echo Deployed successfully. Both servers are now running!
+echo Deployed successfully. Both servers should be running!
