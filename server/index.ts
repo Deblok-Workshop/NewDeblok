@@ -50,7 +50,7 @@ async function healthcheck() {
   let backendstat:any[] = []
   for (let i = 0; i < endpoints.length; i++) {
 
-    backendstat[backendstat.length] = await ping("https://"+endpoints[i])
+    backendstat[backendstat.length] = await ping(endpoints[i])
   }
   return {"api":"up","backend":backendstat};
 }
