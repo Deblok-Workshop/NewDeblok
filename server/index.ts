@@ -263,14 +263,6 @@ server.post("/api/auth/tokenvalidate", async ({ body, set }) => {
   }
 });
 
-// TODO for anyone who comes across here:
-// - make endpoints for starting up N.eko containers
-//   with custom ram amounts (max 3.5gb), cores (max: 2)
-//   and extensions.
-// - above but for removing containers
-
-// left by rare1k
-
 // startup
 
 console.log(`Listening on port ${config.webserver.port} or`),
