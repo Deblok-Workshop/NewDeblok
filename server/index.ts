@@ -20,7 +20,7 @@ server.use(cors()) // ElysiaJS cors plugin
 
 // initial startup stuff
 let endpoints:any = process.env.ENDPOINTS
-if (!endpoints) {throw new ReferenceError('Cannot find Neko Rooms endpoints (check .env)')}
+if (!endpoints) {throw new ReferenceError('Cannot find DeblokManager endpoints (check .env)')}
 let dbpwd:any = process.env.DBPWD
 dbpwd = new Bun.CryptoHasher('sha256').update(dbpwd).digest('hex')
 if (!dbpwd) {throw new ReferenceError('No Database Password (check .env)')}
