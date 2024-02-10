@@ -7,3 +7,4 @@
     format("truetype");
 }
 .deblok-logo {background-image:url('assets/favicon.png');background-size:cover;}
+profile-picture {max-width:38px !important; max-height:38px !important; min-height:38px !important; min-width:38px !important; width:38px !important; height:38px !important; border-radius:10000px !important; background-size:cover !important;} /* css loves ignoring my shit!!! */
