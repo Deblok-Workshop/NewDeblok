@@ -40,8 +40,17 @@
     </nav>
     <br />
     <div class="z-[2] flex flex-col justify-center align-middle w-full h-full">
-    <div class="bg-surface0 p-4 mx-auto my-auto rounded-md ring-1 ring-blue/50 flex hover:ring-2 hover:bg-surface1 duration-300 shadow-inner shadow-black/30">
-<h1 class="text-2xl text-center font-bold">Deblok Settings</h1>
+    <div class="bg-surface0 p-4 mx-auto my-auto rounded-md ring-1 ring-blue/50  hover:ring-2 hover:bg-surface1 duration-300 shadow-inner shadow-black/30 px-8">
+<h1 class="text-3xl text-center font-bold">Deblok Settings</h1>
+<br>
+<ul>
+<li class="settings-item ml-1">
+  Enable Tab Cloaking: <input type="checkbox" class="checkbox enablecloak" onclick="checkbox_check(this)">
+  <div class="if-cloaking-enabled if-section opacity-50">
+    asda
+  </div>
+</li>
+</ul>
     </div>
      </div>
      <br />
@@ -49,6 +58,7 @@
   <script>
     lucide.createIcons();
   </script>
+  <script src="settings.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
   <!-- i am NOT selling 
    -->
