@@ -16,6 +16,7 @@ Deblok is a selfhostable website that allows you to browse and stream apps, game
 > Buy Deblok+ on the discord: [discord.gg/deblok](https://discord.gg/deblok)
 
 # Donate to me!
+
 (If you donate $0.25 or more, you can get the `@Donator` role in the [Discord](https://discord.gg/deblok))
 
 - Crypto:
