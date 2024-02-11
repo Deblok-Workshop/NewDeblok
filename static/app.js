@@ -4,48 +4,48 @@
  // Define the data for the cards
  const cardData = [
    {
-     imageSrc: 'assets/icons/firefox.png',
+     img: 'assets/icons/firefox.png',
      title: 'Firefox',
      subtitle: 'Browser',
    },
    {
-     imageSrc: 'assets/icons/firefox.png',
+     img: 'assets/icons/firefox.png',
      title: 'Firefox',
      subtitle: 'Browser',
    },
    {
-     imageSrc: 'assets/icons/firefox.png',
+     img: 'assets/icons/firefox.png',
      title: 'Firefox',
      subtitle: 'Browser',
    },
    {
-     imageSrc: 'assets/icons/firefox.png',
+     img: 'assets/icons/firefox.png',
      title: 'Firefox',
      subtitle: 'Browser',
    },
    {
-     imageSrc: 'assets/icons/firefox.png',
+     img: 'assets/icons/firefox.png',
      title: 'Firefox',
      subtitle: 'Browser',
    },
    {
-     imageSrc: 'assets/icons/firefox.png',
+     img: 'assets/icons/firefox.png',
      title: 'Firefox',
      subtitle: 'Browser',
    },
    {
-     imageSrc: 'assets/icons/firefox.png',
+     img: 'assets/icons/firefox.png',
      title: 'Firefox',
      subtitle: 'Browser',
    },
-   // this is chatgpt
+   // Made by spark and rare pookie
  ];
 
  cardData.forEach((card) => {
    const cardElement = document.createElement('div');
    cardElement.classList.add(
-     'h-[96px]',
-     'w-[300px]',
+     'h-[92px]',
+     'w-[290px]',
      'bg-surface0',
      '!rounded-lg', "mb-1",
      'p-3',
@@ -54,11 +54,11 @@
      'hover:shadow-lg',
      'hover:ring-2',
      'ring-blue-500'
-   );
+   ); // this is shit
 
    const innerContent = `
      <span class="flex flex-row">
-       <img class="!max-h-14 !max-w-14 !w-14 !h-14 item-img" src="${card.imageSrc}">
+       <img class="!max-h-14 !max-w-14 !w-14 !h-14 item-img" src="${card.img}">
        <span class="flex flex-col">
          <h3 class="ml-5 mt-2 text-2xl font-semibold item-title">${card.title}</h3>
          <span class="opacity-50 mx-5 bottom-text">${card.subtitle}</span>
