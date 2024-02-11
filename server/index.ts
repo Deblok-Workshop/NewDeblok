@@ -11,8 +11,8 @@ Bun.write("tempcaptcha.db", "{}");
 try {
   require("node:fs").accessSync("db.sql", require("node:fs").constants.F_OK);
 } catch {
-  console.warn('WARN: db.sql does not exist. Creating.')
-  Bun.write('db.sql','')
+  console.warn("WARN: db.sql does not exist. Creating.");
+  Bun.write("db.sql", "");
 }
 let netaddr = "[::1]";
 netaddr = require("node:os").hostname();
@@ -58,7 +58,7 @@ endpoints = endpoints.split(",");
 
 async function ping(url: string): Promise<string> {
   try {
-    const response = await fetch("https://"+url);
+    const response = await fetch("https://" + url);
     if (response.status >= 200 && response.status < 400) {
       return "up";
     } else {
@@ -83,19 +83,21 @@ async function healthcheck() {
 async function getBacks() {
   let hc = (await healthcheck()).backend;
   for (let i = 0; i < hc.length; i++) {
-    if (hc[i].status === 'up') {
+    if (hc[i].status === "up") {
       return endpoints[i];
     }
   }
-  console.warn('WARN: No online DeblokManager server found');
+  console.warn("WARN: No online DeblokManager server found");
   return null;
 }
-async function getBackPorts(server:string) {
+async function getBackPorts(server: string) {
   let hc = (await healthcheck()).backend;
   try {
-  let res = await fetch("https://"+server+"/ports/list")
-  return await res.text();
-  } catch (e) {return e;}
+    let res = await fetch("https://" + server + "/ports/list");
+    return await res.text();
+  } catch (e) {
+    return e;
+  }
 }
 
 server.get("/api/__healthcheck", async () => {
@@ -298,9 +300,6 @@ server.post("/api/container/kill", async ({ body, set }) => {
 server.post("/api/container/delete", async ({ body, set }) => {
   // TODO
 });
-
-
-
 
 // startup
 

@@ -4,40 +4,35 @@
 @font-face {
   font-family: "Geist";
   font-style: normal;
-  src: url("./assets/Geist-Light.woff2")
-    format("woff2");
+  src: url("./assets/Geist-Light.woff2") format("woff2");
   font-display: swap;
   font-weight: 300;
 }
 @font-face {
   font-family: "Geist";
   font-style: normal;
-  src: url("./assets/Geist-Regular.woff2")
-    format("woff2");
+  src: url("./assets/Geist-Regular.woff2") format("woff2");
   font-display: swap;
   font-weight: 400;
 }
 @font-face {
   font-family: "Geist";
   font-style: normal;
-  src: url("./assets/Geist-Medium.woff2")
-    format("woff2");
+  src: url("./assets/Geist-Medium.woff2") format("woff2");
   font-display: swap;
   font-weight: 500;
 }
 @font-face {
   font-family: "Geist";
   font-style: normal;
-  src: url("./assets/Geist-SemiBold.woff2")
-    format("woff2");
+  src: url("./assets/Geist-SemiBold.woff2") format("woff2");
   font-display: swap;
   font-weight: 600;
 }
 @font-face {
   font-family: "Geist";
   font-style: normal;
-  src: url("./assets/Geist-Bold.woff2")
-    format("woff2");
+  src: url("./assets/Geist-Bold.woff2") format("woff2");
   font-display: swap;
   font-weight: 700;
 }
@@ -45,65 +40,111 @@
 body,
 html {
   width: 100%;
-  height: 100%; font-family:"Giest",sans-serif;
+  height: 100%;
+  font-family: "Giest", sans-serif;
 }
 
-* {color-scheme:dark;}
+* {
+  color-scheme: dark;
+}
 
-.card {@apply shadow !min-w-[270px]   w-fit h-fit z-10 bg-mantle/80 !rounded-lg mb-1 p-3 hover:bg-surface0 duration-[250ms] hover:shadow-lg hover:ring-2 ring-blue-600 active:ring-4 active:ring-blue-500 active:duration-100;  }
-.grid {@apply grid-cols-2 grid-rows-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4;}
+.card {
+  @apply shadow !min-w-[270px]   w-fit h-fit z-10 bg-mantle/80 !rounded-lg mb-1 p-3 hover:bg-surface0 duration-[250ms] hover:shadow-lg hover:ring-2 ring-blue-600 active:ring-4 active:ring-blue-500 active:duration-100;
+}
+.grid {
+  @apply grid-cols-2 grid-rows-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4;
+}
 @keyframes dropd {
-  from {max-height:0px;overflow-y:clip;}
-  33% {overflow-y: auto;}
-  to {max-height:400px;overflow-y: auto;}
+  from {
+    max-height: 0px;
+    overflow-y: clip;
+  }
+  33% {
+    overflow-y: auto;
+  }
+  to {
+    max-height: 400px;
+    overflow-y: auto;
+  }
 }
-.pfpico {@apply active:ring-4 active:ring-surface1 active:duration-100 flex align-middle my-auto ml-auto float-right duration-300 ring-surface0 hover:ring-4 w-10 h-10 !rounded-full;}
-.anim__dropdown {overflow-y: clip;animation:dropd 0.66s ease-in forwards;max-height:0px;}
-.active-dropdown-color {@apply bg-mauve/40 hover:bg-mauve/60 hover:text-text/80;}
-.reg-dropdown-color {@apply hover:bg-black/20;}
-.dropdown {@apply ml-2 pb-2 absolute bg-mantle rounded-t-none rounded-lg shadow w-44;}
-.if-section {@apply rounded-lg bg-black/20 p-2}
-.backdrop {@apply bg-[url('assets/bg.webp')]; background-size:cover; background-repeat:no-repeat;}
-overlay {@apply backdrop-brightness-50 w-full h-full fixed left-0 top-0}
-.theme-light-ctp {@apply latte}
-.theme-frapp-ctp {@apply frappe}
-.theme-macch-ctp {@apply macchiato}
-.theme-mocha-ctp {@apply mocha}
-.theme-btn-base {@apply ring-black/25 ring-1 hover:ring-[3px] duration-300 hover:mx-[4px] cursor-pointer active:ring-black/70 active:duration-[50ms];}
-.theme-btn-active {@apply !ring-base/75 hover:!ring-surface0 active:!ring-overlay0 !ring-[3px]}
+.pfpico {
+  @apply active:ring-4 active:ring-surface1 active:duration-100 flex align-middle my-auto ml-auto float-right duration-300 ring-surface0 hover:ring-4 w-10 h-10 !rounded-full;
+}
+.anim__dropdown {
+  overflow-y: clip;
+  animation: dropd 0.66s ease-in forwards;
+  max-height: 0px;
+}
+.active-dropdown-color {
+  @apply bg-mauve/40 hover:bg-mauve/60 hover:text-text/80;
+}
+.reg-dropdown-color {
+  @apply hover:bg-black/20;
+}
+.dropdown {
+  @apply ml-2 pb-2 absolute bg-mantle rounded-t-none rounded-lg shadow w-44;
+}
+.if-section {
+  @apply rounded-lg bg-black/20 p-2;
+}
+.backdrop {
+  @apply bg-[url('assets/bg.webp')];
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+overlay {
+  @apply backdrop-brightness-50 w-full h-full fixed left-0 top-0;
+}
+.theme-light-ctp {
+  @apply latte;
+}
+.theme-frapp-ctp {
+  @apply frappe;
+}
+.theme-macch-ctp {
+  @apply macchiato;
+}
+.theme-mocha-ctp {
+  @apply mocha;
+}
+.theme-btn-base {
+  @apply ring-black/25 ring-1 hover:ring-[3px] duration-300 hover:mx-[4px] cursor-pointer active:ring-black/70 active:duration-[50ms];
+}
+.theme-btn-active {
+  @apply !ring-base/75 hover:!ring-surface0 active:!ring-overlay0 !ring-[3px];
+}
 .oled {
   /* reference*/
---ctp-crust: #000 !important;
---ctp-mantle: #000 !important;
---ctp-base: #0f0f0f !important;
---ctp-surface0: #1f1f1f !important;
---ctp-surface1: #2f2f2f !important;
---ctp-surface2: #3f3f3f !important;
---ctp-overlay0: #4f4f4f !important;
---ctp-overlay1: #5f5f5f !important;
---ctp-overlay2: #6f6f6f !important;
---ctp-rosewater: #dc8a78 !important;
---ctp-flamingo: #dd7878 !important;
---ctp-pink: #ea76cb !important;
---ctp-mauve: #8839ef !important;
---ctp-red: #d20f39 !important;
---ctp-maroon: #e64553 !important;
---ctp-peach: #fe640b !important;
---ctp-yellow: #df8e1d !important;
---ctp-green: #40a02b !important;
---ctp-teal: #179299 !important;
---ctp-sky: #04a5e5 !important;
---ctp-sapphire: #209fb5 !important;
---ctp-blue: #1e66f5 !important;
---ctp-lavender: #7287fd !important;
---ctp-text: #eeeeee !important;
---ctp-subtext1: #cccccc  !important;
---ctp-subtext0: #bbbbbb !important;
-
+  --ctp-crust: #000 !important;
+  --ctp-mantle: #000 !important;
+  --ctp-base: #0f0f0f !important;
+  --ctp-surface0: #1f1f1f !important;
+  --ctp-surface1: #2f2f2f !important;
+  --ctp-surface2: #3f3f3f !important;
+  --ctp-overlay0: #4f4f4f !important;
+  --ctp-overlay1: #5f5f5f !important;
+  --ctp-overlay2: #6f6f6f !important;
+  --ctp-rosewater: #dc8a78 !important;
+  --ctp-flamingo: #dd7878 !important;
+  --ctp-pink: #ea76cb !important;
+  --ctp-mauve: #8839ef !important;
+  --ctp-red: #d20f39 !important;
+  --ctp-maroon: #e64553 !important;
+  --ctp-peach: #fe640b !important;
+  --ctp-yellow: #df8e1d !important;
+  --ctp-green: #40a02b !important;
+  --ctp-teal: #179299 !important;
+  --ctp-sky: #04a5e5 !important;
+  --ctp-sapphire: #209fb5 !important;
+  --ctp-blue: #1e66f5 !important;
+  --ctp-lavender: #7287fd !important;
+  --ctp-text: #eeeeee !important;
+  --ctp-subtext1: #cccccc !important;
+  --ctp-subtext0: #bbbbbb !important;
 }
 
- /* Additional styles for the checkbox */
- .toggle-switch {
+/* Additional styles for the checkbox */
+.toggle-switch {
   position: relative;
   display: inline-block;
   width: 50px;
@@ -124,8 +165,8 @@ overlay {@apply backdrop-brightness-50 w-full h-full fixed left-0 top-0}
   right: 0;
   bottom: 0;
   background-color: #1f1f2f;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   border-radius: 34px;
 }
 
@@ -137,8 +178,8 @@ overlay {@apply backdrop-brightness-50 w-full h-full fixed left-0 top-0}
   left: 2px;
   bottom: 2px;
   background-color: #4f4faf;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 
@@ -155,16 +196,56 @@ input[type="checkbox"]:checked + .slider:before {
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
-.horrible * {padding:4px;color:red;font-family:"Comic Sans","Wingdings",serif;font-size:20px;overflow:auto;min-width:2px;max-width:508px !important;animation: horrible 0.25s infinite alternate-reverse;}
-.horrible body {max-width:1000px !important;}
-.horrible img {width:30px !important;background:yellow;}
-.horrible card {z-index:-32767;background:red;position:relative;bottom:-50px;}
-.horrible input {padding:24px;background:yellow;}
-.horrible nav { background:red;background-image:url('https://b.incognitotgt.me/12x12is24.gif')}
-.horrible  {}
-.horrible overlay {background-image:url('https://b.incognitotgt.me/12x12is24.gif') !important; backdrop-filter:none; background-size:fit;}
-.horrible div {opacity:0.7;}
+.horrible * {
+  padding: 4px;
+  color: red;
+  font-family: "Comic Sans", "Wingdings", serif;
+  font-size: 20px;
+  overflow: auto;
+  min-width: 2px;
+  max-width: 508px !important;
+  animation: horrible 0.25s infinite alternate-reverse;
+}
+.horrible body {
+  max-width: 1000px !important;
+}
+.horrible img {
+  width: 30px !important;
+  background: yellow;
+}
+.horrible card {
+  z-index: -32767;
+  background: red;
+  position: relative;
+  bottom: -50px;
+}
+.horrible input {
+  padding: 24px;
+  background: yellow;
+}
+.horrible nav {
+  background: red;
+  background-image: url("https://b.incognitotgt.me/12x12is24.gif");
+}
+.horrible {
+}
+.horrible overlay {
+  background-image: url("https://b.incognitotgt.me/12x12is24.gif") !important;
+  backdrop-filter: none;
+  background-size: fit;
+}
+.horrible div {
+  opacity: 0.7;
+}
 @keyframes horrible {
-  from {padding-right:4px;padding-left:7px;color:green;}
-  to {padding-right:10px;padding-left:0px;color:yellow;}
+  from {
+    padding-right: 4px;
+    padding-left: 7px;
+    color: green;
+  }
+  to {
+    padding-right: 10px;
+    padding-left: 0px;
+    color: yellow;
+  }
 }

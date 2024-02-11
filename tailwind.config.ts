@@ -2,13 +2,12 @@ import type { Config } from "tailwindcss";
 export default {
   content: ["./static/**/*.{html,js}"],
   theme: {
-    
     extend: {
-     // themes:{
-      
-  //  },
+      // themes:{
+
+      //  },
       fontFamily: {
-        sans: ["Geist","sans-serif"],
+        sans: ["Geist", "sans-serif"],
       },
     },
   },
@@ -16,6 +15,6 @@ export default {
     require("@catppuccin/tailwindcss")({
       prefix: false,
     }),
-    require('flowbite/plugin')
+    require("flowbite/plugin"),
   ],
 } satisfies Config;
