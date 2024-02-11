@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="app.css" />
   </head>
   <body class="bg-base flex flex-col min-h-screen text-text font-sans bg-[url('assets/bg.webp')] bg-cover backdrop-blur-sm">
-    <overlay class="-z-5 w-full h-full bg-gradient-to-b  from-crust from-25% fixed left-0 top-0">
+    <overlay class="backdrop-brightness-50 sm:backdrop-brightness-50 md:backdrop-brightness-100 z-5 w-full h-full md:bg-gradient-to-b  from-crust from-25% fixed left-0 top-0">
 
     </overlay>
     <nav
@@ -29,18 +29,26 @@
           ></i>
         </a>
       </div>
-      <a href="#profile-dash" class="flex ml-auto float-right mx-4">
-        <img
-          class="flex align-middle my-auto ml-auto float-right duration-300 ring-surface0 hover:ring-4 w-10 h-10 !rounded-full"
-          src="https://github.com/uhidontkno.png"
-        />
+      <a href="javascript:" class="flex ml-auto float-right mx-4 z-100 relative">
+        
+        <img data-dropdown-toggle="profile-dropdown" onclick="document.querySelector(`#profile-dropdown`).classList.toggle(`anim__dropdown`)" class="pfpico" src="https://github.com/uhidontkno.png" />
+        <div id="profile-dropdown" onblur="document.querySelector(`#profile-dropdown`).classList.toggle(`anim__dropdown`)"  class=" ml-2 hidden absolute bg-mantle rounded-t-none rounded-lg shadow w-44" style="z-index:100 !important">
+          <ul class="py-2 text-sm text-text duration-[250ms]">
+            <li>
+              <a href="dash.html" class="block px-4 py-2 reg-dropdown-color duration-[250ms]">Dashboard</a>
+            </li>
+            <li>
+              <a href="settings.html" class="block px-4 py-2 active-dropdown-color duration-[250ms]">Settings</a>
+            </li>
+          </ul>
+      </div>
       </a>
     </nav>
     <br />
-    <div class="z-10">
-    <div class="flex justify-center align-middle items-center w-full h-full flex-1 card">
-
-      <!-- TODO: settings menu -->
+    <div class="z-10 flex flex-col justify-center align-middle w-full h-full">
+    <div class="bg-surface0 p-4 mx-auto my-auto rounded-md ring-1 ring-blue/50 shadow flex hover:ring-2 hover:bg-surface0/80 duration-300">
+sdfsdf
+    </div>
      </div>
     
   </body>
