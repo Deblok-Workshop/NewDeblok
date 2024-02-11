@@ -8,9 +8,12 @@
     <link rel="icon" type="image/png" href="assets/favicon.png" />
     <link rel="stylesheet" href="app.css" />
   </head>
-  <body class="bg-base flex flex-col min-h-screen text-text font-sans">
+  <body class="bg-base flex flex-col min-h-screen text-text font-sans bg-img">
+    <overlay class="z-5 w-full h-full bg-gradient-to-b  from-crust from-25% fixed left-0 top-0">
+
+    </overlay>
     <nav
-      class="flex flex-row p-2 bg-mantle align-middle shadow-lg shadow-mantle/20"
+      class="flex flex-row p-2 bg-mantle align-middle shadow-lg shadow-mantle/20 z-10"
     >
       <logo class="w-12 h-12 inline-block mr-4"
         ><img src="assets/favicon.png"
@@ -34,40 +37,21 @@
       </a>
     </nav>
     <br />
-    <div class="flex justify-center align-middle items-center w-full flex-1">
+    <div class="z-10">
+    <div class="flex justify-center align-middle items-center w-full flex-1 card">
 
-     <div class="h-28 w-[300px] bg-surface0 !rounded-lg m-2 p-3 hover:bg-surface1 duration-300 hover:shadow-lg hover:ring-2 ring-blue-500">
+     <div class="h-26 w-[300px] bg-surface0 !rounded-lg m-2 p-3 hover:bg-surface1 duration-300 hover:shadow-lg hover:ring-2 ring-blue-500">
       <span class="flex flex-row">
         <img class="!max-h-14 !max-w-14 !w-14 !h-14 item-img" src="assets/icons/firefox.png">
         <span class="flex flex-col">
-        <h3 class="ml-5 mt-3 text-2xl font-semibold item-title">Firefox</h3>
+        <h3 class="ml-5 mt-2 text-2xl font-semibold item-title">Firefox</h3>
         <span class="opacity-50 mx-5 bottom-text">Browser</span>
         
       </span>
       </span>
      </div>
-
-
-     <div class="h-28 w-[300px] bg-surface0 !rounded-lg m-2 p-3 hover:bg-surface1 duration-300 hover:shadow-lg hover:ring-2 ring-blue-500">
-      <span class="flex flex-row">
-        <img class="!max-h-14 !max-w-14 !w-14 !h-14 item-img" src="assets/icons/chromium.png">
-        <span class="flex flex-col">
-        <h3 class="ml-5 mt-3 text-2xl font-semibold item-title">Chrome</h3>
-        <span class="opacity-50 mx-5 bottom-text">Browser</span>
-        
-      </span>
-      </span>
-     </div> 
-     <div class="h-28 w-[300px] bg-surface0 !rounded-lg m-2 p-3 hover:bg-surface1 duration-300 hover:shadow-lg hover:ring-2 ring-blue-500">
-      <span class="flex flex-row">
-        <img class="!max-h-14 !max-w-14 !w-14 !h-14 item-img" src="assets/icons/debian-xfce.png">
-        <span class="flex flex-col">
-        <h3 class="ml-5 mt-3 text-2xl font-semibold item-title">Debian XFCE</h3>
-        <span class="opacity-50 mx-5 bottom-text">Operating System</span>
-        
-      </span>
-      </span>
-     </div> 
+ <!-- when we do frontend, let it dynamically generate the cards! -->
+    </div>
   </body>
   <script>
     lucide.createIcons();
