@@ -59,3 +59,4 @@ html {
 .reg-dropdown-color {@apply hover:bg-black/20;}
 .dropdown {@apply ml-2 pb-2 absolute bg-mantle rounded-t-none rounded-lg shadow w-44;}
 .if-section {@apply rounded-lg bg-black/20 p-2}
+.backdrop {@apply bg-[url('assets/bg.webp')]; background-size:cover; background-repeat:no-repeat;}
