@@ -12,5 +12,6 @@ export default {
     require("@catppuccin/tailwindcss")({
       prefix: false,
     }),
+    require('flowbite/plugin')
   ],
 } satisfies Config;
