@@ -265,6 +265,21 @@ server.post("/api/auth/tokenvalidate", async ({ body, set }) => {
   }
 });
 
+server.post("/api/container/request", async ({ body, set }) => {
+  // TODO
+});
+
+server.post("/api/container/kill", async ({ body, set }) => {
+  // TODO
+});
+
+server.post("/api/container/delete", async ({ body, set }) => {
+  // TODO
+});
+
+
+
+
 // startup
 
 console.log(`Listening on port ${config.webserver.port} or`),
