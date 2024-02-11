@@ -155,3 +155,13 @@ input[type="checkbox"]:checked + .slider:before {
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
+.horrible * {padding:4px;color:red;font-family:"Comic Sans","Wingdings",serif;font-size:20px;overflow:auto;min-width:2px;max-width:508px !important;animation: horrible 0.25s infinite alternate-reverse;}
+.horrible body {max-width:1000px !important;}
+.horrible img {width:30px !important;background:yellow;}
+.horrible card {z-index:-32767;background:red;position:relative;bottom:-50px;}
+.horrible input {padding:24px;background:yellow;}
+.horrible nav { background:red;}
+@keyframes horrible {
+  from {padding-right:4px;padding-left:7px;color:green;}
+  to {padding-right:10px;padding-left:0px;color:yellow;}
+}
