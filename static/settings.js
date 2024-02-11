@@ -5,3 +5,9 @@ function checkbox_check(ele) {
         ifsect.classList.toggle('active')
      }
 }
+function changeTheme(ele) {
+    themetxt = ele.innerText.toLowerCase()
+    console.log(themetxt)
+    localStorage['themeSelected'] = themetxt
+    updateTheme()
+}
