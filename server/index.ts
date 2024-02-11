@@ -53,7 +53,7 @@ endpoints = endpoints.split(",");
 
 async function ping(url: string): Promise<string> {
   try {
-    const response = await fetch(url);
+    const response = await fetch("https://"+url);
     if (response.status >= 200 && response.status < 400) {
       return "up";
     } else {
@@ -82,8 +82,15 @@ async function getBacks() {
       return endpoints[i];
     }
   }
-  console.warn('WARN: No DeblokManager endpoints found');
+  console.warn('WARN: No online DeblokManager server found');
   return null;
+}
+async function getBackPorts(server) {
+  let hc = (await healthcheck()).backend;
+  try {
+  let res = await fetch("https://"+server+"/ports/list")
+  return await res.text();
+  } catch (e) {return e;}
 }
 
 server.get("/api/__healthcheck", async () => {
