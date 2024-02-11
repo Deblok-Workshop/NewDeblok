@@ -52,7 +52,7 @@
      'duration-300',
      'hover:shadow-lg',
      'hover:ring-2',
-     'ring-blue-500'
+     'ring-blue-600', 'active:ring-4','active:ring-blue-500','active:duration-100'
    ); // this is shit
 
    const innerContent = `
