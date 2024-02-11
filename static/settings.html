@@ -68,12 +68,29 @@
                 </div>
             </li>
             <br>
-            <li class="settings-item ml-1">
-              <label class="toggle-switch">
-                  <input type="checkbox" class="checkbox enablecloak" onclick="checkbox_check(this)">
+            <li class="settings-item ml-1" >
+              <label class="toggle-switch" >
+                  <input type="checkbox" class="checkbox enablecloak" onclick="checkbox_check(this.parentElement)">
                   <span class="slider"></span>
               </label>
               Enable Tab Cloaking
+              <div class="if-section opacity-50">
+                <span>
+                  <label class="toggle-switch" >
+                    <input type="checkbox" class="checkbox enablecloak" onclick="checkbox_check(this.parentElement)">
+                    <span class="slider"></span>
+                </label>
+                Cloaking on Unfocus
+
+                </span><br>
+                <span>
+                  Cloak Title: <input type="text" maxlength="72" class="bg-mantle py-0"></input>
+                </span>
+                <br>
+                <span>
+                  Cloak Icon URL: <input type="text" maxlength="255" class="bg-mantle py-0"></input>
+                </span>
+              </div>
           </li>
         </ul>
     </div>

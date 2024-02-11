@@ -50,7 +50,7 @@ html {
 
 * {color-scheme:dark;}
 
-.card {@apply shadow pr-16 w-fit h-fit z-10 bg-mantle/80 !rounded-lg mb-1 p-3 hover:bg-surface0 duration-[250ms] hover:shadow-lg hover:ring-2 ring-blue-600 active:ring-4 active:ring-blue-500 active:duration-100;  }
+.card {@apply shadow !min-w-[270px]   w-fit h-fit z-10 bg-mantle/80 !rounded-lg mb-1 p-3 hover:bg-surface0 duration-[250ms] hover:shadow-lg hover:ring-2 ring-blue-600 active:ring-4 active:ring-blue-500 active:duration-100;  }
 .grid {@apply grid-cols-2 grid-rows-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4;}
 @keyframes dropd {
   from {max-height:0px;overflow-y:clip;}
