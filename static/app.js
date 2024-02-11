@@ -1,45 +1,5 @@
  // Get a reference to the card container element
- const cardContainer = document.getElementById('cardContainer');
-
- // Define the data for the cards
- const cardData = [
-   {
-     img: 'assets/icons/firefox.png',
-     title: 'Firefox',
-     subtitle: 'Browser',
-   },
-   {
-     img: 'assets/icons/firefox.png',
-     title: 'Firefox',
-     subtitle: 'Browser',
-   },
-   {
-     img: 'assets/icons/firefox.png',
-     title: 'Firefox',
-     subtitle: 'Browser',
-   },
-   {
-     img: 'assets/icons/firefox.png',
-     title: 'Firefox',
-     subtitle: 'Browser',
-   },
-   {
-     img: 'assets/icons/firefox.png',
-     title: 'Firefox',
-     subtitle: 'Browser',
-   },
-   {
-     img: 'assets/icons/firefox.png',
-     title: 'Firefox',
-     subtitle: 'Browser',
-   },
-   {
-     img: 'assets/icons/firefox.png',
-     title: 'Firefox',
-     subtitle: 'Browser',
-   },
-   // Made by spark and rare pookie
- ];
+ const cardContain = document.querySelector('#cardContainer');
 
  cardData.forEach((card) => {
    const cardElement = document.createElement('div');
@@ -60,5 +20,5 @@
 
    cardElement.innerHTML = innerContent;
 
-   cardContainer.appendChild(cardElement);
+   cardContain.appendChild(cardElement);
  });
