@@ -57,3 +57,4 @@ html {
 .anim__dropdown {overflow-y: clip;animation:dropd 0.66s ease-in forwards;max-height:0px;}
 .active-dropdown-color {@apply bg-mauve/40 hover:bg-mauve/60 hover:text-text/80;}
 .reg-dropdown-color {@apply hover:bg-black/20;}
+.dropdown {@apply ml-2 pb-2 absolute bg-mantle rounded-t-none rounded-lg shadow w-44;}
