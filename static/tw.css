@@ -69,3 +69,5 @@ overlay {@apply backdrop-brightness-50 w-full h-full fixed left-0 top-0}
 .theme-frapp-ctp {@apply frappe}
 .theme-macch-ctp {@apply macchiato}
 .theme-mocha-ctp {@apply mocha}
+.theme-btn-base {@apply ring-black/25 ring-1 hover:ring-[3px] duration-300 hover:mx-[4px] cursor-pointer active:ring-black/70 active:duration-[50ms];}
+.theme-btn-active {@apply !ring-base/75 hover:!ring-surface0 active:!ring-overlay0 !ring-[3px]}
