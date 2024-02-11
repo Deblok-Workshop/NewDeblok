@@ -24,7 +24,23 @@
         </a>
       </div>
       <a href="#profile-dash" class="flex ml-auto float-right mx-4">
-        <img class="flex align-middle my-auto ml-auto float-right duration-300 ring-surface0 hover:ring-4 w-10 h-10 !rounded-full" src="https://github.com/uhidontkno.png" />
+        <img data-dropdown-toggle="profile-dropdown" class="focus:ring-4 focus:ring-surface1 flex align-middle my-auto ml-auto float-right duration-300 ring-surface0 hover:ring-4 w-10 h-10 !rounded-full" src="https://github.com/uhidontkno.png" />
+        <div id="profile-dropdown"  class=" ml-2 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700" style="z-index:100 !important">
+          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+            <li>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+            </li>
+            <li>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+            </li>
+            <li>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+            </li>
+            <li>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+            </li>
+          </ul>
+      </div>
       </a>
     </nav>
     <br />
