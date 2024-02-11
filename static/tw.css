@@ -56,4 +56,4 @@ html {
 .pfpico {@apply active:ring-4 active:ring-surface1 active:duration-100 flex align-middle my-auto ml-auto float-right duration-300 ring-surface0 hover:ring-4 w-10 h-10 !rounded-full;}
 .anim__dropdown {overflow-y: clip;animation:dropd 0.66s ease-in forwards;max-height:0px;}
 .active-dropdown-color {@apply bg-mauve/40 hover:bg-mauve/60 hover:text-text/80;}
-.reg-dropdown-color {@apply  hover:bg-black/20;}
+.reg-dropdown-color {@apply hover:bg-black/20;}

@@ -9,24 +9,18 @@
     <link rel="stylesheet" href="app.css" />
   </head>
   <body class="bg-base flex flex-col min-h-screen text-text font-sans bg-[url('assets/bg.webp')] bg-cover backdrop-blur-sm">
-    <overlay class="backdrop-brightness-50 sm:backdrop-brightness-50 md:backdrop-brightness-100 z-5 w-full h-full md:bg-gradient-to-b  from-crust from-25% fixed left-0 top-0">
+    
+    <overlay class="backdrop-brightness-50 sm:backdrop-brightness-50 md:backdrop-brightness-100 -z-5 w-full h-full md:bg-gradient-to-b  from-crust from-25% fixed left-0 top-0">
 
     </overlay>
-    <nav
-      class="flex flex-row p-2 bg-mantle align-middle shadow-lg shadow-mantle/20 z-10"
-    >
-      <logo class="w-12 h-12 inline-block mr-4"
-        ><img src="assets/favicon.png"
-      /></logo>
+    
+    <nav class="flex flex-row p-2 bg-mantle align-middle shadow-lg shadow-mantle/20 z-10">
+      <logo class="w-12 h-12 inline-block mr-4">
+        <img src="assets/favicon.png" />
+      </logo>
       <div class="flex flex-row items-center flex-grow justify-end">
-        <a
-          href="/settings.html"
-          class="duration-300 rounded-md hover:bg-mauve/10 p-2 mx-5"
-        >
-          <i
-            data-lucide="settings"
-            class="inline text-mauve w-7 h-7 my-auto"
-          ></i>
+        <a href="settings.html" class="duration-300 rounded-md active-dropdown-color p-2 mx-5">
+          <i data-lucide="settings" class="inline text-mauve w-7 h-7 my-auto"></i>
         </a>
       </div>
       <a href="javascript:" class="flex ml-auto float-right mx-4 z-100 relative">
@@ -45,12 +39,12 @@
       </a>
     </nav>
     <br />
-    <div class="z-10 flex flex-col justify-center align-middle w-full h-full">
+    <div class=" flex flex-col justify-center align-middle w-full h-full">
     <div class="bg-surface0 p-4 mx-auto my-auto rounded-md ring-1 ring-blue/50 shadow flex hover:ring-2 hover:bg-surface0/80 duration-300">
 sdfsdf
     </div>
      </div>
-    
+     <br />
   </body>
   <script>
     lucide.createIcons();
