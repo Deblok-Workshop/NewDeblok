@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        lucide: ["LucideIcons"],
+        sans: ["Geist"],
       },
     },
   },

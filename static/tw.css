@@ -1,6 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  src: url("./assets/Geist-Light.woff2")
+    format("woff2");
+  font-display: swap;
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  src: url("./assets/Geist-Regular.woff2")
+    format("woff2");
+  font-display: swap;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  src: url("./assets/Geist-Medium.woff2")
+    format("woff2");
+  font-display: swap;
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  src: url("./assets/Geist-SemiBold.woff2")
+    format("woff2");
+  font-display: swap;
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  src: url("./assets/Geist-Bold.woff2")
+    format("woff2");
+  font-display: swap;
+  font-weight: 700;
+}
 body,
 html {
   width: 100%;
