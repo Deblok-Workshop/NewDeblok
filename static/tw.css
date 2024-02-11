@@ -65,3 +65,7 @@ html {
 .if-section {@apply rounded-lg bg-black/20 p-2}
 .backdrop {@apply bg-[url('assets/bg.webp')]; background-size:cover; background-repeat:no-repeat;}
 overlay {@apply backdrop-brightness-50 w-full h-full fixed left-0 top-0}
+.theme-light-ctp {@apply latte}
+.theme-frapp-ctp {@apply frappe}
+.theme-macch-ctp {@apply macchiato}
+.theme-mocha-ctp {@apply mocha}
