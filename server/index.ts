@@ -75,6 +75,16 @@ async function healthcheck() {
   }
   return { api: "up", backend: backendstat };
 }
+async function getBacks() {
+  let hc = (await healthcheck()).backend;
+  for (let i = 0; i < hc.length; i++) {
+    if (hc[i].status === 'up') {
+      return endpoints[i];
+    }
+  }
+  console.warn('WARN: No DeblokManager endpoints found');
+  return null;
+}
 
 server.get("/api/__healthcheck", async () => {
   // using /api/__healthcheck to be compatible with Kasmweb's API format
