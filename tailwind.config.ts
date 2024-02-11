@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 export default {
-  content: ["./static/**/*.html"],
+  content: ["./static/**/*.{html,js}"],
   theme: {
     extend: {
       fontFamily: {
