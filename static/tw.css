@@ -48,3 +48,12 @@ html {
 }
 .card {@apply /*max-h-[96px] max-w-[300px] min-h-[76px] min-w-[270px] */ pr-16 w-fit h-fit z-10 bg-surface0 !rounded-lg mb-1 p-3 hover:bg-surface1 duration-[250ms] hover:shadow-lg hover:ring-2 ring-blue-600 active:ring-4 active:ring-blue-500 active:duration-100;  }
 .grid {@apply grid-cols-2 grid-rows-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4;}
+@keyframes dropd {
+  from {max-height:0px;overflow-y:clip;}
+  33% {overflow-y: auto;}
+  to {max-height:400px;overflow-y: auto;}
+}
+.pfpico {@apply active:ring-4 active:ring-surface1 active:duration-100 flex align-middle my-auto ml-auto float-right duration-300 ring-surface0 hover:ring-4 w-10 h-10 !rounded-full;}
+.anim__dropdown {overflow-y: clip;animation:dropd 0.66s ease-in forwards;max-height:0px;}
+.active-dropdown-color {@apply bg-mauve/40 hover:bg-mauve/60 hover:text-text/80;}
+.reg-dropdown-color {@apply  hover:bg-black/20;}
