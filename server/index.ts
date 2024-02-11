@@ -8,7 +8,12 @@ import { cors } from "@elysiajs/cors";
 import fetch from "node-fetch";
 
 Bun.write("tempcaptcha.db", "{}");
-
+try {
+  require("node:fs").accessSync("db.sql", require("node:fs").constants.F_OK);
+} catch {
+  console.warn('WARN: db.sql does not exist. Creating.')
+  Bun.write('db.sql','')
+}
 let netaddr = "[::1]";
 netaddr = require("node:os").hostname();
 
@@ -85,7 +90,7 @@ async function getBacks() {
   console.warn('WARN: No online DeblokManager server found');
   return null;
 }
-async function getBackPorts(server) {
+async function getBackPorts(server:string) {
   let hc = (await healthcheck()).backend;
   try {
   let res = await fetch("https://"+server+"/ports/list")
