@@ -160,7 +160,10 @@ input[type="checkbox"]:checked + .slider:before {
 .horrible img {width:30px !important;background:yellow;}
 .horrible card {z-index:-32767;background:red;position:relative;bottom:-50px;}
 .horrible input {padding:24px;background:yellow;}
-.horrible nav { background:red;}
+.horrible nav { background:red;background-image:url('https://b.incognitotgt.me/12x12is24.gif')}
+.horrible  {}
+.horrible overlay {background-image:url('https://b.incognitotgt.me/12x12is24.gif') !important; backdrop-filter:none; background-size:fit;}
+.horrible div {opacity:0.7;}
 @keyframes horrible {
   from {padding-right:4px;padding-left:7px;color:green;}
   to {padding-right:10px;padding-left:0px;color:yellow;}
