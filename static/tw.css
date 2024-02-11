@@ -90,7 +90,7 @@ overlay {@apply backdrop-brightness-50 w-full h-full fixed left-0 top-0}
 --ctp-maroon: #e64553 !important;
 --ctp-peach: #fe640b !important;
 --ctp-yellow: #df8e1d !important;
---ctp-grreen: #40a02b !important;
+--ctp-green: #40a02b !important;
 --ctp-teal: #179299 !important;
 --ctp-sky: #04a5e5 !important;
 --ctp-sapphire: #209fb5 !important;
@@ -100,4 +100,58 @@ overlay {@apply backdrop-brightness-50 w-full h-full fixed left-0 top-0}
 --ctp-subtext1: #cccccc  !important;
 --ctp-subtext0: #bbbbbb !important;
 
+}
+
+ /* Additional styles for the checkbox */
+ .toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.toggle-switch input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #1f1f2f;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #4f4faf;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input[type="checkbox"]:checked + .slider {
+  background-color: #2f2f4f;
+}
+
+input[type="checkbox"]:focus + .slider {
+  box-shadow: 0 0 1px #2f2f5f;
+}
+
+input[type="checkbox"]:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
 }
