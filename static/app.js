@@ -44,8 +44,7 @@
  cardData.forEach((card) => {
    const cardElement = document.createElement('div');
    cardElement.classList.add(
-     'h-[92px]',
-     'w-[290px]',
+     'card',
      'bg-surface0',
      '!rounded-lg', "mb-1",
      'p-3',
