@@ -45,22 +45,15 @@
    const cardElement = document.createElement('div');
    cardElement.classList.add(
      'card',
-     'bg-surface0',
-     '!rounded-lg', "mb-1",
-     'p-3',
-     'hover:bg-surface1',
-     'duration-300',
-     'hover:shadow-lg',
-     'hover:ring-2',
-     'ring-blue-600', 'active:ring-4','active:ring-blue-500','active:duration-100'
+
    ); // this is shit
 
    const innerContent = `
      <span class="flex flex-row">
        <img class="!max-h-14 !max-w-14 !w-14 !h-14 item-img" src="${card.img}">
        <span class="flex flex-col">
-         <h3 class="ml-5 mt-2 text-2xl font-semibold item-title">${card.title}</h3>
-         <span class="opacity-50 mx-5 bottom-text">${card.subtitle}</span>
+         <h3 class="ml-5 mt-1 text-xl font-semibold item-title">${card.title}</h3>
+         <span class="opacity-50 mx-5 bottom-text text-sm">${card.subtitle}</span>
        </span>
      </span>
    `;

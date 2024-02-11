@@ -46,4 +46,5 @@ html {
   width: 100%;
   height: 100%; font-family:"Giest",sans-serif;
 }
-.card {@apply /*max-h-[96px] max-w-[300px] min-h-[76px] min-w-[270px] */ w-fit h-fit pr-24 z-10 }
+.card {@apply /*max-h-[96px] max-w-[300px] min-h-[76px] min-w-[270px] */ pr-16 w-fit h-fit z-10 bg-surface0 !rounded-lg mb-1 p-3 hover:bg-surface1 duration-[250ms] hover:shadow-lg hover:ring-2 ring-blue-600 active:ring-4 active:ring-blue-500 active:duration-100;  }
+.grid {@apply grid-cols-2 grid-rows-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4;}
