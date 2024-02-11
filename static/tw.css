@@ -64,4 +64,4 @@ html {
 .dropdown {@apply ml-2 pb-2 absolute bg-mantle rounded-t-none rounded-lg shadow w-44;}
 .if-section {@apply rounded-lg bg-black/20 p-2}
 .backdrop {@apply bg-[url('assets/bg.webp')]; background-size:cover; background-repeat:no-repeat;}
-overlay {@apply backdrop-brightness-50 z-[5] w-full h-full fixed left-0 top-0}
+overlay {@apply backdrop-brightness-50 w-full h-full fixed left-0 top-0}
