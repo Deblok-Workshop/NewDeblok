@@ -6,9 +6,14 @@
     <title>Deblok</title>
     <link rel="stylesheet" href="app.css">
   </head>
-  <body class="bg-base flex flex-col min-h-screen text-text font-sans backdrop-blur-md backdrop-brightness-75 backdrop">
-    <div class="bg-mantle/60 p-4 mx-auto my-auto rounded-md ring-1 ring-red/50  hover:ring-2 hover:bg-mantle/80 duration-300 shadow-inner shadow-black/30 px-8">
+  <body class="bg-base flex flex-col sm:flex-col md:flex-row min-h-screen text-text font-sans backdrop-blur-md backdrop-brightness-75 backdrop">
+    <div class="bg-black/40 w-[100%] sm:w-[100%] md:w-[50%] h-full flex align-middle justify-center items-center">
+    <div class="bg-mantle/60 p-4 mx-4 my-auto rounded-md ring-1 ring-red/50  hover:ring-2 hover:bg-mantle/80 duration-300 shadow-inner shadow-black/30 px-8">
       <h1 class="text-3xl text-bold text-center text-text">Login to Deblok</h1>
     </div>
+  </div>
+  <div class="bg-black/20 hidden sm:hidden w-[50%] max-w-[50%] md:flex h-auto align-middle justify-center items-center">
+    <img src="assets/deblok_wordmark.svg" style="height:fit-content;" class="max-w-md w-full mx-12 my-auto hidden sm:hidden md:block">
+</div>
   </body>
 </html>
