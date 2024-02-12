@@ -9,7 +9,6 @@ import fetch from "node-fetch";
 
 Bun.write("tempcaptcha.db", "{}");
 
-
 try {
   require("node:fs").accessSync("db.sql", require("node:fs").constants.F_OK);
 } catch {
@@ -43,17 +42,17 @@ const server = new Elysia();
 // errors
 
 server.onError(({ code, error, set }) => {
-  if (code === 'NOT_FOUND') {
-      set.status = 404
+  if (code === "NOT_FOUND") {
+    set.status = 404;
 
-      return Bun.file('static/404.html')
+    return Bun.file("static/404.html");
   }
-  if (code === 'INTERNAL_SERVER_ERROR') {
-    set.status = 500
+  if (code === "INTERNAL_SERVER_ERROR") {
+    set.status = 500;
 
-    return Bun.file('static/500.html')
-}
-})
+    return Bun.file("static/500.html");
+  }
+});
 
 server.use(cors()); // ElysiaJS cors plugin
 server.use(rateLimit(config.ratelimit));
@@ -75,7 +74,7 @@ endpoints = endpoints.split(",");
 
 server.get("/favicon.ico", async ({ set }) => {
   // fallback
-  set.redirect = '/assets/favicon.png'
+  set.redirect = "/assets/favicon.png";
 });
 
 async function ping(url: string): Promise<string> {

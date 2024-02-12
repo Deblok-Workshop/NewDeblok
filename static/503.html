@@ -1,39 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="mocha">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Deblok | 503</title>
-    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="app.css" />
     <script src="global.js"></script>
     <link rel="icon" type="image/png" href="assets/favicon.png" />
-</head>
-    <body class=" bg-base flex flex-col min-h-screen text-text font-sans backdrop-blur-md backdrop-brightness-75 backdrop">
+  </head>
+  <body
+    class="bg-base flex flex-col min-h-screen text-text font-sans backdrop-blur-md backdrop-brightness-75 backdrop"
+  >
+    <overlay> </overlay>
 
-        <overlay>
-        
-        </overlay>
-        
-        
-        <div class="z-[2] flex flex-col justify-center align-middle w-full h-full">
-            <div class="max-w-[600px] text-center bg-mantle/60 p-4 mx-auto my-auto rounded-md ring-1 ring-red/50  hover:ring-2 hover:bg-mantle/80 duration-300 shadow-inner shadow-black/30 px-8">
-                <h1 class="text-3xl text-center font-extrabold text-red">Service Unavailiable</h1>
-                <br>
-                Deblok is currently unavailiable. Please wait a few minutes and/or check the Discord for any updates about this incident.
-                <br>
-                <br>
-                <img style="height:240px; text-align:center; margin:auto;" src="https://http.cat/503">
-                <br>
-                <br>
-                
-                <div class="max-w-sm mx-auto flex flex-row w-full">
-                    <a href="https://status.deblok.me" class="rounded-r-none block text-2xl rounded-lg bg-green/80 hover:bg-green duration-[375ms] px-6 py-2 hover:text-mantle text-surface0">Status</a>
-                    <a href="https://discord.gg/deblok" class="block text-2xl bg-surface1 hover:bg-lavender/80 duration-[375ms] px-3 py-2 hover:text-mantle">Discord</a>
-                    <a href="https://deblok.me" class="block text-2xl rounded-lg rounded-l-none bg-base hover:bg-sapphire/80 duration-[375ms] px-3 py-2 hover:text-mantle">Deblok.me</a>
-                </div>
-            </div>
+    <div class="z-[2] flex flex-col justify-center align-middle w-full h-full">
+      <div
+        class="max-w-[600px] text-center bg-mantle/60 p-4 mx-auto my-auto rounded-md ring-1 ring-red/50 hover:ring-2 hover:bg-mantle/80 duration-300 shadow-inner shadow-black/30 px-8"
+      >
+        <h1 class="text-3xl text-center font-extrabold text-red">
+          Service Unavailiable
+        </h1>
+        <br />
+        Deblok is currently unavailiable. Please wait a few minutes and/or check
+        the Discord for any updates about this incident.
+        <br />
+        <br />
+        <img
+          style="height: 240px; text-align: center; margin: auto"
+          src="https://http.cat/503"
+        />
+        <br />
+        <br />
+
+        <div class="max-w-sm mx-auto flex flex-row w-full">
+          <a
+            href="https://status.deblok.me"
+            class="rounded-r-none block text-2xl rounded-lg bg-green/80 hover:bg-green duration-[375ms] px-6 py-2 hover:text-mantle text-surface0"
+            >Status</a
+          >
+          <a
+            href="https://discord.gg/deblok"
+            class="block text-2xl bg-surface1 hover:bg-lavender/80 duration-[375ms] px-3 py-2 hover:text-mantle"
+            >Discord</a
+          >
+          <a
+            href="https://deblok.me"
+            class="block text-2xl rounded-lg rounded-l-none bg-base hover:bg-sapphire/80 duration-[375ms] px-3 py-2 hover:text-mantle"
+            >Deblok.me</a
+          >
         </div>
-        <br/>
-        <script>updateTheme()</script>
-</body>
+      </div>
+    </div>
+    <br />
+    <script>
+      updateTheme();
+    </script>
+  </body>
 </html>

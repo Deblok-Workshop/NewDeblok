@@ -7,7 +7,7 @@
     "start": "bun server/index.ts",
     "dev": "concurrently \"bun run build\" \"bun run start\"",
     "deploy": "bash scripts/deploy.sh",
-    "format": "prettier --ignore-path ./static/vnc/**/* --write ."
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "@types/bun": "latest"
