@@ -316,9 +316,16 @@ server.post("/api/container/create", async ({ body, set }) => {
 // TODO
 const b:any=body // the body variable is actually a string, this is here to fix a ts error
 var bjson:any={"name":"","image":"","resources":{"ram":"","cores":""},"ports":""} // boilerplate to not piss off TypeScript.
+if (!bjson.name || bjson.name == "" || !bjson.image || bjson.image == "") {
+  set.status = 400;
+  return "ERR: Name and Image fields are required.";
+}
+bjson.resources.ram = bjson.resources.ram || "1G" // set defaults
+bjson.resources.cores = bjson.resources.cores || "1"
 let back:any = await getBacks()
 if (!back) { throw new Error('No online DeblokManager backends found!');}
-let fr = await fetch(`https://${back}`)
+let fr = await fetch(`https://${back}/containers/create`,{"method":"POST",body:JSON.stringify(body)})
+return fr;
 });
 
 server.post("/api/container/kill", async ({ body, set }) => {
