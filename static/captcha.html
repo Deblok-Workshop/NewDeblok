@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <img id="captchaImage" />
+    <img id="captchaImage" alt="id" />
     <br>
     <input type="text" id="captchaAnswer" placeholder="Enter Captcha">
     <button onclick="validate()">Validate</button>
@@ -31,13 +31,15 @@
           .then(id => {
 
             document.getElementById('captchaImage').src = `/api/captcha/${id}/image.gif`;
+            document.getElementById('captchaImage').alt = id;
             document.getElementById('captchaImage').style.display = 'block';
           });
       }
   
       function validate() {
+        let cId = document.getElementById('captchaImage').alt 
         const captchaAnswer = document.getElementById('captchaAnswer').value;
-        fetch(`/api/captcha/${captchaId}/validate`, {
+        fetch(`/api/captcha/${cId}/validate`, {
           method: 'POST',
           headers: {
             'Content-Type': 'text/plain',
@@ -46,27 +48,28 @@
         })
           .then(response => response.text())
           .then(result => {
-            if (result) {
+            if (result == "true") {
               console.log('Captcha passed!');
-              document.write(captchaId);
+              document.write(document.getElementById('captchaImage').alt );
               /* regex for uuids: /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/ */
             } else {
               console.log('Captcha failed!');
-              requestCaptcha();
+              req();
             }
           });
       }
   
       function regen() {
+        let cId = document.getElementById('captchaImage').alt 
         document.getElementById('captchaAnswer').value = ""
-        fetch(`/api/captcha/${captchaId}/void`)
-          .then(() => 
+        fetch(`/api/captcha/${cId}/void`)
+          .then((response) => 
           {
             if (response.status === 429) {
         alert('You are being rate limited. Please press Regenerate in a few minutes');
         document.getElementById('captchaImage').style.display = 'none'; 
         throw new Error('Rate Limited');
-      } else {req()}
+      } else {captchaId = req()}
       
     
           });
