@@ -235,7 +235,7 @@ input[type="checkbox"]:checked + .slider:before {
   background-size: fit;
 }
 .horrible div {
-  opacity: 0.7;
+  opacity: 0.9;
 }
 @keyframes horrible {
   from {
@@ -249,3 +249,5 @@ input[type="checkbox"]:checked + .slider:before {
     color: yellow;
   }
 }
+
+input, .input {@apply border-none rounded-lg bg-surface0 font-mono px-2 focus:bg-surface1 hover:bg-surface1 active:bg-surface1 active:ring-2 ring-surface2 hover:ring-1 duration-[250ms] py-0.5}

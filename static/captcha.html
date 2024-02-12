@@ -4,11 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CAPTCHA</title>
+    <style>
+      * {color-scheme:dark;}
+    </style>
   </head>
   <body>
-    <img id="captchaImage" alt="id" />
+    <img id="captchaImage" alt="id" style="height:75px" />
     <br />
     <input type="text" id="captchaAnswer" placeholder="Enter Captcha" />
+    <br>
     <button onclick="validate()">Validate</button>
     <button onclick="regen()">Regenerate</button>
 
