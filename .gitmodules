@@ -1,0 +1,3 @@
+[submodule "static/vnc"]
+	path = static/vnc
+	url = https://github.com/kasmtech/kasmvnc.git
