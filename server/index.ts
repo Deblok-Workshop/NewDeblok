@@ -48,6 +48,11 @@ server.onError(({ code, error, set }) => {
 
       return Bun.file('static/404.html')
   }
+  if (code === 'INTERNAL_SERVER_ERROR') {
+    set.status = 500
+
+    return Bun.file('static/500.html')
+}
 })
 server.use(cors()); // ElysiaJS cors plugin
 server.use(rateLimit(config.ratelimit));
