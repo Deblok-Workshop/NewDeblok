@@ -11,7 +11,8 @@
     class="bg-base flex flex-col min-h-screen text-text font-sans backdrop-blur-md backdrop-brightness-75 backdrop"
   >
     <script>
-      (async () => {
+      setTimeout(() => {
+        (async () => {
         if (localStorage["DEBLOKAUTH"] != undefined) {
           let tkncheck = await fetch("/api/auth/tokenvalidate", {
             method: "POST",
@@ -26,6 +27,8 @@
           document.location = "login.html";
         }
       })();
+      },250)
+      
     </script>
   </body>
 </html>
