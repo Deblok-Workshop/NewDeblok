@@ -1,14 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="mocha">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Deblok</title>
+    <link rel="stylesheet" href="app.css">
   </head>
-  <body>
-    <!-- TODO: redirect user to dash or login depending on the authentication status. -->
+  <body class="bg-base flex flex-col min-h-screen text-text font-sans backdrop-blur-md backdrop-brightness-75 backdrop">
     <script>
-      document.location = "dash.html"; // tgt what the fuck did you do to screw this up
+      (async () => {
+        if (localStorage['DEBLOKAUTH'] != undefined) {
+      let tkncheck = await fetch('/api/auth/tokenvalidate', {method:'POST',body:localStorage['DEBLOKAUTH']})
+      if (response.ok) {
+      document.location = "dash.html"; 
+      } else {document.location = "login.html"}
+      } else {document.location = "login.html"}
+      })()
+
     </script>
   </body>
 </html>
