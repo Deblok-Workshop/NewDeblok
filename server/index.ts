@@ -8,6 +8,8 @@ import { cors } from "@elysiajs/cors";
 import fetch from "node-fetch";
 
 Bun.write("tempcaptcha.db", "{}");
+
+
 try {
   require("node:fs").accessSync("db.sql", require("node:fs").constants.F_OK);
 } catch {
@@ -38,8 +40,18 @@ if (
 }
 const server = new Elysia();
 
-server.use(rateLimit(config.ratelimit));
+// 404
+
+server.onError(({ code, error, set }) => {
+  if (code === 'NOT_FOUND') {
+      set.status = 404
+
+      return Bun.file('static/404.html')
+  }
+})
+
 server.use(staticPlugin({ assets: "static/", prefix: "/" }));
+server.use(rateLimit(config.ratelimit));
 server.use(cors()); // ElysiaJS cors plugin
 
 // initial startup stuff
