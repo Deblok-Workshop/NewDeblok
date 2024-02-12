@@ -4,11 +4,8 @@ export default {
     duration: 300 * 1000,
     max: 100,
     responseMessage: "Global rate limit reached.",
-    skip: (req:any) => {
-      let u = new URL(req.url)
-      return !u.pathname.startsWith('/api');}, 
+    skip: (req:any) => {return !new URL(req.url).pathname.startsWith('/api')},
   },
-
   // Webserver config
   webserver: { port: 8080 },
 };
