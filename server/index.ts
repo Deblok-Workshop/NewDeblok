@@ -310,17 +310,39 @@ server.post("/api/auth/tokenvalidate", async ({ body, set }) => {
   }
 });
 
-server.post("/api/container/request", async ({ body, set }) => {
-  // TODO
+server.post("/api/container/create", async ({ body, set }) => {
+  try {
+    const result = await createContainer(body);
+    return result;
+  } catch (err) {
+    set.status = 500;
+    console.error(err);
+    return err;
+  }
 });
 
 server.post("/api/container/kill", async ({ body, set }) => {
-  // TODO
+  try {
+    const result = await killContainer(body);
+    return result;
+  } catch (err) {
+    set.status = 500;
+    console.error(err);
+    return err;
+  }
 });
 
 server.post("/api/container/delete", async ({ body, set }) => {
-  // TODO
+  try {
+    const result = await deleteContainer(body);
+    return result;
+  } catch (err) {
+    set.status = 500;
+    console.error(err);
+    return err;
+  }
 });
+
 
 // startup
 
