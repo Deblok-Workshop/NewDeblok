@@ -310,16 +310,31 @@ server.post("/api/auth/tokenvalidate", async ({ body, set }) => {
   }
 });
 
+// container management
+
 server.post("/api/container/create", async ({ body, set }) => {
 // TODO
+const b:any=body // the body variable is actually a string, this is here to fix a ts error
+var bjson:any={"name":"","image":"","resources":{"ram":"","cores":""},"ports":""} // boilerplate to not piss off TypeScript.
+let back:any = await getBacks()
+if (!back) { throw new Error('No online DeblokManager backends found!');}
+let fr = await fetch(`https://${back}`)
 });
 
 server.post("/api/container/kill", async ({ body, set }) => {
 // TODO
+const b:any=body // the body variable is actually a string, this is here to fix a ts error
+var bjson:any={id:""} // boilerplate to not piss off TypeScript.
+let back:any = await getBacks()
+if (!back) { throw new Error('No online DeblokManager backends found!');}
 });
 
 server.post("/api/container/delete", async ({ body, set }) => {
   // TODO
+  const b:any=body // the body variable is actually a string, this is here to fix a ts error
+  var bjson:any={id:""} // boilerplate to not piss off TypeScript.
+let back:any = await getBacks()
+if (!back) { throw new Error('No online DeblokManager backends found!');}
 });
 
 
