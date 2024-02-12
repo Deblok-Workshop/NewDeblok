@@ -40,7 +40,7 @@ if (
 }
 const server = new Elysia();
 
-// 404
+// errors
 
 server.onError(({ code, error, set }) => {
   if (code === 'NOT_FOUND') {
@@ -54,6 +54,7 @@ server.onError(({ code, error, set }) => {
     return Bun.file('static/500.html')
 }
 })
+
 server.use(cors()); // ElysiaJS cors plugin
 server.use(rateLimit(config.ratelimit));
 server.use(staticPlugin({ assets: "static/", prefix: "/" }));
@@ -71,6 +72,11 @@ if (!dbpwd) {
 endpoints = endpoints.split(",");
 
 // general
+
+server.get("/favicon.ico", async ({ set }) => {
+  // fallback
+  set.redirect = '/assets/favicon.png'
+});
 
 async function ping(url: string): Promise<string> {
   try {
