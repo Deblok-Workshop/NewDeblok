@@ -19,9 +19,19 @@
       function req() {
         document.getElementById('captchaAnswer').value = ""
         fetch('/api/captcha/request')
-          .then(response => response.text())
+          .then(response => {
+            if (response.status === 429) {
+        alert('You are being rate limited. Please press Regenerate in a few minutes');
+        document.getElementById('captchaImage').style.display = 'none'; 
+        throw new Error('Rate Limited');
+      }
+            return response.text()
+
+        })
           .then(id => {
+
             document.getElementById('captchaImage').src = `/api/captcha/${id}/image.gif`;
+            document.getElementById('captchaImage').style.display = 'block';
           });
       }
   
@@ -48,7 +58,16 @@
       function regen() {
         document.getElementById('captchaAnswer').value = ""
         fetch(`/api/captcha/${captchaId}/void`)
-          .then(() => req());
+          .then(() => 
+          {
+            if (response.status === 429) {
+        alert('You are being rate limited. Please press Regenerate in a few minutes');
+        document.getElementById('captchaImage').style.display = 'none'; 
+        throw new Error('Rate Limited');
+      } else {req()}
+      
+    
+          });
       }
   
       // Call req when the page loads
