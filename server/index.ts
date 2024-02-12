@@ -49,10 +49,9 @@ server.onError(({ code, error, set }) => {
       return Bun.file('static/404.html')
   }
 })
-
-server.use(staticPlugin({ assets: "static/", prefix: "/" }));
-server.use(rateLimit(config.ratelimit));
 server.use(cors()); // ElysiaJS cors plugin
+server.use(rateLimit(config.ratelimit));
+server.use(staticPlugin({ assets: "static/", prefix: "/" }));
 
 // initial startup stuff
 let endpoints: any = process.env.ENDPOINTS;
