@@ -7,7 +7,7 @@ cardData.forEach((card) => {
 
   const innerContent = `
      <span class="flex flex-row">
-       <img class="!max-h-14 !max-w-14 !w-14 !h-14 item-img" src="${card.img}">
+       <img class="!max-h-14 !max-w-14 !w-14 !h-14 item-img hover:[border-radius:12px_!important]" style="border-radius:9999px !important;" src="${card.img}">
        <span class="flex flex-col">
          <h3 class="ml-5 mt-1 text-xl font-semibold item-title">${card.title}</h3>
          <span class="opacity-50 mx-5 bottom-text text-sm">${card.subtitle}</span>
