@@ -57,23 +57,9 @@ server.onError(({ code, error, set }) => {
 server.use(cors()); // ElysiaJS cors plugin
 server.use(rateLimit(config.ratelimit));
 if (
-  process.argv.includes("--unavailiable") || process.argv.includes("-u")
+  process.argv.includes("--unavailable") || process.argv.includes("-u")
 ) {
-  server.all("/*", async ({ set }) => {
-    set.status = 503;
-    return Bun.file("static/503.html");
-  });
-  server.all("/app.css", async ({ set }) => {
-    return Bun.file("static/app.css");
-  });
-  server.use(staticPlugin({ assets: "static/assets", prefix: "/assets" }));
-  console.log(`Listening in Unavailiable Mode on port ${config.webserver.port} or`),
-  console.log(` │ 0.0.0.0:${config.webserver.port}`),
-  console.log(` │ 127.0.0.1:${config.webserver.port}`),
-  console.log(` │ ${netaddr}:${config.webserver.port}`),
-  console.log(` └─────────────────────────>`),
-  server.listen(config.webserver);
-
+  require('./unavailable.ts'); 
 } else {
 server.use(staticPlugin({ assets: "static/", prefix: "/" }));
 
