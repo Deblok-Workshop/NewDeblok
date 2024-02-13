@@ -62,14 +62,17 @@
       />
     </div>
     <script>
-      let interval = setInterval(() => {
-        if (checkCaptchaIfr(document.querySelector('.captchaIframe'))) {
+      document.querySelector('.captchaIframe').addEventListener('load',() =>{
+        setTimeout(() => {        if (checkCaptchaIfr(document.querySelector('.captchaIframe'))) {
           document.querySelector('.captchaIframe').style.display = "none"
           document.querySelector('.successCaptcha').style.display = "block"
-          clearInterval(interval)
+          //clearInterval(interval)
           
-        }
-      },500)
+        }},100)
+
+      })
+      
+      
     </script>
   </body>
 </html>
