@@ -225,7 +225,7 @@ input,
 }
 body,
 .body {
-  @apply bg-base flex flex-col min-h-screen text-text font-sans backdrop-blur-md backdrop-brightness-75
+  @apply bg-base flex flex-col min-h-screen text-text font-sans backdrop-blur-md backdrop-brightness-75;
   @apply bg-[url('assets/bg.webp')];
   background-size: cover;
   background-repeat: no-repeat;
