@@ -66,13 +66,15 @@ function evaluateMathFuck(mathFuckCode: string): number {
   };
 
   const pattern = new RegExp(Object.keys(translation).join("|"), "g");
-  const translatedCode = mathFuckCode.replaceAll(
+  let translatedCode = mathFuckCode.replaceAll(
     pattern,
     (match) => translation[match] || match,
   );
 
   try {
-    return eval(translatedCode);
+    translatedCode = translatedCode.replace(/(\.0*|(?<=\d)0+)$/, '')
+    let _:any = (() => {"use strict"; return eval(translatedCode);})();
+    return _
   } catch (error) {
     console.error("Error during evaluation:", error);
     return NaN;
