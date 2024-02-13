@@ -15,9 +15,9 @@ const cardData = [
     subtitle: "Browser",
   },
   {
-    img: "assets/icons/debian-xfce.png",
-    title: "Debian (XFCE)",
-    subtitle: "Operating System",
+    img: "assets/icons/github-desktop.png",
+    title: "Github Desktop",
+    subtitle: "App",
   },
   {
     img: "assets/icons/ubuntu-xfce.png",
@@ -35,9 +35,9 @@ const cardData = [
     subtitle: "Operating System",
   },
   {
-    img: "assets/icons/github-desktop.png",
-    title: "Github Desktop",
-    subtitle: "App",
+    img: "assets/icons/debian-xfce.png",
+    title: "Debian (XFCE)",
+    subtitle: "Operating System",
   },
   // Made by spark and rare pookie
 ];
