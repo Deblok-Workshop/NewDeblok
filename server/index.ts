@@ -183,6 +183,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     var tempdb = JSON.parse(await tempdbfile.text());
     if (tempdb[query] != undefined) {
       tempdb[query] = undefined;
+      Bun.write("./tempcaptcha.db", JSON.stringify(tempdb));
       set.status = 204;
       return "";
     } else {
