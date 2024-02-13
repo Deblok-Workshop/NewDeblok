@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Deblok</title>
+    <script src="auth.js"></script>
     <link rel="stylesheet" href="app.css" />
   </head>
   <body
@@ -33,6 +34,7 @@
             class="trackedIframe captchaIframe rounded-lg bg-surface0 h-[144px]"
             src="captcha.html"
           ></iframe>
+          <span class="successCaptcha hidden px-3 py-1 mx-auto text-center bg-black/20 rounded-lg text-green">Captcha passed!</span>
           <br />
           <div class="flex flex-row text-center mx-auto px-8 w-full">
             <button
@@ -59,5 +61,15 @@
         class="h-fit max-w-md w-full mx-12 my-auto hidden sm:hidden md:block"
       />
     </div>
+    <script>
+      let interval = setInterval(() => {
+        if (checkCaptchaIfr(document.querySelector('.captchaIframe'))) {
+          document.querySelector('.captchaIframe').style.display = "none"
+          document.querySelector('.successCaptcha').style.display = "block"
+          clearInterval(interval)
+          
+        }
+      },500)
+    </script>
   </body>
 </html>
