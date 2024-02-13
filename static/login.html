@@ -61,18 +61,5 @@
         class="h-fit max-w-md w-full mx-12 my-auto hidden sm:hidden md:block"
       />
     </div>
-    <script>
-      document.querySelector('.captchaIframe').addEventListener('load',() =>{
-        setTimeout(() => {        if (checkCaptchaIfr(document.querySelector('.captchaIframe'))) {
-          document.querySelector('.captchaIframe').style.display = "none"
-          document.querySelector('.successCaptcha').style.display = "block"
-          //clearInterval(interval)
-          
-        }},100)
-
-      })
-      
-      
-    </script>
   </body>
 </html>
