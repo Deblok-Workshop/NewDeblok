@@ -113,35 +113,6 @@ overlay {
 .theme-btn-active {
   @apply !ring-base/75 hover:!ring-surface0 active:!ring-overlay0 !ring-[3px];
 }
-.oled {
-  /* reference*/
-  --ctp-crust: #000 !important;
-  --ctp-mantle: #000 !important;
-  --ctp-base: #0f0f0f !important;
-  --ctp-surface0: #1f1f1f !important;
-  --ctp-surface1: #2f2f2f !important;
-  --ctp-surface2: #3f3f3f !important;
-  --ctp-overlay0: #4f4f4f !important;
-  --ctp-overlay1: #5f5f5f !important;
-  --ctp-overlay2: #6f6f6f !important;
-  --ctp-rosewater: #dc8a78 !important;
-  --ctp-flamingo: #dd7878 !important;
-  --ctp-pink: #ea76cb !important;
-  --ctp-mauve: #8839ef !important;
-  --ctp-red: #d20f39 !important;
-  --ctp-maroon: #e64553 !important;
-  --ctp-peach: #fe640b !important;
-  --ctp-yellow: #df8e1d !important;
-  --ctp-green: #40a02b !important;
-  --ctp-teal: #179299 !important;
-  --ctp-sky: #04a5e5 !important;
-  --ctp-sapphire: #209fb5 !important;
-  --ctp-blue: #1e66f5 !important;
-  --ctp-lavender: #7287fd !important;
-  --ctp-text: #eeeeee !important;
-  --ctp-subtext1: #cccccc !important;
-  --ctp-subtext0: #bbbbbb !important;
-}
 
 /* Additional styles for the checkbox */
 .toggle-switch {
@@ -227,8 +198,6 @@ input[type="checkbox"]:checked + .slider:before {
   background: red;
   background-image: url("https://b.incognitotgt.me/12x12is24.gif");
 }
-.horrible {
-}
 .horrible overlay {
   background-image: url("https://b.incognitotgt.me/12x12is24.gif") !important;
   backdrop-filter: none;
@@ -253,4 +222,9 @@ input[type="checkbox"]:checked + .slider:before {
 input,
 .input {
   @apply border-none rounded-lg bg-surface0 font-mono px-2 focus:bg-surface1 hover:bg-surface1 active:bg-surface1 active:ring-2 ring-surface2 hover:ring-1 duration-[250ms] py-0.5;
+}
+body, .body {@apply bg-base flex flex-col min-h-screen text-text font-sans backdrop-blur-md backdrop-brightness-75
+  @apply bg-[url('assets/bg.webp')];
+  background-size: cover;
+  background-repeat: no-repeat;
 }
