@@ -327,23 +327,25 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     const b: any = body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = {
       name: "",
-      image: "",
-      resources: { ram: "", cores: "" },
-      ports: "",
+      
     }; // boilerplate to not piss off TypeScript.
-    if (!bjson.name || bjson.name == "" || !bjson.image || bjson.image == "") {
+    if (!bjson.name || bjson.name == "" ) {
       set.status = 400;
-      return "ERR: Name and Image fields are required.";
+      return "ERR: Name field is required.";
     }
-    bjson.resources.ram = bjson.resources.ram || "1G"; // set defaults
-    bjson.resources.cores = bjson.resources.cores || "1";
     let back: any = await getBacks();
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }
+    let dockconff = Bun.file('docker/containers.json')
+    let dconf = await dockconff.json()
+    if (dconf[bjson.name.toLowerCase()] == undefined) {
+      set.status = 404
+      return "Image could not be found in configuration."
+    }
     let fr = await fetch(`https://${back}/containers/create`, {
       method: "POST",
-      body: JSON.stringify(body),
+      body: JSON.stringify(dconf[bjson.name.toLowerCase()]),
     });
     return fr;
   });
