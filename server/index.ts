@@ -354,7 +354,10 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }
-  
+    if (!bjson.id || bjson.id == "") {
+      set.status = 400;
+      return "ERR: The ID field is required.";
+    }
     let fr = await fetch(`https://${back}/containers/kill`, {
       method: "POST",
       body: JSON.stringify(body),
@@ -370,7 +373,10 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }
-  
+    if (!bjson.id || bjson.id == "") {
+      set.status = 400;
+      return "ERR: The ID field is required.";
+    }
     let fr = await fetch(`https://${back}/containers/delete`, {
       method: "POST",
       body: JSON.stringify(body),
