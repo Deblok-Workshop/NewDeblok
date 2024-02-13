@@ -13,22 +13,21 @@
     <script>
       setTimeout(() => {
         (async () => {
-        if (localStorage["DEBLOKAUTH"] != undefined) {
-          let tkncheck = await fetch("/api/auth/tokenvalidate", {
-            method: "POST",
-            body: localStorage["DEBLOKAUTH"],
-          });
-          if (response.ok) {
-            document.location = "dash.html";
+          if (localStorage["DEBLOKAUTH"] != undefined) {
+            let tkncheck = await fetch("/api/auth/tokenvalidate", {
+              method: "POST",
+              body: localStorage["DEBLOKAUTH"],
+            });
+            if (response.ok) {
+              document.location = "dash.html";
+            } else {
+              document.location = "login.html";
+            }
           } else {
             document.location = "login.html";
           }
-        } else {
-          document.location = "login.html";
-        }
-      })();
-      },250)
-      
+        })();
+      }, 250);
     </script>
   </body>
 </html>

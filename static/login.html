@@ -19,30 +19,35 @@
           Login to Deblok
         </h1>
         <form onsubmit="event.preventDefault()">
-          <br>
+          <br />
           <div class="mb-1">
             Username:
-          <input type="username" maxlength="64" class="py-0.5 input">
+            <input type="username" maxlength="64" class="py-0.5 input" />
           </div>
-        <div class="mb-1">
-          Password:
-        <input type="password" maxlength="64" class="py-0.5 input">
-        </div>
-          <br>
-          <iframe class="trackedIframe captchaIframe rounded-lg bg-surface0 h-[144px]" src="captcha.html"></iframe>
-          <br>
+          <div class="mb-1">
+            Password:
+            <input type="password" maxlength="64" class="py-0.5 input" />
+          </div>
+          <br />
+          <iframe
+            class="trackedIframe captchaIframe rounded-lg bg-surface0 h-[144px]"
+            src="captcha.html"
+          ></iframe>
+          <br />
           <div class="flex flex-row text-center mx-auto px-8 w-full">
-          <button
-            type="submit"
-            class="w-full block text-xl hover:text-xl rounded-lg rounded-r-none bg-blue-800 hover:bg-blue-500 duration-[375ms] px-5 py-2 hover:text-base"
-            >Login</button
-          >
-          <a
-          href="#"
-          class="w-full block text-xl hover:text-xl rounded-lg rounded-l-none bg-blue-900 hover:bg-blue-600 duration-[375ms] px-5 py-2 hover:text-surface0">
-            Signup
-          </a>
-        </div>
+            <button
+              type="submit"
+              class="w-full block text-xl hover:text-xl rounded-lg rounded-r-none bg-blue-800 hover:bg-blue-500 duration-[375ms] px-5 py-2 hover:text-base"
+            >
+              Login
+            </button>
+            <a
+              href="#"
+              class="w-full block text-xl hover:text-xl rounded-lg rounded-l-none bg-blue-900 hover:bg-blue-600 duration-[375ms] px-5 py-2 hover:text-surface0"
+            >
+              Signup
+            </a>
+          </div>
         </form>
       </div>
     </div>
