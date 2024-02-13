@@ -29,7 +29,7 @@ server.onError(({ code, error, set }) => {
 });
 
 // Run the startup "job"
-require('./modules/startupjob.ts')
+require("./modules/startupjob.ts");
 
 server.use(cors()); // ElysiaJS cors plugin
 server.use(rateLimit(config.ratelimit));
