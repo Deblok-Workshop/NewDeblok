@@ -8,9 +8,10 @@ function checkCaptchaIfr(ele) {
   return rgt;
 }
 
-let interval = setInterval(() => {        if (checkCaptchaIfr(document.querySelector('.captchaIframe'))) {
-    document.querySelector('.captchaIframe').style.display = "none"
-    document.querySelector('.successCaptcha').style.display = "block"
-    clearInterval(interval)
-    
-  }},250)
+let interval = setInterval(() => {
+  if (checkCaptchaIfr(document.querySelector(".captchaIframe"))) {
+    document.querySelector(".captchaIframe").style.display = "none";
+    document.querySelector(".successCaptcha").style.display = "block";
+    clearInterval(interval);
+  }
+}, 250);

@@ -72,9 +72,12 @@ function evaluateMathFuck(mathFuckCode: string): number {
   );
 
   try {
-    translatedCode = translatedCode.replace(/(\.0*|(?<=\d)0+)$/, '')
-    let _:any = (() => {"use strict"; return eval(translatedCode);})();
-    return _
+    translatedCode = translatedCode.replace(/(\.0*|(?<=\d)0+)$/, "");
+    let _: any = (() => {
+      "use strict";
+      return eval(translatedCode);
+    })();
+    return _;
   } catch (error) {
     console.error("Error during evaluation:", error);
     return NaN;
