@@ -1,50 +1,16 @@
 import { Elysia, error } from "elysia";
 import config from "./config";
-import helper from "./helper";
-import captcha from "./captcha";
+import helper from "./modules/helper";
+import captcha from "./modules/captcha";
 import { rateLimit } from "elysia-rate-limit";
 import { staticPlugin } from "@elysiajs/static";
 import { cors } from "@elysiajs/cors";
 import fetch from "node-fetch";
 
-if (
-  process.argv.includes("--help") ||
-  process.argv.includes("-?") ||
-  process.argv.includes("-h")
-) {
-  require("./modules/help.ts");
-}
-
-Bun.write("tempcaptcha.db", "{}");
-
-try {
-  require("node:fs").accessSync("db.sql", require("node:fs").constants.F_OK);
-} catch {
-  console.warn("WARN: db.sql does not exist. Creating.");
-  Bun.write("db.sql", "");
-}
+let endpoints: any = process.env.ENDPOINTS;
+endpoints = endpoints.split(",");
 let netaddr = "[::1]";
 netaddr = require("node:os").hostname();
-
-if (
-  process.argv.includes("--ignore-linux-check") &&
-  require("os").platform() != "linux"
-) {
-  console.warn("WARN: Incompatibility detected!");
-  console.warn(
-    "        - A hard dependency DeblokManager can only run on Linux devices.",
-  );
-  console.warn(
-    "          This warning is being ignored due to --ignore-linux-check.",
-  );
-} else if (require("os").platform() != "linux") {
-  console.error("FATAL: Incompatibility detected!");
-  console.error(
-    "        - A hard dependency DeblokManager can only run on Linux devices.",
-  );
-  console.error("          Pass --ignore-linux-check to ignore this warning");
-  process.exit(2);
-}
 const server = new Elysia();
 
 // errors
@@ -62,6 +28,9 @@ server.onError(({ code, error, set }) => {
   }
 });
 
+// Run the startup "job"
+require('./modules/startupjob.ts')
+
 server.use(cors()); // ElysiaJS cors plugin
 server.use(rateLimit(config.ratelimit));
 if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
@@ -69,19 +38,8 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
 } else {
   server.use(staticPlugin({ assets: "static/", prefix: "/" }));
 
-  // initial startup stuff
-  let endpoints: any = process.env.ENDPOINTS;
-  if (!endpoints) {
-    throw new ReferenceError(
-      "Cannot find DeblokManager endpoints (check .env)",
-    );
-  }
   let dbpwd: any = process.env.DBPWD;
   dbpwd = new Bun.CryptoHasher("sha256").update(dbpwd).digest("hex");
-  if (!dbpwd) {
-    throw new ReferenceError("No Database Password (check .env)");
-  }
-  endpoints = endpoints.split(",");
 
   // general
 
