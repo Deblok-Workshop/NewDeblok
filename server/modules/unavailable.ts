@@ -1,5 +1,5 @@
 import { Elysia, error } from "elysia";
-import config from "./config";
+import config from "../config";
 import { staticPlugin } from "@elysiajs/static";
 import { cors } from "@elysiajs/cors";
 const server = new Elysia();

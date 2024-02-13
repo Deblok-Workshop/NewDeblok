@@ -7,6 +7,10 @@ import { staticPlugin } from "@elysiajs/static";
 import { cors } from "@elysiajs/cors";
 import fetch from "node-fetch";
 
+if (process.argv.includes("--help") || process.argv.includes("-?") || process.argv.includes("-h")) {
+  require('./modules/help.ts')
+}
+
 Bun.write("tempcaptcha.db", "{}");
 
 try {
