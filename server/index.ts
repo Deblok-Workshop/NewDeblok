@@ -344,23 +344,35 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   });
 
   server.post("/api/container/kill", async ({ body, set }) => {
-    // TODO
     const b: any = body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
     let back: any = await getBacks();
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }
+  
+    let fr = await fetch(`https://${back}/containers/kill`, {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
+  
+    return fr;
   });
-
+  
   server.post("/api/container/delete", async ({ body, set }) => {
-    // TODO
     const b: any = body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
     let back: any = await getBacks();
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }
+  
+    let fr = await fetch(`https://${back}/containers/delete`, {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
+  
+    return fr;
   });
 
   // startup
