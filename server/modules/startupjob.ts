@@ -51,6 +51,8 @@ if (
   console.log(`
 NewDeblok is licensed under the GNU General Public License v3.0 (GPL-3.0)
 You can find the full license text in the LICENSE file or at https://opensource.org/license/gpl-3-0/
+
+md5.js (https://pajhome.org.uk/crypt/md5/) is distributed under the BSD license, available at https://opensource.org/license/bsd-3-clause/
     `);
   process.exit(0);
 }
