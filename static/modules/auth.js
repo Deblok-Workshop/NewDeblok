@@ -31,6 +31,9 @@ let captchaInterval = setInterval(() => {
   if (checkCaptchaIfr(document.querySelector(".captchaIframe"))) {
     document.querySelector(".captchaIframe").style.display = "none";
     document.querySelector(".successCaptcha").style.display = "block";
+    if (validateInput() && checkCaptchaIfr(document.querySelector(".captchaIframe"))) {
+      document.querySelector('.loginButton').disabled = false
+    } else {document.querySelector('.loginButton').disabled = true}
     clearInterval(captchaInterval);
   }
 } catch {}
@@ -45,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('input').forEach(input => {
     function eventTriggered(e) {
       console.log(e.type + " triggered")
-      if (validateInput()) {
+      if (validateInput() && checkCaptchaIfr(document.querySelector(".captchaIframe"))) {
         document.querySelector('.loginButton').disabled = false
       } else {document.querySelector('.loginButton').disabled = true}
     }
