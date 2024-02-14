@@ -1,8 +1,8 @@
-async function md5Hash(input) {
-  // TODO
+async function md5(input) { // it doesn't need to be async but it is to math with the sha256 hashing function
+  return hex_md5(input) // defined if imported correctly
 }
 
-async function sha256Hash(input) {
+async function sha256(input) {
   const encoder = new TextEncoder();
   const data = encoder.encode(input);
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
