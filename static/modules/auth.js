@@ -19,8 +19,12 @@ async function sha256(input) {
 
 
 
+const pswRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[_!@#$%^&*:;.,?])(?!.*[\\\/<>'"]).{10,}$/
+const usrRegex = /^[a-z0-9_.]{3,24}$/
 
-
+function validateCreds(usr,pwd) {
+  return (pswRegex.test(pwd) && usrRegex.test(usr))
+}
 
 function checkCaptchaIfr(ele) {
   let doc = ele.contentWindow.document || ele.contentDocument;
@@ -40,7 +44,8 @@ function validateInput() {
         usrEle.value.length > 3 &&
         usrPwd.value &&
         usrPwd.value != "" &&
-        usrPwd.value.length > 4 
+        usrPwd.value.length > 4 &&
+        usrRegex.test(usrEle.value)
         ) {
             return true
         }
@@ -84,3 +89,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+async function login(usr,pwd) {
+   // DO NOT deal with any credentials before hashing them
+   if (checkCaptchaIfr(document.querySelector(".captchaIframe")) && validateCreds(usr,pwd)) { // prevent bypassing captcha
+  usr = "md5:"+(await md5(usr))
+  pwd = "sha256:"+(await sha256(pwd))
+  res = await fetch('/api/auth/login',{"method":"POST",body:JSON.stringify({usr:usr,pwd:pwd,em:" "})})
+  return res
+   } else {return undefined;} 
+  }
+async function signup(usr,pwd,em) {
+  // DO NOT deal with any credentials before hashing them
+  if (checkCaptchaIfr(document.querySelector(".captchaIframe")) && validateCreds(usr,pwd)) { // prevent bypassing captcha
+ usr = "md5:"+(await md5(usr))
+ pwd = "sha256:"+(await sha256(pwd))
+ res = await fetch('/api/auth/signup',{"method":"POST",body:JSON.stringify({usr:usr,pwd:pwd,em:em})})
+ return res
+} else {return undefined;} 
+}

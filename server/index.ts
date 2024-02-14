@@ -228,8 +228,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     const usr: string = bjson["usr"];
     var pwd: string = bjson["pwd"];
-    const email: string = bjson["em"];
-    if (usr == "" || !usr || pwd == "" || !pwd || email == "" || !email) {
+    if (usr == "" || !usr || pwd == "" || !pwd) {
       set.status = 400;
       return "ERR: One or more fields are missing.";
     }
@@ -253,8 +252,10 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       e[0] = e[0].split("/");
       let v: any = false;
       try {
-        v = Bun.password.verify(pwd, e[1]);
+        v = Bun.password.verify(pwd, e[0][3]);
       } catch (e) {
+        set.status = 500;
+        console.error(e)
         return e;
       }
       if (v) {
