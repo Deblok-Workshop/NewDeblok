@@ -8,6 +8,24 @@ function checkCaptchaIfr(ele) {
   return rgt;
 }
 
+function validateInput() {
+    let usrEle = document.querySelector('input[type="username"]')
+    let usrPwd = document.querySelector('input[type="password"]') 
+    if (
+        !usrEle.value ||
+        usrEle.value == "" ||
+        usrEle.value.length < 3 ||
+        !usrPwd.value ||
+        usrPwd.alue == "" ||
+        usrPwd.value.length < 4 
+        ) {
+            return false
+        }
+    else {
+        return true
+    }
+}
+
 let interval = setInterval(() => {
   if (checkCaptchaIfr(document.querySelector(".captchaIframe"))) {
     document.querySelector(".captchaIframe").style.display = "none";

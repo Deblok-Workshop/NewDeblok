@@ -1,5 +1,6 @@
 {
   "bun.runtime": "bun",
   "bun.debugTerminal.enabled": true,
-  "bun.debugTerminal.stopOnEntry": false
+  "bun.debugTerminal.stopOnEntry": false,
+  "files.associations": { "tw.css": "tailwindcss" }
 }
