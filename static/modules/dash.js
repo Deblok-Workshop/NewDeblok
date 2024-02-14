@@ -1,3 +1,22 @@
+(async () => {
+  if (localStorage["DEBLOKAUTH"] != undefined) {
+    let tkncheck = await fetch("/api/auth/tokenvalidate", {
+      method: "POST",
+      body: localStorage["DEBLOKAUTH"],
+    });
+    if (response.ok) {
+      
+    } else {
+      document.location = "login.html";
+    }
+  } else {
+    document.location = "login.html";
+  }
+})();
+
+
+
+if (localStorage["DEBLOKAUTH"] != undefined) {
 // Get a reference to the card container element
 const cardContain = document.querySelector("#cardContainer");
 
@@ -19,3 +38,6 @@ cardData.forEach((card) => {
 
   cardContain.appendChild(cardElement);
 });
+
+
+}
