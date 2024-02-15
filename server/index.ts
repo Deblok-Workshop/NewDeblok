@@ -6,7 +6,7 @@ import { rateLimit } from "elysia-rate-limit";
 import { staticPlugin } from "@elysiajs/static";
 import { cors } from "@elysiajs/cors";
 import fetch from "node-fetch";
-import wordlistsafe from './modules/wordlistsafe'
+import wordlistsafe from "./modules/wordlistsafe";
 
 let endpoints: any = process.env.ENDPOINTS;
 endpoints = endpoints.split(",");
@@ -256,7 +256,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         v = Bun.password.verify(pwd, e[0][3]);
       } catch (e) {
         set.status = 500;
-        console.error(e)
+        console.error(e);
         return e;
       }
       if (v) {
@@ -285,7 +285,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   });
 
   server.post("/api/auth/pwdsafe", async ({ body, set }) => {
-    return !wordlistsafe.isSafe(body)
+    return !wordlistsafe.isSafe(body);
   });
   // container management
 

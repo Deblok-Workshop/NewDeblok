@@ -5,7 +5,6 @@
       body: localStorage["DEBLOKAUTH"],
     });
     if (response.ok) {
-      
     } else {
       document.location = "login.html";
     }
@@ -14,17 +13,15 @@
   }
 })();
 
-
-
 if (localStorage["DEBLOKAUTH"] != undefined) {
-// Get a reference to the card container element
-const cardContain = document.querySelector("#cardContainer");
+  // Get a reference to the card container element
+  const cardContain = document.querySelector("#cardContainer");
 
-cardData.forEach((card) => {
-  const cardElement = document.createElement("div");
-  cardElement.classList.add("card"); // this is shit
+  cardData.forEach((card) => {
+    const cardElement = document.createElement("div");
+    cardElement.classList.add("card"); // this is shit
 
-  const innerContent = `
+    const innerContent = `
      <span class="flex flex-row">
        <img class="!max-h-14 !max-w-14 !w-14 !h-14 item-img hover:[border-radius:12px_!important]" style="border-radius:9999px !important;" src="${card.img}">
        <span class="flex flex-col">
@@ -34,10 +31,8 @@ cardData.forEach((card) => {
      </span>
    `;
 
-  cardElement.innerHTML = innerContent;
+    cardElement.innerHTML = innerContent;
 
-  cardContain.appendChild(cardElement);
-});
-
-
+    cardContain.appendChild(cardElement);
+  });
 }

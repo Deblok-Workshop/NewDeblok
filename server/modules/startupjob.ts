@@ -57,4 +57,3 @@ if (!process.env.DBPWD) {
   throw new ReferenceError("No Database Password (check .env)");
 }
 endpoints = endpoints.split(",");
-
