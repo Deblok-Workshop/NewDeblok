@@ -105,13 +105,41 @@
                 </span>
                 <br>
                 <span>
-                  Cloak Title: <input type="text" maxlength="72" class="bg-mantle py-0"></input>
+                  Cloak Title: <input type="text" maxlength="72" class="bg-mantle py-0 cloakTitle"></input>
                 </span>
                 <br>
                 <span>
-                  Cloak Icon URL: <input type="text" maxlength="255" class="bg-mantle py-0"></input>
+                  Cloak Icon URL: <input type="text" maxlength="255" class="bg-mantle py-0 cloakIconUrl"></input>
                 </span>
               </div>
+          </li>
+          <li class="settings-item ml-1">
+            <label class="toggle-switch">
+              <input type="checkbox" class="checkbox enableEmergencyButton" onclick="emergencyButtonCheck(this)">
+              <span class="slider"></span>
+            </label>
+            Enable Emergency Button
+            <div class="if-section opacity-50">
+              <span>
+                Emergency Button Action: 
+                <select class="py-0.5">
+                  <option>Close Tab</option>
+                  <option>Redirect to Safe Page</option>
+                </select>
+              </span>
+              <br>
+              <span>
+                Emergency Button Keybind: <input type="text" maxlength="1" class="bg-mantle py-0 emergencyButtonKeybind">
+              </span>
+              <br>
+              <span>
+                Require Shift: <input type="checkbox" class="checkbox requireShift">
+              </span>
+              <br>
+              <span>
+                Require Ctrl: <input type="checkbox" class="checkbox requireCtrl">
+              </span>
+            </div>
           </li>
         </ul>
     </div>
