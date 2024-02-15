@@ -176,3 +176,4 @@ dist
 .DS_Store
 
 static/app.css
+server/modules/wordlists/*
