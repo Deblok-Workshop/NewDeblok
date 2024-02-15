@@ -309,9 +309,15 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       set.status = 404;
       return "Image could not be found in configuration.";
     }
+    let selling:any = dconf[bjson.name.toLowerCase()]
+    if (selling.port) {
+      let ports:any = await getBackPorts(await getBacks())
+      selling.ports = `${ports[0]}:${selling.port}`
+
+    }
     let fr = await fetch(`https://${back}/containers/create`, {
       method: "POST",
-      body: JSON.stringify(dconf[bjson.name.toLowerCase()]),
+      body: JSON.stringify(selling),
     });
     return fr;
   });
