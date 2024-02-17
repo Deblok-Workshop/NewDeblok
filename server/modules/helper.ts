@@ -127,8 +127,7 @@ function aesDecrypt(
   decrypted += decipher.final("utf8");
   return decrypted;
 }
-const decodeauthpart = (encoded: string): string =>
-  parseInt(encoded, 20).toString();
+const decodeauthpart = (encoded: string): string => parseInt(encoded, 20).toString();
 function auth_tokenvalidate_endpoint(body: any) {
   try {
     const b: any = body; // the body variable is actually a string, this is here to fix a ts error
@@ -147,8 +146,8 @@ function auth_tokenvalidate_endpoint(body: any) {
       error = true;
       errors[errors.length] = "No created time";
     }
-    let exptime = decodeauthpart(authtoken[2].substring(1));
-    let crtime = decodeauthpart(authtoken[1].substring(1));
+    let exptime = decodeauthpart(authtoken[2].substring(2));
+    let crtime = decodeauthpart(authtoken[1].substring(2));
 
     let now = Date.now();
     if (now > Number(exptime) || now > Number(crtime)) {
