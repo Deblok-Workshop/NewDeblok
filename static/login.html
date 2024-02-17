@@ -75,5 +75,23 @@
   <script blocking src="modules/md5.js"></script>
   <!-- set to blocking (if supported) because it needs to be loaded before auth.js does.-->
   <script src="modules/auth.js"></script>
-  
+  <script>
+    setTimeout(() => {
+      (async () => {
+        if (localStorage["DEBLOKAUTH"] != undefined) {
+          let tkncheck = await fetch("/api/auth/tokenvalidate", {
+            method: "POST",
+            body: localStorage["DEBLOKAUTH"],
+          });
+          if (tkncheck.ok) {
+            document.location = "dash.html";
+          } else {
+            localStorage["DEBLOKAUTH"] = undefined
+          }
+        } else {
+          localStorage["DEBLOKAUTH"] = undefined
+        }
+      })();
+    }, 250);
+  </script>
 </html>

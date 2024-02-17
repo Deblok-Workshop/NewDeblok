@@ -18,12 +18,14 @@
               method: "POST",
               body: localStorage["DEBLOKAUTH"],
             });
-            if (response.ok) {
+            if (tkncheck.ok) {
               document.location = "dash.html";
             } else {
+              localStorage["DEBLOKAUTH"] = undefined
               document.location = "login.html";
             }
           } else {
+            localStorage["DEBLOKAUTH"] = undefined
             document.location = "login.html";
           }
         })();
