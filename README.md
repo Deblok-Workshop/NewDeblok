@@ -4,7 +4,7 @@
 > ❗ Please read
 > [the message from rare](https://s.deblok.me)
 
-The New Deblok is a project ditching what Deblok used to run off of, Kasm Workspaces; and using a DIY solution with the help of [DeblokManager](https://github.com/Deblok-Workshop/DeblokManager) to dynamically spawn and kill Docker containers easily, also using [KasmVNC](https://github.com/kasmtech/KasmVNC) for remote control.
+The New Deblok is a project ditching what Deblok used to run off of, Kasm Workspaces; and using a DIY solution with the help of [DeblokManager](https://github.com/Deblok-Workshop/DeblokManager) to dynamically spawn and kill Docker containers easily, also using [noVNC](https://github.com/noVNC/noVNC) for remote control.
 
 ## What is Deblok?
 
