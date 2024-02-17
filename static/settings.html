@@ -81,14 +81,14 @@
             <br>
             <li class="settings-item ml-1" >
               <label class="toggle-switch" >
-                  <input type="checkbox" class="checkbox enablecloak" onclick="checkbox_check(this.parentElement)">
+                  <input type="checkbox" class="checkbox cloak" onclick="checkbox_check(this.parentElement)">
                   <span class="slider"></span>
               </label>
               Enable Tab Cloaking (TODO)
               <div class="if-section opacity-50">
                 <span>
                   <label class="toggle-switch" >
-                    <input type="checkbox" class="checkbox enablecloak" onclick="checkbox_check(this.parentElement)">
+                    <input type="checkbox" class="checkbox cloakunfocus" checked="false" onclick="checkbox_check(this.parentElement)">
                     <span class="slider"></span>
                 </label>
                 Cloaking on Unfocus
@@ -115,30 +115,16 @@
           </li>
           <li class="settings-item ml-1">
             <label class="toggle-switch">
-              <input type="checkbox" class="checkbox enableEmergencyButton" onclick="emergencyButtonCheck(this)">
+              <input type="checkbox" class="checkbox" checked="false" onclick="checkbox_check(this.parentElement)">
               <span class="slider"></span>
             </label>
             Enable Emergency Button
             <div class="if-section opacity-50">
               <span>
-                Emergency Button Action: 
-                <select class="py-0.5">
-                  <option>Close Tab</option>
-                  <option>Redirect to Safe Page</option>
-                </select>
+                Keybind: <input type="text" maxlength="8" class="bg-mantle py-0 emergKeybind max-w-[120px]">
               </span>
               <br>
-              <span>
-                Emergency Button Keybind: <input type="text" maxlength="1" class="bg-mantle py-0 emergencyButtonKeybind">
-              </span>
-              <br>
-              <span>
-                Require Shift: <input type="checkbox" class="checkbox requireShift">
-              </span>
-              <br>
-              <span>
-                Require Ctrl: <input type="checkbox" class="checkbox requireCtrl">
-              </span>
+              <b>TIP:</b> You can use keys like <kbd>Insert</kbd>, <kbd>Home</kbd>, <kbd>Escape</kbd>, etc.
             </div>
           </li>
         </ul>
