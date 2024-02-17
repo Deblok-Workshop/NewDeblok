@@ -4,7 +4,7 @@
       method: "POST",
       body: localStorage["DEBLOKAUTH"],
     });
-    if (response.ok) {
+    if (tkncheck.ok) {
     } else {
       document.location = "login.html";
     }

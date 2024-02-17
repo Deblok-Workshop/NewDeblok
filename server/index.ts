@@ -275,7 +275,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
 
   // this needs testing
   server.post("/api/auth/tokenvalidate", async ({ body, set }) => {
-    let out = helper.auth.validate(body);
+    let out = helper.auth.validate(atob(body));
     if (out[0]) {
       set.status = 400;
       return `ERR: ${out[1]}`;
