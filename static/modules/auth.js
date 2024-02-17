@@ -106,6 +106,7 @@ async function login(usr, pwd) {
     });
     return res;
   } else {
+    alert("ERR: Your username/password does not meet requirements or you didn\'t pass the CAPTCHA yet")
     return undefined;
   }
 }
