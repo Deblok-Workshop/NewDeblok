@@ -48,7 +48,7 @@
             <button
               type="submit"
               disabled
-              onclick="loginFunction()"
+              onclick="loginForm()"
               class="loginButton disabled:bg-slate-800 disabled:hover:text-text disabled:hover:bg-slate-950 disabled:cursor-not-allowed w-full block text-xl hover:text-xl rounded-lg rounded-r-none bg-blue-800 hover:bg-blue-500 duration-[375ms] px-5 py-2 hover:text-base"
             >
               Login
@@ -75,35 +75,5 @@
   <script blocking src="modules/md5.js"></script>
   <!-- set to blocking (if supported) because it needs to be loaded before auth.js does.-->
   <script src="modules/auth.js"></script>
-  <script>
-async function loginFunction() {
-  const username = document.querySelector("input[type=username]").value;
-  const password = document.querySelector("input[type=password]").value;
-  const captchaId = document.querySelector(".captchaIframe").contentWindow
-    .document.querySelector("img").alt;
-  const captchaAnswer = document.querySelector(".captchaIframe").contentWindow
-    .document.querySelector("input").value;
-  const successCaptcha = document.querySelector(".successCaptcha");
-  const captchaValidationResponse = await fetch("/api/captcha/" + captchaId + "/validate", {
-    method: "POST",
-    headers: {
-      "Content-Type": "text/plain",
-    },
-    body: captchaAnswer,
-  });
-  const captchaValidationResult = await captchaValidationResponse.text();
-  if (captchaValidationResult == "true") {
-    successCaptcha.classList.remove("hidden");
-    const loginResponse = await login(username, password);
-    if (loginResponse.ok) {
-      localStorage.setItem("DEBLOKAUTH", loginResponse);
-      window.location.href = "/dashboard";
-    } else {
-      alert("Invalid credentials");
-    }
-  } else {
-    alert("Invalid captcha");
-  }
-}
-  </script>
+  
 </html>

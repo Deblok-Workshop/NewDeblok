@@ -127,3 +127,21 @@ async function signup(usr, pwd, em) {
     return undefined;
   }
 }
+
+
+async function loginForm() {
+  let usrEle = document.querySelector('input[type="username"]');
+  let usrPwd = document.querySelector('input[type="password"]');
+  let res = await login(usrEle.value,usrPwd.value)
+  if (res != undefined) {
+    if (res.ok) {
+      localStorage['DEBLOKAUTH'] = res.text()
+      document.location = new URLSearchParams(window.location.search).get('redirect_to') || "/dash.html"
+    } else {
+      alert(await res.text())
+      usrPwd.value = ""
+      usrEle.value = ""
+  }
+  }
+  return res
+}
