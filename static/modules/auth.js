@@ -106,7 +106,9 @@ async function login(usr, pwd) {
     });
     return res;
   } else {
-    alert("ERR: Your username/password does not meet requirements or you didn\'t pass the CAPTCHA yet")
+    alert(
+      "ERR: Your username/password does not meet requirements or you didn't pass the CAPTCHA yet",
+    );
     return undefined;
   }
 }
@@ -129,20 +131,21 @@ async function signup(usr, pwd, em) {
   }
 }
 
-
 async function loginForm() {
   let usrEle = document.querySelector('input[type="username"]');
   let usrPwd = document.querySelector('input[type="password"]');
-  let res = await login(usrEle.value,usrPwd.value)
+  let res = await login(usrEle.value, usrPwd.value);
   if (res != undefined) {
     if (res.ok) {
-      localStorage['DEBLOKAUTH'] = await res.text()
-      document.location = new URLSearchParams(window.location.search).get('redirect_to') || "/dash.html"
+      localStorage["DEBLOKAUTH"] = await res.text();
+      document.location =
+        new URLSearchParams(window.location.search).get("redirect_to") ||
+        "/dash.html";
     } else {
-      alert(await res.text())
-      usrPwd.value = ""
-      usrEle.value = ""
+      alert(await res.text());
+      usrPwd.value = "";
+      usrEle.value = "";
+    }
   }
-  }
-  return res
+  return res;
 }

@@ -66,7 +66,7 @@ document.body.innerHTML += `    <div id="popup-modal" class="hidden w-full h-ful
   </div>
 </div>
 </div>
-</div>`
+</div>`;
 
 function updateTheme() {
   if (localStorage["themeSelected"] == "horrible latte") {
@@ -78,4 +78,7 @@ function updateTheme() {
   }
 }
 updateTheme();
-function logout() {localStorage["DEBLOKAUTH"] = undefined; document.location="index.html"}
+function logout() {
+  localStorage["DEBLOKAUTH"] = undefined;
+  document.location = "index.html";
+}

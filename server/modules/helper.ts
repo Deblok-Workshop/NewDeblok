@@ -127,7 +127,8 @@ function aesDecrypt(
   decrypted += decipher.final("utf8");
   return decrypted;
 }
-const decodeauthpart = (encoded: string): string => parseInt(encoded, 20).toString();
+const decodeauthpart = (encoded: string): string =>
+  parseInt(encoded, 20).toString();
 function auth_tokenvalidate_endpoint(body: any) {
   try {
     const b: any = body; // the body variable is actually a string, this is here to fix a ts error

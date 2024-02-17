@@ -33,5 +33,4 @@ Deblok is a selfhostable website that allows you to browse and stream apps, game
 
 Deblok is licensed under GNU General Public License v3.0 (GPLv3). By using, forking, or modifying the code, you agree to comply with the terms of this license.
 
-
 # Made with love from everyone at Deblok-Workshop ❤️

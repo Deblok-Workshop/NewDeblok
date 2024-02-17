@@ -5,9 +5,9 @@ function checkbox_check(ele) {
     ifsect.classList.toggle("active");
   }
 
-  if (ele.querySelector('input').checked) {
-    var title = document.querySelector('.cloakTitle').value;
-    var iconUrl = document.querySelector('.cloakIconUrl').value;
+  if (ele.querySelector("input").checked) {
+    var title = document.querySelector(".cloakTitle").value;
+    var iconUrl = document.querySelector(".cloakIconUrl").value;
     cloakTab(iconUrl, title);
   }
 }
@@ -20,10 +20,12 @@ function changeTheme(ele) {
 }
 
 function cloakTab(iconUrl, title) {
-  var l = document.querySelector("link[rel*='icon']") || document.createElement('link');
-  l.type = 'image/x-icon';
-  l.rel = 'shortcut icon';
+  var l =
+    document.querySelector("link[rel*='icon']") ||
+    document.createElement("link");
+  l.type = "image/x-icon";
+  l.rel = "shortcut icon";
   l.href = iconUrl;
-  document.getElementsByTagName('head')[0].appendChild(l);
+  document.getElementsByTagName("head")[0].appendChild(l);
   document.title = title;
 }
