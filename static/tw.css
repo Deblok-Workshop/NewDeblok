@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @font-face {
   font-family: "Geist";
   font-style: normal;
@@ -50,7 +51,15 @@ html {
 }
 
 .card {
-  @apply shadow !min-w-[270px]   w-fit h-fit z-10 bg-mantle/80 !rounded-lg mb-1 p-3 hover:bg-surface0 duration-[250ms] hover:shadow-lg hover:ring-2 ring-blue-600 active:ring-4 active:ring-blue-500 active:duration-100 cursor-pointer;
+  @apply shadow !min-w-[270px]  w-fit h-fit z-10 bg-mantle/80 !rounded-lg mb-1 p-3 hover:bg-surface0 duration-[250ms] hover:shadow-lg hover:ring-2 ring-blue-600 active:ring-4 active:ring-blue-500 active:duration-100 cursor-pointer;
+}
+.card:hover {
+  transform:scale(1.056); z-index:20; 
+  @apply shadow-lg shadow-black/50
+}
+.card:active {
+  transform:scale(1); z-index:20; 
+  @apply shadow-lg shadow-black/50
 }
 .grid {
   @apply grid-cols-2 grid-rows-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4;

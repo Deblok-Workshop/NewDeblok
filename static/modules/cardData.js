@@ -16,28 +16,28 @@ const cardData = [
   },
   {
     img: "assets/icons/github-desktop.png",
-    title: "Github Desktop",
-    subtitle: "App",
+    title: "GitHub Desktop",
+    subtitle: "Collaboration",
   },
   {
     img: "assets/icons/ubuntu-xfce.png",
     title: "Ubuntu (XFCE)",
-    subtitle: "Operating System",
+    subtitle: "Desktop",
   },
   {
     img: "assets/icons/fedora-xfce.png",
     title: "Fedora (XFCE)",
-    subtitle: "Operating System",
+    subtitle: "Desktop",
   },
   {
     img: "assets/icons/arch-xfce.png",
     title: "Arch (XFCE)",
-    subtitle: "Operating System",
+    subtitle: "Desktop",
   },
   {
     img: "assets/icons/debian-xfce.png",
     title: "Debian (XFCE)",
-    subtitle: "Operating System",
+    subtitle: "Desktop",
   },
   // Made by spark and rare pookie
 ];

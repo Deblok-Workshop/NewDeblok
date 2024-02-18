@@ -119,8 +119,17 @@ async function signup(usr, pwd, em) {
     validateCreds(usr, pwd)
   ) {
     // prevent bypassing captcha
+    safe = await fetch("/api/auth/pwdsafe", {
+      method: "POST",
+      body: pwd,
+    });
+    if (await safe.text == "false") {
+      alert('This password seems to be a common password. Please use a stronger, more unique password.');
+      return undefined;
+    }
     usr = "md5:" + (await md5(usr));
     pwd = "sha256:" + (await sha256(pwd));
+    
     res = await fetch("/api/auth/signup", {
       method: "POST",
       body: JSON.stringify({ usr: usr, pwd: pwd, em: em }),
