@@ -26,9 +26,12 @@
     </div>
     <a href="javascript:" class="flex ml-auto float-right mx-4 z-100 relative">
 
-        <img data-dropdown-toggle="profile-dropdown"
-             onclick="document.querySelector(`#profile-dropdown`).classList.toggle(`anim__dropdown`)"
-             class="pfpico" src="https://github.com/uhidontkno.png"/>
+      <img
+      data-dropdown-toggle="profile-dropdown"
+      onclick="document.querySelector(`#profile-dropdown`).classList.toggle(`anim__dropdown`)"
+      class="pfpico p-0.5 bg-white"
+      src="/api/img/identicon.png"
+    />
         <div id="profile-dropdown" onblur="document.querySelector(`#profile-dropdown`).classList.toggle(`anim__dropdown`)"
              class="hidden dropdown" style="z-index:100 !important">
             <ul class="py-2 text-sm text-text duration-[250ms]">
