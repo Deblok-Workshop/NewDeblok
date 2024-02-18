@@ -7,7 +7,7 @@ import { staticPlugin } from "@elysiajs/static";
 import { cors } from "@elysiajs/cors";
 import fetch from "node-fetch";
 import wordlistsafe from "./modules/wordlistsafe";
-
+                                                                                                   
 let endpoints: any = process.env.ENDPOINTS;
 endpoints = endpoints.split(",");
 let netaddr = "[::1]";
@@ -382,3 +382,5 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
 }
                                                                                                    
                                                                                                    
+
+
