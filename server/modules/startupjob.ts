@@ -12,7 +12,7 @@ Please see https://pajhome.org.uk/site/legal.html#bsdlicense for more informatio
     `);
   process.exit(0);
 }
-
+                                                                                                   
 if (
   process.argv.includes("--help") ||
   process.argv.includes("-?") ||
@@ -57,3 +57,4 @@ if (!process.env.DBPWD) {
   throw new ReferenceError("No Database Password (check .env)");
 }
 endpoints = endpoints.split(",");
+                                                                                                   

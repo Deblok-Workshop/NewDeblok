@@ -8,7 +8,7 @@ function genMathFuck(mfk: string): string {
     }
     return result;
   }
-
+                                                                                                   
   const translation: { [key: string]: string } = {
     "+": "O..",
     "-": "o..",
@@ -85,7 +85,7 @@ function evaluateMathFuck(mathFuckCode: string): number {
 }
 
 function shift(inputString: string, flipbit: number = 1) {
-  /* 
+  /*                                                                                               
      @deprecated 
      */
   let shiftedString = "";
@@ -101,7 +101,7 @@ function shift(inputString: string, flipbit: number = 1) {
 
   return shiftedString;
 }
-
+                                                                                                   
 async function makemfk_img(mfk: string, dense: number = 72): Promise<Buffer> {
   const readExp = translateMathFuck(mfk);
   let svg = Bun.file("captchabase.svg");
@@ -185,7 +185,7 @@ function makerandmfk() {
 }
 
 // Exports
-
+                                                                                                   
 export default {
   mathfuck: {
     translate: translateMathFuck,
