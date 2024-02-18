@@ -257,3 +257,7 @@ body,
 }
 
 kbd {@apply rounded-lg ring-1 ring-mantle p-0.5 bg-crust text-sm hover:ring-surface1 px-1 duration-200}
+.usrField .usrRequire {display:none; max-width:400px; @apply text-sm}
+.usrField:hover .usrRequire {display:block; max-width:400px; @apply text-sm}
+.pswField .pswRequire {display:none; max-width:400px; @apply text-sm}
+.pswField:hover .pswRequire {display:block; max-width:400px; @apply text-sm}

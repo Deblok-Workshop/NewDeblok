@@ -10,7 +10,8 @@
   <body
     class="body flex flex-col backdrop-brightness-125 sm:flex-col md:flex-row min-h-screen !bg-[url('assets/bottom-hero.jpg')]"
   >
-  <div class="p-1 rounded-lg bg-black/20 text-text max-w-[400px] absolute left-[40vw] bottom-[52vh] md:hidden sm:hidden hidden lg:block">
+  <div class="z-30 p-1 rounded-lg bg-black/20 text-text max-w-[400px] absolute left-[40vw] bottom-[52vh] md:hidden sm:hidden hidden lg:block">
+    <b>Requirements:</b><br>
     - Username must be 3-24 characters long, be alphanumeric (excluding _ and .)<br><br>
     - Password must be 10 characters long, include 1 capital letter, 1 number, 1 lowercase letter, and 1 special character.<br><br>
     - Email must be valid<br>
@@ -33,7 +34,7 @@
               required
             />
           </div>
-          <div class="mb-1">
+          <div class="mb-1 usrField">
             Username:
             <input
               type="username"
@@ -41,8 +42,11 @@
               class="py-0.5 input"
               required
             />
+            <p class="usrRequire lg:!hidden">
+              - Username must be 3-24 characters long, be alphanumeric (excluding _ and .)
+            </p>
           </div>
-          <div class="mb-1">
+          <div class="mb-1 pswField ">
             Password:
             <input
               type="password"
@@ -50,8 +54,18 @@
               class="py-0.5 input"
               required
             />
+            <p class="pswRequire lg:!hidden ">
+              - Password must be 10 characters long, include 1 capital letter, 1 number, 1 lowercase letter, and 1 special character.
+            </p>
           </div>
-
+          <br>
+          <!-- 
+          <div class="p-1 rounded-lg bg-black/20 text-text max-w-[420px] max-h-[240px] block lg:hidden overflow-x-auto overflow-auto">
+            - Username must be 3-24 characters long, be alphanumeric (excluding _ and .)<br><br>
+            - Password must be 10 characters long, include 1 capital letter, 1 number, 1 lowercase letter, and 1 special character.<br><br>
+            - Email must be valid<br>
+           </div>
+           -->
           <br />
           <iframe
             class="trackedIframe captchaIframe rounded-lg bg-base h-[144px] [transform:scale(0.9)] hover:[transform:scale(0.95)] duration-200"
