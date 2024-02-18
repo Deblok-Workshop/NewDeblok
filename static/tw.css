@@ -261,3 +261,9 @@ kbd {@apply rounded-lg ring-1 ring-mantle p-0.5 bg-crust text-sm hover:ring-surf
 .usrField:hover .usrRequire {display:block; max-width:400px; @apply text-sm}
 .pswField .pswRequire {display:none; max-width:400px; @apply text-sm}
 .pswField:hover .pswRequire {display:block; max-width:400px; @apply text-sm}
+.authPrimary {@apply  disabled:bg-slate-800 disabled:hover:text-text disabled:hover:bg-slate-950 disabled:cursor-not-allowed w-full block text-xl hover:text-xl rounded-lg rounded-r-none bg-blue-800 hover:bg-blue-500 duration-[375ms] px-5 py-2 hover:text-base}
+.authSecondary {@apply w-full block text-xl hover:text-xl rounded-lg rounded-l-none bg-blue-900 hover:bg-blue-600 duration-[375ms] px-5 py-2 hover:text-surface0}
+.errCTA1 {@apply rounded-r-none block text-2xl rounded-lg bg-surface2 hover:bg-blue duration-[375ms] px-3 py-2 hover:text-mantle}
+.errCTA2 {@apply block text-2xl bg-surface1 hover:bg-lavender duration-[375ms] px-3 py-2 hover:text-mantle}
+.errCTA3 {@apply block text-2xl rounded-lg rounded-l-none bg-base hover:bg-sapphire duration-[375ms] px-3 py-2 hover:text-mantle}
+.authOverlay {@apply bg-black/40 w-[100%] sm:w-[100%] md:w-[50%] h-full flex align-middle backdrop-brightness-125 justify-center items-center}
