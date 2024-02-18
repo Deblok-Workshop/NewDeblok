@@ -173,7 +173,7 @@ async function signupForm() {
     if (res.ok) {
       let lres = await login(usrEle.value,usrPwd.value)
       if (lres != undefined && lres.ok) {
-        localStorage["DEBLOKAUTH"] = await res.text();
+        localStorage["DEBLOKAUTH"] = await lres.text();
       document.location =
         new URLSearchParams(window.location.search).get("redirect_to") ||
         "/";

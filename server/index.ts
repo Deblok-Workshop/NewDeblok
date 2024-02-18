@@ -199,7 +199,11 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         return "ERR: Username already exists";
       }
       // TODO: prevent email sharing
+      try {
       pwd = await Bun.password.hash(pwd);
+      } catch (e) {
+        return e;
+      }
       var guid = crypto.randomUUID();
       helper.sql.write(
         db,
@@ -257,7 +261,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       } catch (e) {
         set.status = 500;
         console.error(e);
-        return e;
+        return "err";
       }
       if (v) {
         return btoa(
