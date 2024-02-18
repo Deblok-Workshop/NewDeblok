@@ -14,6 +14,7 @@ async function sha256(input) {
 const pswRegex =
   /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[_!@#$%^&*:;.,?])(?!.*[\\\/<>'"]).{10,}$/;
 const usrRegex = /^[a-z0-9_.]{3,24}$/;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function validateCreds(usr, pwd) {
   return pswRegex.test(pwd) && usrRegex.test(usr);
@@ -31,6 +32,7 @@ function checkCaptchaIfr(ele) {
 function validateInput() {
   let usrEle = document.querySelector('input[type="username"]');
   let usrPwd = document.querySelector('input[type="password"]');
+  let emailE = document.querySelector('input[type="email"]');
   if (
     usrEle.value &&
     usrEle.value != "" &&
@@ -40,7 +42,11 @@ function validateInput() {
     usrPwd.value.length > 4 &&
     usrRegex.test(usrEle.value)
   ) {
+    if (emailE) {
+      return true
+    } else {
     return true;
+    }
   } else {
     return false;
   }
@@ -156,5 +162,27 @@ async function loginForm() {
       usrEle.value = "";
     }
   }
+  return res;
+}
+async function signupForm() {
+  let usrEle = document.querySelector('input[type="username"]');
+  let usrPwd = document.querySelector('input[type="password"]');
+  let emailE = document.querySelector('input[type="email"]');
+  let res = await signup(usrEle.value, usrPwd.value, emailE.value);
+  if (res != undefined) {
+    if (res.ok) {
+      let lres = await login(usrEle.value,usrPwd.value)
+      if (lres != undefined && lres.ok) {
+        localStorage["DEBLOKAUTH"] = await res.text();
+      document.location =
+        new URLSearchParams(window.location.search).get("redirect_to") ||
+        "/";
+      }
+    } else {
+      alert(await res.text());
+      usrPwd.value = "";
+      usrEle.value = "";
+    }
+  } else {alert(res)}
   return res;
 }
