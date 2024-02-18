@@ -10,6 +10,11 @@
   <body
     class="body flex flex-col backdrop-brightness-125 sm:flex-col md:flex-row min-h-screen !bg-[url('assets/bottom-hero.jpg')]"
   >
+  <div class="p-1 rounded-lg bg-black/20 text-text max-w-[400px] absolute left-[40vw] bottom-[52vh] md:hidden sm:hidden hidden lg:block">
+    - Username must be 3-24 characters long, be alphanumeric (excluding _ and .)<br><br>
+    - Password must be 10 characters long, include 1 capital letter, 1 number, 1 lowercase letter, and 1 special character.<br><br>
+    - Email must be valid<br>
+   </div>
     <div
       class="bg-black/40 w-[100%] sm:w-[100%] md:w-[50%] h-full flex align-middle backdrop-brightness-125 justify-center items-center"
     >
@@ -46,6 +51,7 @@
               required
             />
           </div>
+
           <br />
           <iframe
             class="trackedIframe captchaIframe rounded-lg bg-base h-[144px] [transform:scale(0.9)] hover:[transform:scale(0.95)] duration-200"

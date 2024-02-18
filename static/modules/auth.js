@@ -183,6 +183,8 @@ async function signupForm() {
       usrPwd.value = "";
       usrEle.value = "";
     }
-  } else {alert(res)}
+  } else {
+    
+  }
   return res;
 }
