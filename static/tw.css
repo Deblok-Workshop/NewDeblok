@@ -267,3 +267,4 @@ kbd {@apply rounded-lg ring-1 ring-mantle p-0.5 bg-crust text-sm hover:ring-surf
 .errCTA2 {@apply block text-2xl bg-surface1 hover:bg-lavender duration-[375ms] px-3 py-2 hover:text-mantle}
 .errCTA3 {@apply block text-2xl rounded-lg rounded-l-none bg-base hover:bg-sapphire duration-[375ms] px-3 py-2 hover:text-mantle}
 .authOverlay {@apply bg-black/40 w-[100%] sm:w-[100%] md:w-[50%] h-full flex align-middle backdrop-brightness-125 justify-center items-center}
+hidden, .hidden {display:none;}

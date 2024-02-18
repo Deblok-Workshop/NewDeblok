@@ -37,5 +37,10 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
   });
 }
 function itemModal(title,description) {
-
+ document.querySelector('#item-modal').classList.remove('hidden')
+ document.querySelector('#item-modal').classList.add('block')
 }
+function itemModalHide() {
+  document.querySelector('#item-modal').classList.add('hidden')
+  document.querySelector('#item-modal').classList.remove('block')
+ }
