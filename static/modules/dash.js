@@ -38,9 +38,9 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
 }
 function itemModal(title,description) {
  document.querySelector('#item-modal').classList.remove('hidden')
- document.querySelector('#item-modal').classList.add('block')
+ document.querySelector('#item-modal').classList.add('flex')
 }
 function itemModalHide() {
   document.querySelector('#item-modal').classList.add('hidden')
-  document.querySelector('#item-modal').classList.remove('block')
+  document.querySelector('#item-modal').classList.remove('flex')
  }
