@@ -257,7 +257,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       e[0] = e[0].split("/");
       let v: any = false;
       try {
-        v = Bun.password.verify(pwd, e[0][3]);
+        v = await Bun.password.verify(pwd, e[0][3]);
       } catch (e) {
         set.status = 500;
         console.error(e);
