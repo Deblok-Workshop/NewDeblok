@@ -359,14 +359,16 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       method: "POST",
       body: JSON.stringify(body),
     });
-
-    return fr;
+ 
+    return fr; 
+  }); 
+ 
+ 
+  server.get("/api/img/identicon.png", async ({ body, set }) => { 
+   return new Blob([await helper.auth.identicon()]); 
   });
-
-
-  server.get("/api/img/identicon.png", async ({ body, set }) => {
-   return new Blob([await helper.auth.identicon()]);
-  });
+                                         
+                                                
   // startup
   if (
     !process.argv.includes("--unavailiable") &&

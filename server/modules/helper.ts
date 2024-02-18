@@ -168,8 +168,8 @@ const colors = ['#0d6efd', '#6610f2', '#6f42c1', '#d63384', '#dc3545', '#fd7e14'
 async function indenticon() {
     const image = sharp({
       create: {
-        width: 5,
-        height: 5,
+        width: 6,
+        height: 6,
         channels: 4,
         background: { r: 255, g: 255, b: 255, alpha: 1 },
       },
@@ -177,7 +177,7 @@ async function indenticon() {
   
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
   
-    const pixelData = new Uint8Array(25 * 4).fill(255); // 5x5 image with white background
+    const pixelData = new Uint8Array(36 * 4).fill(255); 
   
     for (let i = 0; i < pixelData.length; i += 4) {
       const replacePixel = Math.random() < 0.5;

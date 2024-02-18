@@ -23,7 +23,7 @@ function cloakTab(iconUrl, title) {
   var l =
     document.querySelector("link[rel*='icon']") ||
     document.createElement("link");
-  l.type = "image/x-icon";
+  l.type = "image/png";
   l.rel = "shortcut icon";
   l.href = iconUrl;
   document.getElementsByTagName("head")[0].appendChild(l);
