@@ -36,3 +36,6 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
     cardContain.appendChild(cardElement);
   });
 }
+function itemModal(title,description) {
+
+}
