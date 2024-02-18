@@ -15,10 +15,19 @@
     >
       <div class="dialog">
         <h1 class="text-3xl text-bold text-center text-text">
-          Login to Deblok
+          Signup to Deblok
         </h1>
         <form onsubmit="event.preventDefault()">
           <br />
+          <div class="mb-1">
+            Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input
+              type="email"
+              maxlength="255"
+              class="py-0.5 input"
+              required
+            />
+          </div>
           <div class="mb-1">
             Username:
             <input
@@ -48,16 +57,16 @@
             <button
               type="submit"
               disabled
-              onclick="loginForm()"
-              class="loginButton disabled:bg-slate-800 disabled:hover:text-text disabled:hover:bg-slate-950 disabled:cursor-not-allowed w-full block text-xl hover:text-xl rounded-lg rounded-r-none bg-blue-800 hover:bg-blue-500 duration-[375ms] px-5 py-2 hover:text-base"
-            >
-              Login
-            </button>
-            <a
-              href="signup.html"
-              class="w-full block text-xl hover:text-xl rounded-lg rounded-l-none bg-blue-900 hover:bg-blue-600 duration-[375ms] px-5 py-2 hover:text-surface0"
+              onclick="signupForm()"
+              class="signupButton disabled:bg-slate-800 disabled:hover:text-text disabled:hover:bg-slate-950 disabled:cursor-not-allowed w-full block text-xl hover:text-xl rounded-lg rounded-r-none bg-blue-800 hover:bg-blue-500 duration-[375ms] px-5 py-2 hover:text-base"
             >
               Signup
+            </button>
+            <a
+              href="login.html"
+              class="w-full block text-xl hover:text-xl rounded-lg rounded-l-none bg-blue-900 hover:bg-blue-600 duration-[375ms] px-5 py-2 hover:text-surface0"
+            >
+              Login
             </a>
           </div>
         </form>
