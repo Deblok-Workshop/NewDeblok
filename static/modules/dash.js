@@ -36,7 +36,7 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
     cardContain.appendChild(cardElement);
   });
 }
-function itemModal(title,description) {
+function itemModal(title,description,icon) {
  document.querySelector('#item-modal').classList.remove('hidden')
  document.querySelector('#item-modal').classList.add('flex')
 }
