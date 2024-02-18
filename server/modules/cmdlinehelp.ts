@@ -7,8 +7,3 @@ NewDeblok command line help:
 --no-linux-check disables the crash about DeblokManager only being compatible on Linux machines.
 `);
 process.exit(0);
-                                                                                                   
-                                                                                                   
-                                                                                                   
-                                                                                                   
-                                                                                                   

@@ -43,9 +43,9 @@ function validateInput() {
     usrRegex.test(usrEle.value)
   ) {
     if (emailE) {
-      return true
+      return true;
     } else {
-    return true;
+      return true;
     }
   } else {
     return false;
@@ -129,13 +129,15 @@ async function signup(usr, pwd, em) {
       method: "POST",
       body: pwd,
     });
-    if (await safe.text == "false") {
-      alert('This password seems to be a common password. Please use a stronger, more unique password.');
+    if ((await safe.text) == "false") {
+      alert(
+        "This password seems to be a common password. Please use a stronger, more unique password.",
+      );
       return undefined;
     }
     usr = "md5:" + (await md5(usr));
     pwd = "sha256:" + (await sha256(pwd));
-    
+
     res = await fetch("/api/auth/signup", {
       method: "POST",
       body: JSON.stringify({ usr: usr, pwd: pwd, em: em }),
@@ -154,8 +156,7 @@ async function loginForm() {
     if (res.ok) {
       localStorage["DEBLOKAUTH"] = await res.text();
       document.location =
-        new URLSearchParams(window.location.search).get("redirect_to") ||
-        "/";
+        new URLSearchParams(window.location.search).get("redirect_to") || "/";
     } else {
       alert(await res.text());
       usrPwd.value = "";
@@ -171,12 +172,11 @@ async function signupForm() {
   let res = await signup(usrEle.value, usrPwd.value, emailE.value);
   if (res != undefined) {
     if (res.ok) {
-      let lres = await login(usrEle.value,usrPwd.value)
+      let lres = await login(usrEle.value, usrPwd.value);
       if (lres != undefined && lres.ok) {
         localStorage["DEBLOKAUTH"] = await lres.text();
-      document.location =
-        new URLSearchParams(window.location.search).get("redirect_to") ||
-        "/";
+        document.location =
+          new URLSearchParams(window.location.search).get("redirect_to") || "/";
       }
     } else {
       alert(await res.text());
@@ -184,7 +184,6 @@ async function signupForm() {
       usrEle.value = "";
     }
   } else {
-    
   }
   return res;
 }

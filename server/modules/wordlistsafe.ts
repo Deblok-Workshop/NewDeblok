@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-function pwdSafe(password: any): boolean {                                                
+function pwdSafe(password: any): boolean {
   const files = fs.readdirSync("./server/modules/wordlists/");
 
   if (files.length === 0) {
@@ -11,7 +11,7 @@ function pwdSafe(password: any): boolean {
   for (const file of files) {
     if (file.endsWith(".txt")) {
       const wordlistPath = `./server/modules/wordlists/${file}`;
-                                                                                                   
+
       const wordlist = fs.readFileSync(wordlistPath, "utf-8");
       if (wordlist.toLowerCase().includes(password.toLowerCase())) {
         console.log(`Password found in ${file}`);

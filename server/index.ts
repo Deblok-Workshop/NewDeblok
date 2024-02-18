@@ -7,7 +7,7 @@ import { staticPlugin } from "@elysiajs/static";
 import { cors } from "@elysiajs/cors";
 import fetch from "node-fetch";
 import wordlistsafe from "./modules/wordlistsafe";
-                                                                                                   
+
 let endpoints: any = process.env.ENDPOINTS;
 endpoints = endpoints.split(",");
 let netaddr = "[::1]";
@@ -200,7 +200,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       }
       // TODO: prevent email sharing
       try {
-      pwd = await Bun.password.hash(pwd);
+        pwd = await Bun.password.hash(pwd);
       } catch (e) {
         return e;
       }
@@ -359,16 +359,14 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       method: "POST",
       body: JSON.stringify(body),
     });
- 
-    return fr; 
-  }); 
- 
- 
-  server.get("/api/img/identicon.png", async ({ body, set }) => { 
-   return new Blob([await helper.auth.identicon()]); 
+
+    return fr;
   });
-                                         
-                                                
+
+  server.get("/api/img/identicon.png", async ({ body, set }) => {
+    return new Blob([await helper.auth.identicon()]);
+  });
+
   // startup
   if (
     !process.argv.includes("--unavailiable") &&
@@ -382,7 +380,3 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       server.listen(config.webserver);
   }
 }
-                                                                                                   
-                                                                                                   
-
-

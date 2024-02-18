@@ -10,15 +10,17 @@
   <body
     class="body flex flex-col backdrop-brightness-125 sm:flex-col md:flex-row min-h-screen !bg-[url('assets/bottom-hero.jpg')]"
   >
-  <div class="z-30 p-1 rounded-lg bg-black/20 text-text max-w-[400px] absolute left-[40vw] bottom-[52vh] md:hidden sm:hidden hidden lg:block">
-    <b>Requirements:</b><br>
-    - Username must be 3-24 characters long, be alphanumeric (excluding _ and .)<br><br>
-    - Password must be 10 characters long, include 1 capital letter, 1 number, 1 lowercase letter, and 1 special character.<br><br>
-    - Email must be valid<br>
-   </div>
     <div
-      class="authOverlay"
+      class="z-30 p-1 rounded-lg bg-black/20 text-text max-w-[400px] absolute left-[40vw] bottom-[52vh] md:hidden sm:hidden hidden lg:block"
     >
+      <b>Requirements:</b><br />
+      - Username must be 3-24 characters long, be alphanumeric (excluding _ and
+      .)<br /><br />
+      - Password must be 10 characters long, include 1 capital letter, 1 number,
+      1 lowercase letter, and 1 special character.<br /><br />
+      - Email must be valid<br />
+    </div>
+    <div class="authOverlay">
       <div class="dialog">
         <h1 class="text-3xl text-bold text-center text-text">
           Signup to Deblok
@@ -27,12 +29,7 @@
           <br />
           <div class="mb-1">
             Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input
-              type="email"
-              maxlength="255"
-              class="py-0.5 input"
-              required
-            />
+            <input type="email" maxlength="255" class="py-0.5 input" required />
           </div>
           <div class="mb-1 usrField">
             Username:
@@ -43,10 +40,11 @@
               required
             />
             <p class="usrRequire lg:!hidden">
-              - Username must be 3-24 characters long and be alphanumeric (including _ and .)
+              - Username must be 3-24 characters long and be alphanumeric
+              (including _ and .)
             </p>
           </div>
-          <div class="mb-1 pswField ">
+          <div class="mb-1 pswField">
             Password:
             <input
               type="password"
@@ -54,11 +52,12 @@
               class="py-0.5 input"
               required
             />
-            <p class="pswRequire lg:!hidden ">
-              - Password must be 10 characters long, include 1 capital letter, 1 number, 1 lowercase letter, and 1 special character.
+            <p class="pswRequire lg:!hidden">
+              - Password must be 10 characters long, include 1 capital letter, 1
+              number, 1 lowercase letter, and 1 special character.
             </p>
           </div>
-          <br>
+          <br />
           <br />
           <iframe
             class="trackedIframe captchaIframe rounded-lg bg-base h-[144px] [transform:scale(0.9)] hover:[transform:scale(0.95)] duration-200"

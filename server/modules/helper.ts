@@ -1,4 +1,4 @@
-import sharp from 'sharp';
+import sharp from "sharp";
 import sqllite from "bun:sqlite";
 import * as cgraphy from "node:crypto";
 // database operations
@@ -164,48 +164,59 @@ function auth_tokenvalidate_endpoint(body: any) {
     return [true, e];
   }
 }
-const colors = ['#0d6efd', '#6610f2', '#6f42c1', '#d63384', '#dc3545', '#fd7e14', '#ffc107', '#198754', '#20c997', '#0dcaf0'];
+const colors = [
+  "#0d6efd",
+  "#6610f2",
+  "#6f42c1",
+  "#d63384",
+  "#dc3545",
+  "#fd7e14",
+  "#ffc107",
+  "#198754",
+  "#20c997",
+  "#0dcaf0",
+];
 async function indenticon() {
-    const image = sharp({
-      create: {
-        width: 6,
-        height: 6,
-        channels: 4,
-        background: { r: 255, g: 255, b: 255, alpha: 1 },
-      },
-    });
-  
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-  
-    const pixelData = new Uint8Array(36 * 4).fill(255); 
-  
-    for (let i = 0; i < pixelData.length; i += 4) {
-      const replacePixel = Math.random() < 0.5;
-      if (replacePixel) {
-        const color = Buffer.from(randomColor.slice(1), 'hex');
-        pixelData.set(color, i);
-      }
+  const image = sharp({
+    create: {
+      width: 6,
+      height: 6,
+      channels: 4,
+      background: { r: 255, g: 255, b: 255, alpha: 1 },
+    },
+  });
+
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+  const pixelData = new Uint8Array(36 * 4).fill(255);
+
+  for (let i = 0; i < pixelData.length; i += 4) {
+    const replacePixel = Math.random() < 0.5;
+    if (replacePixel) {
+      const color = Buffer.from(randomColor.slice(1), "hex");
+      pixelData.set(color, i);
     }
-  
-    let scaledImg = await image
-      .raw()
-      .toBuffer({ resolveWithObject: true })
-      .then(({ data, info }) =>
-        sharp(Buffer.from(pixelData), {
-          raw: { width: info.width, height: info.height, channels: 4 },
-        })
-      );
-    let scaledImgR = await scaledImg.resize(300, 300, { kernel: sharp.kernel.nearest })
-    return scaledImgR.png().toBuffer();
-  
-  
+  }
+
+  let scaledImg = await image
+    .raw()
+    .toBuffer({ resolveWithObject: true })
+    .then(({ data, info }) =>
+      sharp(Buffer.from(pixelData), {
+        raw: { width: info.width, height: info.height, channels: 4 },
+      }),
+    );
+  let scaledImgR = await scaledImg.resize(300, 300, {
+    kernel: sharp.kernel.nearest,
+  });
+  return scaledImgR.png().toBuffer();
 }
 
 // Exports
 
 const sql = { open: dbopen, write: dbwrite, read: dbread };
 const crypto = { aes: { decrypt: aesDecrypt, encrypt: aesEncrypt } };
-const auth = { validate: auth_tokenvalidate_endpoint, identicon:indenticon };
+const auth = { validate: auth_tokenvalidate_endpoint, identicon: indenticon };
 export default {
   sql: sql,
   crypto: crypto,

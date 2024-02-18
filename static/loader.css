@@ -1,4 +1,3 @@
-
 .spinner {
   position: relative;
   width: 60px;
@@ -11,7 +10,9 @@
   right: 0;
   bottom: 0;
   opacity: 0;
-  animation: r 4.88s infinite cubic-bezier(0.15, 0.55, 0.85, 0.45), o 4.878s infinite step-end;
+  animation:
+    r 4.88s infinite cubic-bezier(0.15, 0.55, 0.85, 0.45),
+    o 4.878s infinite step-end;
 }
 .spinner div::after {
   content: "";

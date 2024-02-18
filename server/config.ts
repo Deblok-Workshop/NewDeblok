@@ -8,6 +8,6 @@ export default {
       return !new URL(req.url).pathname.startsWith("/api");
     },
   },
-  // Webserver config 
+  // Webserver config
   webserver: { port: 8080 },
 };

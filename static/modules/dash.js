@@ -36,11 +36,11 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
     cardContain.appendChild(cardElement);
   });
 }
-function itemModal(title,description,icon) {
- document.querySelector('#item-modal').classList.remove('hidden')
- document.querySelector('#item-modal').classList.add('flex')
+function itemModal(title, description, icon) {
+  document.querySelector("#item-modal").classList.remove("hidden");
+  document.querySelector("#item-modal").classList.add("flex");
 }
 function itemModalHide() {
-  document.querySelector('#item-modal').classList.add('hidden')
-  document.querySelector('#item-modal').classList.remove('flex')
- }
+  document.querySelector("#item-modal").classList.add("hidden");
+  document.querySelector("#item-modal").classList.remove("flex");
+}
