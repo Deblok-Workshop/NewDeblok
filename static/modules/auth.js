@@ -149,7 +149,7 @@ async function loginForm() {
       localStorage["DEBLOKAUTH"] = await res.text();
       document.location =
         new URLSearchParams(window.location.search).get("redirect_to") ||
-        "/dash.html";
+        "/";
     } else {
       alert(await res.text());
       usrPwd.value = "";
