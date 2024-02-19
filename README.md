@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> ## NewDeblok is looking for a new maintainer!
+> Me, rare, the biggest contributor & owner of Deblok has lost motivation to work on the project at this time and would like someone else to finish the project for me. I am __not__ departing from Deblok, and will still be providing hosting and domains. I will check and look at every single Pull Request and issue.
+
+
 # <img src="assets/banner.png" alt="banner" width="448">
 
 > [!IMPORTANT]
