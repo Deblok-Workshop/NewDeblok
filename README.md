@@ -2,6 +2,14 @@
 > ## NewDeblok is looking for a new maintainer!
 > Me, rare, the biggest contributor & owner of Deblok has lost motivation to work on the project at this time and would like someone else to finish the project for me. I am __not__ departing from Deblok, and will still be providing hosting and domains. I will check and look at every single Pull Request and issue.
 
+### The state of New Deblok:
+- Total: ~50% complete
+- DeblokManager: 100% complete, nothing needs work in this area
+- Backend: 100% complete, nothing needs work in this area
+- Frontend: 30% done, the entire dash needs to be implemented 
+- Nginx & Bare: 0% done, I need to set this up in my deployments
+
+------
 
 # <img src="assets/banner.png" alt="banner" width="448">
 
