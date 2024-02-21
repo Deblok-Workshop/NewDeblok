@@ -29,6 +29,12 @@ try {
   console.warn("WARN: db.sql does not exist. Creating.");
   Bun.write("db.sql", "");
 }
+try {
+  require("node:fs").accessSync(".env", require("node:fs").constants.F_OK);
+} catch {
+  console.error("FATAL: .env file not found.");
+
+}
 
 if (
   process.argv.includes("--ignore-linux-check") &&
