@@ -28,6 +28,11 @@ Deblok is a selfhostable website that allows you to browse and stream apps, game
 > Deblok+ is **optional**, and your free experience is not effected by not having Deblok+.
 > Buy Deblok+ on the discord: [discord.gg/deblok](https://discord.gg/deblok)
 
+## For chromebook skids
+* I **strongly __do not__ recommend** you to deploy NewDeblok to a service like Vercel.
+* Use `bun run buildonce` instead of `bun run build` if you don't need to watch the files.
+* You **__have__** to selfhost DeblokManager. It cannot be deployed to a service like Vercel.
+
 # Donate to me!
 
 (If you donate $0.25 or more, you can get the `@Donator` role in the [Discord](https://discord.gg/deblok))
@@ -45,5 +50,6 @@ Deblok is a selfhostable website that allows you to browse and stream apps, game
 ## Legal Notice
 
 Deblok is licensed under GNU General Public License v3.0 (GPLv3). By using, forking, or modifying the code, you agree to comply with the terms of this license.
+
 
 # Made with love from everyone at Deblok-Workshop ❤️
