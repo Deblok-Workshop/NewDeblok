@@ -1,3 +1,16 @@
+> [!IMPORTANT]
+> ## NewDeblok is looking for a new maintainer!
+> Me, rare, the biggest contributor & owner of Deblok has lost motivation to work on the project at this time and would like someone else to finish the project for me. I am __not__ departing from Deblok, and will still be providing hosting and domains. I will check and look at every single Pull Request and issue.
+
+### The state of New Deblok:
+- Total: ~50% complete
+- DeblokManager: 100% complete, nothing needs work in this area
+- Backend: 100% complete, nothing needs work in this area
+- Frontend: 30% done, the entire dash needs to be implemented 
+- Nginx & Bare: 0% done, I need to set this up in my deployments
+
+------
+
 # <img src="assets/banner.png" alt="banner" width="448">
 
 > [!IMPORTANT]
@@ -14,6 +27,11 @@ Deblok is a selfhostable website that allows you to browse and stream apps, game
 > There is some additional things you can buy which are **supplementary** on the Deblok Discord.
 > Deblok+ is **optional**, and your free experience is not effected by not having Deblok+.
 > Buy Deblok+ on the discord: [discord.gg/deblok](https://discord.gg/deblok)
+
+## For chromebook skids
+* I **strongly __do not__ recommend** you to deploy NewDeblok to a service like Vercel.
+* Use `bun run buildonce` instead of `bun run build` if you don't need to watch the files.
+* You **__have__** to selfhost DeblokManager. It cannot be deployed to a service like Vercel.
 
 # Donate to me!
 
@@ -32,5 +50,6 @@ Deblok is a selfhostable website that allows you to browse and stream apps, game
 ## Legal Notice
 
 Deblok is licensed under GNU General Public License v3.0 (GPLv3). By using, forking, or modifying the code, you agree to comply with the terms of this license.
+
 
 # Made with love from everyone at Deblok-Workshop ❤️
