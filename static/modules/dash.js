@@ -50,7 +50,8 @@ function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
           <div
             class="flex items-center justify-between p-4 md:p-5 border-b border-black/20 rounded-t"
           >
-            <h3 class="text-xl font-medium text-text">${title}</h3>
+            
+          <h3 class="text-xl font-medium text-text">${title}</h3>
             <button
               type="button"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
@@ -87,15 +88,18 @@ function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
               type="button"
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center s:ring-blue-800"
             >
-              I accept
+              ${buttons[0]}
             </button>
+            ${buttons[1] ? `
             <button
               data-modal-hide="item-modal"
               type="button"
               class="py-2.5 px-5 ms-3 text-sm font-medium text-text focus:outline-none bg-base rounded-lg border border-black/40 hover:bg-surface0 hover:text-blue focus:z-10 focus:ring-4 focus:ring-gray-100 s:ring-gray-700"
             >
-              Decline
+              ${buttons[1]}
             </button>
+            ` : ``}
+            
           </div>
         </div>
       </div>
