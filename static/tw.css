@@ -288,7 +288,7 @@ kbd {
   @apply text-sm;
 }
 .authPrimary {
-  @apply disabled:bg-slate-800 disabled:hover:text-text disabled:hover:bg-slate-950 disabled:cursor-not-allowed w-full block text-xl hover:text-xl rounded-lg rounded-r-none bg-blue-800 hover:bg-blue-500 duration-[375ms] px-5 py-2 hover:text-base;
+  @apply disabled:bg-slate-800 disabled:hover:text-text disabled:hover:bg-slate-950 disabled:cursor-not-allowed !w-full block !text-xl rounded-lg rounded-r-none bg-blue-800 hover:bg-blue-500 duration-[375ms] px-5 py-2 hover:text-base;
 }
 .authSecondary {
   @apply w-full block text-xl hover:text-xl rounded-lg rounded-l-none bg-blue-900 hover:bg-blue-600 duration-[375ms] px-5 py-2 hover:text-surface0;

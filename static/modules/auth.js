@@ -61,9 +61,9 @@ let captchaInterval = setInterval(() => {
         validateInput() &&
         checkCaptchaIfr(document.querySelector(".captchaIframe"))
       ) {
-        document.querySelector(".loginButton").disabled = false;
+        document.querySelector(".authPrimary").disabled = false;
       } else {
-        document.querySelector(".loginButton").disabled = true;
+        document.querySelector(".authPrimary").disabled = true;
       }
       clearInterval(captchaInterval);
     }
@@ -71,7 +71,7 @@ let captchaInterval = setInterval(() => {
 }, 250);
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector(".loginButton").disabled = true;
+  document.querySelector(".authPrimary").disabled = true;
   let usrEle = document.querySelector('input[type="username"]');
   let usrPwd = document.querySelector('input[type="password"]');
   usrEle.value = "";
@@ -83,9 +83,9 @@ document.addEventListener("DOMContentLoaded", () => {
         validateInput() &&
         checkCaptchaIfr(document.querySelector(".captchaIframe"))
       ) {
-        document.querySelector(".loginButton").disabled = false;
+        document.querySelector(".authPrimary").disabled = false;
       } else {
-        document.querySelector(".loginButton").disabled = true;
+        document.querySelector(".authPrimary").disabled = true;
       }
     }
     input.addEventListener("blur", (e) => {
