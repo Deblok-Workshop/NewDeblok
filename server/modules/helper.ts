@@ -152,7 +152,9 @@ function auth_tokenvalidate_endpoint(body: any) {
     let crtime = decodeauthpart(authtoken[1].substring(2));
 
     let now = Date.now();
-    if (now > Number(exptime) || now > Number(crtime)) {
+    console.log(exptime, crtime, now)
+    if (now < Number(exptime) && now > Number(crtime)) {
+      // exptime should be in the future, crtime should be in the past.
       // All good
     } else {
       error = true;
