@@ -19,7 +19,7 @@ const cardData = [
   },
   {
     img: "assets/icons/gimp.png",
-    title: "Gimp",
+    title: "GIMP",
     subtitle: "Multimedia",
     name: "gimp",
   },
