@@ -38,18 +38,19 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
 }
 function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
   document.body.innerHTML += `
+  
     <div
       id="item-modal"
-      class="fixed top-0 left-0 w-full h-full justify-center items-middle align-middle z-50"
+      class="fixed top-0 left-0 w-full h-full justify-center items-middle align-middle z-50 flex bg-black/50 backdrop-blur-md"
     >
       <div class="relative w-fit max-w-4xl max-h-[50%]">
         <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow">
+        <div class="relative bg-mantle rounded-lg shadow">
           <!-- Modal header -->
           <div
             class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
           >
-            <h3 class="text-xl font-medium text-gray-900">${title}</h3>
+            <h3 class="text-xl font-medium text-text">${title}</h3>
             <button
               type="button"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
@@ -75,7 +76,7 @@ function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
           </div>
           <!-- Modal body -->
           <div class="p-4 md:p-5 space-y-4">
-            <p class="text-base leading-relaxed text-gray-500">${description}</p>
+            <p class="text-base leading-relaxed text-text/80">${description}</p>
           </div>
           <!-- Modal footer -->
           <div
@@ -91,7 +92,7 @@ function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
             <button
               data-modal-hide="item-modal"
               type="button"
-              class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 s:ring-gray-700"
+              class="py-2.5 px-5 ms-3 text-sm font-medium text-text focus:outline-none bg-base rounded-lg border border-gray-200 hover:bg-surface0 hover:text-blue focus:z-10 focus:ring-4 focus:ring-gray-100 s:ring-gray-700"
             >
               Decline
             </button>
