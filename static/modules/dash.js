@@ -41,14 +41,14 @@ function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
   
     <div
       id="item-modal"
-      class="fixed top-0 left-0 w-full h-full justify-center items-middle align-middle z-50 flex bg-black/50 backdrop-blur-md"
+      class="fixed top-0 left-0 w-full h-full justify-center self-center items-middle align-middle z-50 flex bg-black/50 backdrop-blur-md"
     >
-      <div class="relative w-fit max-w-4xl max-h-[50%]">
+      <div class=" w-fit max-w-4xl max-h-[50%]">
         <!-- Modal content -->
-        <div class="relative bg-mantle rounded-lg shadow">
+        <div class="relative bg-mantle rounded-lg shadow-md shadow-black/40">
           <!-- Modal header -->
           <div
-            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
+            class="flex items-center justify-between p-4 md:p-5 border-b border-black/20 rounded-t"
           >
             <h3 class="text-xl font-medium text-text">${title}</h3>
             <button
@@ -80,7 +80,7 @@ function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
           </div>
           <!-- Modal footer -->
           <div
-            class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b"
+            class="bg-black/20 flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-black/40 rounded-b"
           >
             <button
               data-modal-hide="item-modal"
@@ -92,7 +92,7 @@ function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
             <button
               data-modal-hide="item-modal"
               type="button"
-              class="py-2.5 px-5 ms-3 text-sm font-medium text-text focus:outline-none bg-base rounded-lg border border-gray-200 hover:bg-surface0 hover:text-blue focus:z-10 focus:ring-4 focus:ring-gray-100 s:ring-gray-700"
+              class="py-2.5 px-5 ms-3 text-sm font-medium text-text focus:outline-none bg-base rounded-lg border border-black/40 hover:bg-surface0 hover:text-blue focus:z-10 focus:ring-4 focus:ring-gray-100 s:ring-gray-700"
             >
               Decline
             </button>
