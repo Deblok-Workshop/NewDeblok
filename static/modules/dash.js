@@ -38,13 +38,9 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
 }
 function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
   document.body.innerHTML += `
-  <div
-      class="z-10 mx-auto my-auto justify-center align-middle items-center grid gap-2"
-      id="cardContainer"
-    ></div>
     <div
       id="item-modal"
-      class="hidden fixed top-0 left-0 w-full h-full justify-center items-middle align-middle z-50"
+      class="fixed top-0 left-0 w-full h-full justify-center items-middle align-middle z-50"
     >
       <div class="relative w-fit max-w-4xl max-h-[50%]">
         <!-- Modal content -->
@@ -57,7 +53,7 @@ function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
             <button
               type="button"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-              data-modal-hide="item-modal"
+              onclick="itemModalHide()"
             >
               <svg
                 class="w-3 h-3"
