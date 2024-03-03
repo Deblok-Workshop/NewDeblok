@@ -41,11 +41,11 @@ function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
   
     <div
       id="item-modal"
-      class="fixed top-0 left-0 w-full h-full justify-center self-center items-middle align-middle z-50 flex bg-black/50 backdrop-blur-md"
+      class="fixed top-0 left-0 w-full h-full justify-center self-center items-middle align-middle z-50 flex flex-col bg-black/50 backdrop-blur-md"
     >
-      <div class=" w-fit max-w-4xl max-h-[50%]">
+      <div class=" w-full max-w-4xl max-h-[50%]">
         <!-- Modal content -->
-        <div class="relative bg-mantle rounded-lg shadow-md shadow-black/40">
+        <div class="w-fit mx-auto relative bg-mantle rounded-lg shadow-md shadow-black/40">
           <!-- Modal header -->
           <div
             class="flex items-center justify-between p-4 md:p-5 border-b border-black/20 rounded-t"
