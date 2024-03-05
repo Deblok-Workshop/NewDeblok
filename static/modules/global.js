@@ -1,7 +1,7 @@
 
 fetch('/api/healthcheck')
 .then(response => {
-  if (!response.ok || response.headers.get('Content-Type') !== 'application/json') {
+  if (!response.ok || !String(decodeURIComponent(response.headers.get('Content-Type'))).startsWith('application/json')) {
     const reason = !response.ok
       ? `The NewDeblok API is down, responded with HTTP ${response.status}`
       : `An unexpected MIME type was received: ${encodeURIComponent(response.headers.get('Content-Type'))}, are you sure NewDeblok API is running? (Is NewDeblok running on a static host by accident?)`;
