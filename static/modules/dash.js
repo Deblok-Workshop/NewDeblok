@@ -45,7 +45,7 @@ function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
     >
       <div class=" w-full max-w-4xl max-h-[50%]">
         <!-- Modal content -->
-        <div class="w-fit mx-auto relative bg-mantle rounded-lg shadow-md shadow-black/40">
+        <div class="min-w-sm w-fit mx-auto relative bg-mantle rounded-lg shadow-md shadow-black/40">
           <!-- Modal header -->
           <div
             class="flex items-center justify-between p-4 md:p-5 border-b border-black/20 rounded-t"
@@ -81,7 +81,7 @@ function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
           </div>
           <!-- Modal footer -->
           <div
-            class="bg-black/20 flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-black/40 rounded-b"
+            class="bg-black/20 justify-evenly flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-black/40 rounded-b"
           >
             <button
               onclick="window.btnReturn = 'clickedbtn0';itemModalHide();"

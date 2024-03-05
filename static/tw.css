@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 .tw__build {
-  @apply duration-300;
+  @apply duration-300 min-w-60 justify-evenly;
 }
-
+.min-w-sm {@apply min-w-60}
 @font-face {
   font-family: "Geist";
   font-style: normal;
@@ -308,4 +308,11 @@ kbd {
 hidden,
 .hidden {
   display: none;
+}
+.force-break {
+  white-space: pre-wrap; /* css-3 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
