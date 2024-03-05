@@ -49,8 +49,8 @@ function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
           <!-- Modal header -->
           <div
             class="flex items-center justify-between p-4 md:p-5 border-b border-black/20 rounded-t"
-          >
-            <icon class="w-8 h-8 inline-block mr-2" style="background-image:url(${icon ? icon : ""});background-size:cover;"> </icon>
+          >${icon ? `<icon class="w-8 h-8 inline-block mr-2" style="background-image:url(${icon ? icon : ""});background-size:cover;"> </icon>` : ""}
+            
           <h3 class="text-xl font-medium text-text">${title}</h3>
             <button
               type="button"
