@@ -276,8 +276,6 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return "ERR: Username is incorrect.";
     }
   });
-
-  // this needs testing
   server.post("/api/auth/tokenvalidate", async ({ body, set }) => {
     let out = helper.auth.validate(atob(body));
     if (out[0]) {
