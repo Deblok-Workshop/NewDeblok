@@ -1,5 +1,4 @@
-setTimeout(()=> {
-  // add healthcheck
+
 fetch('/api/healthcheck')
 .then(response => {
   if (!response.ok || response.headers.get('Content-Type') !== 'application/json') {
@@ -11,7 +10,6 @@ fetch('/api/healthcheck')
 })
 .catch(error => {window.location.href = `/503_err.html#0|${encodeURIComponent("Failed to fetch.")}`;});
 
-},1000)
 
 
 
