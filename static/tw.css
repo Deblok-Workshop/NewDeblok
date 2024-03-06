@@ -5,7 +5,9 @@
 .tw__build {
   @apply duration-300 min-w-60 justify-evenly;
 }
-.min-w-sm {@apply min-w-60}
+.min-w-sm {
+  @apply min-w-60;
+}
 @font-face {
   font-family: "Geist";
   font-style: normal;

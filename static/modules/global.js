@@ -1,17 +1,20 @@
-
-fetch('/api/healthcheck')
-.then(response => {
-  if (!response.ok || !String(decodeURIComponent(response.headers.get('Content-Type'))).startsWith('application/json')) {
-    const reason = !response.ok
-      ? `The NewDeblok API is down, responded with HTTP ${response.status}`
-      : `An unexpected MIME type was received: ${encodeURIComponent(response.headers.get('Content-Type'))}, are you sure NewDeblok API is running? (Is NewDeblok running on a static host by accident?)`;
-    window.location.href = `/503_err.html#0|${encodeURIComponent(reason)}`;
-  }
-})
-.catch(error => {window.location.href = `/503_err.html#0|${encodeURIComponent("Failed to fetch.")}`;});
-
-
-
+fetch("/api/healthcheck")
+  .then((response) => {
+    if (
+      !response.ok ||
+      !String(
+        decodeURIComponent(response.headers.get("Content-Type")),
+      ).startsWith("application/json")
+    ) {
+      const reason = !response.ok
+        ? `The NewDeblok API is down, responded with HTTP ${response.status}`
+        : `An unexpected MIME type was received: ${encodeURIComponent(response.headers.get("Content-Type"))}, are you sure NewDeblok API is running? (Is NewDeblok running on a static host by accident?)`;
+      window.location.href = `/503_err.html#0|${encodeURIComponent(reason)}`;
+    }
+  })
+  .catch((error) => {
+    window.location.href = `/503_err.html#0|${encodeURIComponent("Failed to fetch.")}`;
+  });
 
 // add logout modal to everything
 document.body.innerHTML += `    <div id="popup-modal" class="hidden w-full h-full fixed bg-black/50 z-[6000]">
@@ -97,4 +100,3 @@ function logout() {
   localStorage["DEBLOKAUTH"] = undefined;
   document.location = "index.html";
 }
-

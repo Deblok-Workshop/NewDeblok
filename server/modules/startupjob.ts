@@ -32,8 +32,8 @@ try {
 try {
   require("node:fs").accessSync(".env", require("node:fs").constants.F_OK);
 } catch {
-  console.error("FATAL: .env file not found."); process.exit(1);
-
+  console.error("FATAL: .env file not found.");
+  process.exit(1);
 }
 
 if (

@@ -20,10 +20,14 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
   cardData.forEach((card) => {
     const cardElement = document.createElement("div");
     cardElement.classList.add("card"); // this is shit
-   
-      cardElement.onclick = ()=> {itemModal(card.title, card.description,card.img,["Launch (not functional yet)"]);console.log('trigger')}
-   
-    
+
+    cardElement.onclick = () => {
+      itemModal(card.title, card.description, card.img, [
+        "Launch (not functional yet)",
+      ]);
+      console.log("trigger");
+    };
+
     const innerContent = `
     <div onclick="itemModal('${card.title}', '${card.description}','${card.img}',['Launch (not functional yet)']);">
 <span class="flex flex-row">
@@ -41,7 +45,7 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
     cardContain.appendChild(cardElement);
   });
 }
-function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
+function itemModal(title, description, icon, buttons = ["OK", "Cancel"]) {
   document.body.innerHTML += `
   
     <div
@@ -95,7 +99,9 @@ function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
             >
               ${buttons[0]}
             </button>
-            ${buttons[1] ? `
+            ${
+              buttons[1]
+                ? `
             <button
               type="button"
               onclick="window.btnReturn = 'clickedbtn1';itemModalHide();"
@@ -103,13 +109,15 @@ function itemModal(title, description, icon,buttons = ["OK","Cancel"]) {
             >
               ${buttons[1]}
             </button>
-            ` : ``}
+            `
+                : ``
+            }
             
           </div>
         </div>
       </div>
     </div>
-  `
+  `;
 }
 function itemModalHide() {
   document.querySelector("#item-modal").remove();
