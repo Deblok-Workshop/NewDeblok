@@ -6,8 +6,8 @@
 - Total: ~50% complete
 - DeblokManager: 100% complete, nothing needs work in this area
 - Backend: 100% complete, nothing needs work in this area
-- Frontend: 30% done, the entire dash needs to be implemented 
-- Nginx & Bare: 0% done, I need to set this up in my deployments
+- Frontend: 32% done, the entire dash needs to be implemented 
+- Nginx & Bare: 0% done, This will be needed once NewDeblok goes prod
 
 ------
 
