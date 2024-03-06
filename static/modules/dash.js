@@ -41,15 +41,16 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
   });
 }
 function itemModal(title, description, icon, buttons = ["OK", "Cancel"]) {
+  //setTimeout(()=>{
   document.body.innerHTML += `
   
     <div
       id="item-modal"
-      class="fixed top-0 left-0 w-full h-full justify-center self-center items-middle align-middle z-50 flex flex-col bg-black/50 backdrop-blur-md"
+      class="fixed top-0 left-0 w-full h-full justify-center self-center items-middle align-middle z-50 flex flex-col bg-black __animModal"
     >
-      <div class=" w-full max-h-[50%]">
+      <div class=" w-full max-h-[50%] ">
         <!-- Modal content -->
-        <div class="min-w-sm w-fit mx-auto relative bg-mantle rounded-lg shadow-md shadow-black/40">
+        <div class="min-w-sm w-fit mx-auto relative bg-mantle rounded-lg shadow-md shadow-black/40 __animModal2">
           <!-- Modal header -->
           <div
             class="flex items-center justify-between p-4 md:p-5 border-b border-black/20 rounded-t"
@@ -113,6 +114,7 @@ function itemModal(title, description, icon, buttons = ["OK", "Cancel"]) {
       </div>
     </div>
   `;
+//},200)
 }
 function itemModalHide() {
   document.querySelector("#item-modal").remove();

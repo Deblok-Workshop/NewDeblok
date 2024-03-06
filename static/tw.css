@@ -318,3 +318,13 @@ hidden,
   white-space: -o-pre-wrap; /* Opera 7 */
   word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
+.__animModal {background:transparent !important;animation: 0.5s animModalRoot forwards;animation-delay:0.05s;backdrop-filter:brightness(0.8);}
+.__animModal2 {animation: 0.2s animModal forwards; opacity:0;}
+@keyframes animModalRoot {
+  from {backdrop-filter: brightness(0.8) blur(0px)}
+  to {backdrop-filter:brightness(0.5) blur(10px)}
+}
+@keyframes animModal {
+ from {transform: scale(0.9); opacity:0.3; }
+ to {transform: scale(1); opacity:1;}
+}
