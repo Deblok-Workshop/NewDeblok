@@ -50,7 +50,7 @@ function itemModal(title, description, icon, buttons = ["OK", "Cancel"]) {
     >
       <div class=" w-full max-h-[50%] ">
         <!-- Modal content -->
-        <div class="min-w-sm w-fit mx-auto relative bg-mantle rounded-lg shadow-md shadow-black/40 __animModal2">
+        <div class="__modalContent min-w-sm w-fit mx-auto relative bg-mantle rounded-lg shadow-md shadow-black/40 __animModal2">
           <!-- Modal header -->
           <div
             class="flex items-center justify-between p-4 md:p-5 border-b border-black/20 rounded-t"
@@ -117,5 +117,10 @@ function itemModal(title, description, icon, buttons = ["OK", "Cancel"]) {
 //},200)
 }
 function itemModalHide() {
-  document.querySelector("#item-modal").remove();
+  document.querySelector("#item-modal").classList.remove('__animModal')
+  document.querySelector("#item-modal").classList.add('__animModalEnd')
+  document.querySelector("#item-modal .__modalContent").classList.remove('__animModal2')
+  document.querySelector("#item-modal .__modalContent").classList.add('__animModal2End')
+  setTimeout(()=>{document.querySelector("#item-modal").remove();},320)
+  
 }
