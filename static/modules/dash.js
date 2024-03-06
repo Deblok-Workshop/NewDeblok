@@ -20,8 +20,12 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
   cardData.forEach((card) => {
     const cardElement = document.createElement("div");
     cardElement.classList.add("card"); // this is shit
-    cardElement.onclick = ()=> {itemModal(card.title, card.description,card.img,["Launch (not functional yet)"]);console.log('trigger')}
+   
+      cardElement.onclick = ()=> {itemModal(card.title, card.description,card.img,["Launch (not functional yet)"]);console.log('trigger')}
+   
+    
     const innerContent = `
+    <div onclick="itemModal('${card.title}', '${card.description}','${card.img}',['Launch (not functional yet)']);">
 <span class="flex flex-row">
 <img class="!max-h-14 !max-w-14 !w-14 !h-14 item-img duration-300" style="border-radius:9999px;" src="${card.img}">
 <span class="flex flex-col">
@@ -29,6 +33,7 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
 <span class="opacity-50 mx-5 bottom-text text-sm">${card.subtitle}</span>
 </span>
 </span>
+</div>
    `;
 
     cardElement.innerHTML = innerContent;
