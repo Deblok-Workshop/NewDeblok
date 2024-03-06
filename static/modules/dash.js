@@ -20,7 +20,7 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
   cardData.forEach((card) => {
     const cardElement = document.createElement("div");
     cardElement.classList.add("card"); // this is shit
-    cardElement.addEventListener("click",()=> itemModal(card.title, card.description,card.img,["Launch (not functional yet)"]))
+    cardElement.onclick = ()=> {itemModal(card.title, card.description,card.img,["Launch (not functional yet)"]);console.log('trigger')}
     const innerContent = `
 <span class="flex flex-row">
 <img class="!max-h-14 !max-w-14 !w-14 !h-14 item-img duration-300" style="border-radius:9999px;" src="${card.img}">
