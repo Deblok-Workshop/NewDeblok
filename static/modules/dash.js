@@ -21,8 +21,6 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
     const cardElement = document.createElement("div");
     cardElement.classList.add("card"); // this is shit
 
-    
-
     const innerContent = `
     <div onclick="itemModal('${card.title}', '${card.description}','${card.img}',['Launch (not functional yet)']);">
 <span class="flex flex-row">
@@ -114,13 +112,18 @@ function itemModal(title, description, icon, buttons = ["OK", "Cancel"]) {
       </div>
     </div>
   `;
-//},200)
+  //},200)
 }
 function itemModalHide() {
-  document.querySelector("#item-modal").classList.remove('__animModal')
-  document.querySelector("#item-modal").classList.add('__animModalEnd')
-  document.querySelector("#item-modal .__modalContent").classList.remove('__animModal2')
-  document.querySelector("#item-modal .__modalContent").classList.add('__animModal2End')
-  setTimeout(()=>{document.querySelector("#item-modal").remove();},320)
-  
+  document.querySelector("#item-modal").classList.remove("__animModal");
+  document.querySelector("#item-modal").classList.add("__animModalEnd");
+  document
+    .querySelector("#item-modal .__modalContent")
+    .classList.remove("__animModal2");
+  document
+    .querySelector("#item-modal .__modalContent")
+    .classList.add("__animModal2End");
+  setTimeout(() => {
+    document.querySelector("#item-modal").remove();
+  }, 320);
 }

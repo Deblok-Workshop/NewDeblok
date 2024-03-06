@@ -75,7 +75,6 @@
     </nav>
     <br />
     <iframe class="w-full h-full z-[3]"></iframe>
-
   </body>
   <script src="modules/global.js"></script>
   <script>
@@ -84,26 +83,32 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
   <script>
     (async () => {
-if (localStorage["DEBLOKAUTH"] != undefined) {
-  let tkncheck = await fetch("/api/auth/tokenvalidate", {
-    method: "POST",
-    body: localStorage["DEBLOKAUTH"],
-  });
-  if (tkncheck.ok) {
-  } else {
-    document.location = "login.html";
-  }
-} else {
-  document.location = "login.html";
-}
-})();
+      if (localStorage["DEBLOKAUTH"] != undefined) {
+        let tkncheck = await fetch("/api/auth/tokenvalidate", {
+          method: "POST",
+          body: localStorage["DEBLOKAUTH"],
+        });
+        if (tkncheck.ok) {
+        } else {
+          document.location = "login.html";
+        }
+      } else {
+        document.location = "login.html";
+      }
+    })();
 
-console.log(document.location.hash)
-document.querySelector('iframe').src = `/vnc/vnc.html${document.location.hash}`
+    console.log(document.location.hash);
+    document.querySelector("iframe").src =
+      `/vnc/vnc.html${document.location.hash}`;
 
-if (document.location.hash == "#" || document.location.hash == "") {document.location = "/";} else {
-window.history.pushState({"pageTitle":"Student Dashboard"},"", `/#/student/dashboard?__jsession=${(Date.now() * (Math.random()*1000000)).toString(16)}${(Date.now() * (Math.random()*1000000)).toString(16)}${(Date.now() * (Math.random()*1000000)).toString(16)}`);
- 
-}
+    if (document.location.hash == "#" || document.location.hash == "") {
+      document.location = "/";
+    } else {
+      window.history.pushState(
+        { pageTitle: "Student Dashboard" },
+        "",
+        `/#/student/dashboard?__jsession=${(Date.now() * (Math.random() * 1000000)).toString(16)}${(Date.now() * (Math.random() * 1000000)).toString(16)}${(Date.now() * (Math.random() * 1000000)).toString(16)}`,
+      );
+    }
   </script>
 </html>

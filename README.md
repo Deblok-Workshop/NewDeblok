@@ -35,7 +35,7 @@ Deblok is a selfhostable website that allows you to browse and stream apps, game
 
 - I **strongly **do not** recommend** you to deploy NewDeblok to a service like Vercel.
 - Use `bun run buildonce` instead of `bun run build` if you don't need to watch the files.
-- You ****have**** to selfhost DeblokManager. It cannot be deployed to a service like Vercel.
+- You \***\*have\*\*** to selfhost DeblokManager. It cannot be deployed to a service like Vercel.
 
 # Donate to me!
 
