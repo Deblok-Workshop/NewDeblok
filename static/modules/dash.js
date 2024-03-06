@@ -21,12 +21,7 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
     const cardElement = document.createElement("div");
     cardElement.classList.add("card"); // this is shit
 
-    cardElement.onclick = () => {
-      itemModal(card.title, card.description, card.img, [
-        "Launch (not functional yet)",
-      ]);
-      console.log("trigger");
-    };
+    
 
     const innerContent = `
     <div onclick="itemModal('${card.title}', '${card.description}','${card.img}',['Launch (not functional yet)']);">
