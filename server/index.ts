@@ -10,17 +10,19 @@ import wordlistsafe from "./modules/wordlistsafe";
 import util from "./modules/util.ts";
 import fs from "node:fs";
 if (!fs.existsSync(".env")) {
-  console.error("ERR: Your .env file is missing.")
+  console.error("ERR: Your .env file is missing.");
   process.exit(1);
 }
 var endpoints: any = process.env.ENDPOINTS;
 try {
-endpoints = endpoints.split(",");
+  endpoints = endpoints.split(",");
 } catch {
-  console.error("ERR: You're missing the ENDPOINTS field from your .env file or it is invalid.")
-  console.error("ERR: Make sure:")
-  console.error("ERR: - Your .env file exists and is valid")
-  console.error("ERR: - You aren't accidentally using the example env file.")
+  console.error(
+    "ERR: You're missing the ENDPOINTS field from your .env file or it is invalid.",
+  );
+  console.error("ERR: Make sure:");
+  console.error("ERR: - Your .env file exists and is valid");
+  console.error("ERR: - You aren't accidentally using the example env file.");
   process.exit(1);
 }
 let netaddr = "[::1]";
@@ -56,7 +58,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   // server.use(staticPlugin({ assets: "static/", prefix: "/" }));
   let dbpwd: any = process.env.DBPWD;
   if (dbpwd) {
-  dbpwd = new Bun.CryptoHasher("sha256").update(dbpwd).digest("hex");
+    dbpwd = new Bun.CryptoHasher("sha256").update(dbpwd).digest("hex");
   }
 
   // general
@@ -360,14 +362,12 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       }
       selling.name = `newdeblok-${bjson.name}-${ports[0]}`;
       let fr = await fetch(`http://${back}/containers/create`, {
-        
         method: "POST",
         body: JSON.stringify(selling),
         headers: {
           Authorization: util.getHTTPAuthHeader(back),
           "Content-Type": "text/plain",
         },
-        
       });
       let resp = await fr.text();
       let sessionsDBentry: any = helper.sql.read(
@@ -424,7 +424,6 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       back = endpoints[Number(bjson.node)];
     }
     let fr = await fetch(`http://${back}/containers/kill`, {
-      
       method: "POST",
       body: JSON.stringify(bjson),
       headers: {
@@ -479,7 +478,6 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       back = endpoints[Number(bjson.node)];
     }
     let fr = await fetch(`http://${back}/containers/restart`, {
-      
       method: "POST",
       body: JSON.stringify(bjson),
       headers: {
@@ -607,7 +605,6 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let fr = await fetch(`http://${back}/containers/delete`, {
-      
       method: "POST",
       body: JSON.stringify(bjson),
       headers: {
@@ -661,7 +658,6 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let fr = await fetch(`http://${back}/containers/pause`, {
-      
       method: "POST",
       body: JSON.stringify(bjson),
       headers: {
@@ -716,7 +712,6 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let fr = await fetch(`http://${back}/containers/unpause`, {
-      
       method: "POST",
       body: JSON.stringify(bjson),
       headers: {
@@ -761,7 +756,6 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       }
       try {
         let fr = await fetch(`http://${back}/containers/keepalive`, {
-          
           method: "POST",
           body: req.body,
           headers: {
@@ -839,7 +833,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         req.url.replace(`/ws/${req.url.split("/")[2]}/`, "");
       req.url = url;
       try {
-      proxy.ws(req, socket, head, { target: req.url });
+        proxy.ws(req, socket, head, { target: req.url });
       } catch {}
     } else {
       socket.send("no");

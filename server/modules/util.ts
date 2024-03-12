@@ -1,11 +1,13 @@
 var endpoints: any = process.env.ENDPOINTS;
 try {
-endpoints = endpoints.split(",");
+  endpoints = endpoints.split(",");
 } catch {
-  console.error("ERR: You're missing the ENDPOINTS field from your .env file or it is invalid.")
-  console.error("ERR: Make sure:")
-  console.error("ERR: - Your .env file exists and is valid")
-  console.error("ERR: - You aren't accidentally using the example env file.")
+  console.error(
+    "ERR: You're missing the ENDPOINTS field from your .env file or it is invalid.",
+  );
+  console.error("ERR: Make sure:");
+  console.error("ERR: - Your .env file exists and is valid");
+  console.error("ERR: - You aren't accidentally using the example env file.");
   process.exit(1);
 }
 async function ping(url: string): Promise<string> {
@@ -50,7 +52,6 @@ async function getBackPorts(server: string) {
   let hc = (await healthcheck()).backend;
   try {
     let res = await fetch("http://" + server + "/ports/list", {
-      
       headers: { Authorization: getHTTPAuthHeader(server) },
     });
     return await res.json();

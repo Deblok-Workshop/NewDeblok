@@ -1,14 +1,14 @@
 (async () => {
   if (localStorage["DEBLOKAUTH"] != undefined) {
     let tkncheck = await fetch("/api/auth/tokenvalidate", {
-      
       method: "POST",
       body: localStorage["DEBLOKAUTH"],
     });
-    if (tkncheck.status == 429) {window.location.href = `/503_err.html#2`;} 
-    else if (!tkncheck.ok) {
+    if (tkncheck.status == 429) {
+      window.location.href = `/503_err.html#2`;
+    } else if (!tkncheck.ok) {
       document.location = "login.html";
-      }
+    }
   } else {
     document.location = "login.html";
   }
@@ -149,7 +149,6 @@ function itemModalHide() {
 function makeSession(container) {
   (async () => {
     let res = await fetch("/api/container/create", {
-      
       method: "POST",
       body: JSON.stringify({ name: container, for: localStorage["username"] }),
     });

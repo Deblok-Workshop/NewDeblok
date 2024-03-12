@@ -242,11 +242,9 @@ input[type="checkbox"]:checked + .slider:before {
 }
 @keyframes horrible {
   from {
-
     color: green;
   }
   to {
-
     color: yellow;
   }
 }
@@ -407,18 +405,20 @@ div.session_collapsed {
   transition: all 0.3s;
   padding: 0;
   margin: 0;
-  
 }
 .sessionNav.session_collapsed {
-  transition: all 0.5s, filter 0.35s;
+  transition:
+    all 0.5s,
+    filter 0.35s;
 }
 .sessionNav.session_collapsed * {
-  opacity:0;
+  opacity: 0;
   transition: opacity 0.3s;
 }
 .sessionNav.session_expanded {
-  transition: all 0.5s, filter 0.35s;
-  
+  transition:
+    all 0.5s,
+    filter 0.35s;
 }
 div.session_expanded {
   overflow: clip;
@@ -445,11 +445,23 @@ div.session_expanded {
   width: 140px;
   overflow: clip;
   transition: all 0.3s;
-  margin:auto;
+  margin: auto;
 }
 .compression:hover span {
-  width:0px;overflow:clip;height:0px;transition: all 0.3s;
+  width: 0px;
+  overflow: clip;
+  height: 0px;
+  transition: all 0.3s;
 }
-.sessionNav span {margin-left:8px;margin-right:8px;}
-.sessionNavContainer span {margin:auto;padding-left:8px;padding-right:8px;}
-.compression {@apply text-center py-2.5 align-middle items-center self-center flex flex-row w-full h-fit mb-2 p-2 rounded-md duration-200 bg-slate-900 hover:bg-slate-800 active:bg-slate-900 hover:ring-2 ring-1 px-4 text-subtext1}
+.sessionNav span {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+.sessionNavContainer span {
+  margin: auto;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.compression {
+  @apply text-center py-2.5 align-middle items-center self-center flex flex-row w-full h-fit mb-2 p-2 rounded-md duration-200 bg-slate-900 hover:bg-slate-800 active:bg-slate-900 hover:ring-2 ring-1 px-4 text-subtext1;
+}

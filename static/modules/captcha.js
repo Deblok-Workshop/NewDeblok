@@ -26,7 +26,6 @@ function validate() {
   const cId = captchaId;
   const captchaAnswer = document.getElementById("captchaAnswer").value;
   fetch(`/api/captcha/${cId}/validate`, {
-    
     method: "POST",
     headers: {
       "Content-Type": "text/plain",

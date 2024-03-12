@@ -6,7 +6,6 @@ export default {
     skipFailedRequests: true,
     message: "Global rate limit reached.",
     skip: (req: any) => {
-      
       return !req.path.includes("/api/");
     },
   },

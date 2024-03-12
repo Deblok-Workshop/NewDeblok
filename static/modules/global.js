@@ -5,7 +5,12 @@ let tips = [
   "COMMON SENSE: Deblok is NOT your PC.",
   "TIP: my cat doesnt want me to work",
   "Hello World!",
-  `TIP: your ip: ${(()=>{const xhr=new XMLHttpRequest();xhr.open("GET","https://ip.jammingin.space",false);xhr.send();return xhr.responseText;})()}`,
+  `TIP: your ip: ${(() => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://ip.jammingin.space", false);
+    xhr.send();
+    return xhr.responseText;
+  })()}`,
   "TIP: Don't mine at night!",
   "CAUTION: DO NOT DUMB HERE! NO DUMB AREA.",
   "CAUTION: FISH",
@@ -48,8 +53,8 @@ let tips = [
   "Excitement!",
   "More than 500 sold!",
   "One of a kind!",
-  "0% Sugar"
-]
+  "0% Sugar",
+];
 
 setTimeout(() => {
   fetch("/api/healthcheck")
@@ -61,10 +66,10 @@ setTimeout(() => {
         ).startsWith("application/json")
       ) {
         if (response.status != 429) {
-        const reason = !response.ok
-          ? `The NewDeblok API is down, responded with HTTP ${response.status}`
-          : `An unexpected MIME type was received: ${encodeURIComponent(response.headers.get("Content-Type"))}, are you sure NewDeblok API is running? (Is NewDeblok running on a static host by accident?)`;
-        window.location.href = `/503_err.html#0|${encodeURIComponent(reason)}`;
+          const reason = !response.ok
+            ? `The NewDeblok API is down, responded with HTTP ${response.status}`
+            : `An unexpected MIME type was received: ${encodeURIComponent(response.headers.get("Content-Type"))}, are you sure NewDeblok API is running? (Is NewDeblok running on a static host by accident?)`;
+          window.location.href = `/503_err.html#0|${encodeURIComponent(reason)}`;
         } else {
           window.location.href = `/503_err.html#2`;
         }

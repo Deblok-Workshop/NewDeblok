@@ -109,7 +109,6 @@ async function login(usr, pwd) {
     usr = "md5:" + (await md5(usr));
     pwd = "sha256:" + (await sha256(pwd));
     res = await fetch("/api/auth/login", {
-      
       method: "POST",
       body: JSON.stringify({ usr: usr, pwd: pwd, em: " " }),
     });
@@ -130,7 +129,6 @@ async function signup(usr, pwd, em) {
   ) {
     // prevent bypassing captcha
     safe = await fetch("/api/auth/pwdsafe", {
-      
       method: "POST",
       body: pwd,
     });
@@ -144,7 +142,6 @@ async function signup(usr, pwd, em) {
     pwd = "sha256:" + (await sha256(pwd));
 
     res = await fetch("/api/auth/signup", {
-      
       method: "POST",
       body: JSON.stringify({ usr: usr, pwd: pwd, em: em }),
     });
@@ -161,9 +158,12 @@ async function loginForm() {
   if (res != undefined) {
     if (res.ok) {
       localStorage["DEBLOKAUTH"] = await res.text();
-      let redirect = new URLSearchParams(window.location.search).get("redirect_to") || "/"
-      document.location =
-        redirect.replaceAll("javascript","").replaceAll("http:","").replaceAll("https:","");
+      let redirect =
+        new URLSearchParams(window.location.search).get("redirect_to") || "/";
+      document.location = redirect
+        .replaceAll("javascript", "")
+        .replaceAll("http:", "")
+        .replaceAll("https:", "");
     } else {
       alert(await res.text());
       usrPwd.value = "";
@@ -182,10 +182,12 @@ async function signupForm() {
       let lres = await login(usrEle.value, usrPwd.value);
       if (lres != undefined && lres.ok) {
         localStorage["DEBLOKAUTH"] = await lres.text();
-        let redirect = new URLSearchParams(window.location.search).get("redirect_to") || "/"
-        document.location =
-          redirect.replaceAll("javascript","").replaceAll("http:","").replaceAll("https:","");
-  
+        let redirect =
+          new URLSearchParams(window.location.search).get("redirect_to") || "/";
+        document.location = redirect
+          .replaceAll("javascript", "")
+          .replaceAll("http:", "")
+          .replaceAll("https:", "");
       }
     } else {
       alert(await res.text());

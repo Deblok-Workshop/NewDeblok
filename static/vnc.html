@@ -9,22 +9,33 @@
     <link rel="stylesheet" href="app.css" />
   </head>
   <body class="body">
-    <overlay class="connectingOverlay z-[999999] bg-base/70 backdrop-blur-md backdrop-brightness-75 flex items-center justify-center align-middle duration-300 flex-col">
+    <overlay
+      class="connectingOverlay z-[999999] bg-base/70 backdrop-blur-md backdrop-brightness-75 flex items-center justify-center align-middle duration-300 flex-col"
+    >
       <h2 class="font-extrabold text-4xl">Connecting...</h2>
       <h3 class="connectingTip font-light text-xl mb-6">TIP: ...</h3>
-      <iframe src="assets/load_cube.html" style="width:340px;height:340px;background:transparent;transform:scale(0.7)"></iframe>
+      <iframe
+        src="assets/load_cube.html"
+        style="
+          width: 340px;
+          height: 340px;
+          background: transparent;
+          transform: scale(0.7);
+        "
+      ></iframe>
       <button
-      class="connectCancelBtn w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 hover:ring-2 ring-1 ring-red px-4 text-red"
-      onclick="killContainer()"
-      title="Cancel"
-    >
-      <span>Cancel</span>
-    </button>
-    
+        class="connectCancelBtn w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 hover:ring-2 ring-1 ring-red px-4 text-red"
+        onclick="killContainer()"
+        title="Cancel"
+      >
+        <span>Cancel</span>
+      </button>
     </overlay>
-    <div class="sessionNavContainer  flex flex-row h-full align-middle items-center">
+    <div
+      class="sessionNavContainer flex flex-row h-full align-middle items-center"
+    >
       <div
-        class="sessionNav  h-full items-center self-center align-middle justify-center  session_collapsed bg-blue-950/60 backdrop-brightness-75 pr-2 p-0.5 backdrop-blur-md !z-[10000] rounded-md w-full flex flex-col px-8"
+        class="sessionNav h-full items-center self-center align-middle justify-center session_collapsed bg-blue-950/60 backdrop-brightness-75 pr-2 p-0.5 backdrop-blur-md !z-[10000] rounded-md w-full flex flex-col px-8"
       >
         <div class="flex flex-row w-full">
           <button
@@ -36,7 +47,7 @@
             <span>Disconnect</span>
           </button>
         </div>
-        <div class="flex flex-row w-full ">
+        <div class="flex flex-row w-full">
           <button
             class="w-full text-center h-fit mb-2 p-2 py-2.5 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 ring-red hover:ring-2 ring-1 px-4 text-red"
             onclick=";window.UI.showStatus('Deleting container...','warning',3000);killContainer();window.UI.disconnect();"
@@ -55,10 +66,7 @@
           </button>
         </div>
         <div class="flex flex-col w-full">
-          <button
-            class="compression "
-            title="Compression (reconnect to apply)"
-          >
+          <button class="compression" title="Compression (reconnect to apply)">
             <i
               data-lucide="fold-vertical"
               class="inline text-subtext1 w-5 h-5"
@@ -75,7 +83,7 @@
             </div>
           </button>
           <button
-            class="compression "
+            class="compression"
             title="Picture Quality (reconnect to apply)"
           >
             <i
@@ -107,17 +115,14 @@
             <span>Clipboard</span>
           </button>
           <button
-          class="ml-2 align-middle items-center py-2.5 self-center flex flex-row w-full h-fit mb-2 p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700 hover:ring-2 ring-1 px-4 text-blue"
-          title="Toggle Fullscreen"
-          onclick="toggleFullScreen()"
-        >
-          <i
-            data-lucide="maximize"
-            class="inline text-blue w-5 h-5"
-          ></i>
-          <span>Fullscreen</span>
-        </button>
-      </div>
+            class="ml-2 align-middle items-center py-2.5 self-center flex flex-row w-full h-fit mb-2 p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700 hover:ring-2 ring-1 px-4 text-blue"
+            title="Toggle Fullscreen"
+            onclick="toggleFullScreen()"
+          >
+            <i data-lucide="maximize" class="inline text-blue w-5 h-5"></i>
+            <span>Fullscreen</span>
+          </button>
+        </div>
       </div>
       <button
         class="w-fit h-fit py-4 session_collapsed expandSessionNav !z-[10000] p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700"
@@ -139,6 +144,11 @@
   <script>
     lucide.createIcons();
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js" integrity="sha512-eNB1lPVKSAW5mXqnboj6QX9kTZKEq4t2f2c5ytUhb+QzPudY3imnjHyXYhIXavZo9e3slCjhDpOJhuMm9uSwzw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"
+    integrity="sha512-eNB1lPVKSAW5mXqnboj6QX9kTZKEq4t2f2c5ytUhb+QzPudY3imnjHyXYhIXavZo9e3slCjhDpOJhuMm9uSwzw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
   <script src="vnc.js"></script>
 </html>

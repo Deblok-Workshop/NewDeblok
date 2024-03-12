@@ -1,1 +1,162 @@
-<br><br><br><div class=cubes-grid><div class=item><div class=cube><div class="cube-face front"><div><img src="favicon.png" width=70%></div></div><div class="cube-face back"><div><img src="favicon.png" width=70%></div></div><div class="cube-face right"><div><img src="favicon.png" width=70%></div></div><div class="cube-face left"><div><img src="favicon.png" width=70%></div></div><div class="cube-face top"><div class=top-content> <img src="favicon.png" width=70%></div></div><div class="cube-face bottom"><div class=top-content> <img src="favicon.png" width=70%></div></div></div></div></div><style>:root{--w:200px;--h:200px;--start-pos:translateZ(-8rem) rotateX(330deg) rotateY(-45deg);--end-pos:translateZ(-8rem) rotateX(-90deg) rotateY(-45deg);--anim-duration:500ms;--half-w:calc(var(--w) / 2);--half-h:calc(var(--h) / 2)}body,html{margin:0;color:#fff;font-family:sans-serif}.header{margin:16px 0 128px}.wrapper{max-width:320px;margin:0 auto;display:flex;flex-direction:column;align-items:center}.cubes-grid{margin:0;width:100%;max-width:calc(var(--w) * 5);display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto;gap:calc(var(--h) * .5) 1.5em;justify-items:center;align-items:center}.item{width:var(--w);height:var(--h)}*{color-scheme:dark}@keyframes cubeRot{from{transform:rotateX(0) rotateY(-16deg) rotateZ(-16deg)}to{transform:rotateX(360deg) rotateY(16deg) rotateZ(16deg)}}@keyframes cubeHov{from{transform:var(--start-pos)scale(1)}to{transform:var(--end-pos)scale(.9) rotateY(-6deg) rotateZ(360deg)}}.cube{animation:5s cubeRot infinite alternate;position:relative;width:100%;height:100%;transform-style:preserve-3d;transform:scale(.9) var(--start-pos);transition:transform var(--anim-duration)}.item:hover .cube{animation:1s cubeHov forwards}.cube-face{border-radius:12px;position:absolute;width:100%;height:100%}.cube-face div{width:100%;height:100%;display:flex;justify-content:center;align-items:center;text-align:center}.front img{opacity:.8}.front{transform:rotateY(0) translateZ(var(--half-w));background:#5248A8CC;border:4px solid #5248A899}.right{transform:rotateY(90deg) translateZ(var(--half-w));background:#312A65CC;border:4px solid #312A6599}.back{transform:rotateY(180deg) translateZ(var(--half-w));background:#2B255CCC;border:4px solid #2B255C99}.left{transform:rotateY(-90deg) translateZ(var(--half-w));background:#5B50B5CC;border:4px solid #5B50B599}.top{width:var(--w);height:var(--w);transform:rotateX(90deg) translateZ(var(--half-w));background:#B3A5FFCC;border:4px solid #B3A5FF99}.bottom{width:var(--w);height:var(--w);transform:rotateX(-90deg) translateZ(var(--half-w));background:#342E66CC;border:4px solid #342E6699}.top-content{transform:rotateZ(-45deg)}@media screen and (max-width:1150px){.cubes-grid{grid-template-columns:1fr 1fr}}@media screen and (max-width:700px){.cubes-grid{grid-template-columns:1fr}}</style>
+<br /><br /><br />
+<div class="cubes-grid">
+  <div class="item">
+    <div class="cube">
+      <div class="cube-face front">
+        <div><img src="favicon.png" width="70%" /></div>
+      </div>
+      <div class="cube-face back">
+        <div><img src="favicon.png" width="70%" /></div>
+      </div>
+      <div class="cube-face right">
+        <div><img src="favicon.png" width="70%" /></div>
+      </div>
+      <div class="cube-face left">
+        <div><img src="favicon.png" width="70%" /></div>
+      </div>
+      <div class="cube-face top">
+        <div class="top-content"><img src="favicon.png" width="70%" /></div>
+      </div>
+      <div class="cube-face bottom">
+        <div class="top-content"><img src="favicon.png" width="70%" /></div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  :root {
+    --w: 200px;
+    --h: 200px;
+    --start-pos: translateZ(-8rem) rotateX(330deg) rotateY(-45deg);
+    --end-pos: translateZ(-8rem) rotateX(-90deg) rotateY(-45deg);
+    --anim-duration: 500ms;
+    --half-w: calc(var(--w) / 2);
+    --half-h: calc(var(--h) / 2);
+  }
+  body,
+  html {
+    margin: 0;
+    color: #fff;
+    font-family: sans-serif;
+  }
+  .header {
+    margin: 16px 0 128px;
+  }
+  .wrapper {
+    max-width: 320px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cubes-grid {
+    margin: 0;
+    width: 100%;
+    max-width: calc(var(--w) * 5);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap: calc(var(--h) * 0.5) 1.5em;
+    justify-items: center;
+    align-items: center;
+  }
+  .item {
+    width: var(--w);
+    height: var(--h);
+  }
+  * {
+    color-scheme: dark;
+  }
+  @keyframes cubeRot {
+    from {
+      transform: rotateX(0) rotateY(-16deg) rotateZ(-16deg);
+    }
+    to {
+      transform: rotateX(360deg) rotateY(16deg) rotateZ(16deg);
+    }
+  }
+  @keyframes cubeHov {
+    from {
+      transform: var(--start-pos) scale(1);
+    }
+    to {
+      transform: var(--end-pos) scale(0.9) rotateY(-6deg) rotateZ(360deg);
+    }
+  }
+  .cube {
+    animation: 5s cubeRot infinite alternate;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: scale(0.9) var(--start-pos);
+    transition: transform var(--anim-duration);
+  }
+  .item:hover .cube {
+    animation: 1s cubeHov forwards;
+  }
+  .cube-face {
+    border-radius: 12px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .cube-face div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .front img {
+    opacity: 0.8;
+  }
+  .front {
+    transform: rotateY(0) translateZ(var(--half-w));
+    background: #5248a8cc;
+    border: 4px solid #5248a899;
+  }
+  .right {
+    transform: rotateY(90deg) translateZ(var(--half-w));
+    background: #312a65cc;
+    border: 4px solid #312a6599;
+  }
+  .back {
+    transform: rotateY(180deg) translateZ(var(--half-w));
+    background: #2b255ccc;
+    border: 4px solid #2b255c99;
+  }
+  .left {
+    transform: rotateY(-90deg) translateZ(var(--half-w));
+    background: #5b50b5cc;
+    border: 4px solid #5b50b599;
+  }
+  .top {
+    width: var(--w);
+    height: var(--w);
+    transform: rotateX(90deg) translateZ(var(--half-w));
+    background: #b3a5ffcc;
+    border: 4px solid #b3a5ff99;
+  }
+  .bottom {
+    width: var(--w);
+    height: var(--w);
+    transform: rotateX(-90deg) translateZ(var(--half-w));
+    background: #342e66cc;
+    border: 4px solid #342e6699;
+  }
+  .top-content {
+    transform: rotateZ(-45deg);
+  }
+  @media screen and (max-width: 1150px) {
+    .cubes-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media screen and (max-width: 700px) {
+    .cubes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
