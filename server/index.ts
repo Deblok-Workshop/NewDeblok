@@ -128,8 +128,10 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       var tempdb = JSON.parse(await tempdbfile.text());
       if (tempdb[query] != undefined) {
         if (b != captcha.mathfuck.eval(tempdb[query])) {
+          console.log(b,captcha.mathfuck.eval(tempdb[query]))
           rv = false;
         } else {
+          console.log(b,captcha.mathfuck.eval(tempdb[query]))
           rv = true;
         }
         tempdb[query] = undefined;
