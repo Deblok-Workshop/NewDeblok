@@ -49,18 +49,6 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     set.redirect = "/assets/favicon.png";
   });
  
-  async function ping(url: string): Promise<string> {
-    try {
-      const response = await fetch("https://" + url);
-      if (response.status >= 200 && response.status < 400) {
-        return "up";
-      } else {
-        return "down";
-      }
-    } catch (error) {
-      return "down";
-    }
-  }
 
   server.get("/api/", () => {
     return "Welcome to Deblok!";
