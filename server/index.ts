@@ -48,7 +48,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     // fallback
     set.redirect = "/assets/favicon.png";
   });
-
+ 
   async function ping(url: string): Promise<string> {
     try {
       const response = await fetch("https://" + url);
