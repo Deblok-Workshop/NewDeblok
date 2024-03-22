@@ -107,7 +107,7 @@
       window.history.pushState(
         { pageTitle: "Student Dashboard" },
         "",
-        `/#/student/dashboard?__jsession=${(Date.now() * (Math.random() * 1000000)).toString(16)}${(Date.now() * (Math.random() * 1000000)).toString(16)}${(Date.now() * (Math.random() * 1000000)).toString(16)}`,
+        `/#/student/dashboard?__jsession=${crypto.randomUUID()}`,
       );
     }
   </script>
