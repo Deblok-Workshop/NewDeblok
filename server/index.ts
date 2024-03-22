@@ -297,6 +297,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     var bjson: any = {
       name: "",
     }; // boilerplate to not piss off TypeScript.
+    bjson = JSON.parse(b)
     if (!bjson.name || bjson.name == "") {
       set.status = 400;
       return "ERR: Name field is required.";
