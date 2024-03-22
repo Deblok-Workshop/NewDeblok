@@ -39,8 +39,10 @@ async function getBacks() {
   async function getBackPorts(server: string) {
     let hc = (await healthcheck()).backend;
     try {
-      let res = await fetch("https://" + server + "/ports/list");
-      return await res.text();
+      let res = await fetch("https://" + server + "/ports/list",
+      {"headers":{"Authorization":getHTTPAuthHeader(server)}}
+      );
+      return await res.json();
     } catch (e) {
       return e;
     }

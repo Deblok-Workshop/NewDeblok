@@ -2,43 +2,43 @@
   "firefox": {
     "title": "Firefox",
     "specs": { "ram": "1G", "cores": "1.25" },
-    "image": "lscr.io/deblok-workshop/deblokdocker/firefox:latest",
+    "image": "ghcr.io/deblok-workshop/deblokdocker/firefox:latest",
     "port": "6080"
   },
   "chrome": {
     "title": "Chrome",
     "specs": { "ram": "1G", "cores": "1.25" },
-    "image": "lscr.io/deblok-workshop/deblokdocker/chromium:latest",
+    "image": "ghcr.io/deblok-workshop/deblokdocker/chromium:latest",
     "port": "6080"
   },
 "ubuntu-xfce": {
     "title": "Ubuntu XFCE",
     "specs": { "ram": "2560M", "cores": "1.25" },
-    "image": "lscr.io/deblok-workshop/deblokdocker/ubuntu-xfce:latest",
+    "image": "ghcr.io/deblok-workshop/deblokdocker/ubuntu-xfce:latest",
     "port": "6080"
   },
 "debian-xfce": {
     "title": "Debian XFCE",
     "specs": { "ram": "2560M", "cores": "1.25" },
-    "image": "lscr.io/deblok-workshop/deblokdocker/debian-xfce:latest",
+    "image": "ghcr.io/deblok-workshop/deblokdocker/debian-xfce:latest",
     "port": "6080"
   },
 "debian-base": {
     "title": "Debian Terminal",
     "specs": { "ram": "1G", "cores": "1.25" },
-    "image": "lscr.io/deblok-workshop/deblokdocker/debian-base:latest",
+    "image": "ghcr.io/deblok-workshop/deblokdocker/debian-base:latest",
     "port": "6080"
   },
 "ubuntu-base": {
     "title": "Ubuntu Terminal",
     "specs": { "ram": "1G", "cores": "1.25" },
-    "image": "lscr.io/deblok-workshop/deblokdocker/ubuntu-base:latest",
+    "image": "ghcr.io/deblok-workshop/deblokdocker/ubuntu-base:latest",
     "port": "6080"
   },
 
 "fedora-base": {
     "title": "Fedora Terminal",
     "specs": { "ram": "1G", "cores": "1.25" },
-    "image": "lscr.io/deblok-workshop/deblokdocker/fedora-base:latest",
+    "image": "ghcr.io/deblok-workshop/deblokdocker/fedora-base:latest",
     "port": "6080"
   }}

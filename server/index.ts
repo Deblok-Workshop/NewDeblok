@@ -282,6 +282,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       let ports: any = await util.getBackPorts(await util.getBacks());
       selling.ports = `${ports[0]}:${selling.port}`;
     }
+    console.log(selling)
     let fr = await fetch(`https://${back}/containers/create`, {
       method: "POST",
       body: JSON.stringify(selling),
