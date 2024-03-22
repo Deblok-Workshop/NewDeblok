@@ -45,4 +45,11 @@ async function getBacks() {
       return e;
     }
   }
-export default {getBacks,getBackPorts,healthcheck,ping}
+
+ function getHTTPAuthHeader(url: string) {
+    // admin:admin@example.com
+    url = url.replaceAll("http://","").replaceAll("https://","")
+    let auth = url.split("@")[0].split(":")
+    return `Basic ${btoa(`${auth[0]}:${auth[1]}`)}`
+ }
+export default {getBacks,getBackPorts,healthcheck,ping,getHTTPAuthHeader}
