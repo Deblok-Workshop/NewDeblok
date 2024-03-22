@@ -85,9 +85,11 @@ html {
 }
 @keyframes dropd {
   from {
+    display:hidden;
     max-height: 0px;
     overflow-y: clip;
   }
+  1% {display:flex;}
   33% {
     overflow-y: auto;
   }
@@ -100,6 +102,7 @@ html {
   @apply active:ring-4 active:ring-surface1 active:duration-100 flex align-middle my-auto ml-auto float-right duration-300 ring-surface0 hover:ring-4 w-10 h-10 !rounded-full;
 }
 .anim__dropdown {
+  display:hidden;
   overflow-y: clip;
   animation: dropd 0.66s ease-in forwards;
   max-height: 0px;
