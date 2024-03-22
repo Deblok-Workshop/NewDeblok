@@ -7,6 +7,7 @@ import { staticPlugin } from "@elysiajs/static";
 import { cors } from "@elysiajs/cors";
 import fetch from "node-fetch";
 import wordlistsafe from "./modules/wordlistsafe";
+import util from "./modules/util.ts"
 
 let endpoints: any = process.env.ENDPOINTS;
 endpoints = endpoints.split(",");
@@ -49,63 +50,21 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     set.redirect = "/assets/favicon.png";
   });
 
-  async function ping(url: string): Promise<string> {
-    try {
-      let headers: { [key: string]: string } = {};
-      if (url.includes("@")) {
-        let creds = url.split("@")[0].split(":")
-        headers.Authorization = `Basic ${btoa(`${creds[0]}:${creds[1]}`)}`;
-      }
-      const response = await fetch("https://"+url+"/", { headers });
-      if (response.status >= 200 && response.status < 400) {
-        return "up";
-      } else {
-        return "down";
-      }
-    } catch (error) {
-      return "down";
-    }
-  }
+  
   server.get("/api/", () => {
     return "Welcome to Deblok!";
   });
 
-  async function healthcheck() {
-    let backendstat: any[] = [];
-    for (let i = 0; i < endpoints.length; i++) {
-      console.log(backendstat,endpoints)
-      backendstat[backendstat.length] = await ping(endpoints[i]);
-    }
-    return { api: "up", backend: backendstat };
-  }
-  async function getBacks() {
-    let hc = (await healthcheck()).backend;
-    for (let i = 0; i < hc.length; i++) {
-      if (hc[i].status === "up") {
-        return endpoints[i];
-      }
-    }
-    console.warn("WARN: No online DeblokManager server found");
-    return null;
-  }
-  async function getBackPorts(server: string) {
-    let hc = (await healthcheck()).backend;
-    try {
-      let res = await fetch("https://" + server + "/ports/list");
-      return await res.text();
-    } catch (e) {
-      return e;
-    }
-  }
+
 
   server.get("/api/__healthcheck", async () => {
     // using /api/__healthcheck to be compatible with Kasmweb's API format
-    return await healthcheck();
+    return await util.healthcheck();
   });
 
   server.get("/api/healthcheck", async () => {
     // alias
-    return await healthcheck();
+    return await util.healthcheck();
   });
 
   // captcha
@@ -302,11 +261,13 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     var bjson: any = {
       name: "",
     }; // boilerplate to not piss off TypeScript.
+    bjson = JSON.parse(b);
     if (!bjson.name || bjson.name == "") {
       set.status = 400;
       return "ERR: Name field is required.";
     }
-    let back: any = await getBacks();
+    let back: any = await util.getBacks();
+    console.log(back)
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }
@@ -318,7 +279,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     let selling: any = dconf[bjson.name.toLowerCase()];
     if (selling.port) {
-      let ports: any = await getBackPorts(await getBacks());
+      let ports: any = await util.getBackPorts(await util.getBacks());
       selling.ports = `${ports[0]}:${selling.port}`;
     }
     let fr = await fetch(`https://${back}/containers/create`, {
@@ -331,7 +292,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   server.post("/api/container/kill", async ({ body, set }) => {
     const b: any = body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
-    let back: any = await getBacks();
+    let back: any = await util.getBacks();
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }
@@ -350,7 +311,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   server.post("/api/container/delete", async ({ body, set }) => {
     const b: any = body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
-    let back: any = await getBacks();
+    let back: any = await util.getBacks();
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }

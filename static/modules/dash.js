@@ -87,7 +87,7 @@ function itemModal(title, description, icon, buttons = ["OK", "Cancel"]) {
             class="bg-black/20 justify-evenly flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-black/40 rounded-b"
           >
             <button
-              onclick="window.btnReturn = 'clickedbtn0';itemModalHide();"
+              onclick="window.btnReturn = 'clickedbtn0';itemModalHide();clickbtn0()"
               type="button"
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center s:ring-blue-800"
             >
@@ -125,5 +125,5 @@ function itemModalHide() {
     .classList.add("__animModal2End");
   setTimeout(() => {
     document.querySelector("#item-modal").remove();
-  }, 320);
+  }, 320);33
 }
