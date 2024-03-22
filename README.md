@@ -6,10 +6,10 @@
 
 ### The state of New Deblok:
 
-- Total: ~50% complete
+- Total: ~70% complete
 - DeblokManager: 100% complete, nothing needs work in this area
 - Backend: 100% complete, nothing needs work in this area
-- Frontend: 32% done, the entire dash needs to be implemented
+- Frontend: 50% done, needs container creation and vnc proxy.
 - Nginx & Bare: 0% done, This will be needed once NewDeblok goes prod
 
 ---
