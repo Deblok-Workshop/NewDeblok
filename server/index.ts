@@ -48,11 +48,15 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     // fallback
     set.redirect = "/assets/favicon.png";
   });
- 
 
   async function ping(url: string): Promise<string> {
     try {
-      const response = await fetch("https://" + url);
+      let headers: { [key: string]: string } = {};
+      if (url.includes("@")) {
+        let creds = url.split("@")[0].split(":")
+        headers.Authorization = `Basic ${btoa(`${creds[0]}:${creds[1]}`)}`;
+      }
+      const response = await fetch("https://"+url+"/", { headers });
       if (response.status >= 200 && response.status < 400) {
         return "up";
       } else {
@@ -69,6 +73,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   async function healthcheck() {
     let backendstat: any[] = [];
     for (let i = 0; i < endpoints.length; i++) {
+      console.log(backendstat,endpoints)
       backendstat[backendstat.length] = await ping(endpoints[i]);
     }
     return { api: "up", backend: backendstat };
@@ -297,7 +302,6 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     var bjson: any = {
       name: "",
     }; // boilerplate to not piss off TypeScript.
-    bjson = JSON.parse(b)
     if (!bjson.name || bjson.name == "") {
       set.status = 400;
       return "ERR: Name field is required.";
