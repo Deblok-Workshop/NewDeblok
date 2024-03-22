@@ -285,6 +285,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let fr = await fetch(`https://${back}/containers/create`, {
       method: "POST",
       body: JSON.stringify(selling),
+      headers: {"Authorization":util.getHTTPAuthHeader(back)}
     });
     return fr;
   });
@@ -303,6 +304,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let fr = await fetch(`https://${back}/containers/kill`, {
       method: "POST",
       body: JSON.stringify(body),
+      headers: {"Authorization":util.getHTTPAuthHeader(back)}
     });
 
     return fr;
@@ -322,6 +324,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let fr = await fetch(`https://${back}/containers/delete`, {
       method: "POST",
       body: JSON.stringify(body),
+      headers: {"Authorization":util.getHTTPAuthHeader(back)}
     });
 
     return fr;

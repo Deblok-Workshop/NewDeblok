@@ -48,8 +48,10 @@ async function getBacks() {
 
  function getHTTPAuthHeader(url: string) {
     // admin:admin@example.com
+    if (url.includes("@")) {
     url = url.replaceAll("http://","").replaceAll("https://","")
     let auth = url.split("@")[0].split(":")
     return `Basic ${btoa(`${auth[0]}:${auth[1]}`)}`
+    } else {return ""}
  }
 export default {getBacks,getBackPorts,healthcheck,ping,getHTTPAuthHeader}
