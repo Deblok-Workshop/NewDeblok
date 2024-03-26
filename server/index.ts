@@ -289,7 +289,8 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       body: JSON.stringify(selling),
       headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
-    return fr;
+    let res = await fr.text()
+    return res;
   });
 
   server.post("/api/container/kill", async ({ body, set }) => {
@@ -309,8 +310,8 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       body: JSON.stringify(body),
       headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
-
-    return fr;
+    let res = await fr.text()
+    return res;
   });
 
   server.post("/api/container/delete", async ({ body, set }) => {
@@ -330,8 +331,8 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       body: JSON.stringify(body),
       headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
-
-    return fr;
+    let res = await fr.text()
+    return res;
   });
 
   server.get("/api/img/identicon.png", async ({ body, set }) => {
