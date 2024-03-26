@@ -278,12 +278,12 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return "Image could not be found in configuration.";
     }
     let selling: any = dconf[bjson.name.toLowerCase()];
+    let ports: any = await util.getBackPorts(await util.getBacks());
     if (selling.port) {
-      let ports: any = await util.getBackPorts(await util.getBacks());
+      
       selling.ports = `${ports[0]}:${selling.port}`;
     }
-
-    console.log(selling, util.getHTTPAuthHeader(back))
+    selling.name = `newdeblok-${bjson.name}-${ports[0]}`
     let fr = await fetch(`https://${back}/containers/create`, {
       method: "POST",
       body: JSON.stringify(selling),
@@ -299,6 +299,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }
+    bjson = JSON.parse(b)
     if (!bjson.id || bjson.id == "") {
       set.status = 400;
       return "ERR: The ID field is required.";
