@@ -293,10 +293,10 @@ kbd {
   @apply text-sm;
 }
 .authPrimary {
-  @apply disabled:bg-slate-800 !text-xl disabled:hover:text-text disabled:hover:bg-slate-950 disabled:cursor-not-allowed !w-full block  rounded-lg rounded-r-none bg-blue-800 hover:bg-blue-500 duration-[375ms] px-5 py-2 text-base;
+  @apply disabled:bg-slate-800 disabled:text-white !text-xl disabled:hover:text-gray-600 disabled:hover:bg-slate-950 disabled:cursor-not-allowed !w-full block  rounded-lg rounded-r-none bg-blue-800 hover:bg-blue-500 duration-[375ms] px-5 py-2 !text-white;
 }
 .authSecondary {
-  @apply text-base w-full block !text-xl   rounded-lg rounded-l-none bg-blue-900 hover:bg-blue-600 duration-[375ms] px-5 py-2 ;
+  @apply text-white w-full block !text-xl   rounded-lg rounded-l-none bg-blue-900 hover:bg-blue-600 duration-[375ms] px-5 py-2 ;
 }
 .errCTA1 {
   @apply rounded-r-none block text-2xl rounded-lg bg-surface2 hover:bg-blue duration-[375ms] px-3 py-2 hover:text-mantle;
