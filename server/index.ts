@@ -307,7 +307,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let fr = await fetch(`https://${back}/containers/kill`, {
       method: "POST",
       body: JSON.stringify(body),
-      headers: {"Authorization":util.getHTTPAuthHeader(back)}
+      headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
 
     return fr;
@@ -316,6 +316,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   server.post("/api/container/delete", async ({ body, set }) => {
     const b: any = body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
+    bjson = JSON.parse(b)
     let back: any = await util.getBacks();
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
@@ -327,7 +328,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let fr = await fetch(`https://${back}/containers/delete`, {
       method: "POST",
       body: JSON.stringify(body),
-      headers: {"Authorization":util.getHTTPAuthHeader(back)}
+      headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
 
     return fr;
