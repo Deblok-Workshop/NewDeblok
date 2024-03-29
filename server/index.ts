@@ -284,7 +284,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       selling.ports = `${ports[0]}:${selling.port}`;
     }
     selling.name = `newdeblok-${bjson.name}-${ports[0]}`
-    let fr = await fetch(`https://${back}/containers/create`, {
+    let fr = await fetch(`http://${back}/containers/create`, {
       method: "POST",
       body: JSON.stringify(selling),
       headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
@@ -305,7 +305,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       set.status = 400;
       return "ERR: The ID field is required.";
     }
-    let fr = await fetch(`https://${back}/containers/kill`, {
+    let fr = await fetch(`http://${back}/containers/kill`, {
       method: "POST",
       body: JSON.stringify(body),
       headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
@@ -326,7 +326,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       set.status = 400;
       return "ERR: The ID field is required.";
     }
-    let fr = await fetch(`https://${back}/containers/delete`, {
+    let fr = await fetch(`http://${back}/containers/delete`, {
       method: "POST",
       body: JSON.stringify(body),
       headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}

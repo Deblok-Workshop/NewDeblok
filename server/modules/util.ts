@@ -7,7 +7,7 @@ async function ping(url: string): Promise<string> {
         let creds = url.split("@")[0].split(":")
         headers.Authorization = `Basic ${btoa(`${creds[0]}:${creds[1]}`)}`;
       }
-      const response = await fetch("https://"+url+"/", { headers });
+      const response = await fetch("http://"+url+"/", { headers });
       if (response.status >= 200 && response.status < 400) {
         return "up";
       } else {
@@ -39,7 +39,7 @@ async function getBacks() {
   async function getBackPorts(server: string) {
     let hc = (await healthcheck()).backend;
     try {
-      let res = await fetch("https://" + server + "/ports/list",
+      let res = await fetch("http://" + server + "/ports/list",
       {"headers":{"Authorization":getHTTPAuthHeader(server)}}
       );
       return await res.json();
