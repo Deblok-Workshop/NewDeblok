@@ -1,4 +1,4 @@
-import { Elysia, error } from "elysia";
+import { Elysia, error, t } from "elysia";
 import config from "./config";
 import helper from "./modules/helper";
 import captcha from "./modules/captcha";
@@ -8,6 +8,8 @@ import { cors } from "@elysiajs/cors";
 import fetch from "node-fetch";
 import wordlistsafe from "./modules/wordlistsafe";
 import util from "./modules/util.ts"
+import { libcurl } from "libcurl.js"
+import wisp from "wisp-server-node"
 
 let endpoints: any = process.env.ENDPOINTS;
 endpoints = endpoints.split(",");
@@ -335,8 +337,12 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     return res;
   });
 
-  server.get("/api/img/identicon.png", async ({ body, set }) => {
+  server.get("/api/img/identicon.png", async () => {
     return new Blob([await helper.auth.identicon()]);
+  });
+
+  server.get("/api/getbare", async () => {
+    return process.env.BARESERVER || "https://tomp.app"
   });
 
   // startup
