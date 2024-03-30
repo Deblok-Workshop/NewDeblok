@@ -345,6 +345,8 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     return process.env.BARESERVER || "https://tomp.app"
   });
 
+  server.onRequest()
+
   // startup
   if (
     !process.argv.includes("--unavailiable") &&

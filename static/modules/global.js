@@ -16,7 +16,7 @@ setTimeout(() => {
     .catch((error) => {
       window.location.href = `/503_err.html#0|${encodeURIComponent("Failed to fetch.")}`;
     });
-}, 768);
+}, 2000);
 
 // add logout modal to everything
 document.body.innerHTML += `    <div id="popup-modal" class="hidden w-full h-full fixed bg-black/50 z-[6000]">
