@@ -344,9 +344,13 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   server.get("/api/getbare", async () => {
     return process.env.BARESERVER || "https://tomp.app"
   });
-
-  server.onRequest()
-
+/*
+  server.on("upgrade", (req: Request, socket: Socket, head: Head) => {
+    if (req.url.endsWith("/wisp/")) {
+      wisp.routeRequest(req, socket, head);
+    }
+  });
+*/
   // startup
   if (
     !process.argv.includes("--unavailiable") &&
