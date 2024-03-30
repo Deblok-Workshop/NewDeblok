@@ -1,6 +1,3 @@
-// Duplicate version of LICENSE to meet with GNU's requirements for
-// licensing.
-
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
