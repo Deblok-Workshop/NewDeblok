@@ -1,5 +1,5 @@
 async function md5(input) {
-  // it doesn't need to be async but it is to math with the sha256 hashing function
+  // it doesn't need to be async but it is to match with the sha256 hashing function
   return hex_md5(input); // defined if imported correctly
 }
 
@@ -61,9 +61,9 @@ let captchaInterval = setInterval(() => {
         validateInput() &&
         checkCaptchaIfr(document.querySelector(".captchaIframe"))
       ) {
-        document.querySelector(".authPrimary").disabled = false;
+        document.querySelector(".loginButton").disabled = false;
       } else {
-        document.querySelector(".authPrimary").disabled = true;
+        document.querySelector(".loginButton").disabled = true;
       }
       clearInterval(captchaInterval);
     }
@@ -71,30 +71,33 @@ let captchaInterval = setInterval(() => {
 }, 250);
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector(".authPrimary").disabled = true;
-  let usrEle = document.querySelector('input[type="username"]');
-  let usrPwd = document.querySelector('input[type="password"]');
-  usrEle.value = "";
-  usrPwd.value = "";
-  document.querySelectorAll("input").forEach((input) => {
-    function eventTriggered(e) {
-      console.log(e.type + " triggered");
-      if (
-        validateInput() &&
-        checkCaptchaIfr(document.querySelector(".captchaIframe"))
-      ) {
-        document.querySelector(".authPrimary").disabled = false;
-      } else {
-        document.querySelector(".authPrimary").disabled = true;
+  setTimeout(()=>{
+    document.querySelector(".loginButton").disabled = true;
+    let usrEle = document.querySelector('input[type="username"]');
+    let usrPwd = document.querySelector('input[type="password"]');
+    usrEle.value = "";
+    usrPwd.value = "";
+    document.querySelectorAll("input").forEach((input) => {
+      function eventTriggered(e) {
+        console.log(e.type + " triggered");
+        if (
+          validateInput() &&
+          checkCaptchaIfr(document.querySelector(".captchaIframe"))
+        ) {
+          document.querySelector(".loginButton").disabled = false;
+        } else {
+          document.querySelector(".loginButton").disabled = true;
+        }
       }
-    }
-    input.addEventListener("blur", (e) => {
-      eventTriggered(e);
+      input.addEventListener("blur", (e) => {
+        eventTriggered(e);
+      });
+      input.addEventListener("click", (e) => {
+        eventTriggered(e);
+      });
     });
-    input.addEventListener("click", (e) => {
-      eventTriggered(e);
-    });
-  });
+  },400)
+
 });
 
 async function login(usr, pwd) {
