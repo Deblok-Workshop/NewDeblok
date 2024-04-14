@@ -13,7 +13,8 @@ endpoints = endpoints.split(",");
 let netaddr = "[::1]";
 netaddr = require("node:os").hostname();
 const server = express();
-
+var HTTPproxy = require('http-proxy');
+var proxy = HTTPproxy.createProxyServer({ ws: true });
 var bodyParser = require('body-parser');
 server.use(bodyParser.raw({type:"text/plain"}));
 
@@ -42,9 +43,24 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
 } else {
   // server.use(staticPlugin({ assets: "static/", prefix: "/" }));
 
+
   let dbpwd: any = process.env.DBPWD;
   dbpwd = new Bun.CryptoHasher("sha256").update(dbpwd).digest("hex");
 
+  // proxy
+  server.get('/ws/:node/*', function(req:Request, res:Response) {
+    let url = req.url.replace(`/ws/${req.params.node}/`,"")
+    req.url = url
+    console.log(endpoints[req.params.node].split("@")[1],url,req.url)
+    
+    proxy.web(req, res, { target: "http://"+endpoints[req.params.node].split("@")[1]});
+  });
+  const proxyServer = require('http').createServer(server)
+  proxyServer.on('upgrade', function (req:any, socket:any, head:any) {
+    if (req.url.split("/")[0] == "ws" || req.url.split("/")[1] == "ws") {
+    proxy.ws(req, socket, head)
+    } else {socket.send("no")}
+  })
   // general
 
   server.get("/favicon.ico", async (req: Request, res: Response) => {
@@ -265,6 +281,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   // container management
 
   server.post("/api/container/create", async (req: Request, res: Response) => {
+    try {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = {
       name: "",
@@ -300,9 +317,13 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let resp = await fr.text()
     res.send(
       {
-      "port":selling.port,
+      "port":selling.ports,
       "returned":resp
     });
+  } catch (e) {
+    req.statusCode = 503;
+    res.send(e);
+  }
   });
 
   server.post("/api/container/kill", async (req: Request, res: Response) => {
@@ -350,32 +371,8 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   server.get("/api/img/identicon.png", async (req: Request, res: Response) => {
     res.send(await helper.auth.identicon());
   });
-  server.use('/ws/:idx/:port/:path*', (req: Request, res: Response) => {
-    const { idx, port, path } = req.params;
   
-    // Validate idx parameter
-    const idxNum = parseInt(idx);
-    if (isNaN(idxNum) || idxNum < 0 || idxNum >= endpoints.length) {
-      return res.status(404).send('Invalid endpoint index');
-    }
-    const parsedPort = parseInt(port);
-    if (isNaN(parsedPort) || parsedPort < 1024 || parsedPort >= 65530) {
-      return res.status(400).send('Invalid port number');
-    }
-    const socket = new WebSocket(`ws://${endpoints[idxNum].split("@")[1]}/port/${port}/${path}`);
-    socket.on('message', (data:any) => {
-      res.send(data);
-    });
-    socket.on('error', (error:any) => {
-      console.error('WebSocket error:', error);
-      res.status(500).send('WebSocket connection failed');
-    });
-  });
-  server.on("upgrade",async () => {
-    // TODO: make websocket proxy
-    // format: /ws/{deblokmanager_index}/{port}/{path}
-    // could use wisp.
-  })
+  
   // startup
   if (
     !process.argv.includes("--unavailiable") &&
