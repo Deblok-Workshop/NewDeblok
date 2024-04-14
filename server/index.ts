@@ -298,7 +298,11 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
     let resp = await fr.text()
-    res.send(resp);
+    res.send(
+      {
+      "port":selling.port,
+      "returned":resp
+    });
   });
 
   server.post("/api/container/kill", async (req: Request, res: Response) => {
