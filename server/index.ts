@@ -364,7 +364,6 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   server.get('/ws/:node/*', function(req:Request, res:Response) {
     let url = req.url.replace(`/ws/${req.params.node}/`,"")
     req.url = url
-    console.log(endpoints[req.params.node].split("@")[1],url,req.url)
     try {
     proxy.web(req, res, { target: "http://"+endpoints[req.params.node].split("@")[1]});
     } catch {}
@@ -374,19 +373,16 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   // real deal ws proxy
   const wss = new WSocket.Server({ server: proxyServer });
   wss.on('connection', function connection(ws:any, req:any) {
-    console.log('WebSocket connected');
     
     const target = 'ws://'+endpoints[req.url.split("/")[2]].split("@")[1]+"/"+req.url.replace(`/ws/${req.url.split("/")[2]}/`,""); 
-    console.log(req.url)
-    console.log(target)
     // @ts-ignore
     const wsProxy = new WebSocket(target);
     // @ts-ignore
-    wsProxy.addEventListener("message", event => {ws.send(event.data)});
+    wsProxy.addEventListener("message", event => {ws.send(event.data);});
     // @ts-ignore
     wsProxy.addEventListener("close", event => {ws.close()});
     // @ts-ignore
-    ws.addEventListener("message", event => {wsProxy.send(event.data)});
+    ws.addEventListener("message", event => {wsProxy.send(event.data);});
     // @ts-ignore
     ws.addEventListener("close", event => {wsProxy.close()});
     
@@ -394,13 +390,9 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
 
   // proxy upgrade req
   proxyServer.on('upgrade', function (req:any, socket:any, head:any) {
-    console.log("ws recieved")
-    if (req.url.split("/")[1] == "ws") {
-      
+    if (req.url.split("/")[1] == "ws") {  
     let url = "http://"+endpoints[req.url.split("/")[2]].split("@")[1]+"/"+req.url.replace(`/ws/${req.url.split("/")[2]}/`,"")
     req.url = url
-    
-    console.log(req.url)
     proxy.ws(req, socket, head,{target: req.url})
     } else {socket.send("no")}
   })
