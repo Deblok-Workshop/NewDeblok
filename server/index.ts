@@ -242,13 +242,14 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
   });
   server.post("/api/auth/tokenvalidate", async (req: Request, res: Response) => {
+    try {
     let out = helper.auth.validate(atob(req.body));
     if (out[0]) {
       req.statusCode = 400;
       return `ERR: ${out[1]}`;
     } else {
       return "OK";
-    }
+    } } catch {res.statusCode = 400;res.end()}
   });
 
   server.post("/api/auth/pwdsafe", async (req: Request, res: Response) => {
