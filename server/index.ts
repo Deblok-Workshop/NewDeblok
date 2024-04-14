@@ -14,6 +14,9 @@ let netaddr = "[::1]";
 netaddr = require("node:os").hostname();
 const server = express();
 
+var bodyParser = require('body-parser');
+server.use(bodyParser.raw({type:"text/plain"}));
+
 // errors
 /*// idk if theres an express-quivulent to this, i dont care atm.
 server.onError(({ code, error, set }) => {
@@ -91,7 +94,10 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       var tempdbfile: Blob = Bun.file("tempcaptcha.db");
       var tempdb = JSON.parse(await tempdbfile.text());
       if (tempdb[req.params.query] != undefined) {
-        if (Number(b) != Number(captcha.mathfuck.eval(tempdb[req.params.query]))) {
+        let result:number = Number(captcha.mathfuck.eval(tempdb[req.params.query]))
+        console.log(b,Number(b),Number(result))
+        if (Number(b) != Number(result)) {
+          
           rv = false;
         } else {
           rv = true;
@@ -123,6 +129,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     var tempdb = JSON.parse(await tempdbfile.text());
     var randuuid = crypto.randomUUID();
     tempdb[randuuid] = captcha.mathfuck.random();
+    //console.log(tempdb[randuuid]) //debug
     Bun.write("./tempcaptcha.db", JSON.stringify(tempdb));
     res.send(randuuid);
   });
