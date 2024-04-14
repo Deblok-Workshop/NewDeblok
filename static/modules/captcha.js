@@ -14,7 +14,8 @@ function req() {
     })
     .then((id) => {
       captchaId = id;
-      document.getElementById("captchaImage").src = `/api/captcha/${id}/image.gif`;
+      document.getElementById("captchaImage").src =
+        `/api/captcha/${id}/image.gif`;
       document.getElementById("captchaImage").alt = id;
       document.getElementById("captchaImage").style.display = "block";
       document.getElementById("regenerateButton").disabled = false;
@@ -39,7 +40,7 @@ function validate() {
         /* regex for uuids: /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/ */
       } else {
         console.log("Captcha failed!");
-        req(); 
+        req();
       }
     });
 }

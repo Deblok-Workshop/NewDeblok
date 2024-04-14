@@ -11,34 +11,35 @@
     "image": "ghcr.io/deblok-workshop/deblokdocker/chromium:latest",
     "port": "6080"
   },
-"ubuntu-xfce": {
+  "ubuntu-xfce": {
     "title": "Ubuntu XFCE",
     "resources": { "ram": "2560M", "cores": "1.25" },
     "image": "ghcr.io/deblok-workshop/deblokdocker/ubuntu-xfce:latest",
     "port": "6080"
   },
-"debian-xfce": {
+  "debian-xfce": {
     "title": "Debian XFCE",
     "resources": { "ram": "2560M", "cores": "1.25" },
     "image": "ghcr.io/deblok-workshop/deblokdocker/debian-xfce:latest",
     "port": "6080"
   },
-"debian-base": {
+  "debian-base": {
     "title": "Debian Terminal",
     "resources": { "ram": "1G", "cores": "1.25" },
     "image": "ghcr.io/deblok-workshop/deblokdocker/debian-base:latest",
     "port": "6080"
   },
-"ubuntu-base": {
+  "ubuntu-base": {
     "title": "Ubuntu Terminal",
     "resources": { "ram": "1G", "cores": "1.25" },
     "image": "ghcr.io/deblok-workshop/deblokdocker/ubuntu-base:latest",
     "port": "6080"
   },
 
-"fedora-base": {
+  "fedora-base": {
     "title": "Fedora Terminal",
     "resources": { "ram": "1G", "cores": "1.25" },
     "image": "ghcr.io/deblok-workshop/deblokdocker/fedora-base:latest",
     "port": "6080"
-  }}
+  }
+}

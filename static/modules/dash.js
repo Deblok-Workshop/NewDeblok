@@ -125,5 +125,6 @@ function itemModalHide() {
     .classList.add("__animModal2End");
   setTimeout(() => {
     document.querySelector("#item-modal").remove();
-  }, 320);33
+  }, 320);
+  33;
 }

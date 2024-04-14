@@ -71,7 +71,7 @@ let captchaInterval = setInterval(() => {
 }, 250);
 
 document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(()=>{
+  setTimeout(() => {
     document.querySelector(".loginButton").disabled = true;
     let usrEle = document.querySelector('input[type="username"]');
     let usrPwd = document.querySelector('input[type="password"]');
@@ -96,8 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
         eventTriggered(e);
       });
     });
-  },400)
-
+  }, 400);
 });
 
 async function login(usr, pwd) {

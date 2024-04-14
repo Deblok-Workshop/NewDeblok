@@ -1,13 +1,15 @@
-import express from 'express';
-import type { Request, Response } from 'express';
+import express from "express";
+import type { Request, Response } from "express";
 import config from "../config";
 const server = express();
 
-server.use('/assets', express.static('static/assets'))
+server.use("/assets", express.static("static/assets"));
 
 server.all("/app.css", async (req: Request, res: Response) => {
   res.statusCode = 200;
-  res.sendFile(import.meta.dir.replace("server/modules","")+"/static/app.css");
+  res.sendFile(
+    import.meta.dir.replace("server/modules", "") + "/static/app.css",
+  );
 });
 server.get("/api/__healthcheck", async (req: Request, res: Response) => {
   res.json({ api: "down", backend: ["n/a"] });
@@ -16,12 +18,12 @@ server.get("/api/healthcheck", async (req: Request, res: Response) => {
   res.json({ api: "down", backend: ["n/a"] });
 });
 server.get("/*", async (req: Request, res: Response) => {
-  console.log(import.meta.dir)
-  res.statusCode = 503
-  res.sendFile(import.meta.dir.replace("server/modules","")+"/static/503.html");
-  
+  console.log(import.meta.dir);
+  res.statusCode = 503;
+  res.sendFile(
+    import.meta.dir.replace("server/modules", "") + "/static/503.html",
+  );
 });
-
 
 console.log(
   `Listening in Unavailiable Mode on port ${config.webserver.port} or`,
