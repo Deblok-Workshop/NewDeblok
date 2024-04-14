@@ -1,10 +1,10 @@
-import { Elysia, error, t } from "elysia";
+import express from 'express';
+import type { Request, Response } from 'express';
 import config from "./config";
 import helper from "./modules/helper";
 import captcha from "./modules/captcha";
-import { rateLimit } from "elysia-rate-limit";
-import { staticPlugin } from "@elysiajs/static";
-import { cors } from "@elysiajs/cors";
+import { rateLimit } from "express-rate-limit";
+import cors from "cors";
 import fetch from "node-fetch";
 import wordlistsafe from "./modules/wordlistsafe";
 import util from "./modules/util.ts"
@@ -12,7 +12,7 @@ let endpoints: any = process.env.ENDPOINTS;
 endpoints = endpoints.split(",");
 let netaddr = "[::1]";
 netaddr = require("node:os").hostname();
-const server = new Elysia();
+const server = express();
 
 // errors
 /*
@@ -32,7 +32,7 @@ server.onError(({ code, error, set }) => {
 // Run the startup "job"
 require("./modules/startupjob.ts");
 
-server.use(cors()); // ElysiaJS cors plugin
+server.use(cors()); // Express cors plugin
 server.use(rateLimit(config.ratelimit));
 if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   require("./modules/unavailable.ts");
@@ -44,26 +44,26 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
 
   // general
 
-  server.get("/favicon.ico", async ({ set }) => {
+  server.get("/favicon.ico", async (req: Request, res: Response) => {
     // fallback
-    set.redirect = "/assets/favicon.png";
+    res.redirect("/assets/favicon.png");
   });
 
   
-  server.get("/api/", () => {
-    return "Welcome to Deblok!";
+  server.get("/api/", (req: Request, res: Response) => {
+    res.send("Welcome to Deblok!");
   });
 
 
 
-  server.get("/api/__healthcheck", async () => {
+  server.get("/api/__healthcheck", async (req: Request, res: Response) => {
     // using /api/__healthcheck to be compatible with Kasmweb's API format
-    return await util.healthcheck();
+    res.send(await util.healthcheck());
   });
 
-  server.get("/api/healthcheck", async () => {
+  server.get("/api/healthcheck", async (req: Request, res: Response) => {
     // alias
-    return await util.healthcheck();
+    res.send(await util.healthcheck());
   });
 
   // captcha
