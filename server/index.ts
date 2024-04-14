@@ -1,13 +1,13 @@
-import express from "express";
-import type { Request, Response } from "express";
+import express from 'express';
+import type { Request, Response } from 'express';
 import config from "./config";
 import helper from "./modules/helper";
 import captcha from "./modules/captcha";
-import { rateLimit } from "express-rate-limit";
+// import { rateLimit } from "express-rate-limit";
 import cors from "cors";
 import fetch from "node-fetch";
 import wordlistsafe from "./modules/wordlistsafe";
-import util from "./modules/util.ts";
+import util from "./modules/util.ts"
 let endpoints: any = process.env.ENDPOINTS;
 endpoints = endpoints.split(",");
 let netaddr = "[::1]";
@@ -15,7 +15,7 @@ netaddr = require("node:os").hostname();
 const server = express();
 
 // errors
-/*
+/*// idk if theres an express-quivulent to this, i dont care atm.
 server.onError(({ code, error, set }) => {
   if (code === "NOT_FOUND") {
     req.statusCode = 404;
@@ -33,7 +33,7 @@ server.onError(({ code, error, set }) => {
 require("./modules/startupjob.ts");
 
 server.use(cors()); // Express cors plugin
-server.use(rateLimit(config.ratelimit));
+// server.use(rateLimit(config.ratelimit));
 if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   require("./modules/unavailable.ts");
 } else {
@@ -49,9 +49,12 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     res.redirect("/assets/favicon.png");
   });
 
+  
   server.get("/api/", (req: Request, res: Response) => {
     res.send("Welcome to Deblok!");
   });
+
+
 
   server.get("/api/__healthcheck", async (req: Request, res: Response) => {
     // using /api/__healthcheck to be compatible with Kasmweb's API format
@@ -72,7 +75,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       var tempdb = JSON.parse(await tempdbfile.text());
       if (tempdb[req.params.query] != undefined) {
         var buf = await captcha.mathfuck.img(tempdb[req.params.query]);
-        res.contentType("png");
+        res.contentType("png")
         res.send(buf);
       } else {
         res.statusCode = 404;
@@ -88,9 +91,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       var tempdbfile: Blob = Bun.file("tempcaptcha.db");
       var tempdb = JSON.parse(await tempdbfile.text());
       if (tempdb[req.params.query] != undefined) {
-        if (
-          Number(b) != Number(captcha.mathfuck.eval(tempdb[req.params.query]))
-        ) {
+        if (Number(b) != Number(captcha.mathfuck.eval(tempdb[req.params.query]))) {
           rv = false;
         } else {
           rv = true;
@@ -104,22 +105,19 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       }
     },
   );
-  server.get(
-    "/api/captcha/:query/void",
-    async (req: Request, res: Response) => {
-      var tempdbfile: Blob = Bun.file("tempcaptcha.db");
-      var tempdb = JSON.parse(await tempdbfile.text());
-      if (tempdb[req.params.query] != undefined) {
-        tempdb[req.params.query] = undefined;
-        Bun.write("./tempcaptcha.db", JSON.stringify(tempdb));
-        res.statusCode = 204;
-        res.send("");
-      } else {
-        res.statusCode = 404;
-        res.send("ERR: CAPTCHA not found");
-      }
-    },
-  );
+  server.get("/api/captcha/:query/void", async (req: Request, res: Response) => {
+    var tempdbfile: Blob = Bun.file("tempcaptcha.db");
+    var tempdb = JSON.parse(await tempdbfile.text());
+    if (tempdb[req.params.query] != undefined) {
+      tempdb[req.params.query] = undefined;
+      Bun.write("./tempcaptcha.db", JSON.stringify(tempdb));
+      res.statusCode = 204;
+      res.send("");
+    } else {
+      res.statusCode = 404;
+      res.send("ERR: CAPTCHA not found");
+    }
+  });
   server.get("/api/captcha/request", async (req: Request, res: Response) => {
     var tempdbfile: Blob = Bun.file("tempcaptcha.db");
     var tempdb = JSON.parse(await tempdbfile.text());
@@ -231,11 +229,9 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         res.send(e);
       }
       if (v) {
-        res.send(
-          btoa(
-            `@dblok.cr${Date.now().toString(20)}.ex${(Date.now() + 43200 * 1000).toString(20)}.${btoa(`${usr.substring(6)}.${e[1].split("/")[1]}`)}`,
-          ),
-        );
+        res.send(btoa(
+          `@dblok.cr${Date.now().toString(20)}.ex${(Date.now() + 43200 * 1000).toString(20)}.${btoa(`${usr.substring(6)}.${e[1].split("/")[1]}`)}`,
+        ));
       } else {
         req.statusCode = 400;
         res.send("ERR: Password is incorrect.");
@@ -245,18 +241,15 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       res.send("ERR: Username is incorrect.");
     }
   });
-  server.post(
-    "/api/auth/tokenvalidate",
-    async (req: Request, res: Response) => {
-      let out = helper.auth.validate(atob(req.body));
-      if (out[0]) {
-        req.statusCode = 400;
-        return `ERR: ${out[1]}`;
-      } else {
-        return "OK";
-      }
-    },
-  );
+  server.post("/api/auth/tokenvalidate", async (req: Request, res: Response) => {
+    let out = helper.auth.validate(atob(req.body));
+    if (out[0]) {
+      req.statusCode = 400;
+      return `ERR: ${out[1]}`;
+    } else {
+      return "OK";
+    }
+  });
 
   server.post("/api/auth/pwdsafe", async (req: Request, res: Response) => {
     return !wordlistsafe.isSafe(req.body);
@@ -274,7 +267,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       res.send("ERR: Name field is required.");
     }
     let back: any = await util.getBacks();
-    console.log(back);
+    console.log(back)
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }
@@ -287,18 +280,16 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let selling: any = dconf[bjson.name.toLowerCase()];
     let ports: any = await util.getBackPorts(await util.getBacks());
     if (selling.port) {
+      
       selling.ports = `${ports[0]}:${selling.port}`;
     }
-    selling.name = `newdeblok-${bjson.name}-${ports[0]}`;
+    selling.name = `newdeblok-${bjson.name}-${ports[0]}`
     let fr = await fetch(`http://${back}/containers/create`, {
       method: "POST",
       body: JSON.stringify(selling),
-      headers: {
-        Authorization: util.getHTTPAuthHeader(back),
-        "Content-Type": "text/plain",
-      },
+      headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
-    let resp = await fr.text();
+    let resp = await fr.text()
     res.send(resp);
   });
 
@@ -309,7 +300,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }
-    bjson = JSON.parse(b);
+    bjson = JSON.parse(b)
     if (!bjson.id || bjson.id == "") {
       req.statusCode = 400;
       res.send("ERR: The ID field is required.");
@@ -317,19 +308,16 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let fr = await fetch(`http://${back}/containers/kill`, {
       method: "POST",
       body: JSON.stringify(req.body),
-      headers: {
-        Authorization: util.getHTTPAuthHeader(back),
-        "Content-Type": "text/plain",
-      },
+      headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
-    let resp = await fr.text();
+    let resp = await fr.text()
     res.send(resp);
   });
 
   server.post("/api/container/delete", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
-    bjson = JSON.parse(b);
+    bjson = JSON.parse(b)
     let back: any = await util.getBacks();
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
@@ -341,23 +329,41 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let fr = await fetch(`http://${back}/containers/delete`, {
       method: "POST",
       body: JSON.stringify(req.body),
-      headers: {
-        Authorization: util.getHTTPAuthHeader(back),
-        "Content-Type": "text/plain",
-      },
+      headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
-    let resp = await fr.text();
+    let resp = await fr.text()
     res.send(resp);
   });
 
   server.get("/api/img/identicon.png", async (req: Request, res: Response) => {
     res.send(await helper.auth.identicon());
   });
-  server.on("upgrade", async () => {
+  server.use('/ws/:idx/:port/:path*', (req: Request, res: Response) => {
+    const { idx, port, path } = req.params;
+  
+    // Validate idx parameter
+    const idxNum = parseInt(idx);
+    if (isNaN(idxNum) || idxNum < 0 || idxNum >= endpoints.length) {
+      return res.status(404).send('Invalid endpoint index');
+    }
+    const parsedPort = parseInt(port);
+    if (isNaN(parsedPort) || parsedPort < 1024 || parsedPort >= 65530) {
+      return res.status(400).send('Invalid port number');
+    }
+    const socket = new WebSocket(`ws://${endpoints[idxNum].split("@")[1]}/port/${port}/${path}`);
+    socket.on('message', (data:any) => {
+      res.send(data);
+    });
+    socket.on('error', (error:any) => {
+      console.error('WebSocket error:', error);
+      res.status(500).send('WebSocket connection failed');
+    });
+  });
+  server.on("upgrade",async () => {
     // TODO: make websocket proxy
     // format: /ws/{deblokmanager_index}/{port}/{path}
     // could use wisp.
-  });
+  })
   // startup
   if (
     !process.argv.includes("--unavailiable") &&
