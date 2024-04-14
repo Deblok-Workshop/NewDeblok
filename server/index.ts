@@ -242,7 +242,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
   });
   server.post("/api/auth/tokenvalidate", async (req: Request, res: Response) => {
-    let out = helper.auth.validate(atob(body));
+    let out = helper.auth.validate(atob(req.body));
     if (out[0]) {
       req.statusCode = 400;
       return `ERR: ${out[1]}`;
@@ -275,7 +275,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let dconf = await dockconff.json();
     if (dconf[bjson.name.toLowerCase()] == undefined) {
       req.statusCode = 404;
-      return "Image could not be found in configuration.";
+      res.send("Image could not be found in configuration.");
     }
     let selling: any = dconf[bjson.name.toLowerCase()];
     let ports: any = await util.getBackPorts(await util.getBacks());
@@ -289,12 +289,12 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       body: JSON.stringify(selling),
       headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
-    let res = await fr.text()
-    return res;
+    let resp = await fr.text()
+    res.send(resp);
   });
 
   server.post("/api/container/kill", async (req: Request, res: Response) => {
-    const b: any = body; // the body variable is actually a string, this is here to fix a ts error
+    const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
     let back: any = await util.getBacks();
     if (!back) {
@@ -303,19 +303,19 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     bjson = JSON.parse(b)
     if (!bjson.id || bjson.id == "") {
       req.statusCode = 400;
-      res.send("ERR: The ID field is required.";
+      res.send("ERR: The ID field is required.");
     }
     let fr = await fetch(`http://${back}/containers/kill`, {
       method: "POST",
-      body: JSON.stringify(body),
+      body: JSON.stringify(req.body),
       headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
-    let res = await fr.text()
-    return res;
+    let resp = await fr.text()
+    res.send(resp);
   });
 
   server.post("/api/container/delete", async (req: Request, res: Response) => {
-    const b: any = body; // the body variable is actually a string, this is here to fix a ts error
+    const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b)
     let back: any = await util.getBacks();
@@ -324,19 +324,19 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     if (!bjson.id || bjson.id == "") {
       req.statusCode = 400;
-      res.send("ERR: The ID field is required.";
+      res.send("ERR: The ID field is required.");
     }
     let fr = await fetch(`http://${back}/containers/delete`, {
       method: "POST",
-      body: JSON.stringify(body),
+      body: JSON.stringify(req.body),
       headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
-    let res = await fr.text()
-    return res;
+    let resp = await fr.text()
+    res.send(resp);
   });
 
-  server.get("/api/img/identicon.png", async () => {
-    return new Blob([await helper.auth.identicon()]);
+  server.get("/api/img/identicon.png", async (req: Request, res: Response) => {
+    res.send(await helper.auth.identicon());
   });
 /*
   server.get("/api/getbare", async () => {
