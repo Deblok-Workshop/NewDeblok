@@ -145,11 +145,11 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     if (pwd.length != 71) {
       req.statusCode = 400;
-      res.send("ERR: Invalid input.");
+      res.send("ERR: Invalid input, pwd should be a hash.");
     }
     if (usr.length != 36) {
       req.statusCode = 400;
-      res.send("ERR: Invalid input.");
+      res.send("ERR: Invalid input, usr should be a hash.");
     }
     if (!String(pwd).startsWith("sha256:") || !String(usr).startsWith("md5:")) {
       req.statusCode = 400;
