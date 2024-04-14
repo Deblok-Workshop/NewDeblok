@@ -18,12 +18,12 @@ const server = express();
 /*
 server.onError(({ code, error, set }) => {
   if (code === "NOT_FOUND") {
-    set.status = 404;
+    req.statusCode = 404;
 
     return Bun.file("static/404.html");
   }
   if (code === "INTERNAL_SERVER_ERROR") {
-    set.status = 500;
+    req.statusCode = 500;
 
     return Bun.file("static/500.html");
   }
@@ -37,7 +37,7 @@ server.use(rateLimit(config.ratelimit));
 if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   require("./modules/unavailable.ts");
 } else {
-  server.use(staticPlugin({ assets: "static/", prefix: "/" }));
+  // server.use(staticPlugin({ assets: "static/", prefix: "/" }));
 
   let dbpwd: any = process.env.DBPWD;
   dbpwd = new Bun.CryptoHasher("sha256").update(dbpwd).digest("hex");
@@ -70,95 +70,96 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
 
   server.get(
     "/api/captcha/:query/image.gif",
-    async ({ params: { query }, set }) => {
+    async (req: Request, res: Response) => {
       var tempdbfile: Blob = Bun.file("tempcaptcha.db");
       var tempdb = JSON.parse(await tempdbfile.text());
-      if (tempdb[query] != undefined) {
-        var buf = await captcha.mathfuck.img(tempdb[query]);
-        return new Blob([buf]);
+      if (tempdb[req.params.query] != undefined) {
+        var buf = await captcha.mathfuck.img(tempdb[req.params.query]);
+        res.contentType("png")
+        res.send(buf);
       } else {
-        set.status = 404;
-        return "ERR: CAPTCHA not found";
+        res.statusCode = 404;
+        res.send("ERR: CAPTCHA not found");
       }
     },
   );
   server.post(
     "/api/captcha/:query/validate",
-    async ({ body, params: { query }, set }) => {
-      var b: any = body;
+    async (req: Request, res: Response) => {
+      var b: any = req.body;
       var rv = false;
       var tempdbfile: Blob = Bun.file("tempcaptcha.db");
       var tempdb = JSON.parse(await tempdbfile.text());
-      if (tempdb[query] != undefined) {
-        if (Number(b) != Number(captcha.mathfuck.eval(tempdb[query]))) {
+      if (tempdb[req.params.query] != undefined) {
+        if (Number(b) != Number(captcha.mathfuck.eval(tempdb[req.params.query]))) {
           rv = false;
         } else {
           rv = true;
         }
-        tempdb[query] = undefined;
+        tempdb[req.params.query] = undefined;
         Bun.write("./tempcaptcha.db", JSON.stringify(tempdb));
-        return rv;
+        res.send(rv);
       } else {
-        set.status = 404;
-        return "ERR: CAPTCHA not found";
+        req.statusCode = 404;
+        res.send("ERR: CAPTCHA not found");
       }
     },
   );
-  server.get("/api/captcha/:query/void", async ({ params: { query }, set }) => {
+  server.get("/api/captcha/:query/void", async (req: Request, res: Response) => {
     var tempdbfile: Blob = Bun.file("tempcaptcha.db");
     var tempdb = JSON.parse(await tempdbfile.text());
-    if (tempdb[query] != undefined) {
-      tempdb[query] = undefined;
+    if (tempdb[req.params.query] != undefined) {
+      tempdb[req.params.query] = undefined;
       Bun.write("./tempcaptcha.db", JSON.stringify(tempdb));
-      set.status = 204;
-      return "";
+      res.statusCode = 204;
+      res.send("");
     } else {
-      set.status = 404;
-      return "ERR: CAPTCHA not found";
+      res.statusCode = 404;
+      res.send("ERR: CAPTCHA not found");
     }
   });
-  server.get("/api/captcha/request", async () => {
+  server.get("/api/captcha/request", async (req: Request, res: Response) => {
     var tempdbfile: Blob = Bun.file("tempcaptcha.db");
     var tempdb = JSON.parse(await tempdbfile.text());
     var randuuid = crypto.randomUUID();
     tempdb[randuuid] = captcha.mathfuck.random();
     Bun.write("./tempcaptcha.db", JSON.stringify(tempdb));
-    return randuuid;
+    res.send(randuuid);
   });
-  server.post("/api/auth/signup", async ({ body, set }) => {
-    const b: any = body; // the body variable is actually a string, this is here to fix a ts error
+  server.post("/api/auth/signup", async (req: Request, res: Response) => {
+    const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
     let bjson: any = { usr: "", pwd: "", em: "" };
     try {
       bjson = JSON.parse(b);
     } catch (e) {
       console.error(e);
-      set.status = 400;
+      req.statusCode = 400;
       return "ERR: Bad JSON";
     }
     const usr: string = bjson["usr"];
     var pwd: string = bjson["pwd"];
     const email: string = bjson["em"];
     if (usr == "" || !usr || pwd == "" || !pwd || email == "" || !email) {
-      set.status = 400;
+      req.statusCode = 400;
       return "ERR: One or more fields are missing.";
     }
     if (pwd.length != 71) {
-      set.status = 400;
+      req.statusCode = 400;
       return "ERR: Invalid input.";
     }
     if (usr.length != 36) {
-      set.status = 400;
+      req.statusCode = 400;
       return "ERR: Invalid input.";
     }
     if (!String(pwd).startsWith("sha256:") || !String(usr).startsWith("md5:")) {
-      set.status = 400;
+      req.statusCode = 400;
       return "ERR: Invalid input.";
     }
     try {
       var db = helper.sql.open("db.sql", true);
       var exists = helper.sql.read(db, "credentials", usr);
       if (exists) {
-        set.status = 400;
+        req.statusCode = 400;
         return "ERR: Username already exists";
       }
       // TODO: prevent email sharing
@@ -177,7 +178,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return guid;
     } catch (e) {
       console.error(e);
-      set.status = 500;
+      req.statusCode = 500;
       return e;
     }
   });
@@ -191,25 +192,25 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       bjson = JSON.parse(b);
     } catch (e) {
       console.error(e);
-      set.status = 400;
+      req.statusCode = 400;
       return "ERR: Bad JSON";
     }
     const usr: string = bjson["usr"];
     var pwd: string = bjson["pwd"];
     if (usr == "" || !usr || pwd == "" || !pwd) {
-      set.status = 400;
+      req.statusCode = 400;
       return "ERR: One or more fields are missing.";
     }
     if (pwd.length != 71) {
-      set.status = 400;
+      req.statusCode = 400;
       return "ERR: Invalid input.";
     }
     if (usr.length != 36) {
-      set.status = 400;
+      req.statusCode = 400;
       return "ERR: Invalid input.";
     }
     if (!String(pwd).startsWith("sha256:") || !String(usr).startsWith("md5:")) {
-      set.status = 400;
+      req.statusCode = 400;
       return "ERR: Invalid input.";
     }
     var db = helper.sql.open("db.sql", true);
@@ -222,7 +223,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       try {
         v = await Bun.password.verify(pwd, e[0][3]);
       } catch (e) {
-        set.status = 500;
+        req.statusCode = 500;
         console.error(e);
         return "err";
       }
@@ -231,18 +232,18 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
           `@dblok.cr${Date.now().toString(20)}.ex${(Date.now() + 43200 * 1000).toString(20)}.${btoa(`${usr.substring(6)}.${e[1].split("/")[1]}`)}`,
         );
       } else {
-        set.status = 400;
+        req.statusCode = 400;
         return "ERR: Password is incorrect.";
       }
     } else {
-      set.status = 400;
+      req.statusCode = 400;
       return "ERR: Username is incorrect.";
     }
   });
   server.post("/api/auth/tokenvalidate", async ({ body, set }) => {
     let out = helper.auth.validate(atob(body));
     if (out[0]) {
-      set.status = 400;
+      req.statusCode = 400;
       return `ERR: ${out[1]}`;
     } else {
       return "OK";
@@ -261,7 +262,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b);
     if (!bjson.name || bjson.name == "") {
-      set.status = 400;
+      req.statusCode = 400;
       return "ERR: Name field is required.";
     }
     let back: any = await util.getBacks();
@@ -272,7 +273,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let dockconff = Bun.file("docker/containers.json");
     let dconf = await dockconff.json();
     if (dconf[bjson.name.toLowerCase()] == undefined) {
-      set.status = 404;
+      req.statusCode = 404;
       return "Image could not be found in configuration.";
     }
     let selling: any = dconf[bjson.name.toLowerCase()];
@@ -300,7 +301,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     bjson = JSON.parse(b)
     if (!bjson.id || bjson.id == "") {
-      set.status = 400;
+      req.statusCode = 400;
       return "ERR: The ID field is required.";
     }
     let fr = await fetch(`http://${back}/containers/kill`, {
@@ -321,7 +322,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       throw new Error("No online DeblokManager backends found!");
     }
     if (!bjson.id || bjson.id == "") {
-      set.status = 400;
+      req.statusCode = 400;
       return "ERR: The ID field is required.";
     }
     let fr = await fetch(`http://${back}/containers/delete`, {
