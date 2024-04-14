@@ -15,7 +15,7 @@ netaddr = require("node:os").hostname();
 const server = new Elysia();
 
 // errors
-
+/*
 server.onError(({ code, error, set }) => {
   if (code === "NOT_FOUND") {
     set.status = 404;
@@ -27,7 +27,7 @@ server.onError(({ code, error, set }) => {
 
     return Bun.file("static/500.html");
   }
-});
+});*/
 
 // Run the startup "job"
 require("./modules/startupjob.ts");
@@ -255,7 +255,6 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   // container management
 
   server.post("/api/container/create", async ({ body, set }) => {
-    // TODO
     const b: any = body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = {
       name: "",
@@ -337,17 +336,12 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   server.get("/api/img/identicon.png", async () => {
     return new Blob([await helper.auth.identicon()]);
   });
-
+/*
   server.get("/api/getbare", async () => {
     return process.env.BARESERVER || "https://tomp.app"
   });
-/*
-  server.on("upgrade", (req: Request, socket: Socket, head: Head) => {
-    if (req.url.endsWith("/wisp/")) {
-      wisp.routeRequest(req, socket, head);
-    }
-  });
-*/
+  */
+
   // startup
   if (
     !process.argv.includes("--unavailiable") &&
