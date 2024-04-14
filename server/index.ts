@@ -375,24 +375,30 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   const wss = new WSocket.Server({ server: proxyServer });
   wss.on('connection', function connection(ws:any, req:any) {
     console.log('WebSocket connected');
-    const target = 'ws://'+endpoints[req.url.split("/")[2]].split("@")[1]+"/"+req.url.replace(`/ws/${req.url.split("/")[2]}/`); 
-
-    const wsProxy = new WSocket(target);
+    
+    const target = 'ws://'+endpoints[req.url.split("/")[2]].split("@")[1]+"/"+req.url.replace(`/ws/${req.url.split("/")[2]}/`,""); 
+    console.log(req.url)
+    console.log(target)
+    const wsProxy = new WebSocket(target);
 
     wsProxy.on('open', function () {
         wsProxy.on('message', function (data:any) {
+          console.log("got msg!")
             ws.send(data);
         });
 
         ws.on('message', function (data:any) {
+          console.log("got msg!")
             wsProxy.send(data);
         });
 
         wsProxy.on('close', function () {
+            console.log("closing...")
             ws.close();
         });
 
         ws.on('close', function () {
+          console.log("closing...")
             wsProxy.close();
         });
     });
@@ -405,6 +411,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         console.error('Client WebSocket error:', err.message);
     });
 });
+
   // proxy upgrade req
   proxyServer.on('upgrade', function (req:any, socket:any, head:any) {
     console.log("ws recieved")
@@ -427,6 +434,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       console.log(` │ 127.0.0.1:${config.webserver.port}`),
       console.log(` │ ${netaddr}:${config.webserver.port}`),
       console.log(` └─────────────────────────>`),
+      config.webserver.ws = true,
       proxyServer.listen(config.webserver);
   }
 }

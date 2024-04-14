@@ -9,5 +9,5 @@ export default {
     },
   },
   // Webserver config
-  webserver: { port: 8080 },
+  webserver: { port: 8080, ws:true },
 };
