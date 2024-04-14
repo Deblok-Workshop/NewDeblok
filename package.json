@@ -24,6 +24,7 @@
     "concurrently": "^8.2.2",
     "elysia": "^0.8.15",
     "elysia-rate-limit": "^2.0.1",
+    "express": "^4.19.2",
     "flowbite": "^2.2.1",
     "libcurl.js": "^0.6.7",
     "node-fetch": "^3.3.2",
