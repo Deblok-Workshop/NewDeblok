@@ -253,9 +253,9 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let out = helper.auth.validate(atob(req.body));
     if (out[0]) {
       req.statusCode = 400;
-      return `ERR: ${out[1]}`;
+      res.send(`ERR: ${out[1]}`);
     } else {
-      return "OK";
+      res.send("OK");
     } } catch {res.statusCode = 400;res.end()}
   });
 
