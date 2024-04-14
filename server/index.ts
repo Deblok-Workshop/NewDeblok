@@ -14,7 +14,7 @@ let netaddr = "[::1]";
 netaddr = require("node:os").hostname();
 const server = express();
 var HTTPproxy = require('http-proxy');
-var proxy = HTTPproxy.createProxyServer({ ws: true });
+
 var bodyParser = require('body-parser');
 server.use(bodyParser.raw({type:"text/plain"}));
 
@@ -47,20 +47,6 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   let dbpwd: any = process.env.DBPWD;
   dbpwd = new Bun.CryptoHasher("sha256").update(dbpwd).digest("hex");
 
-  // proxy
-  server.get('/ws/:node/*', function(req:Request, res:Response) {
-    let url = req.url.replace(`/ws/${req.params.node}/`,"")
-    req.url = url
-    console.log(endpoints[req.params.node].split("@")[1],url,req.url)
-    
-    proxy.web(req, res, { target: "http://"+endpoints[req.params.node].split("@")[1]});
-  });
-  const proxyServer = require('http').createServer(server)
-  proxyServer.on('upgrade', function (req:any, socket:any, head:any) {
-    if (req.url.split("/")[0] == "ws" || req.url.split("/")[1] == "ws") {
-    proxy.ws(req, socket, head)
-    } else {socket.send("no")}
-  })
   // general
 
   server.get("/favicon.ico", async (req: Request, res: Response) => {
@@ -373,6 +359,28 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   });
   
   
+  // proxy
+  var proxy = HTTPproxy.createProxyServer({ ws: true });
+  server.get('/ws/:node/*', function(req:Request, res:Response) {
+    let url = req.url.replace(`/ws/${req.params.node}/`,"")
+    req.url = url
+    console.log(endpoints[req.params.node].split("@")[1],url,req.url)
+    
+    proxy.web(req, res, { target: "http://"+endpoints[req.params.node].split("@")[1]});
+  });
+
+  const proxyServer = require('http').createServer(server)
+  proxyServer.on('upgrade', function (req:any, socket:any, head:any) {
+    console.log("ws recieved")
+    if (req.url.split("/")[1] == "ws") {
+      
+    let url = "http://"+endpoints[req.url.split("/")[2]].split("@")[1]+"/"+req.url.replace(`/ws/${req.url.split("/")[2]}/`,"")
+    req.url = url
+    
+    console.log(req.url)
+    proxy.ws(req, socket, head,{target: req.url})
+    } else {socket.send("no")}
+  })
   // startup
   if (
     !process.argv.includes("--unavailiable") &&
@@ -383,6 +391,6 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       console.log(` │ 127.0.0.1:${config.webserver.port}`),
       console.log(` │ ${netaddr}:${config.webserver.port}`),
       console.log(` └─────────────────────────>`),
-      server.listen(config.webserver);
+      proxyServer.listen(config.webserver);
   }
 }
