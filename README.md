@@ -10,7 +10,7 @@
 - DeblokManager: 100% complete, nothing needs work in this area
 - Backend: 100% complete, nothing needs work in this area
 - Frontend: 50% done, needs container creation and vnc proxy.
-- Backend Proxies: 50% done, Implemented nginx for DeblokManager but need to find a way for NewDeblok.
+- Backend Proxies: 100% done, nothing needs work in this area
 
 ---
 
