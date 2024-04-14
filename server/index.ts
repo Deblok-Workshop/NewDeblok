@@ -379,37 +379,17 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     const target = 'ws://'+endpoints[req.url.split("/")[2]].split("@")[1]+"/"+req.url.replace(`/ws/${req.url.split("/")[2]}/`,""); 
     console.log(req.url)
     console.log(target)
+    // @ts-ignore
     const wsProxy = new WebSocket(target);
-
-    wsProxy.on('open', function () {
-        wsProxy.on('message', function (data:any) {
-          console.log("got msg!")
-            ws.send(data);
-        });
-
-        ws.on('message', function (data:any) {
-          console.log("got msg!")
-            wsProxy.send(data);
-        });
-
-        wsProxy.on('close', function () {
-            console.log("closing...")
-            ws.close();
-        });
-
-        ws.on('close', function () {
-          console.log("closing...")
-            wsProxy.close();
-        });
-    });
-
-    wsProxy.on('error', function (err:any) {
-        console.error('WebSocket proxy error:', err.message);
-    });
-
-    ws.on('error', function (err:any) {
-        console.error('Client WebSocket error:', err.message);
-    });
+    // @ts-ignore
+    wsProxy.addEventListener("message", event => {ws.send(event.data)});
+    // @ts-ignore
+    wsProxy.addEventListener("close", event => {ws.close()});
+    // @ts-ignore
+    ws.addEventListener("message", event => {wsProxy.send(event.data)});
+    // @ts-ignore
+    ws.addEventListener("close", event => {wsProxy.close()});
+    
 });
 
   // proxy upgrade req
