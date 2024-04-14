@@ -153,7 +153,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     if (!String(pwd).startsWith("sha256:") || !String(usr).startsWith("md5:")) {
       req.statusCode = 400;
-      res.send("ERR: Invalid input.");
+      res.send("ERR: Invalid input, the hash should be known.");
     }
     try {
       var db = helper.sql.open("db.sql", true);
@@ -186,33 +186,33 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
 
   // authentication
 
-  server.post("/api/auth/login", async ({ body, set }) => {
-    const b: any = body; // the body variable is actually a string, this is here to fix a ts error
+  server.post("/api/auth/login", async (req: Request, res: Response) => {
+    const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = { usr: "", pwd: "", em: "" };
     try {
       bjson = JSON.parse(b);
     } catch (e) {
       console.error(e);
       req.statusCode = 400;
-      res.send("ERR: Bad JSON";
+      res.send("ERR: Bad JSON");
     }
     const usr: string = bjson["usr"];
     var pwd: string = bjson["pwd"];
     if (usr == "" || !usr || pwd == "" || !pwd) {
       req.statusCode = 400;
-      res.send("ERR: One or more fields are missing.";
+      res.send("ERR: One or more fields are missing.");
     }
     if (pwd.length != 71) {
       req.statusCode = 400;
-      res.send("ERR: Invalid input.";
+      res.send("ERR: Invalid input.");
     }
     if (usr.length != 36) {
       req.statusCode = 400;
-      res.send("ERR: Invalid input.";
+      res.send("ERR: Invalid input.");
     }
     if (!String(pwd).startsWith("sha256:") || !String(usr).startsWith("md5:")) {
       req.statusCode = 400;
-      res.send("ERR: Invalid input.";
+      res.send("ERR: Invalid input.");
     }
     var db = helper.sql.open("db.sql", true);
     var entry: any = helper.sql.read(db, "credentials", usr);
@@ -226,22 +226,22 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       } catch (e) {
         req.statusCode = 500;
         console.error(e);
-        return "err";
+        res.send(e);
       }
       if (v) {
-        return btoa(
+        res.send(btoa(
           `@dblok.cr${Date.now().toString(20)}.ex${(Date.now() + 43200 * 1000).toString(20)}.${btoa(`${usr.substring(6)}.${e[1].split("/")[1]}`)}`,
-        );
+        ));
       } else {
         req.statusCode = 400;
-        res.send("ERR: Password is incorrect.";
+        res.send("ERR: Password is incorrect.");
       }
     } else {
       req.statusCode = 400;
-      res.send("ERR: Username is incorrect.";
+      res.send("ERR: Username is incorrect.");
     }
   });
-  server.post("/api/auth/tokenvalidate", async ({ body, set }) => {
+  server.post("/api/auth/tokenvalidate", async (req: Request, res: Response) => {
     let out = helper.auth.validate(atob(body));
     if (out[0]) {
       req.statusCode = 400;
@@ -251,20 +251,20 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
   });
 
-  server.post("/api/auth/pwdsafe", async ({ body, set }) => {
-    return !wordlistsafe.isSafe(body);
+  server.post("/api/auth/pwdsafe", async (req: Request, res: Response) => {
+    return !wordlistsafe.isSafe(req.body);
   });
   // container management
 
-  server.post("/api/container/create", async ({ body, set }) => {
-    const b: any = body; // the body variable is actually a string, this is here to fix a ts error
+  server.post("/api/container/create", async (req: Request, res: Response) => {
+    const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = {
       name: "",
     }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b);
     if (!bjson.name || bjson.name == "") {
       req.statusCode = 400;
-      res.send("ERR: Name field is required.";
+      res.send("ERR: Name field is required.");
     }
     let back: any = await util.getBacks();
     console.log(back)
@@ -293,7 +293,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     return res;
   });
 
-  server.post("/api/container/kill", async ({ body, set }) => {
+  server.post("/api/container/kill", async (req: Request, res: Response) => {
     const b: any = body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
     let back: any = await util.getBacks();
@@ -314,7 +314,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     return res;
   });
 
-  server.post("/api/container/delete", async ({ body, set }) => {
+  server.post("/api/container/delete", async (req: Request, res: Response) => {
     const b: any = body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b)
