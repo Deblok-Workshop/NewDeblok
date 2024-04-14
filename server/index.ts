@@ -134,39 +134,40 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     } catch (e) {
       console.error(e);
       req.statusCode = 400;
-      return "ERR: Bad JSON";
+      res.send("ERR: Bad JSON");
     }
     const usr: string = bjson["usr"];
     var pwd: string = bjson["pwd"];
     const email: string = bjson["em"];
     if (usr == "" || !usr || pwd == "" || !pwd || email == "" || !email) {
       req.statusCode = 400;
-      return "ERR: One or more fields are missing.";
+      res.send("ERR: One or more fields are missing.");
     }
     if (pwd.length != 71) {
       req.statusCode = 400;
-      return "ERR: Invalid input.";
+      res.send("ERR: Invalid input.");
     }
     if (usr.length != 36) {
       req.statusCode = 400;
-      return "ERR: Invalid input.";
+      res.send("ERR: Invalid input.");
     }
     if (!String(pwd).startsWith("sha256:") || !String(usr).startsWith("md5:")) {
       req.statusCode = 400;
-      return "ERR: Invalid input.";
+      res.send("ERR: Invalid input.");
     }
     try {
       var db = helper.sql.open("db.sql", true);
       var exists = helper.sql.read(db, "credentials", usr);
       if (exists) {
         req.statusCode = 400;
-        return "ERR: Username already exists";
+        res.send("ERR: Username already exists");
       }
       // TODO: prevent email sharing
       try {
         pwd = await Bun.password.hash(pwd);
       } catch (e) {
-        return e;
+        res.statusCode = 500;
+        res.send(e);
       }
       var guid = crypto.randomUUID();
       helper.sql.write(
@@ -175,11 +176,11 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         usr,
         `u/${usr}/p/${pwd}/e/${btoa(email)}|guid/${guid}`,
       );
-      return guid;
+      res.send(guid);
     } catch (e) {
       console.error(e);
       req.statusCode = 500;
-      return e;
+      res.send(e);
     }
   });
 
@@ -193,25 +194,25 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     } catch (e) {
       console.error(e);
       req.statusCode = 400;
-      return "ERR: Bad JSON";
+      res.send("ERR: Bad JSON";
     }
     const usr: string = bjson["usr"];
     var pwd: string = bjson["pwd"];
     if (usr == "" || !usr || pwd == "" || !pwd) {
       req.statusCode = 400;
-      return "ERR: One or more fields are missing.";
+      res.send("ERR: One or more fields are missing.";
     }
     if (pwd.length != 71) {
       req.statusCode = 400;
-      return "ERR: Invalid input.";
+      res.send("ERR: Invalid input.";
     }
     if (usr.length != 36) {
       req.statusCode = 400;
-      return "ERR: Invalid input.";
+      res.send("ERR: Invalid input.";
     }
     if (!String(pwd).startsWith("sha256:") || !String(usr).startsWith("md5:")) {
       req.statusCode = 400;
-      return "ERR: Invalid input.";
+      res.send("ERR: Invalid input.";
     }
     var db = helper.sql.open("db.sql", true);
     var entry: any = helper.sql.read(db, "credentials", usr);
@@ -233,11 +234,11 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         );
       } else {
         req.statusCode = 400;
-        return "ERR: Password is incorrect.";
+        res.send("ERR: Password is incorrect.";
       }
     } else {
       req.statusCode = 400;
-      return "ERR: Username is incorrect.";
+      res.send("ERR: Username is incorrect.";
     }
   });
   server.post("/api/auth/tokenvalidate", async ({ body, set }) => {
@@ -263,7 +264,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     bjson = JSON.parse(b);
     if (!bjson.name || bjson.name == "") {
       req.statusCode = 400;
-      return "ERR: Name field is required.";
+      res.send("ERR: Name field is required.";
     }
     let back: any = await util.getBacks();
     console.log(back)
@@ -302,7 +303,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     bjson = JSON.parse(b)
     if (!bjson.id || bjson.id == "") {
       req.statusCode = 400;
-      return "ERR: The ID field is required.";
+      res.send("ERR: The ID field is required.";
     }
     let fr = await fetch(`http://${back}/containers/kill`, {
       method: "POST",
@@ -323,7 +324,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     if (!bjson.id || bjson.id == "") {
       req.statusCode = 400;
-      return "ERR: The ID field is required.";
+      res.send("ERR: The ID field is required.";
     }
     let fr = await fetch(`http://${back}/containers/delete`, {
       method: "POST",
