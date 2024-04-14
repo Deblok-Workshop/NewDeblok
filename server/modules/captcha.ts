@@ -84,24 +84,6 @@ function evaluateMathFuck(mathFuckCode: string): number {
   }
 }
 
-function shift(inputString: string, flipbit: number = 1) {
-  /*                                                                                               
-     @deprecated 
-     */
-  let shiftedString = "";
-  if (flipbit == -1 || flipbit == 1) {
-  } else {
-    flipbit = 1;
-  }
-  for (let i = 0; i < inputString.length; i++) {
-    const codePoint = inputString.charCodeAt(i);
-    const shiftedCodePoint = codePoint + 54 * flipbit;
-    shiftedString += String.fromCharCode(shiftedCodePoint);
-  }
-
-  return shiftedString;
-}
-
 async function makemfk_img(mfk: string, dense: number = 72): Promise<Buffer> {
   const readExp = translateMathFuck(mfk);
   let svg = Bun.file("captchabase.svg");
@@ -190,7 +172,6 @@ export default {
   mathfuck: {
     translate: translateMathFuck,
     img: makemfk_img,
-    shift: shift,
     random: makerandmfk,
     gen: genMathFuck,
     eval: evaluateMathFuck,
