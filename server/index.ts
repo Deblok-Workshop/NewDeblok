@@ -338,12 +338,11 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   server.get("/api/img/identicon.png", async (req: Request, res: Response) => {
     res.send(await helper.auth.identicon());
   });
-/*
-  server.get("/api/getbare", async () => {
-    return process.env.BARESERVER || "https://tomp.app"
-  });
-  */
-
+  server.on("upgrade",async () => {
+    // TODO: make websocket proxy
+    // format: /ws/{deblokmanager_index}/{port}/{path}
+    // could use wisp.
+  })
   // startup
   if (
     !process.argv.includes("--unavailiable") &&
