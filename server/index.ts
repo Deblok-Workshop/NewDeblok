@@ -31,7 +31,7 @@ server.onError(({ code, error, set }) => {
 
 // Run the startup "job"
 require("./modules/startupjob.ts");
-
+server.use("/", express.static("static/"));
 server.use(cors()); // Express cors plugin
 // server.use(rateLimit(config.ratelimit));
 if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
