@@ -1,23 +1,28 @@
-import { Elysia, error } from "elysia";
+import express from 'express';
+import type { Request, Response } from 'express';
 import config from "../config";
-import { staticPlugin } from "@elysiajs/static";
-import { cors } from "@elysiajs/cors";
-const server = new Elysia();
+const server = express();
 
-server.all("/*", async ({ set }) => {
-  set.status = 503;
-  return Bun.file("static/503.html");
+server.use('/assets', express.static('static/assets'))
+
+server.all("/app.css", async (req: Request, res: Response) => {
+  res.statusCode = 200;
+  res.sendFile(import.meta.dir.replace("server/modules","")+"/static/app.css");
 });
-server.all("/app.css", async ({ set }) => {
-  return Bun.file("static/app.css");
+server.get("/api/__healthcheck", async (req: Request, res: Response) => {
+  res.json({ api: "down", backend: ["n/a"] });
 });
-server.get("/api/__healthcheck", async ({ set }) => {
-  return { api: "down", backend: [] };
+server.get("/api/healthcheck", async (req: Request, res: Response) => {
+  res.json({ api: "down", backend: ["n/a"] });
 });
-server.get("/api/healthcheck", async ({ set }) => {
-  return { api: "down", backend: [] };
+server.get("/*", async (req: Request, res: Response) => {
+  console.log(import.meta.dir)
+  res.statusCode = 503
+  res.sendFile(import.meta.dir.replace("server/modules","")+"/static/503.html");
+  
 });
-server.use(staticPlugin({ assets: "static/assets", prefix: "/assets" }));
+
+
 console.log(
   `Listening in Unavailiable Mode on port ${config.webserver.port} or`,
 ),

@@ -8,9 +8,6 @@ import { cors } from "@elysiajs/cors";
 import fetch from "node-fetch";
 import wordlistsafe from "./modules/wordlistsafe";
 import util from "./modules/util.ts"
-import { libcurl } from "libcurl.js"
-import wisp from "wisp-server-node"
-
 let endpoints: any = process.env.ENDPOINTS;
 endpoints = endpoints.split(",");
 let netaddr = "[::1]";
@@ -38,7 +35,7 @@ require("./modules/startupjob.ts");
 server.use(cors()); // ElysiaJS cors plugin
 server.use(rateLimit(config.ratelimit));
 if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
-  require("./unavailable.ts");
+  require("./modules/unavailable.ts");
 } else {
   server.use(staticPlugin({ assets: "static/", prefix: "/" }));
 

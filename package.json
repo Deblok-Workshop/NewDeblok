@@ -21,6 +21,7 @@
     "@catppuccin/tailwindcss": "^0.1.6",
     "@elysiajs/cors": "^0.8.0",
     "@elysiajs/static": "^0.8.1",
+    "@types/express": "^4.17.21",
     "concurrently": "^8.2.2",
     "elysia": "^0.8.15",
     "elysia-rate-limit": "^2.0.1",
