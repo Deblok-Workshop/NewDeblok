@@ -14,7 +14,7 @@ let netaddr = "[::1]";
 netaddr = require("node:os").hostname();
 const server = express();
 var HTTPproxy = require('http-proxy');
-
+const WSocket = require('ws');
 var bodyParser = require('body-parser');
 server.use(bodyParser.raw({type:"text/plain"}));
 
@@ -365,11 +365,47 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let url = req.url.replace(`/ws/${req.params.node}/`,"")
     req.url = url
     console.log(endpoints[req.params.node].split("@")[1],url,req.url)
-    
+    try {
     proxy.web(req, res, { target: "http://"+endpoints[req.params.node].split("@")[1]});
+    } catch {}
   });
 
   const proxyServer = require('http').createServer(server)
+  // real deal ws proxy
+  const wss = new WSocket.Server({ server: proxyServer });
+  wss.on('connection', function connection(ws:any, req:any) {
+    console.log('WebSocket connected');
+    const target = 'ws://'+endpoints[req.url.split("/")[2]].split("@")[1]+"/"+req.url.replace(`/ws/${req.url.split("/")[2]}/`); 
+
+    const wsProxy = new WSocket(target);
+
+    wsProxy.on('open', function () {
+        wsProxy.on('message', function (data:any) {
+            ws.send(data);
+        });
+
+        ws.on('message', function (data:any) {
+            wsProxy.send(data);
+        });
+
+        wsProxy.on('close', function () {
+            ws.close();
+        });
+
+        ws.on('close', function () {
+            wsProxy.close();
+        });
+    });
+
+    wsProxy.on('error', function (err:any) {
+        console.error('WebSocket proxy error:', err.message);
+    });
+
+    ws.on('error', function (err:any) {
+        console.error('Client WebSocket error:', err.message);
+    });
+});
+  // proxy upgrade req
   proxyServer.on('upgrade', function (req:any, socket:any, head:any) {
     console.log("ws recieved")
     if (req.url.split("/")[1] == "ws") {
