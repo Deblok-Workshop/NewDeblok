@@ -29,7 +29,7 @@ Deblok is a selfhostable website that allows you to browse and stream apps, game
 > [!NOTE]
 > There is some additional things you can buy which are **supplementary** on the Deblok Discord.
 > Deblok+ is **optional**, and your free experience is not effected by not having Deblok+.
-> Buy Deblok+ on the discord: [discord.gg/deblok](https://discord.gg/deblok)
+> Buy Deblok+ on the discord: [discord.gg/surfskip](https://discord.gg/surfskip)
 
 ## For chromebook skids
 
@@ -39,7 +39,7 @@ Deblok is a selfhostable website that allows you to browse and stream apps, game
 
 # Donate to me!
 
-(If you donate $0.25 or more, you can get the `@Donator` role in the [Discord](https://discord.gg/deblok))
+(If you donate $0.25 or more, you can get the `@Donator` role in the [Discord](https://discord.gg/surfskip))
 
 - Crypto:
   - **BTC**: `186dGbqMAFLPzQAbdzaYtAWDiQwgDPFq8y`
