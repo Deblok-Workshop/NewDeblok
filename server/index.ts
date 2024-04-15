@@ -22,12 +22,12 @@ server.use(bodyParser.raw({type:"text/plain"}));
 /*// idk if theres an express-quivulent to this, i dont care atm.
 server.onError(({ code, error, set }) => {
   if (code === "NOT_FOUND") {
-    req.statusCode = 404;
+    res.statusCode = 404;
 
     return Bun.file("static/404.html");
   }
   if (code === "INTERNAL_SERVER_ERROR") {
-    req.statusCode = 500;
+    res.statusCode = 500;
 
     return Bun.file("static/500.html");
   }
@@ -108,7 +108,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         Bun.write("./tempcaptcha.db", JSON.stringify(tempdb));
         res.send(rv);
       } else {
-        req.statusCode = 404;
+        res.statusCode = 404;
         res.send("ERR: CAPTCHA not found");
       }
     },
@@ -142,33 +142,33 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       bjson = JSON.parse(b);
     } catch (e) {
       console.error(e);
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: Bad JSON");
     }
     const usr: string = bjson["usr"];
     var pwd: string = bjson["pwd"];
     const email: string = bjson["em"];
     if (usr == "" || !usr || pwd == "" || !pwd || email == "" || !email) {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: One or more fields are missing.");
     }
     if (pwd.length != 71) {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: Invalid input, pwd should be a hash.");
     }
     if (usr.length != 36) {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: Invalid input, usr should be a hash.");
     }
     if (!String(pwd).startsWith("sha256:") || !String(usr).startsWith("md5:")) {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: Invalid input, the hash should be known.");
     }
     try {
       var db = helper.sql.open("db.sql", true);
       var exists = helper.sql.read(db, "credentials", usr);
       if (exists) {
-        req.statusCode = 400;
+        res.statusCode = 400;
         res.send("ERR: Username already exists");
       }
       // TODO: prevent email sharing
@@ -188,7 +188,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       res.send(guid);
     } catch (e) {
       console.error(e);
-      req.statusCode = 500;
+      res.statusCode = 500;
       res.send(e);
     }
   });
@@ -202,25 +202,25 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       bjson = JSON.parse(b);
     } catch (e) {
       console.error(e);
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: Bad JSON");
     }
     const usr: string = bjson["usr"];
     var pwd: string = bjson["pwd"];
     if (usr == "" || !usr || pwd == "" || !pwd) {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: One or more fields are missing.");
     }
     if (pwd.length != 71) {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: Invalid input.");
     }
     if (usr.length != 36) {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: Invalid input.");
     }
     if (!String(pwd).startsWith("sha256:") || !String(usr).startsWith("md5:")) {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: Invalid input.");
     }
     var db = helper.sql.open("db.sql", true);
@@ -233,7 +233,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       try {
         v = await Bun.password.verify(pwd, e[0][3]);
       } catch (e) {
-        req.statusCode = 500;
+        res.statusCode = 500;
         console.error(e);
         res.send(e);
       }
@@ -242,11 +242,11 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
           `@dblok.cr${Date.now().toString(20)}.ex${(Date.now() + 43200 * 1000).toString(20)}.${btoa(`${usr.substring(6)}.${e[1].split("/")[1]}`)}`,
         ));
       } else {
-        req.statusCode = 400;
+        res.statusCode = 400;
         res.send("ERR: Password is incorrect.");
       }
     } else {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: Username is incorrect.");
     }
   });
@@ -254,7 +254,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     try {
     let out = helper.auth.validate(atob(req.body));
     if (out[0]) {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send(`ERR: ${out[1]}`);
     } else {
       res.send("OK");
@@ -275,7 +275,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b);
     if (!bjson.name || bjson.name == "") {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: Name field is required.");
     }
     let back: any = await util.getBacks();
@@ -286,7 +286,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let dockconff = Bun.file("docker/containers.json");
     let dconf = await dockconff.json();
     if (dconf[bjson.name.toLowerCase()] == undefined) {
-      req.statusCode = 404;
+      res.statusCode = 404;
       res.send("Image could not be found in configuration.");
     }
     let selling: any = dconf[bjson.name.toLowerCase()];
@@ -308,7 +308,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       "returned":resp
     });
   } catch (e) {
-    req.statusCode = 503;
+    res.statusCode = 503;
     res.send(e);
   }
   });
@@ -322,7 +322,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     bjson = JSON.parse(b)
     if (!bjson.id || bjson.id == "") {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: The ID field is required.");
     }
     let fr = await fetch(`http://${back}/containers/kill`, {
@@ -343,7 +343,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       throw new Error("No online DeblokManager backends found!");
     }
     if (!bjson.id || bjson.id == "") {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: The ID field is required.");
     }
     let fr = await fetch(`http://${back}/containers/delete`, {
@@ -363,7 +363,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       throw new Error("No online DeblokManager backends found!");
     }
     if (!bjson.id || bjson.id == "") {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: The ID field is required.");
     }
     let fr = await fetch(`http://${back}/containers/pause`, {
@@ -383,7 +383,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       throw new Error("No online DeblokManager backends found!");
     }
     if (!bjson.id || bjson.id == "") {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: The ID field is required.");
     }
     let fr = await fetch(`http://${back}/containers/unpause`, {
@@ -403,7 +403,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       throw new Error("No online DeblokManager backends found!");
     }
     if (!bjson.id || bjson.id == "") {
-      req.statusCode = 400;
+      res.statusCode = 400;
       res.send("ERR: The ID field is required.");
     }
     let fr = await fetch(`http://${back}/containers/keepalive`, {
