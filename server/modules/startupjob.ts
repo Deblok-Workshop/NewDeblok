@@ -1,3 +1,4 @@
+import helper from "./helper.ts"
 if (
   process.argv.includes("--license") ||
   process.argv.includes("--copyright") ||
@@ -71,3 +72,7 @@ if (!process.env.DBPWD) {
   throw new ReferenceError("No Database Password (check .env)");
 }
 endpoints = endpoints.split(",");
+
+// make sure session table exists
+let db = helper.sql.open("db.sql")
+helper.sql.maketable(db,"sessions") // https://xkcd.com/327/

@@ -14,6 +14,15 @@ function dbmaketable(db: sqllite, table: string) {
     db.exec(`CREATE TABLE ${table} (name TEXT PRIMARY KEY, value TEXT)`);
   }
 }
+function dbdroptable(db: sqllite, table: string) { // https://xkcd.com/327/
+  const sql = `SELECT name FROM sqlite_master WHERE type='table' AND name=?`;
+  const stmt = db.prepare(sql);
+  const result = stmt.get(table);
+
+  if (!result) {
+    db.exec(`DROP TABLE ${table} IF EXISTS`);
+  }
+}
 function dbwrite(
   db: sqllite,
   table: string,
@@ -215,7 +224,7 @@ async function indenticon() {
 
 // Exports
 
-const sql = { open: dbopen, write: dbwrite, read: dbread };
+const sql = { open: dbopen, write: dbwrite, read: dbread,maketable:dbmaketable };
 const crypto = { aes: { decrypt: aesDecrypt, encrypt: aesEncrypt } };
 const auth = { validate: auth_tokenvalidate_endpoint, identicon: indenticon };
 export default {

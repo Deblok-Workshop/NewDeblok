@@ -271,6 +271,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = {
       name: "",
+      for: ""
     }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b);
     if (!bjson.name || bjson.name == "") {
