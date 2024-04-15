@@ -1,6 +1,7 @@
 import * as fs from "fs";
 
 function pwdSafe(password: any): boolean {
+  try {
   const files = fs.readdirSync("./server/modules/wordlists/");
 
   if (files.length === 0) {
@@ -21,5 +22,6 @@ function pwdSafe(password: any): boolean {
   }
 
   return false;
+} catch {return false;}
 }
 export default { isSafe: pwdSafe };
