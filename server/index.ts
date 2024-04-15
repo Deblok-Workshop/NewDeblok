@@ -353,7 +353,66 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let resp = await fr.text()
     res.send(resp);
   });
-
+  server.post("/api/container/pause", async (req: Request, res: Response) => {
+    const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
+    var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
+    bjson = JSON.parse(b)
+    let back: any = await util.getBacks();
+    if (!back) {
+      throw new Error("No online DeblokManager backends found!");
+    }
+    if (!bjson.id || bjson.id == "") {
+      req.statusCode = 400;
+      res.send("ERR: The ID field is required.");
+    }
+    let fr = await fetch(`http://${back}/containers/pause`, {
+      method: "POST",
+      body: JSON.stringify(req.body),
+      headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
+    });
+    let resp = await fr.text()
+    res.send(resp);
+  });
+  server.post("/api/container/unpause", async (req: Request, res: Response) => {
+    const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
+    var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
+    bjson = JSON.parse(b)
+    let back: any = await util.getBacks();
+    if (!back) {
+      throw new Error("No online DeblokManager backends found!");
+    }
+    if (!bjson.id || bjson.id == "") {
+      req.statusCode = 400;
+      res.send("ERR: The ID field is required.");
+    }
+    let fr = await fetch(`http://${back}/containers/unpause`, {
+      method: "POST",
+      body: JSON.stringify(req.body),
+      headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
+    });
+    let resp = await fr.text()
+    res.send(resp);
+  });
+  server.post("/api/container/keepalive", async (req: Request, res: Response) => {
+    const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
+    var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
+    bjson = JSON.parse(b)
+    let back: any = await util.getBacks();
+    if (!back) {
+      throw new Error("No online DeblokManager backends found!");
+    }
+    if (!bjson.id || bjson.id == "") {
+      req.statusCode = 400;
+      res.send("ERR: The ID field is required.");
+    }
+    let fr = await fetch(`http://${back}/containers/keepalive`, {
+      method: "POST",
+      body: JSON.stringify(req.body),
+      headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
+    });
+    let resp = await fr.text()
+    res.send(resp);
+  });
   server.get("/api/img/identicon.png", async (req: Request, res: Response) => {
     res.send(await helper.auth.identicon());
   });
