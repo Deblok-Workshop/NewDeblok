@@ -262,7 +262,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   });
 
   server.post("/api/auth/pwdsafe", async (req: Request, res: Response) => {
-    return !wordlistsafe.isSafe(req.body);
+    res.send( !wordlistsafe.isSafe(req.body));
   });
   // container management
 
