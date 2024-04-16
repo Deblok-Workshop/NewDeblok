@@ -173,8 +173,15 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       }
       // TODO: prevent email sharing
       try {
-        pwd = await Bun.password.hash(pwd);
+        console.log(pwd)
+        pwd = await Bun.password.hash(pwd,{
+          algorithm: "argon2id", // "argon2id" | "argon2i" | "argon2d"
+          memoryCost: 4096, // memory usage in kibibytes
+          timeCost: 15, // the number of iterations
+        });
+        console.log(pwd)
       } catch (e) {
+        console.error(e)
         res.statusCode = 500;
         res.send(e);
       }
@@ -183,7 +190,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         db,
         "credentials",
         usr,
-        `u/${usr}/p/${pwd}/e/${btoa(email)}|guid/${guid}`,
+        `u/${usr}/p/${pwd.replaceAll("/","??")}/e/${btoa(email)}|guid/${guid}`,
       );
       helper.sql.write(
         db,
@@ -237,7 +244,8 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       e[0] = e[0].split("/");
       let v: any = false;
       try {
-        v = await Bun.password.verify(pwd, e[0][3]);
+        
+        v = await Bun.password.verify(pwd, e[0][3].replaceAll("??","/"));
       } catch (e) {
         res.statusCode = 500;
         console.error(e);
