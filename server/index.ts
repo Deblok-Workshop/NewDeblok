@@ -189,7 +189,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         db,
         "userinfo",
         usr,
-        btoa(JSON.stringify({"displayName":usr.split(":")[2].substring(0,16)})) // don't know real username
+        btoa(JSON.stringify({"displayName":usr.split(":")[1].substring(0,16)})) // don't know real username
       )
       res.send(guid);
     } catch (e) {
