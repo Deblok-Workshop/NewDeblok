@@ -379,20 +379,20 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     res.send(resp);
   });
   server.get("/api/container/getsessions/:user", async (req: Request, res: Response) => {
-    const b: any = req.params.for; 
+    const b: any = req.params.user; 
     if (!b || b == "") {
       res.statusCode = 400;
-      res.send("ERR: The for field is required.");
+      res.send("ERR: The user field is required.");return;
     };
   let db = helper.sql.open("db.sql");
   let sessionsDBentry:any = helper.sql.read(db, "sessions", "md5:"+b);
   res.json(JSON.parse(sessionsDBentry["value"] || "{}"))
   });
-  server.get("/api/container/getuserinfo/:user/", async (req: Request, res: Response) => {
-    const b: any = req.params.for; 
+  server.get("/api/auth/getuserinfo/:user/", async (req: Request, res: Response) => {
+    const b: any = req.params.user; 
     if (!b || b == "") {
       res.statusCode = 400;
-      res.send("ERR: The for field is required.");
+      res.send("ERR: The user field is required.");return;
     };
   let db = helper.sql.open("db.sql");
   let sessionsDBentry:any = helper.sql.read(db, "userinfo", "md5:"+b);
