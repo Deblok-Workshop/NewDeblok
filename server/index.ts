@@ -370,7 +370,26 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     );
     res.send(resp);
   });
-
+  server.get("/api/container/getsessions/:user", async (req: Request, res: Response) => {
+    const b: any = req.params.for; 
+    if (!b || b == "") {
+      res.statusCode = 400;
+      res.send("ERR: The for field is required.");
+    };
+  let db = helper.sql.open("db.sql");
+  let sessionsDBentry:any = helper.sql.read(db, "sessions", "md5:"+b);
+  res.json(JSON.parse(sessionsDBentry["value"] || "{}"))
+  });
+  server.get("/api/container/getuserinfo/:user/", async (req: Request, res: Response) => {
+    const b: any = req.params.for; 
+    if (!b || b == "") {
+      res.statusCode = 400;
+      res.send("ERR: The for field is required.");
+    };
+  let db = helper.sql.open("db.sql");
+  let sessionsDBentry:any = helper.sql.read(db, "userinfo", "md5:"+b);
+  res.json(JSON.parse(sessionsDBentry["value"] || "{}"))
+  });
   server.post("/api/container/delete", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = { id: "", for: "" }; // boilerplate to not piss off TypeScript.
