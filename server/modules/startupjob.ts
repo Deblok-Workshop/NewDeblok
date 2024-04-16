@@ -75,4 +75,5 @@ endpoints = endpoints.split(",");
 
 // make sure session table exists
 let db = helper.sql.open("db.sql")
-helper.sql.maketable(db,"sessions") // https://xkcd.com/327/
+helper.sql.droptable(db,"sessions") // drop table if exists, https://xkcd.com/327/
+helper.sql.maketable(db,"sessions") 

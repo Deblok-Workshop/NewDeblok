@@ -185,6 +185,12 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         usr,
         `u/${usr}/p/${pwd}/e/${btoa(email)}|guid/${guid}`,
       );
+      helper.sql.write(
+        db,
+        "userinfo",
+        usr,
+        btoa(JSON.stringify({"displayName":usr.split(":")[2].substring(0,16)})) // don't know real username
+      )
       res.send(guid);
     } catch (e) {
       console.error(e);

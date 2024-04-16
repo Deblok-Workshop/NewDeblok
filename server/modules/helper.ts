@@ -20,7 +20,7 @@ function dbdroptable(db: sqllite, table: string) { // https://xkcd.com/327/
   const result = stmt.get(table);
 
   if (!result) {
-    db.exec(`DROP TABLE ${table} IF EXISTS`);
+    db.exec(`DROP TABLE IF EXISTS ${table}`);
   }
 }
 function dbwrite(
@@ -224,7 +224,7 @@ async function indenticon() {
 
 // Exports
 
-const sql = { open: dbopen, write: dbwrite, read: dbread,maketable:dbmaketable };
+const sql = { open: dbopen, write: dbwrite, read: dbread,maketable:dbmaketable,droptable:dbdroptable };
 const crypto = { aes: { decrypt: aesDecrypt, encrypt: aesEncrypt } };
 const auth = { validate: auth_tokenvalidate_endpoint, identicon: indenticon };
 export default {
