@@ -280,9 +280,15 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       for: ""
     }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b);
-    if (!bjson.name || bjson.name == "") {
+    if (!bjson.name || bjson.name == "" || !bjson.for || bjson.for == "") {
       res.statusCode = 400;
-      res.send("ERR: Name field is required.");
+      res.send("ERR: Name and for field is required.");
+    }
+    let db = helper.sql.open("db.sql")
+    let dbEntry:any = helper.sql.read(db, "userinfo", bjson.for);
+    if (!dbEntry["value"]) {
+      res.statusCode = 400;
+      res.send("ERR: Must provide userid.");
     }
     let back: any = await util.getBacks();
     console.log(back)
@@ -308,6 +314,15 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
     let resp = await fr.text()
+    let sessionsDBentry:any = helper.sql.read(db, "sessions", bjson.for);
+    let sessionsEnrtyVal = JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}") // assume no sessions if it doesnt exist
+    sessionsEnrtyVal[resp]={"id":resp,"status":"created"}
+    helper.sql.write(
+      db,
+      "sessions",
+      bjson.for,
+      btoa(JSON.stringify(sessionsEnrtyVal))
+    );
     res.send(
       {
       "port":selling.ports,
@@ -321,29 +336,55 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
 
   server.post("/api/container/kill", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
-    var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
+    var bjson: any = { id: "", for: "" }; // boilerplate to not piss off TypeScript.
+    bjson = JSON.parse(b)
+    if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
+      res.statusCode = 400;
+      res.send("ERR: The ID and for field is required.");
+    };
+    let db = helper.sql.open("db.sql")
+    let dbEntry:any = helper.sql.read(db, "userinfo", bjson.for);
+    if (!dbEntry["value"]) {
+      res.statusCode = 400;
+      res.send("ERR: Must provide userid or it is invalid.");
+    }
     let back: any = await util.getBacks();
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }
-    bjson = JSON.parse(b)
-    if (!bjson.id || bjson.id == "") {
-      res.statusCode = 400;
-      res.send("ERR: The ID field is required.");
-    }
+   
     let fr = await fetch(`http://${back}/containers/kill`, {
       method: "POST",
       body: JSON.stringify(req.body),
       headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
     let resp = await fr.text()
+    let sessionsDBentry:any = helper.sql.read(db, "sessions", bjson.for);
+    let sessionsEnrtyVal = JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}") // assume no sessions if it doesnt exist
+    sessionsEnrtyVal[resp]={"id":resp,"status":"killed"}
+    helper.sql.write(
+      db,
+      "sessions",
+      bjson.for,
+      btoa(JSON.stringify(sessionsEnrtyVal))
+    );
     res.send(resp);
   });
 
   server.post("/api/container/delete", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
-    var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
+    var bjson: any = { id: "", for: "" }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b)
+    if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
+      res.statusCode = 400;
+      res.send("ERR: The ID and for field is required.");
+    };
+    let db = helper.sql.open("db.sql")
+    let dbEntry:any = helper.sql.read(db, "userinfo", bjson.for);
+    if (!dbEntry["value"]) {
+      res.statusCode = 400;
+      res.send("ERR: Must provide userid or it is invalid.");
+    }
     let back: any = await util.getBacks();
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
@@ -358,12 +399,31 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
     let resp = await fr.text()
+    let sessionsDBentry:any = helper.sql.read(db, "sessions", bjson.for);
+    let sessionsEntryVal = JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}") // assume no sessions if it doesnt exist
+    sessionsEntryVal[resp] = undefined
+    helper.sql.write(
+      db,
+      "sessions",
+      bjson.for,
+      btoa(JSON.stringify(sessionsEntryVal))
+    );
     res.send(resp);
   });
   server.post("/api/container/pause", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
-    var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
+    var bjson: any = { id: "", for: "" }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b)
+    if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
+      res.statusCode = 400;
+      res.send("ERR: The ID and for field is required.");
+    };
+    let db = helper.sql.open("db.sql")
+    let dbEntry:any = helper.sql.read(db, "userinfo", bjson.for);
+    if (!dbEntry["value"]) {
+      res.statusCode = 400;
+      res.send("ERR: Must provide userid or it is invalid.");
+    }
     let back: any = await util.getBacks();
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
@@ -378,12 +438,32 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
     let resp = await fr.text()
+    let sessionsDBentry:any = helper.sql.read(db, "sessions", bjson.for);
+    let sessionsEnrtyVal = JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}") // assume no sessions if it doesnt exist
+    sessionsEnrtyVal[resp]={"id":resp,"status":"paused"}
+    helper.sql.write(
+      db,
+      "sessions",
+      bjson.for,
+      btoa(JSON.stringify(sessionsEnrtyVal))
+    );
+    
     res.send(resp);
   });
   server.post("/api/container/unpause", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
-    var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
+    var bjson: any = { id: "", for: "" }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b)
+    if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
+      res.statusCode = 400;
+      res.send("ERR: The ID and for field is required.");
+    };
+    let db = helper.sql.open("db.sql")
+    let dbEntry:any = helper.sql.read(db, "userinfo", bjson.for);
+    if (!dbEntry["value"]) {
+      res.statusCode = 400;
+      res.send("ERR: Must provide userid or it is invalid.");
+    }
     let back: any = await util.getBacks();
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
@@ -398,6 +478,15 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       headers: {"Authorization":util.getHTTPAuthHeader(back),"Content-Type":"text/plain"}
     });
     let resp = await fr.text()
+    let sessionsDBentry:any = helper.sql.read(db, "sessions", bjson.for);
+    let sessionsEnrtyVal = JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}") // assume no sessions if it doesnt exist
+    sessionsEnrtyVal[resp]={"id":resp,"status":"started"}
+    helper.sql.write(
+      db,
+      "sessions",
+      bjson.for,
+      btoa(JSON.stringify(sessionsEnrtyVal))
+    );
     res.send(resp);
   });
   server.post("/api/container/keepalive", async (req: Request, res: Response) => {
