@@ -100,18 +100,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function login(usr, pwd) {
-  // DO NOT deal with any credentials before hashing them
+  
   if (
+    // prevent bypassing captcha
     checkCaptchaIfr(document.querySelector(".captchaIframe")) &&
     validateCreds(usr, pwd)
   ) {
-    // prevent bypassing captcha
+    // DO NOT deal with any credentials before hashing them
     usr = "md5:" + (await md5(usr));
     pwd = "sha256:" + (await sha256(pwd));
     res = await fetch("/api/auth/login", {
       method: "POST",
       body: JSON.stringify({ usr: usr, pwd: pwd, em: " " }),
     });
+    localStorage["username"] = usr.replace("md5:","")
     return res;
   } else {
     alert(
@@ -131,7 +133,7 @@ async function signup(usr, pwd, em) {
       method: "POST",
       body: pwd,
     });
-    if ((await safe.text) == "false") {
+    if ((await safe.text()) == "false") {
       alert(
         "This password seems to be a common password. Please use a stronger, more unique password.",
       );
