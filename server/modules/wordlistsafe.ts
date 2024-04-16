@@ -22,6 +22,6 @@ function pwdSafe(password: any): boolean {
   }
 
   return false;
-} catch {return false;}
+} catch {console.warn("Warning: No wordlists found.");;return false;}
 }
 export default { isSafe: pwdSafe };
