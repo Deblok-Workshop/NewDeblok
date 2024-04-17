@@ -370,6 +370,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       res.send({
         port: selling.ports,
         returned: resp,
+        fromNode: endpoints.indexOf(back)
       });
     } catch (e) {
       res.statusCode = 503;
