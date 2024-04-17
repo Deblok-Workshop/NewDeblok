@@ -407,7 +407,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     let fr = await fetch(`http://${back}/containers/kill`, {
       method: "POST",
-      body: JSON.stringify(req.body),
+      body: JSON.stringify(bjson),
       headers: {
         Authorization: util.getHTTPAuthHeader(back),
         "Content-Type": "text/plain",
@@ -547,7 +547,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     let fr = await fetch(`http://${back}/containers/delete`, {
       method: "POST",
-      body: JSON.stringify(req.body),
+      body: JSON.stringify(bjson),
       headers: {
         Authorization: util.getHTTPAuthHeader(back),
         "Content-Type": "text/plain",
@@ -596,7 +596,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     let fr = await fetch(`http://${back}/containers/pause`, {
       method: "POST",
-      body: JSON.stringify(req.body),
+      body: JSON.stringify(bjson),
       headers: {
         Authorization: util.getHTTPAuthHeader(back),
         "Content-Type": "text/plain",
@@ -646,7 +646,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     let fr = await fetch(`http://${back}/containers/unpause`, {
       method: "POST",
-      body: JSON.stringify(req.body),
+      body: JSON.stringify(bjson),
       headers: {
         Authorization: util.getHTTPAuthHeader(back),
         "Content-Type": "text/plain",
@@ -685,7 +685,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       }
       let fr = await fetch(`http://${back}/containers/keepalive`, {
         method: "POST",
-        body: JSON.stringify(req.body),
+        body: req.body,
         headers: {
           Authorization: util.getHTTPAuthHeader(back),
           "Content-Type": "text/plain",
