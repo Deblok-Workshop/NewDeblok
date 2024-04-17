@@ -95,12 +95,8 @@
         document.location = "login.html";
       }
     })();
-
-    console.log(document.location.hash);
-    document.querySelector("iframe").src =
-      `/vnc/vnc.html${document.location.hash}`;
-
-    if (document.location.hash == "#" || document.location.hash == "") {
+    (() => {
+      if (document.location.hash == "#" || document.location.hash == "") {
       document.location = "/";
     } else {
       window.history.pushState(
@@ -109,5 +105,22 @@
         `/#/student/dashboard?__jsession=${crypto.randomUUID()}`,
       );
     }
+      console.log(document.location.hash);
+    let params = document.location.hash.split(";")
+    if (!params || !params[0] || !params[1] || !params[2]) {
+      document.write("ERR: all fields are required.");
+      return;
+    } 
+    let img = params[0];
+    let port = params[1];
+    let node = params[2];
+    document.querySelector("iframe").src = `/vnc/vnc.html#path=/ws/${node}/port/${port}/websockify&autoconnect=true`;
+    // todo actually get from deblokmanager node, but for now we're gonna use slightly lower than inital default keepalive.
+    setInterval(async ()=>{
+      await fetch("/container/keepalive",{"method":"POST","body":JSON.stringify({"id":img,"node":Number(params[2])})});
+    },45000)
+    })();
+    
+    
   </script>
 </html>
