@@ -329,7 +329,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         return;
       }
       let back: any = await util.getBacks();
-      if (!bjson.node || bjson.node > 0) {
+      if (bjson.node || bjson.node != 0) {
         back = endpoints[bjson.node]
       }
       console.log(back);
