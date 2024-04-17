@@ -322,7 +322,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         return;
       }
       let db = helper.sql.open("db.sql");
-      let dbEntry: any = helper.sql.read(db, "userinfo", bjson.for);
+      let dbEntry: any = helper.sql.read(db, "userinfo", "md5:"+bjson.for);
       if (!dbEntry["value"]) {
         res.statusCode = 400;
         res.send("ERR: Must provide userid.");
@@ -357,7 +357,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         },
       });
       let resp = await fr.text();
-      let sessionsDBentry: any = helper.sql.read(db, "sessions", bjson.for);
+      let sessionsDBentry: any = helper.sql.read(db, "sessions", "md5:"+bjson.for);
       let sessionsEnrtyVal =
         JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}"); // assume no sessions if it doesnt exist
       sessionsEnrtyVal[resp] = { id: resp, status: "created" };
@@ -373,6 +373,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         fromNode: endpoints.indexOf(back)
       });
     } catch (e) {
+      console.error(e)
       res.statusCode = 503;
       res.send(e);
     }
@@ -388,7 +389,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let db = helper.sql.open("db.sql");
-    let dbEntry: any = helper.sql.read(db, "userinfo", bjson.for);
+    let dbEntry: any = helper.sql.read(db, "userinfo", "md5:"+bjson.for);
     if (!dbEntry["value"]) {
       res.statusCode = 400;
       res.send("ERR: Must provide userid or it is invalid.");
@@ -410,7 +411,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       },
     });
     let resp = await fr.text();
-    let sessionsDBentry: any = helper.sql.read(db, "sessions", bjson.for);
+    let sessionsDBentry: any = helper.sql.read(db, "sessions", "md5:"+bjson.for);
     let sessionsEnrtyVal =
       JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}"); // assume no sessions if it doesnt exist
     sessionsEnrtyVal[resp] = { id: resp, status: "killed" };
@@ -523,7 +524,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let db = helper.sql.open("db.sql");
-    let dbEntry: any = helper.sql.read(db, "userinfo", bjson.for);
+    let dbEntry: any = helper.sql.read(db, "userinfo", "md5:"+bjson.for);
     if (!dbEntry["value"]) {
       res.statusCode = 400;
       res.send("ERR: Must provide userid or it is invalid.");
@@ -550,7 +551,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       },
     });
     let resp = await fr.text();
-    let sessionsDBentry: any = helper.sql.read(db, "sessions", bjson.for);
+    let sessionsDBentry: any = helper.sql.read(db, "sessions", "md5:"+bjson.for);
     let sessionsEntryVal =
       JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}"); // assume no sessions if it doesnt exist
     sessionsEntryVal[resp] = undefined;
@@ -572,7 +573,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let db = helper.sql.open("db.sql");
-    let dbEntry: any = helper.sql.read(db, "userinfo", bjson.for);
+    let dbEntry: any = helper.sql.read(db, "userinfo", "md5:"+bjson.for);
     if (!dbEntry["value"]) {
       res.statusCode = 400;
       res.send("ERR: Must provide userid or it is invalid.");
@@ -599,7 +600,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       },
     });
     let resp = await fr.text();
-    let sessionsDBentry: any = helper.sql.read(db, "sessions", bjson.for);
+    let sessionsDBentry: any = helper.sql.read(db, "sessions", "md5:"+bjson.for);
     let sessionsEnrtyVal =
       JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}"); // assume no sessions if it doesnt exist
     sessionsEnrtyVal[resp] = { id: resp, status: "paused" };
@@ -622,7 +623,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let db = helper.sql.open("db.sql");
-    let dbEntry: any = helper.sql.read(db, "userinfo", bjson.for);
+    let dbEntry: any = helper.sql.read(db, "userinfo", "md5:"+bjson.for);
     if (!dbEntry["value"]) {
       res.statusCode = 400;
       res.send("ERR: Must provide userid or it is invalid.");
@@ -649,7 +650,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       },
     });
     let resp = await fr.text();
-    let sessionsDBentry: any = helper.sql.read(db, "sessions", bjson.for);
+    let sessionsDBentry: any = helper.sql.read(db, "sessions", "md5:"+bjson.for);
     let sessionsEnrtyVal =
       JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}"); // assume no sessions if it doesnt exist
     sessionsEnrtyVal[resp] = { id: resp, status: "started" };
