@@ -313,7 +313,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       var bjson: any = {
         name: "",
         for: "",
-        node: 0
+        node: -1
       }; // boilerplate to not piss off TypeScript.
       bjson = JSON.parse(b);
       if (!bjson.name || bjson.name == "" || !bjson.for || bjson.for == "") {
@@ -329,10 +329,10 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         return;
       }
       let back: any = await util.getBacks();
-      if (bjson.node || bjson.node != 0) {
+      if (bjson.node && bjson.node != -1) {
         back = endpoints[bjson.node]
       }
-      console.log(back);
+      console.log(bjson.node,back);
       if (!back) {
         throw new Error("No online DeblokManager backends found!");
       }
@@ -358,9 +358,12 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       });
       let resp = await fr.text();
       let sessionsDBentry: any = helper.sql.read(db, "sessions", "md5:"+bjson.for);
-      let sessionsEnrtyVal =
+      let sessionsEnrtyVal: any = {}
+      try {
+      sessionsEnrtyVal =
         JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}"); // assume no sessions if it doesnt exist
-      sessionsEnrtyVal[resp] = { id: resp, status: "created" };
+      } catch {}
+        sessionsEnrtyVal[resp] = { id: resp, status: "created" };
       helper.sql.write(
         db,
         "sessions",
