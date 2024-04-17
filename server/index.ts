@@ -84,7 +84,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         res.send(buf);
       } else {
         res.statusCode = 404;
-        res.send("ERR: CAPTCHA not found");
+        res.send("ERR: CAPTCHA not found");return;
       }
     },
   );
@@ -109,7 +109,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         res.send(rv);
       } else {
         res.statusCode = 404;
-        res.send("ERR: CAPTCHA not found");
+        res.send("ERR: CAPTCHA not found");return;
       }
     },
   );
@@ -123,7 +123,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       res.send("");
     } else {
       res.statusCode = 404;
-      res.send("ERR: CAPTCHA not found");
+      res.send("ERR: CAPTCHA not found");return;
     }
   });
   server.get("/api/captcha/request", async (req: Request, res: Response) => {
@@ -143,33 +143,33 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     } catch (e) {
       console.error(e);
       res.statusCode = 400;
-      res.send("ERR: Bad JSON");
+      res.send("ERR: Bad JSON");return;
     }
     const usr: string = bjson["usr"];
     var pwd: string = bjson["pwd"];
     const email: string = bjson["em"];
     if (usr == "" || !usr || pwd == "" || !pwd || email == "" || !email) {
       res.statusCode = 400;
-      res.send("ERR: One or more fields are missing.");
+      res.send("ERR: One or more fields are missing.");return;
     }
     if (pwd.length != 71) {
       res.statusCode = 400;
-      res.send("ERR: Invalid input, pwd should be a hash.");
+      res.send("ERR: Invalid input, pwd should be a hash.");return;
     }
     if (usr.length != 36) {
       res.statusCode = 400;
-      res.send("ERR: Invalid input, usr should be a hash.");
+      res.send("ERR: Invalid input, usr should be a hash.");return;
     }
     if (!String(pwd).startsWith("sha256:") || !String(usr).startsWith("md5:")) {
       res.statusCode = 400;
-      res.send("ERR: Invalid input, the hash should be known.");
+      res.send("ERR: Invalid input, the hash should be known.");return;
     }
     try {
       var db = helper.sql.open("db.sql", true);
       var exists = helper.sql.read(db, "credentials", usr);
       if (exists) {
         res.statusCode = 400;
-        res.send("ERR: Username already exists");
+        res.send("ERR: Username already exists");return;
       }
       // TODO: prevent email sharing
       try {
@@ -216,25 +216,25 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     } catch (e) {
       console.error(e);
       res.statusCode = 400;
-      res.send("ERR: Bad JSON");
+      res.send("ERR: Bad JSON");return;
     }
     const usr: string = bjson["usr"];
     var pwd: string = bjson["pwd"];
     if (usr == "" || !usr || pwd == "" || !pwd) {
       res.statusCode = 400;
-      res.send("ERR: One or more fields are missing.");
+      res.send("ERR: One or more fields are missing.");return;
     }
     if (pwd.length != 71) {
       res.statusCode = 400;
-      res.send("ERR: Invalid input.");
+      res.send("ERR: Invalid input.");return;
     }
     if (usr.length != 36) {
       res.statusCode = 400;
-      res.send("ERR: Invalid input.");
+      res.send("ERR: Invalid input.");return;
     }
     if (!String(pwd).startsWith("sha256:") || !String(usr).startsWith("md5:")) {
       res.statusCode = 400;
-      res.send("ERR: Invalid input.");
+      res.send("ERR: Invalid input.");return;
     }
     var db = helper.sql.open("db.sql", true);
     var entry: any = helper.sql.read(db, "credentials", usr);
@@ -257,11 +257,11 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         ));
       } else {
         res.statusCode = 400;
-        res.send("ERR: Password is incorrect.");
+        res.send("ERR: Password is incorrect.");return;
       }
     } else {
       res.statusCode = 400;
-      res.send("ERR: Username is incorrect.");
+      res.send("ERR: Username is incorrect.");return;
     }
   });
   server.post("/api/auth/tokenvalidate", async (req: Request, res: Response) => {
@@ -269,7 +269,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     let out = helper.auth.validate(atob(req.body));
     if (out[0]) {
       res.statusCode = 400;
-      res.send(`ERR: ${out[1]}`);
+      res.send(`ERR: ${out[1]}`);return;
     } else {
       res.send("OK");
     } } catch {res.statusCode = 400;res.end()}
@@ -290,13 +290,13 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     bjson = JSON.parse(b);
     if (!bjson.name || bjson.name == "" || !bjson.for || bjson.for == "") {
       res.statusCode = 400;
-      res.send("ERR: Name and for field is required.");
+      res.send("ERR: Name and for field is required.");return;
     }
     let db = helper.sql.open("db.sql")
     let dbEntry:any = helper.sql.read(db, "userinfo", bjson.for);
     if (!dbEntry["value"]) {
       res.statusCode = 400;
-      res.send("ERR: Must provide userid.");
+      res.send("ERR: Must provide userid.");return;
     }
     let back: any = await util.getBacks();
     console.log(back)
@@ -348,13 +348,13 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     bjson = JSON.parse(b)
     if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
       res.statusCode = 400;
-      res.send("ERR: The ID and for field is required.");
+      res.send("ERR: The ID and for field is required.");return;
     };
     let db = helper.sql.open("db.sql")
     let dbEntry:any = helper.sql.read(db, "userinfo", bjson.for);
     if (!dbEntry["value"]) {
       res.statusCode = 400;
-      res.send("ERR: Must provide userid or it is invalid.");
+      res.send("ERR: Must provide userid or it is invalid.");return;
     }
     let back: any = await util.getBacks();
     if (!back) {
@@ -382,7 +382,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     const b: any = req.params.user; 
     if (!b || b == "") {
       res.statusCode = 400;
-      res.send("ERR: The user field is required.");return;
+      res.send("ERR: The user field is required.");return;return;
     };
   let db = helper.sql.open("db.sql");
   let sessionsDBentry:any = helper.sql.read(db, "sessions", "md5:"+b);
@@ -392,7 +392,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     const b: any = req.params.user; 
     if (!b || b == "") {
       res.statusCode = 400;
-      res.send("ERR: The user field is required.");return;
+      res.send("ERR: The user field is required.");return;return;
     };
   let db = helper.sql.open("db.sql");
   let sessionsDBentry:any = helper.sql.read(db, "userinfo", "md5:"+b);
@@ -404,13 +404,13 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     bjson = JSON.parse(b)
     if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
       res.statusCode = 400;
-      res.send("ERR: The ID and for field is required.");
+      res.send("ERR: The ID and for field is required.");return;
     };
     let db = helper.sql.open("db.sql")
     let dbEntry:any = helper.sql.read(db, "userinfo", bjson.for);
     if (!dbEntry["value"]) {
       res.statusCode = 400;
-      res.send("ERR: Must provide userid or it is invalid.");
+      res.send("ERR: Must provide userid or it is invalid.");return;
     }
     let back: any = await util.getBacks();
     if (!back) {
@@ -418,7 +418,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     if (!bjson.id || bjson.id == "") {
       res.statusCode = 400;
-      res.send("ERR: The ID field is required.");
+      res.send("ERR: The ID field is required.");return;
     }
     let fr = await fetch(`http://${back}/containers/delete`, {
       method: "POST",
@@ -443,13 +443,13 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     bjson = JSON.parse(b)
     if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
       res.statusCode = 400;
-      res.send("ERR: The ID and for field is required.");
+      res.send("ERR: The ID and for field is required.");return;
     };
     let db = helper.sql.open("db.sql")
     let dbEntry:any = helper.sql.read(db, "userinfo", bjson.for);
     if (!dbEntry["value"]) {
       res.statusCode = 400;
-      res.send("ERR: Must provide userid or it is invalid.");
+      res.send("ERR: Must provide userid or it is invalid.");return;
     }
     let back: any = await util.getBacks();
     if (!back) {
@@ -457,7 +457,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     if (!bjson.id || bjson.id == "") {
       res.statusCode = 400;
-      res.send("ERR: The ID field is required.");
+      res.send("ERR: The ID field is required.");return;
     }
     let fr = await fetch(`http://${back}/containers/pause`, {
       method: "POST",
@@ -483,13 +483,13 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     bjson = JSON.parse(b)
     if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
       res.statusCode = 400;
-      res.send("ERR: The ID and for field is required.");
+      res.send("ERR: The ID and for field is required.");return;
     };
     let db = helper.sql.open("db.sql")
     let dbEntry:any = helper.sql.read(db, "userinfo", bjson.for);
     if (!dbEntry["value"]) {
       res.statusCode = 400;
-      res.send("ERR: Must provide userid or it is invalid.");
+      res.send("ERR: Must provide userid or it is invalid.");return;
     }
     let back: any = await util.getBacks();
     if (!back) {
@@ -497,7 +497,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     if (!bjson.id || bjson.id == "") {
       res.statusCode = 400;
-      res.send("ERR: The ID field is required.");
+      res.send("ERR: The ID field is required.");return;
     }
     let fr = await fetch(`http://${back}/containers/unpause`, {
       method: "POST",
@@ -526,7 +526,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     if (!bjson.id || bjson.id == "") {
       res.statusCode = 400;
-      res.send("ERR: The ID field is required.");
+      res.send("ERR: The ID field is required.");return;
     }
     let fr = await fetch(`http://${back}/containers/keepalive`, {
       method: "POST",
