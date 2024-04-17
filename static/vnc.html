@@ -108,10 +108,13 @@
     let img = params[0];
     let port = params[1];
     let node = params[2];
-    document.querySelector("iframe").src = `/vnc/vnc.html#path=/ws/${node}/port/${port}/websockify&autoconnect=true`;
+    document.querySelector("iframe").src = `/vnc/vnc.html#path=ws/${node}/port/${port}/websockify&autoconnect=false&password=12345678`;
     // todo actually get from deblokmanager node, but for now we're gonna use slightly lower than inital default keepalive.
+    setTimeout(async ()=>{
+      await fetch("/api/container/keepalive",{"method":"POST","body":JSON.stringify({"id":img.replace("#",""),"node":Number(params[2]),"for":localStorage["username"]})});
+    },3000)
     setInterval(async ()=>{
-      await fetch("/container/keepalive",{"method":"POST","body":JSON.stringify({"id":img,"node":Number(params[2])})});
+      await fetch("/api/container/keepalive",{"method":"POST","body":JSON.stringify({"id":img.replace("#",""),"node":Number(params[2]),"for":localStorage["username"]})});
     },45000)
     window.history.pushState(
         { pageTitle: "Student Dashboard" },
