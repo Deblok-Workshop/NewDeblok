@@ -396,7 +396,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     };
   let db = helper.sql.open("db.sql");
   let sessionsDBentry:any = helper.sql.read(db, "userinfo", "md5:"+b);
-  res.json(JSON.parse(sessionsDBentry["value"] || "{}"))
+  res.json(JSON.parse(atob(sessionsDBentry["value"]|| btoa("{}"))))
   });
   server.post("/api/container/delete", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
