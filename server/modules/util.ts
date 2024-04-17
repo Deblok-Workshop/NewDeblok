@@ -3,17 +3,16 @@ endpoints = endpoints.split(",");
 async function ping(url: string): Promise<string> {
   try {
     let headers: { [key: string]: string } = {};
-    if (url.includes("@")) {
-      let creds = url.split("@")[0].split(":");
-      headers.Authorization = `Basic ${btoa(`${creds[0]}:${creds[1]}`)}`;
-    }
-    const response = await fetch("http://" + url + "/", { headers });
+      headers.Authorization = getHTTPAuthHeader(url);
+    const response = await fetch("http://"+url.split("@")[1] + "/", { headers:{"Authorization":getHTTPAuthHeader(url),"Content-Type":"text/plain"}} );
+    console.log(await response.text())
     if (response.status >= 200 && response.status < 400) {
       return "up";
     } else {
       return "down";
     }
   } catch (error) {
+    console.error(error)
     return "down";
   }
 }
