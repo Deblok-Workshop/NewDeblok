@@ -1,4 +1,4 @@
-import helper from "./helper.ts"
+import helper from "./helper.ts";
 if (
   process.argv.includes("--license") ||
   process.argv.includes("--copyright") ||
@@ -74,6 +74,6 @@ if (!process.env.DBPWD) {
 endpoints = endpoints.split(",");
 
 // make sure session table exists
-let db = helper.sql.open("db.sql")
-helper.sql.droptable(db,"sessions") // drop table if exists, https://xkcd.com/327/
-helper.sql.maketable(db,"sessions") 
+let db = helper.sql.open("db.sql");
+helper.sql.droptable(db, "sessions"); // drop table if exists, https://xkcd.com/327/
+helper.sql.maketable(db, "sessions");

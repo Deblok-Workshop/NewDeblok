@@ -100,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function login(usr, pwd) {
-  
   if (
     // prevent bypassing captcha
     checkCaptchaIfr(document.querySelector(".captchaIframe")) &&
@@ -113,7 +112,7 @@ async function login(usr, pwd) {
       method: "POST",
       body: JSON.stringify({ usr: usr, pwd: pwd, em: " " }),
     });
-    localStorage["username"] = usr.replace("md5:","")
+    localStorage["username"] = usr.replace("md5:", "");
     return res;
   } else {
     alert(

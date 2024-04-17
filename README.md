@@ -1,5 +1,3 @@
-
-
 ### The state of New Deblok:
 
 - Total: ~75% complete
