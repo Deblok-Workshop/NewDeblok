@@ -398,6 +398,36 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   let sessionsDBentry:any = helper.sql.read(db, "userinfo", "md5:"+b);
   res.json(JSON.parse(atob(sessionsDBentry["value"]|| btoa("{}"))))
   });
+  server.post("/api/auth/updatedisplayname/", async (req: Request, res: Response) => {
+    const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
+    var bjson: any = { newname: "", for: "", auth: "" }; // boilerplate to not piss off TypeScript.
+    bjson = JSON.parse(b)
+    if (!bjson.newname || bjson.newname == "" || !bjson.for || bjson.for == "" || !bjson.auth || bjson.auth == "") {
+      res.statusCode = 400;
+      res.send("ERR: All fields are required");return;
+    };
+    if (!helper.auth.validate(bjson.auth)[0]) {
+      res.statusCode = 400;
+      res.send("ERR: Auth token is errornous.");return;
+    }
+    let db = helper.sql.open("db.sql")
+    let dbEntry:any = helper.sql.read(db, "userinfo", "md5:"+bjson.for);
+    if (!dbEntry["value"]) {
+      res.statusCode = 400;
+      res.send("ERR: Must provide userid or it is invalid.");return;
+    }
+  let sessionsDBentry:any = helper.sql.read(db, "userinfo", "md5:"+bjson.for);
+  let uinfo = JSON.parse(atob(sessionsDBentry["value"]|| btoa("{}")))
+  uinfo.displayName = bjson.newname;
+  helper.sql.write(
+    db,
+    "userinfo",
+    "md5:"+bjson.for,
+    btoa(JSON.stringify(uinfo)) // don't know real username
+  )
+  res.send("OK!");
+  return;
+  });
   server.post("/api/container/delete", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
     var bjson: any = { id: "", for: "" }; // boilerplate to not piss off TypeScript.
