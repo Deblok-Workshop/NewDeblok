@@ -313,6 +313,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       var bjson: any = {
         name: "",
         for: "",
+        node: 0
       }; // boilerplate to not piss off TypeScript.
       bjson = JSON.parse(b);
       if (!bjson.name || bjson.name == "" || !bjson.for || bjson.for == "") {
@@ -328,6 +329,9 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         return;
       }
       let back: any = await util.getBacks();
+      if (!bjson.node || bjson.node > 0) {
+        back = endpoints[bjson.node]
+      }
       console.log(back);
       if (!back) {
         throw new Error("No online DeblokManager backends found!");
@@ -375,7 +379,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
 
   server.post("/api/container/kill", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
-    var bjson: any = { id: "", for: "" }; // boilerplate to not piss off TypeScript.
+    var bjson: any = { id: "", for: "",node:0 }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b);
     if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
       res.statusCode = 400;
@@ -393,7 +397,9 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }
-
+    if (!bjson.node || bjson.node > 0) {
+      back = endpoints[bjson.node]
+    }
     let fr = await fetch(`http://${back}/containers/kill`, {
       method: "POST",
       body: JSON.stringify(req.body),
@@ -423,6 +429,20 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         res.statusCode = 400;
         res.send("ERR: The user field is required.");
         return;
+        return;
+      }
+      let db = helper.sql.open("db.sql");
+      let sessionsDBentry: any = helper.sql.read(db, "sessions", "md5:" + b);
+      res.json(JSON.parse(sessionsDBentry["value"] || "{}"));
+    },
+  );
+  server.get(
+    "/api/policy/:node/get",
+    async (req: Request, res: Response) => {
+      const b: any = req.params.user;
+      if (!b || b == "") {
+        res.statusCode = 400;
+        res.send("ERR: The user field is required.");
         return;
       }
       let db = helper.sql.open("db.sql");
@@ -494,7 +514,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   );
   server.post("/api/container/delete", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
-    var bjson: any = { id: "", for: "" }; // boilerplate to not piss off TypeScript.
+    var bjson: any = { id: "", for: "", node:0 }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b);
     if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
       res.statusCode = 400;
@@ -509,6 +529,9 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let back: any = await util.getBacks();
+    if (!bjson.node || bjson.node > 0) {
+      back = endpoints[bjson.node]
+    }
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }
@@ -540,7 +563,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   });
   server.post("/api/container/pause", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
-    var bjson: any = { id: "", for: "" }; // boilerplate to not piss off TypeScript.
+    var bjson: any = { id: "", for: "",node:0 }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b);
     if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
       res.statusCode = 400;
@@ -555,6 +578,9 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let back: any = await util.getBacks();
+    if (!bjson.node || bjson.node > 0) {
+      back = endpoints[bjson.node]
+    }
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }
@@ -587,7 +613,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   });
   server.post("/api/container/unpause", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
-    var bjson: any = { id: "", for: "" }; // boilerplate to not piss off TypeScript.
+    var bjson: any = { id: "", for: "",node:0 }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b);
     if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
       res.statusCode = 400;
@@ -602,6 +628,9 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let back: any = await util.getBacks();
+    if (!bjson.node || bjson.node > 0) {
+      back = endpoints[bjson.node]
+    }
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
     }
@@ -635,9 +664,12 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     "/api/container/keepalive",
     async (req: Request, res: Response) => {
       const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
-      var bjson: any = { id: "" }; // boilerplate to not piss off TypeScript.
+      var bjson: any = { id: "",node:0 }; // boilerplate to not piss off TypeScript.
       bjson = JSON.parse(b);
       let back: any = await util.getBacks();
+      if (!bjson.node || bjson.node > 0) {
+        back = endpoints[bjson.node]
+      }
       if (!back) {
         throw new Error("No online DeblokManager backends found!");
       }

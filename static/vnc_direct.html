@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" class="mocha">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deblok</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body class="body">
+    <hidden data-modal-target="item-modal"></hidden>
+    <overlay> </overlay>
+    <nav
+      class="flex flex-row p-2 bg-mantle align-middle shadow-lg shadow-mantle/20 z-10"
+    >
+      <logo class="w-12 h-12 inline-block mr-4">
+        <img src="assets/favicon.png" />
+      </logo>
+      <div class="flex flex-row items-center flex-grow justify-end">
+        <a
+          href="settings.html"
+          class="duration-300 rounded-md hover:bg-mauve/10 p-2 mx-5"
+        >
+          <i
+            data-lucide="settings"
+            class="inline text-mauve w-7 h-7 my-auto"
+          ></i>
+        </a>
+      </div>
+      <a
+        href="javascript:"
+        class="flex ml-auto float-right mx-4 z-100 relative"
+      >
+        <img
+          data-dropdown-toggle="profile-dropdown"
+          onclick="document.querySelector(`#profile-dropdown`).classList.toggle(`anim__dropdown`)"
+          class="pfpico p-0.5 bg-white"
+          src="/api/img/identicon.png"
+        />
+        <div
+          id="profile-dropdown"
+          onblur="document.querySelector(`#profile-dropdown`).classList.toggle(`anim__dropdown`)"
+          class="hidden dropdown"
+        >
+          <ul class="py-2 text-sm text-text duration-[250ms]">
+            <li>
+              <a
+                href="dash.html"
+                class="block px-4 py-2 active-dropdown-color duration-[250ms]"
+                >Dashboard</a
+              >
+            </li>
+            <li>
+              <a
+                href="settings.html"
+                class="block px-4 py-2 reg-dropdown-color duration-[250ms]"
+              >
+                Settings</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                data-modal-target="popup-modal"
+                data-modal-toggle="popup-modal"
+                class="block px-4 py-2 bg-red-600/20 hover:bg-red-600 duration-[250ms]"
+                >Log Out</a
+              >
+            </li>
+          </ul>
+        </div>
+      </a>
+    </nav>
+    <br />
+    <iframe class="w-full h-full z-[3]"></iframe>
+  </body>
+  <script src="modules/global.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+  <script>
+    (async () => {
+      if (localStorage["DEBLOKAUTH"] != undefined) {
+        let tkncheck = await fetch("/api/auth/tokenvalidate", {
+          method: "POST",
+          body: localStorage["DEBLOKAUTH"],
+        });
+        if (tkncheck.ok) {
+        } else {
+          document.location = "login.html";
+        }
+      } else {
+        document.location = "login.html";
+      }
+    })();
+
+    console.log(document.location.hash);
+    document.querySelector("iframe").src =
+      `/vnc/vnc.html${document.location.hash}`;
+
+    if (document.location.hash == "#" || document.location.hash == "") {
+      document.location = "/";
+    } else {
+      window.history.pushState(
+        { pageTitle: "Student Dashboard" },
+        "",
+        `/#/student/dashboard?__jsession=${crypto.randomUUID()}`,
+      );
+    }
+  </script>
+</html>
