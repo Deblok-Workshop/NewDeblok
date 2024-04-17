@@ -343,7 +343,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         res.send("Image could not be found in configuration.");
       }
       let selling: any = dconf[bjson.name.toLowerCase()];
-      let ports: any = await util.getBackPorts(await util.getBacks());
+      let ports: any = await util.getBackPorts(back);
       if (selling.port) {
         selling.ports = `${ports[0]}:${selling.port}`;
       }
