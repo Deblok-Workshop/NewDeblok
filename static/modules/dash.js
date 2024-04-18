@@ -44,7 +44,7 @@ function item(title, description, icon, buttons = ["OK", "Cancel"],launchSession
   if (window.btnReturn == "clickedbtn0") {
     makeSession(launchSession)
   }
-  })
+  })();
   
 }
 function itemModal(title, description, icon, buttons = ["OK", "Cancel"]) {
