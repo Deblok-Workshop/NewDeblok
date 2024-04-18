@@ -313,7 +313,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       var bjson: any = {
         name: "",
         for: "",
-        node: -1
+        node: -1,
       }; // boilerplate to not piss off TypeScript.
       bjson = JSON.parse(b);
       if (!bjson.name || bjson.name == "" || !bjson.for || bjson.for == "") {
@@ -322,7 +322,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         return;
       }
       let db = helper.sql.open("db.sql");
-      let dbEntry: any = helper.sql.read(db, "userinfo", "md5:"+bjson.for);
+      let dbEntry: any = helper.sql.read(db, "userinfo", "md5:" + bjson.for);
       if (!dbEntry["value"]) {
         res.statusCode = 400;
         res.send("ERR: Must provide userid.");
@@ -330,9 +330,9 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       }
       let back: any = await util.getBacks();
       if (bjson.node && bjson.node != -1) {
-        back = endpoints[bjson.node]
+        back = endpoints[bjson.node];
       }
-      console.log(bjson.node,back);
+      console.log(bjson.node, back);
       if (!back) {
         throw new Error("No online DeblokManager backends found!");
       }
@@ -357,13 +357,17 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         },
       });
       let resp = await fr.text();
-      let sessionsDBentry: any = helper.sql.read(db, "sessions", "md5:"+bjson.for);
-      let sessionsEnrtyVal: any = {}
+      let sessionsDBentry: any = helper.sql.read(
+        db,
+        "sessions",
+        "md5:" + bjson.for,
+      );
+      let sessionsEnrtyVal: any = {};
       try {
-      sessionsEnrtyVal =
-        JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}"); // assume no sessions if it doesnt exist
+        sessionsEnrtyVal =
+          JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}"); // assume no sessions if it doesnt exist
       } catch {}
-        sessionsEnrtyVal[resp] = { id: resp, status: "created" };
+      sessionsEnrtyVal[resp] = { id: resp, status: "created" };
       helper.sql.write(
         db,
         "sessions",
@@ -373,10 +377,10 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       res.send({
         port: selling.ports,
         returned: resp,
-        fromNode: endpoints.indexOf(back)
+        fromNode: endpoints.indexOf(back),
       });
     } catch (e) {
-      console.error(e)
+      console.error(e);
       res.statusCode = 503;
       res.send(e);
     }
@@ -384,7 +388,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
 
   server.post("/api/container/kill", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
-    var bjson: any = { id: "", for: "",node:0 }; // boilerplate to not piss off TypeScript.
+    var bjson: any = { id: "", for: "", node: 0 }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b);
     if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
       res.statusCode = 400;
@@ -392,7 +396,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let db = helper.sql.open("db.sql");
-    let dbEntry: any = helper.sql.read(db, "userinfo", "md5:"+bjson.for);
+    let dbEntry: any = helper.sql.read(db, "userinfo", "md5:" + bjson.for);
     if (!dbEntry["value"]) {
       res.statusCode = 400;
       res.send("ERR: Must provide userid or it is invalid.");
@@ -403,7 +407,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       throw new Error("No online DeblokManager backends found!");
     }
     if (!bjson.node || bjson.node > 0) {
-      back = endpoints[bjson.node]
+      back = endpoints[bjson.node];
     }
     let fr = await fetch(`http://${back}/containers/kill`, {
       method: "POST",
@@ -414,7 +418,11 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       },
     });
     let resp = await fr.text();
-    let sessionsDBentry: any = helper.sql.read(db, "sessions", "md5:"+bjson.for);
+    let sessionsDBentry: any = helper.sql.read(
+      db,
+      "sessions",
+      "md5:" + bjson.for,
+    );
     let sessionsEnrtyVal =
       JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}"); // assume no sessions if it doesnt exist
     sessionsEnrtyVal[resp] = { id: resp, status: "killed" };
@@ -441,20 +449,17 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       res.json(JSON.parse(sessionsDBentry["value"] || "{}"));
     },
   );
-  server.get(
-    "/api/policy/:node/get",
-    async (req: Request, res: Response) => {
-      const b: any = req.params.user;
-      if (!b || b == "") {
-        res.statusCode = 400;
-        res.send("ERR: The user field is required.");
-        return;
-      }
-      let db = helper.sql.open("db.sql");
-      let sessionsDBentry: any = helper.sql.read(db, "sessions", "md5:" + b);
-      res.json(JSON.parse(sessionsDBentry["value"] || "{}"));
-    },
-  );
+  server.get("/api/policy/:node/get", async (req: Request, res: Response) => {
+    const b: any = req.params.user;
+    if (!b || b == "") {
+      res.statusCode = 400;
+      res.send("ERR: The user field is required.");
+      return;
+    }
+    let db = helper.sql.open("db.sql");
+    let sessionsDBentry: any = helper.sql.read(db, "sessions", "md5:" + b);
+    res.json(JSON.parse(sessionsDBentry["value"] || "{}"));
+  });
   server.get(
     "/api/auth/getuserinfo/:user/",
     async (req: Request, res: Response) => {
@@ -519,7 +524,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   );
   server.post("/api/container/delete", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
-    var bjson: any = { id: "", for: "", node:0 }; // boilerplate to not piss off TypeScript.
+    var bjson: any = { id: "", for: "", node: 0 }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b);
     if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
       res.statusCode = 400;
@@ -527,7 +532,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let db = helper.sql.open("db.sql");
-    let dbEntry: any = helper.sql.read(db, "userinfo", "md5:"+bjson.for);
+    let dbEntry: any = helper.sql.read(db, "userinfo", "md5:" + bjson.for);
     if (!dbEntry["value"]) {
       res.statusCode = 400;
       res.send("ERR: Must provide userid or it is invalid.");
@@ -535,7 +540,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     let back: any = await util.getBacks();
     if (!bjson.node || bjson.node > 0) {
-      back = endpoints[bjson.node]
+      back = endpoints[bjson.node];
     }
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
@@ -554,7 +559,11 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       },
     });
     let resp = await fr.text();
-    let sessionsDBentry: any = helper.sql.read(db, "sessions", "md5:"+bjson.for);
+    let sessionsDBentry: any = helper.sql.read(
+      db,
+      "sessions",
+      "md5:" + bjson.for,
+    );
     let sessionsEntryVal =
       JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}"); // assume no sessions if it doesnt exist
     sessionsEntryVal[resp] = undefined;
@@ -568,7 +577,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   });
   server.post("/api/container/pause", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
-    var bjson: any = { id: "", for: "",node:0 }; // boilerplate to not piss off TypeScript.
+    var bjson: any = { id: "", for: "", node: 0 }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b);
     if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
       res.statusCode = 400;
@@ -576,7 +585,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let db = helper.sql.open("db.sql");
-    let dbEntry: any = helper.sql.read(db, "userinfo", "md5:"+bjson.for);
+    let dbEntry: any = helper.sql.read(db, "userinfo", "md5:" + bjson.for);
     if (!dbEntry["value"]) {
       res.statusCode = 400;
       res.send("ERR: Must provide userid or it is invalid.");
@@ -584,7 +593,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     let back: any = await util.getBacks();
     if (!bjson.node || bjson.node > 0) {
-      back = endpoints[bjson.node]
+      back = endpoints[bjson.node];
     }
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
@@ -603,7 +612,11 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       },
     });
     let resp = await fr.text();
-    let sessionsDBentry: any = helper.sql.read(db, "sessions", "md5:"+bjson.for);
+    let sessionsDBentry: any = helper.sql.read(
+      db,
+      "sessions",
+      "md5:" + bjson.for,
+    );
     let sessionsEnrtyVal =
       JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}"); // assume no sessions if it doesnt exist
     sessionsEnrtyVal[resp] = { id: resp, status: "paused" };
@@ -618,7 +631,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   });
   server.post("/api/container/unpause", async (req: Request, res: Response) => {
     const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
-    var bjson: any = { id: "", for: "",node:0 }; // boilerplate to not piss off TypeScript.
+    var bjson: any = { id: "", for: "", node: 0 }; // boilerplate to not piss off TypeScript.
     bjson = JSON.parse(b);
     if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
       res.statusCode = 400;
@@ -626,7 +639,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let db = helper.sql.open("db.sql");
-    let dbEntry: any = helper.sql.read(db, "userinfo", "md5:"+bjson.for);
+    let dbEntry: any = helper.sql.read(db, "userinfo", "md5:" + bjson.for);
     if (!dbEntry["value"]) {
       res.statusCode = 400;
       res.send("ERR: Must provide userid or it is invalid.");
@@ -634,7 +647,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     let back: any = await util.getBacks();
     if (!bjson.node || bjson.node > 0) {
-      back = endpoints[bjson.node]
+      back = endpoints[bjson.node];
     }
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
@@ -653,7 +666,11 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       },
     });
     let resp = await fr.text();
-    let sessionsDBentry: any = helper.sql.read(db, "sessions", "md5:"+bjson.for);
+    let sessionsDBentry: any = helper.sql.read(
+      db,
+      "sessions",
+      "md5:" + bjson.for,
+    );
     let sessionsEnrtyVal =
       JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}"); // assume no sessions if it doesnt exist
     sessionsEnrtyVal[resp] = { id: resp, status: "started" };
@@ -669,11 +686,11 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     "/api/container/keepalive",
     async (req: Request, res: Response) => {
       const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
-      var bjson: any = { id: "",node:0 }; // boilerplate to not piss off TypeScript.
+      var bjson: any = { id: "", node: 0 }; // boilerplate to not piss off TypeScript.
       bjson = JSON.parse(b);
       let back: any = await util.getBacks();
       if (!bjson.node || bjson.node > 0) {
-        back = endpoints[bjson.node]
+        back = endpoints[bjson.node];
       }
       if (!back) {
         throw new Error("No online DeblokManager backends found!");

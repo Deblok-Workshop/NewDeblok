@@ -97,32 +97,45 @@
     })();
     (() => {
       if (document.location.hash == "#" || document.location.hash == "") {
-      document.location = "/";
-    }
+        document.location = "/";
+      }
       console.log(document.location.hash);
-    let params = document.location.hash.split(";")
-    if (!params || !params[0] || !params[1] || !params[2]) {
-      document.write("ERR: all fields are required.");
-      return;
-    } 
-    let img = params[0];
-    let port = params[1];
-    let node = params[2];
-    document.querySelector("iframe").src = `/vnc/vnc.html#path=ws/${node}/port/${port}/websockify&autoconnect=false&password=12345678`;
-    // todo actually get from deblokmanager node, but for now we're gonna use slightly lower than inital default keepalive.
-    setTimeout(async ()=>{
-      await fetch("/api/container/keepalive",{"method":"POST","body":JSON.stringify({"id":img.replace("#",""),"node":Number(params[2]),"for":localStorage["username"]})});
-    },3000)
-    setInterval(async ()=>{
-      await fetch("/api/container/keepalive",{"method":"POST","body":JSON.stringify({"id":img.replace("#",""),"node":Number(params[2]),"for":localStorage["username"]})});
-    },45000)
-    window.history.pushState(
+      let params = document.location.hash.split(";");
+      if (!params || !params[0] || !params[1] || !params[2]) {
+        document.write("ERR: all fields are required.");
+        return;
+      }
+      let img = params[0];
+      let port = params[1];
+      let node = params[2];
+      document.querySelector("iframe").src =
+        `/vnc/vnc.html#path=ws/${node}/port/${port}/websockify&autoconnect=false&password=12345678`;
+      // todo actually get from deblokmanager node, but for now we're gonna use slightly lower than inital default keepalive.
+      setTimeout(async () => {
+        await fetch("/api/container/keepalive", {
+          method: "POST",
+          body: JSON.stringify({
+            id: img.replace("#", ""),
+            node: Number(params[2]),
+            for: localStorage["username"],
+          }),
+        });
+      }, 3000);
+      setInterval(async () => {
+        await fetch("/api/container/keepalive", {
+          method: "POST",
+          body: JSON.stringify({
+            id: img.replace("#", ""),
+            node: Number(params[2]),
+            for: localStorage["username"],
+          }),
+        });
+      }, 45000);
+      window.history.pushState(
         { pageTitle: "Student Dashboard" },
         "",
         `/#/student/dashboard?__jsession=${crypto.randomUUID()}`,
       );
     })();
-    
-    
   </script>
 </html>

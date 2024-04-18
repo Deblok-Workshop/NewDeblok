@@ -2,7 +2,7 @@ import express from "express";
 import type { Request, Response } from "express";
 import config from "../config";
 const server = express();
-console.warn("warn: unavailable mode is enabled!")
+console.warn("warn: unavailable mode is enabled!");
 server.use("/assets", express.static("static/assets"));
 
 server.all("/app.css", async (req: Request, res: Response) => {
