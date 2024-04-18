@@ -35,20 +35,33 @@ const cardData = [
     name: "ubuntu-xfce",
     description: "Ubuntu (XFCE) on Deblok.",
   },
-  /*
+  {
+    img: "assets/icons/ubuntu-xfce.png",
+    title: "Ubuntu Terminal",
+    subtitle: "Terminals",
+    name: "ubuntu-base",
+    description: "Ubuntu on Deblok.",
+  },
   {
     img: "assets/icons/fedora-xfce.png",
-    title: "Fedora (XFCE)",
-    subtitle: "Desktop",
-    name: "fedora-xfce",
-    description: "Fedora (XFCE) on Deblok.",
-  },*/
+    title: "Fedora Terminal",
+    subtitle: "Terminals",
+    name: "fedora-base",
+    description: "Fedora on Deblok.",
+  },
   {
     img: "assets/icons/debian-xfce.png",
     title: "Debian (XFCE)",
     subtitle: "Desktop",
     name: "debian-xfce",
     description: "Debian (XFCE) on Deblok.",
+  },
+  {
+    img: "assets/icons/debian-xfce.png",
+    title: "Debian Terminal",
+    subtitle: "Terminals",
+    name: "debian-base",
+    description: "Debian on Deblok.",
   },
   // Made by spark and rare pookie
 ];
