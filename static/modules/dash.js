@@ -22,7 +22,7 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
     cardElement.classList.add("card"); // this is shit
 
     const innerContent = `
-    <div onclick="itemModal('${card.title}', '${card.description}','${card.img}',['Launch (not functional yet)']);">
+    <div onclick="item('${card.title}', '${card.description}','${card.img}',['Launch'],'${card.name}');">
 <span class="flex flex-row">
 <img class="!max-h-14 !max-w-14 !w-14 !h-14 item-img duration-300" style="border-radius:9999px;" src="${card.img}">
 <span class="flex flex-col">
@@ -37,6 +37,15 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
 
     cardContain.appendChild(cardElement);
   });
+}
+function item(title, description, icon, buttons = ["OK", "Cancel"],launchSession) {
+  (()=>{
+    itemModal(title, description,icon,buttons);
+  if (window.btnReturn == "clickedbtn0") {
+    makeSession(launchSession)
+  }
+  })
+  
 }
 function itemModal(title, description, icon, buttons = ["OK", "Cancel"]) {
   //setTimeout(()=>{
@@ -128,3 +137,11 @@ function itemModalHide() {
   }, 320);
   33;
 }
+function makeSession(container) {
+  (async ()=>{
+    let res = await fetch("/api/container/create",{"method":"POST","body":JSON.stringify({"name":"debian-base","for":localStorage["username"]})})
+res = await res.json();
+document.location = `vnc.html#${res.returned};${res.port.split(":")[0]};${res.fromNode};`
+
+  })();
+} 
