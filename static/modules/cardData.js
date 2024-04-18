@@ -13,7 +13,7 @@ const cardData = [
     name: "chromium",
     description: "Chromium on Deblok.",
   },
-  {
+ /* {
     img: "assets/icons/opera.png",
     title: "Opera",
     subtitle: "Internet",
@@ -27,6 +27,7 @@ const cardData = [
     name: "gimp",
     description: "GIMP on Deblok.",
   },
+  */
   {
     img: "assets/icons/ubuntu-xfce.png",
     title: "Ubuntu (XFCE)",
@@ -34,13 +35,14 @@ const cardData = [
     name: "ubuntu-xfce",
     description: "Ubuntu (XFCE) on Deblok.",
   },
+  /*
   {
     img: "assets/icons/fedora-xfce.png",
     title: "Fedora (XFCE)",
     subtitle: "Desktop",
     name: "fedora-xfce",
     description: "Fedora (XFCE) on Deblok.",
-  },
+  },*/
   {
     img: "assets/icons/debian-xfce.png",
     title: "Debian (XFCE)",
