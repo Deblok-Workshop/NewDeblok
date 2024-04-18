@@ -5,7 +5,6 @@ async function ping(url: string): Promise<string> {
     let headers: { [key: string]: string } = {};
       headers.Authorization = getHTTPAuthHeader(url);
     const response = await fetch("http://"+url.split("@")[1] + "/", { headers:{"Authorization":getHTTPAuthHeader(url),"Content-Type":"text/plain"}} );
-    console.log(await response.text())
     if (response.status >= 200 && response.status < 400) {
       return "up";
     } else {
@@ -29,7 +28,6 @@ async function getBacks() {
 async function healthcheck() {
   let backendstat: any[] = [];
   for (let i = 0; i < endpoints.length; i++) {
-    console.log(backendstat, endpoints);
     backendstat[backendstat.length] = await ping(endpoints[i]);
   }
   return { api: "up", backend: backendstat };
