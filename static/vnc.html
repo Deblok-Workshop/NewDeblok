@@ -109,7 +109,7 @@
       let port = params[1];
       let node = params[2];
       document.querySelector("iframe").src =
-        `/vnc/vnc.html#path=ws/${node}/port/${port}/websockify&autoconnect=false&password=12345678`;
+        `/vnc/vnc.html#path=ws/${node}/port/${port}/websockify&autoconnect=true&scaling=remote&password=12345678`;
       // todo actually get from deblokmanager node, but for now we're gonna use slightly lower than inital default keepalive.
       setTimeout(async () => {
         await fetch("/api/container/keepalive", {
