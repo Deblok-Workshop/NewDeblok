@@ -3,7 +3,7 @@
 - Total: ~75% complete
 - DeblokManager: 100% complete, nothing needs work in this area
 - Backend: 100% complete, This probably says 100% but rare's still cookin the backend.
-- Frontend: 50% done, needs container creation and vnc proxy.
+- Frontend: 80% done, everything (kinda) works but its buggy, also need custom vnc menu for container stuff
 - Backend Proxies: 100% done, nothing needs work in this area
 
 ---
