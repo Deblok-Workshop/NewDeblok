@@ -74,18 +74,22 @@
     </nav>
     <br />
       <div class="sessionNavContainer flex flex-row">
-      <div class="sessionNav bg-blue-950/60  pr-2 p-0.5 backdrop-blur-md z-[10000] rounded-md flex flex-row w-fit session_collapsed">
-        <button class="w-fit h-fit p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700"
+      <div class="sessionNav py-2 session_collapsed bg-blue-950/60 backdrop-brightness-75 pr-2 p-0.5 backdrop-blur-md !z-[10000] rounded-md flex flex-row w-fit ">
+        <button class="w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 hover:ring-2 ring-1 "
       onclick="UI.disconnect()"
-      title="Disconnect"
-      <i
-      data-lucide="unplug"
-      class="inline text-red w-6 h-6 my-auto"
-    ></i>
-      >
+      title="Disconnect">
+      <i data-lucide="unplug" class="inline text-red w-6 h-6 my-auto"></i>
+      
+      </button>
+      <button class="compression w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-slate-900 hover:bg-slate-800 active:bg-slate-700 hover:ring-2 ring-1 "
+      title="Compression">
+      <i data-lucide="fold-vertical" class="inline text-red w-6 h-6 my-auto"></i>
+      <div class="slider">
+        <input type="range" min="1" max="9">
+      </div>
       </button>
       </div>
-      <button class="w-fit h-fit session_collapsed expandSessionNav z-[10000] p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700"
+      <button class="w-fit h-fit session_collapsed expandSessionNav !z-[10000] p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700"
       onclick="let nc=document.querySelector('.sessionNav');
       nc.classList.toggle('session_collapsed');nc.classList.toggle('session_expanded');
       this.classList.toggle('session_collapsed');this.classList.toggle('session_expanded');

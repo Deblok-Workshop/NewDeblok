@@ -379,10 +379,12 @@ hidden,
   opacity: 0;
 }
 button.session_collapsed svg {transform:rotateZ(0deg);transition: all 0.3s;}
-button.session_collapsed {position:relative;left:-131px;transition: all 0.3s;}
+button.session_collapsed {transition: all 0.3s;}
 button.session_collapsed:hover {padding-left:16px;transition:all 0.3s;}
-button.session_expanded {position:relative;left:-16px;transition: all 0.3s;border-top-left-radius: 0px;border-bottom-left-radius: 0px;}
+button.session_expanded {transition: all 0.3s;border-top-left-radius: 0px;border-bottom-left-radius: 0px;}
 button.session_expanded svg {transform:rotateZ(180deg);transition: all 0.3s;}
 button.session_expanded:hover {padding-right:16px;transition:all 0.3s;}
-div.session_collapsed {position:relative;left:-70%;transition: all 0.3s;}
-div.session_expanded {position:relative;left:-16px;transition: all 0.3s; padding-left:24px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;}
+div.session_collapsed {width:0px; min-width:0px;overflow:clip;transition: all 0.3s;padding:0; margin:0;}
+div.session_expanded {width:80px; min-width:80px; overflow:clip;transition: all 0.3s; position:relative;}
+.sessionNav {padding-left:16px;padding-right:16px;border-radius:0px;}
+
