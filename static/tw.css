@@ -378,3 +378,5 @@ hidden,
   animation: 0.1s animModal-bw forwards;
   opacity: 0;
 }
+.session_collapsed {@apply overflow-clip max-w-[0px] w-[0px] max-h-[0px] h-[0px] duration-200 !p-0 !m-0}
+.session_expanded {@apply min-w-[100px] overflow-auto duration-200;transition: padding 0s;}
