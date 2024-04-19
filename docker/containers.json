@@ -5,8 +5,8 @@
     "image": "ghcr.io/deblok-workshop/deblokdocker/firefox:latest",
     "port": "6080"
   },
-  "chrome": {
-    "title": "Chrome",
+  "chromium": {
+    "title": "Chromium",
     "resources": { "ram": "1G", "cores": "1.25" },
     "image": "ghcr.io/deblok-workshop/deblokdocker/chromium:latest",
     "port": "6080"
