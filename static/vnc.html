@@ -73,17 +73,31 @@
       </a>
     </nav>
     <br />
-    <div class="sessionNav bg-blue-950/60 backdrop-blur-md z-[10000] rounded-md flex flex-row w-fit">
-      <button class="expandSessionNav p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800"
-      onclick="let nc=document.querySelector('.sessionNavContainer');nc.classList.toggle('session_collapsed');nc.classList.toggle('session_expanded');"
+      <div class="sessionNavContainer flex flex-row">
+      <div class="sessionNav bg-blue-950/60  pr-2 p-0.5 backdrop-blur-md z-[10000] rounded-md flex flex-row w-fit session_collapsed">
+        <button class="w-fit h-fit p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700"
+      onclick="UI.disconnect()"
+      title="Disconnect"
+      <i
+      data-lucide="unplug"
+      class="inline text-red w-6 h-6 my-auto"
+    ></i>
+      >
+      </button>
+      </div>
+      <button class="w-fit h-fit session_collapsed expandSessionNav z-[10000] p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700"
+      onclick="let nc=document.querySelector('.sessionNav');
+      nc.classList.toggle('session_collapsed');nc.classList.toggle('session_expanded');
+      this.classList.toggle('session_collapsed');this.classList.toggle('session_expanded');
+      "
       >
         <i
             data-lucide="chevron-right"
             class="inline text-mauve w-6 h-6 my-auto"
           ></i>
       </button>
-      <div class="sessionNavContainer session_collapsed block duration-300 p-2">sdfsdfsdfsdfsdf</div>
     </div>
+
     <iframe class="w-full h-[90%] z-[3] fixed top-[10%] left-0"></iframe>
   </body>
   <script src="modules/global.js"></script>
@@ -148,11 +162,11 @@
         "",
         `/#/student/dashboard?__jsession=${crypto.randomUUID()}`,
       );
-    })();
+    })();/*
     setInterval(() => {
       document.querySelector("iframe").contentDocument.querySelector("#noVNC_control_bar_anchor").style.display = "none"
       document.querySelector("iframe").contentDocument.querySelector("#noVNC_control_bar").style.display = "none"
-    }, 100);
+    }, 100);*/
     let UI;
     setTimeout(()=>{
       UI = document.querySelector("iframe").contentWindow.novncui

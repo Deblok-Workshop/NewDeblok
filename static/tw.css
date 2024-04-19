@@ -378,5 +378,11 @@ hidden,
   animation: 0.1s animModal-bw forwards;
   opacity: 0;
 }
-.session_collapsed {@apply overflow-clip max-w-[0px] w-[0px] max-h-[0px] h-[0px] duration-200 !p-0 !m-0}
-.session_expanded {@apply min-w-[100px] overflow-auto duration-200;transition: padding 0s;}
+button.session_collapsed svg {transform:rotateZ(0deg);transition: all 0.3s;}
+button.session_collapsed {position:relative;left:-131px;transition: all 0.3s;}
+button.session_collapsed:hover {padding-left:16px;transition:all 0.3s;}
+button.session_expanded {position:relative;left:-16px;transition: all 0.3s;border-top-left-radius: 0px;border-bottom-left-radius: 0px;}
+button.session_expanded svg {transform:rotateZ(180deg);transition: all 0.3s;}
+button.session_expanded:hover {padding-right:16px;transition:all 0.3s;}
+div.session_collapsed {position:relative;left:-70%;transition: all 0.3s;}
+div.session_expanded {position:relative;left:-16px;transition: all 0.3s; padding-left:24px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;}
