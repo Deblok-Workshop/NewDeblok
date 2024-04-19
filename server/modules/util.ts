@@ -5,6 +5,7 @@ async function ping(url: string): Promise<string> {
     let headers: { [key: string]: string } = {};
     headers.Authorization = getHTTPAuthHeader(url);
     const response = await fetch("http://" + url.split("@")[1] + "/", {
+      verbose: true,
       headers: {
         Authorization: getHTTPAuthHeader(url),
         "Content-Type": "text/plain",
