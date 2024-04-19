@@ -109,7 +109,7 @@
       let port = params[1];
       let node = params[2];
       document.querySelector("iframe").src =
-        `/vnc/vnc_lite.html?path=ws/${node}/port/${port}/websockify&autoconnect=true&scaling=remote&password=12345678`;
+        `/vnc/vnc.html?path=ws/${node}/port/${port}/websockify&autoconnect=true&scaling=remote&password=12345678&quality=6&compression=5&logging=info&reconnect=true&reconnect_delay=2000`;
       // todo actually get from deblokmanager node, but for now we're gonna use slightly lower than inital default keepalive.
       setTimeout(async () => {
         await fetch("/api/container/keepalive", {
@@ -120,6 +120,7 @@
             for: localStorage["username"],
           }),
         });
+        
       }, 3000);
       setInterval(async () => {
         await fetch("/api/container/keepalive", {
@@ -137,5 +138,9 @@
         `/#/student/dashboard?__jsession=${crypto.randomUUID()}`,
       );
     })();
+    setInterval(() => {
+      document.querySelector("iframe").contentDocument.querySelector("#noVNC_control_bar_anchor").style.display = "none"
+      document.querySelector("iframe").contentDocument.querySelector("#noVNC_control_bar").style.display = "none"
+    }, 100);
   </script>
 </html>
