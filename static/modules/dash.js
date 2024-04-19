@@ -139,7 +139,7 @@ function itemModalHide() {
 }
 function makeSession(container) {
   (async ()=>{
-    let res = await fetch("/api/container/create",{"method":"POST","body":JSON.stringify({"name":"debian-base","for":localStorage["username"]})})
+    let res = await fetch("/api/container/create",{"method":"POST","body":JSON.stringify({"name":container,"for":localStorage["username"]})})
 res = await res.json();
 document.location = `vnc.html#${res.returned};${res.port.split(":")[0]};${res.fromNode};`
 
