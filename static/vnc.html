@@ -75,30 +75,37 @@
     <br />
       <div class="sessionNavContainer flex flex-row">
       <div class="sessionNav items-center self-center align-middle justify-center py-2 session_collapsed bg-blue-950/60 backdrop-brightness-75 pr-2 p-0.5 backdrop-blur-md !z-[10000] rounded-md flex flex-col w-fit ">
-        <button class="w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 hover:ring-2 ring-1 "
+        <button class="w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 hover:ring-2 ring-1 px-4"
       onclick="UI.disconnect()"
       title="Disconnect">
       <i data-lucide="unplug" class="inline text-red w-5 h-5 "></i>
       
       </button>
-      <button class="compression align-middle items-center self-center flex flex-row w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-slate-900 hover:bg-slate-800 active:bg-slate-900 hover:ring-2 ring-1 "
+      <button class="compression align-middle items-center self-center flex flex-row w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-slate-900 hover:bg-slate-800 active:bg-slate-900 hover:ring-2 ring-1 px-4"
       title="Compression">
       <i data-lucide="fold-vertical" class="inline text-red w-5 h-5 "></i>
       <div class="mx-2 session_slider">
-        <input type="range" onmousemove='document.querySelector("iframe").contentDocument.getElementById("noVNC_setting_compression").value = this.value;UI.updateCompression();' min="1" max="9" class="!ring-0 m-0 p-0 w-[80px]">
+        <input type="range" onmousemove='UI.forceSetting("compression",this.value)' min="0" max="9" class="!ring-0 m-0 p-0 w-[80px]">
       </div>
       
       </button>
-      <button class="compression align-middle items-center self-center flex flex-row w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-slate-900 hover:bg-slate-800 active:bg-slate-900 hover:ring-2 ring-1 "
+      <button class="compression align-middle items-center self-center flex flex-row w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-slate-900 hover:bg-slate-800 active:bg-slate-900 hover:ring-2 ring-1 px-4"
       title="Picture Quality">
       <i data-lucide="image-play" class="inline text-red w-5 h-5 "></i>
       <div class="mx-2 session_slider">
-        <input type="range" onmousemove='document.querySelector("iframe").contentDocument.getElementById("noVNC_setting_quality").value = this.value;UI.updateQuality();' min="1" max="9" class="!ring-0 m-0 p-0 w-[80px]">
+        <input type="range" onmousemove='UI.forceSetting("quality",this.value)' min="0" max="9" class="!ring-0 m-0 p-0 w-[80px]">
       </div>
       
       </button>
+      <button class=" align-middle items-center self-center flex flex-row w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700 hover:ring-2 ring-1 px-4"
+      title="Toggle Clipboard"
+      onclick="toggleClipboard()"
+      >
+      <i data-lucide="clipboard-type" class="inline text-blue w-5 h-5 "></i>
+      
+      </button>
     </div>
-      <button class="w-fit h-fit session_collapsed expandSessionNav !z-[10000] p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700"
+      <button class="w-fit h-fit session_collapsed expandSessionNav !z-[10000] p-2  rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700"
       onclick="let nc=document.querySelector('.sessionNav');
       nc.classList.toggle('session_collapsed');nc.classList.toggle('session_expanded');
       this.classList.toggle('session_collapsed');this.classList.toggle('session_expanded');
@@ -146,8 +153,14 @@
       let img = params[0];
       let port = params[1];
       let node = params[2];
-      document.querySelector("iframe").src =
+      window.img = img
+      window.port = port
+      window.node = node
+      setTimeout(()=>{
+        document.querySelector("iframe").src =
         `/vnc/vnc.html?path=ws/${node}/port/${port}/websockify&autoconnect=true&scaling=remote&password=12345678&quality=6&compression=5&logging=info&reconnect=true&reconnect_delay=2000`;
+      },200)
+      
       // todo actually get from deblokmanager node, but for now we're gonna use slightly lower than inital default keepalive.
       setTimeout(async () => {
         await fetch("/api/container/keepalive", {
@@ -184,5 +197,31 @@
     setTimeout(()=>{
       UI = document.querySelector("iframe").contentWindow.novncui
     },1000)
+    setInterval(()=>{
+      let ele = document.querySelector("iframe").contentDocument.querySelectorAll(".noVNC_button")
+for (let i = 0; i < ele.length; i++) {ele[i].style.display = "none"}
+document.querySelector("iframe").contentDocument.querySelector("#noVNC_disconnect_button").style.display = "block";
+
+    },500)
+    setInterval(()=>{
+      if (!UI.rfb) {UI.connect()}
+    },5000)
+    let showingClipboard = false;
+    function toggleClipboard() {
+      let UI = document.querySelector("iframe").contentWindow.novncui
+      if (showingClipboard) {
+        showingClipboard = !showingClipboard
+        UI.closeClipboardPanel()
+      }
+      else {
+        showingClipboard = !showingClipboard
+        UI.openClipboardPanel()
+      }
+    }
+    function killContainer() {
+      (async () => {
+        await fetch("/api/container/kill",{"method":"POST","body":JSON.stringify({"id":img.substring(1),"node":node,"for":localStorage.username})})
+      })
+    }
   </script>
 </html>
