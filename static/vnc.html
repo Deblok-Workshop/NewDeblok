@@ -74,7 +74,8 @@
     </nav>
     <br />
       <div class="sessionNavContainer flex flex-row">
-      <div class="sessionNav items-center self-center align-middle justify-center py-2 session_collapsed bg-blue-950/60 backdrop-brightness-75 pr-2 p-0.5 backdrop-blur-md !z-[10000] rounded-md flex flex-col w-fit ">
+      <div class="sessionNav items-center self-center align-middle justify-center py-2 session_collapsed bg-blue-950/60 backdrop-brightness-75 pr-2 p-0.5 backdrop-blur-md !z-[10000] rounded-md flex flex-row w-fit ">
+        <div class="row1 flex flex-col mx-2">
         <button class="w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 hover:ring-2 ring-1 ring-red px-4 text-red"
       onclick="UI.disconnect()"
       title="Disconnect">
@@ -88,11 +89,13 @@
       
       </button>
       <button class="w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 ring-red hover:ring-2 ring-1 px-4 text-red"
-      onclick=";UI.rfb.disconnect();UI.showStatus('Restarting container...','warning',3000);restartContainer();"
+      onclick=";UI.disconnect();restartContainer();"
       title="Restart Session">
       <i data-lucide="rotate-ccw" class="inline text-red w-5 h-5 "></i>
       
       </button>
+    </div>
+    <div class="row2 flex flex-col mr-2">
       <button class="compression align-middle items-center self-center flex flex-row w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-slate-900 hover:bg-slate-800 active:bg-slate-900 hover:ring-2 ring-1 px-4 text-subtext1"
       title="Compression">
       <i data-lucide="fold-vertical" class="inline text-subtext1 w-5 h-5 "></i>
@@ -117,6 +120,7 @@
       
       </button>
     </div>
+    </div>
       <button class="w-fit h-fit session_collapsed expandSessionNav !z-[10000] p-2  rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700"
       onclick="let nc=document.querySelector('.sessionNav');
       nc.classList.toggle('session_collapsed');nc.classList.toggle('session_expanded');
@@ -129,6 +133,7 @@
           ></i>
       </button>
     </div>
+    
 
     <iframe class="w-full h-[90%] z-[3] fixed top-[10%] left-0"></iframe>
   </body>
@@ -207,17 +212,18 @@
     }, 100);*/
     let UI;
     setTimeout(()=>{
-      UI = document.querySelector("iframe").contentWindow.novncui
+      UI = document.querySelector("iframe").contentWindow.novncui;
+      UI.showStatus('Hello! If you get a failed to connect error, reconnect after a few seconds.','success',3000);
     },1000)
+    setTimeout(()=>{
+      if(!UI.rfb) {UI.connect()}
+    },5700)
     setInterval(()=>{
       let ele = document.querySelector("iframe").contentDocument.querySelectorAll(".noVNC_button")
 for (let i = 0; i < ele.length; i++) {ele[i].style.display = "none"}
 document.querySelector("iframe").contentDocument.querySelector("#noVNC_disconnect_button").style.display = "block";
 
     },500)
-    setInterval(()=>{
-      if (!UI.rfb) {UI.connect()}
-    },5000)
     let showingClipboard = false;
     function toggleClipboard() {
       let UI = document.querySelector("iframe").contentWindow.novncui
@@ -232,14 +238,18 @@ document.querySelector("iframe").contentDocument.querySelector("#noVNC_disconnec
     }
     function killContainer() {
       (async () => {
+        UI.closeConnectPanel();
         await fetch("/api/container/kill",{"method":"POST","body":JSON.stringify({"id":img.substring(1),"node":node,"for":localStorage.username})});
         setTimeout(()=>{document.location = "/"},100)
       })();
     }
     function restartContainer() {
       (async () => {
-        await fetch("/api/container/restart",{"method":"POST","body":JSON.stringify({"id":img.substring(1),"node":node,"for":localStorage.username})});
+        setTimeout(()=>{UI.showStatus('Restarting container...','success',3000);UI.closeConnectPanel();},300)
         
+        await fetch("/api/container/restart",{"method":"POST","body":JSON.stringify({"id":img.substring(1),"node":node,"for":localStorage.username})});
+        UI.showStatus('Restarted container, autoconnecting in 5 seconds...','success',3000);
+        setTimeout(()=>{UI.connect()},5700)
       })();
     }
   </script>
