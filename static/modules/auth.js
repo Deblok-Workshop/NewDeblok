@@ -160,7 +160,7 @@ async function loginForm() {
       localStorage["DEBLOKAUTH"] = await res.text();
       let redirect = new URLSearchParams(window.location.search).get("redirect_to") || "/"
       document.location =
-        redirect.replaceAll("javascript","");
+        redirect.replaceAll("javascript","").replaceAll("http:","").replaceAll("https:","");
     } else {
       alert(await res.text());
       usrPwd.value = "";
@@ -181,7 +181,7 @@ async function signupForm() {
         localStorage["DEBLOKAUTH"] = await lres.text();
         let redirect = new URLSearchParams(window.location.search).get("redirect_to") || "/"
         document.location =
-          redirect.replaceAll("javascript","");
+          redirect.replaceAll("javascript","").replaceAll("http:","").replaceAll("https:","");
   
       }
     } else {
