@@ -1,9 +1,10 @@
 export default {
   // Ratelimit config
   ratelimit: {
-    duration: 300 * 1000,
-    max: 100,
-    responseMessage: "Global rate limit reached.",
+    windowMs: 300 * 1000,
+    limit: 100,
+    skipFailedRequests: true,
+    message: "Global rate limit reached.",
     skip: (req: any) => {
       return !new URL(req.url).pathname.startsWith("/api");
     },

@@ -3,7 +3,7 @@ import type { Request, Response } from "express";
 import config from "./config";
 import helper from "./modules/helper";
 import captcha from "./modules/captcha";
-// import { rateLimit } from "express-rate-limit";
+import { rateLimit } from "express-rate-limit";
 import cors from "cors";
 import fetch from "node-fetch";
 import wordlistsafe from "./modules/wordlistsafe";
@@ -37,7 +37,7 @@ server.onError(({ code, error, set }) => {
 require("./modules/startupjob.ts");
 server.use("/", express.static("static/"));
 server.use(cors()); // Express cors plugin
-// server.use(rateLimit(config.ratelimit));
+server.use(rateLimit(config.ratelimit));
 if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   require("./modules/unavailable.ts");
 } else {
