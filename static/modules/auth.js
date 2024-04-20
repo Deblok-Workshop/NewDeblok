@@ -158,8 +158,9 @@ async function loginForm() {
   if (res != undefined) {
     if (res.ok) {
       localStorage["DEBLOKAUTH"] = await res.text();
+      let redirect = new URLSearchParams(window.location.search).get("redirect_to") || "/"
       document.location =
-        new URLSearchParams(window.location.search).get("redirect_to") || "/";
+        redirect.replaceAll("javascript","");
     } else {
       alert(await res.text());
       usrPwd.value = "";
@@ -178,8 +179,10 @@ async function signupForm() {
       let lres = await login(usrEle.value, usrPwd.value);
       if (lres != undefined && lres.ok) {
         localStorage["DEBLOKAUTH"] = await lres.text();
+        let redirect = new URLSearchParams(window.location.search).get("redirect_to") || "/"
         document.location =
-          new URLSearchParams(window.location.search).get("redirect_to") || "/";
+          redirect.replaceAll("javascript","");
+  
       }
     } else {
       alert(await res.text());
