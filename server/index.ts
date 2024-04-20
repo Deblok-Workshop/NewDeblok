@@ -38,7 +38,7 @@ require("./modules/startupjob.ts");
 server.use("/", express.static("static/"));
 server.use(cors()); // Express cors plugin
 server.use(rateLimit(config.ratelimit));
-if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
+if (process.argv.includes("--unavailale") || process.argv.includes("-u")) {
   require("./modules/unavailable.ts");
 } else {
   // server.use(staticPlugin({ assets: "static/", prefix: "/" }));
@@ -329,10 +329,10 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         return;
       }
       let back: any = await util.getBacks();
-      if (bjson.node && bjson.node != -1) {
-        back = endpoints[bjson.node];
+      if (Number(bjson.node) && Number(bjson.node) != -1) {
+        back = endpoints[Number(bjson.node)];
       }
-      console.log(bjson.node, back);
+      console.log(Number(bjson.node), back);
       if (!back) {
         throw new Error("No online DeblokManager backends found!");
       }
@@ -407,8 +407,8 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       res.status(500).send("No online DeblokManager backends found!");
       return;
     }
-    if (!bjson.node || bjson.node > 0) {
-      back = endpoints[bjson.node];
+    if (!Number(bjson.node) || Number(bjson.node) > 0) {
+      back = endpoints[Number(bjson.node)];
     }
     let fr = await fetch(`http://${back}/containers/kill`, {
       method: "POST",
@@ -461,8 +461,8 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       res.status(500).send("No online DeblokManager backends found!");
       return;
     }
-    if (!bjson.node || bjson.node > 0) {
-      back = endpoints[bjson.node];
+    if (!Number(bjson.node) || Number(bjson.node) > 0) {
+      back = endpoints[Number(bjson.node)];
     }
     let fr = await fetch(`http://${back}/containers/restart`, {
       method: "POST",
@@ -580,8 +580,8 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let back: any = await util.getBacks();
-    if (!bjson.node || bjson.node > 0) {
-      back = endpoints[bjson.node];
+    if (!Number(bjson.node) || Number(bjson.node) > 0) {
+      back = endpoints[Number(bjson.node)];
     }
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
@@ -633,8 +633,8 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let back: any = await util.getBacks();
-    if (!bjson.node || bjson.node > 0) {
-      back = endpoints[bjson.node];
+    if (!Number(bjson.node) || Number(bjson.node) > 0) {
+      back = endpoints[Number(bjson.node)];
     }
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
@@ -687,8 +687,8 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       return;
     }
     let back: any = await util.getBacks();
-    if (!bjson.node || bjson.node > 0) {
-      back = endpoints[bjson.node];
+    if (!Number(bjson.node) || Number(bjson.node) > 0) {
+      back = endpoints[Number(bjson.node)];
     }
     if (!back) {
       throw new Error("No online DeblokManager backends found!");
@@ -730,8 +730,8 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       var bjson: any = { id: "", node: 0 }; // boilerplate to not piss off TypeScript.
       bjson = JSON.parse(b);
       let back: any = await util.getBacks();
-      if (!bjson.node || bjson.node > 0) {
-        back = endpoints[bjson.node];
+      if (!Number(bjson.node) || Number(bjson.node) > 0) {
+        back = endpoints[Number(bjson.node)];
       }
       if (!back) {
         throw new Error("No online DeblokManager backends found!");
