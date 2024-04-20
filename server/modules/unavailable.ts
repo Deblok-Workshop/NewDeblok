@@ -1,7 +1,9 @@
 import express from "express";
 import type { Request, Response } from "express";
 import config from "../config";
+import rateLimit from "express-rate-limit";
 const server = express();
+server.use(rateLimit(config.ratelimit));
 console.warn("warn: unavailable mode is enabled!");
 server.use("/assets", express.static("static/assets"));
 
