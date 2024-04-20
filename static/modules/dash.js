@@ -38,12 +38,12 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
     cardContain.appendChild(cardElement);
   });
 }
-function item(title, description, icon, buttons = ["OK", "Cancel"],launchSession) {
+function item(title, description, icon, buttons = ["OK", "Cancel"],launchSession = "") {
   (()=>{
     window.btnReturn = ""
     itemModal(title, description,icon,buttons);
     let b = setInterval(()=>{
-      if (window.btnReturn == "clickedbtn0") {
+      if (window.btnReturn == "clickedbtn0" && launchSession != "") {
         makeSession(launchSession); clearInterval(b)
       }
     },150)
@@ -93,7 +93,7 @@ function itemModal(title, description, icon, buttons = ["OK", "Cancel"]) {
           </div>
           <!-- Modal body -->
           <div class="p-4 md:p-5 space-y-4">
-            <p class="text-base leading-relaxed text-text/80">${description}</p>
+            <p class="text-base leading-relaxed text-text/80 w-fit mx-auto">${description}</p>
           </div>
           <!-- Modal footer -->
           <div
@@ -144,8 +144,13 @@ function itemModalHide() {
 function makeSession(container) {
   (async ()=>{
     let res = await fetch("/api/container/create",{"method":"POST","body":JSON.stringify({"name":container,"for":localStorage["username"]})})
-res = await res.json();
-document.location = `vnc.html#${res.returned};${res.port.split(":")[0]};${res.fromNode};`
+    let resp = await res.json();
+if (res.ok && !resp.returned.includes("{")) {
+
+document.location = `vnc.html#${resp.returned};${resp.port.split(":")[0]};${resp.fromNode};`
+} else {
+  itemModal("Error",`The session failed to start: \n<code style="max-width:480px;">${resp.returned}</code>\n`,"",["Close"]);return
+}
 
   })();
 } 
