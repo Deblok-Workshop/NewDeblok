@@ -404,7 +404,8 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     let back: any = await util.getBacks();
     if (!back) {
-      res.status(500).send("No online DeblokManager backends found!");return;
+      res.status(500).send("No online DeblokManager backends found!");
+      return;
     }
     if (!bjson.node || bjson.node > 0) {
       back = endpoints[bjson.node];
@@ -425,10 +426,10 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     );
     let sessionsEnrtyVal;
     try {
-    sessionsEnrtyVal =
-      JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}"); // assume no sessions if it doesnt exist
+      sessionsEnrtyVal =
+        JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}"); // assume no sessions if it doesnt exist
     } catch {
-      sessionsEnrtyVal = {}
+      sessionsEnrtyVal = {};
     }
     sessionsEnrtyVal[resp] = { id: resp, status: "killed" };
     helper.sql.write(
@@ -457,7 +458,8 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     let back: any = await util.getBacks();
     if (!back) {
-      res.status(500).send("No online DeblokManager backends found!");return;
+      res.status(500).send("No online DeblokManager backends found!");
+      return;
     }
     if (!bjson.node || bjson.node > 0) {
       back = endpoints[bjson.node];
@@ -740,19 +742,19 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         return;
       }
       try {
-      let fr = await fetch(`http://${back}/containers/keepalive`, {
-        method: "POST",
-        body: req.body,
-        headers: {
-          Authorization: util.getHTTPAuthHeader(back),
-          "Content-Type": "text/plain",
-        },
-      });
-      let resp = await fr.text();
-      res.send(resp);
-    } catch {
-      res.status(500).send("Internal Server Error")
-    }
+        let fr = await fetch(`http://${back}/containers/keepalive`, {
+          method: "POST",
+          body: req.body,
+          headers: {
+            Authorization: util.getHTTPAuthHeader(back),
+            "Content-Type": "text/plain",
+          },
+        });
+        let resp = await fr.text();
+        res.send(resp);
+      } catch {
+        res.status(500).send("Internal Server Error");
+      }
     },
   );
   server.get("/api/img/identicon.png", async (req: Request, res: Response) => {
@@ -785,20 +787,22 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     // @ts-ignore
     wsProxy.addEventListener("message", (event) => {
       try {
-      ws.send(event.data);
-      } catch {ws.close()}
+        ws.send(event.data);
+      } catch {
+        ws.close();
+      }
     });
     // @ts-ignore
     wsProxy.addEventListener("close", (event) => {
-
       ws.close();
-      
     });
     // @ts-ignore
     ws.addEventListener("message", (event) => {
       try {
-      wsProxy.send(event.data);
-    } catch {ws.close()}
+        wsProxy.send(event.data);
+      } catch {
+        ws.close();
+      }
     });
     // @ts-ignore
     ws.addEventListener("close", (event) => {

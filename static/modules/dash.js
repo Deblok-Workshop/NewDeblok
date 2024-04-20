@@ -38,18 +38,23 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
     cardContain.appendChild(cardElement);
   });
 }
-function item(title, description, icon, buttons = ["OK", "Cancel"],launchSession = "") {
-  (()=>{
-    window.btnReturn = ""
-    itemModal(title, description,icon,buttons);
-    let b = setInterval(()=>{
+function item(
+  title,
+  description,
+  icon,
+  buttons = ["OK", "Cancel"],
+  launchSession = "",
+) {
+  (() => {
+    window.btnReturn = "";
+    itemModal(title, description, icon, buttons);
+    let b = setInterval(() => {
       if (window.btnReturn == "clickedbtn0" && launchSession != "") {
-        makeSession(launchSession); clearInterval(b)
+        makeSession(launchSession);
+        clearInterval(b);
       }
-    },150)
-  
+    }, 150);
   })();
-  
 }
 function itemModal(title, description, icon, buttons = ["OK", "Cancel"]) {
   //setTimeout(()=>{
@@ -139,18 +144,24 @@ function itemModalHide() {
   setTimeout(() => {
     document.querySelector("#item-modal").remove();
   }, 320);
-  
 }
 function makeSession(container) {
-  (async ()=>{
-    let res = await fetch("/api/container/create",{"method":"POST","body":JSON.stringify({"name":container,"for":localStorage["username"]})})
+  (async () => {
+    let res = await fetch("/api/container/create", {
+      method: "POST",
+      body: JSON.stringify({ name: container, for: localStorage["username"] }),
+    });
     let resp = await res.json();
-if (res.ok && !resp.returned.includes("{")) {
-
-document.location = `vnc.html#${resp.returned};${resp.port.split(":")[0]};${resp.fromNode};`
-} else {
-  itemModal("Error",`The session failed to start: \n<code style="max-width:480px;">${resp.returned}</code>\n`,"",["Close"]);return
-}
-
+    if (res.ok && !resp.returned.includes("{")) {
+      document.location = `vnc.html#${resp.returned};${resp.port.split(":")[0]};${resp.fromNode};`;
+    } else {
+      itemModal(
+        "Error",
+        `The session failed to start: \n<code style="max-width:480px;">${resp.returned}</code>\n`,
+        "",
+        ["Close"],
+      );
+      return;
+    }
   })();
-} 
+}

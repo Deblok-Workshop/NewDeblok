@@ -13,7 +13,7 @@ const cardData = [
     name: "chromium",
     description: "Chromium on Deblok.",
   },
- /* {
+  /* {
     img: "assets/icons/opera.png",
     title: "Opera",
     subtitle: "Internet",

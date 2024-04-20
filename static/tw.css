@@ -378,16 +378,65 @@ hidden,
   animation: 0.1s animModal-bw forwards;
   opacity: 0;
 }
-button.session_collapsed svg {transform:rotateZ(0deg);transition: all 0.3s;}
-button.session_collapsed {transition: all 0.3s;}
-button.session_collapsed:hover {padding-left:16px;transition:all 0.3s;}
-button.session_expanded {transition: all 0.3s;border-top-left-radius: 0px;border-bottom-left-radius: 0px;}
-button.session_expanded svg {transform:rotateZ(180deg);transition: all 0.3s;}
-button.session_expanded:hover {padding-right:16px;transition:all 0.3s;}
-div.session_collapsed {width:0px; min-width:0px;overflow:clip;transition: all 0.3s;padding:0; margin:0;}
-div.session_expanded {min-width:80px; overflow:clip;transition: all 0.3s; position:relative;}
-.sessionNav {padding-left:12px;padding-right:12px;border-radius:0px;}
+button.session_collapsed svg {
+  transform: rotateZ(0deg);
+  transition: all 0.3s;
+}
+button.session_collapsed {
+  transition: all 0.3s;
+}
+button.session_collapsed:hover {
+  padding-left: 16px;
+  transition: all 0.3s;
+}
+button.session_expanded {
+  transition: all 0.3s;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+button.session_expanded svg {
+  transform: rotateZ(180deg);
+  transition: all 0.3s;
+}
+button.session_expanded:hover {
+  padding-right: 16px;
+  transition: all 0.3s;
+}
+div.session_collapsed {
+  width: 0px;
+  min-width: 0px;
+  overflow: clip;
+  transition: all 0.3s;
+  padding: 0;
+  margin: 0;
+}
+div.session_expanded {
+  min-width: 80px;
+  overflow: clip;
+  transition: all 0.3s;
+  position: relative;
+}
+.sessionNav {
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 0px;
+}
 
-.compression .session_slider {max-width:0px;min-width:0px;width:0px;overflow:clip;transition: all 0.3s;margin:0;}
-.compression:hover .session_slider {min-width:40px;max-width:80px;width:80px;overflow:clip;transition: all 0.3s;}
-.compression:hover svg {display:none;}
+.compression .session_slider {
+  max-width: 0px;
+  min-width: 0px;
+  width: 0px;
+  overflow: clip;
+  transition: all 0.3s;
+  margin: 0;
+}
+.compression:hover .session_slider {
+  min-width: 40px;
+  max-width: 80px;
+  width: 80px;
+  overflow: clip;
+  transition: all 0.3s;
+}
+.compression:hover svg {
+  display: none;
+}
