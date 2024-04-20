@@ -404,7 +404,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     }
     let back: any = await util.getBacks();
     if (!back) {
-      throw new Error("No online DeblokManager backends found!");
+      res.status(500).send("No online DeblokManager backends found!");return;
     }
     if (!bjson.node || bjson.node > 0) {
       back = endpoints[bjson.node];
@@ -437,6 +437,40 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       bjson.for,
       btoa(JSON.stringify(sessionsEnrtyVal)),
     );
+    res.send(resp);
+  });
+  server.post("/api/container/restart", async (req: Request, res: Response) => {
+    const b: any = req.body; // the body variable is actually a string, this is here to fix a ts error
+    var bjson: any = { id: "", for: "", node: 0 }; // boilerplate to not piss off TypeScript.
+    bjson = JSON.parse(b);
+    if (!bjson.id || bjson.id == "" || !bjson.for || bjson.for == "") {
+      res.statusCode = 400;
+      res.send("ERR: The ID and for field is required.");
+      return;
+    }
+    let db = helper.sql.open("db.sql");
+    let dbEntry: any = helper.sql.read(db, "userinfo", "md5:" + bjson.for);
+    if (!dbEntry["value"]) {
+      res.statusCode = 400;
+      res.send("ERR: Must provide userid or it is invalid.");
+      return;
+    }
+    let back: any = await util.getBacks();
+    if (!back) {
+      res.status(500).send("No online DeblokManager backends found!");return;
+    }
+    if (!bjson.node || bjson.node > 0) {
+      back = endpoints[bjson.node];
+    }
+    let fr = await fetch(`http://${back}/containers/restart`, {
+      method: "POST",
+      body: JSON.stringify(bjson),
+      headers: {
+        Authorization: util.getHTTPAuthHeader(back),
+        "Content-Type": "text/plain",
+      },
+    });
+    let resp = await fr.text();
     res.send(resp);
   });
   server.get(
