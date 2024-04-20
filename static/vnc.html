@@ -88,7 +88,7 @@
       
       </button>
       <button class="w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 ring-red hover:ring-2 ring-1 px-4 text-red"
-      onclick=";UI.disconnect();UI.showStatus('Restarting container...','warning',3000);restartContainer();"
+      onclick=";UI.rfb.disconnect();UI.showStatus('Restarting container...','warning',3000);restartContainer();"
       title="Restart Session">
       <i data-lucide="rotate-ccw" class="inline text-red w-5 h-5 "></i>
       
@@ -234,6 +234,12 @@ document.querySelector("iframe").contentDocument.querySelector("#noVNC_disconnec
       (async () => {
         await fetch("/api/container/kill",{"method":"POST","body":JSON.stringify({"id":img.substring(1),"node":node,"for":localStorage.username})});
         setTimeout(()=>{document.location = "/"},100)
+      })();
+    }
+    function restartContainer() {
+      (async () => {
+        await fetch("/api/container/restart",{"method":"POST","body":JSON.stringify({"id":img.substring(1),"node":node,"for":localStorage.username})});
+        
       })();
     }
   </script>
