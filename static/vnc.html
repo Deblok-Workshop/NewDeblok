@@ -213,7 +213,8 @@
     let UI;
     setTimeout(()=>{
       UI = document.querySelector("iframe").contentWindow.novncui;
-      UI.showStatus('Hello! If you get a failed to connect error, reconnect after a few seconds.','success',3000);
+      setTimeout(()=>{alert('Hello! If you get a failed to connect error, wait a few seconds and try again. I will automatically try and connect after 5 seconds.');},1500)
+      
     },1000)
     setTimeout(()=>{
       if(!UI.rfb) {UI.connect()}

@@ -40,10 +40,14 @@ if (localStorage["DEBLOKAUTH"] != undefined) {
 }
 function item(title, description, icon, buttons = ["OK", "Cancel"],launchSession) {
   (()=>{
+    window.btnReturn = ""
     itemModal(title, description,icon,buttons);
-  if (window.btnReturn == "clickedbtn0") {
-    makeSession(launchSession)
-  }
+    setInterval(()=>{
+      if (window.btnReturn == "clickedbtn0") {
+        makeSession(launchSession)
+      }
+    },150)
+  
   })();
   
 }
@@ -135,7 +139,7 @@ function itemModalHide() {
   setTimeout(() => {
     document.querySelector("#item-modal").remove();
   }, 320);
-  33;
+  
 }
 function makeSession(container) {
   (async ()=>{
