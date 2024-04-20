@@ -85,11 +85,19 @@
       title="Compression">
       <i data-lucide="fold-vertical" class="inline text-red w-5 h-5 "></i>
       <div class="mx-2 session_slider">
-        <input type="range" onmousemove="" min="1" max="9" class="!ring-0 m-0 p-0 w-[80px]">
+        <input type="range" onmousemove='document.querySelector("iframe").contentDocument.getElementById("noVNC_setting_compression").value = this.value;UI.updateCompression();' min="1" max="9" class="!ring-0 m-0 p-0 w-[80px]">
       </div>
-      </div>
-      </button>
       
+      </button>
+      <button class="compression align-middle items-center self-center flex flex-row w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-slate-900 hover:bg-slate-800 active:bg-slate-900 hover:ring-2 ring-1 "
+      title="Picture Quality">
+      <i data-lucide="image-play" class="inline text-red w-5 h-5 "></i>
+      <div class="mx-2 session_slider">
+        <input type="range" onmousemove='document.querySelector("iframe").contentDocument.getElementById("noVNC_setting_quality").value = this.value;UI.updateQuality();' min="1" max="9" class="!ring-0 m-0 p-0 w-[80px]">
+      </div>
+      
+      </button>
+    </div>
       <button class="w-fit h-fit session_collapsed expandSessionNav !z-[10000] p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700"
       onclick="let nc=document.querySelector('.sessionNav');
       nc.classList.toggle('session_collapsed');nc.classList.toggle('session_expanded');
