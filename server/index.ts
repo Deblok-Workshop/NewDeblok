@@ -423,8 +423,13 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       "sessions",
       "md5:" + bjson.for,
     );
-    let sessionsEnrtyVal =
+    let sessionsEnrtyVal;
+    try {
+    sessionsEnrtyVal =
       JSON.parse(atob(sessionsDBentry["value"])) || JSON.parse("{}"); // assume no sessions if it doesnt exist
+    } catch {
+      sessionsEnrtyVal = {}
+    }
     sessionsEnrtyVal[resp] = { id: resp, status: "killed" };
     helper.sql.write(
       db,
@@ -700,6 +705,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         res.send("ERR: The ID field is required.");
         return;
       }
+      try {
       let fr = await fetch(`http://${back}/containers/keepalive`, {
         method: "POST",
         body: req.body,
@@ -710,6 +716,9 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       });
       let resp = await fr.text();
       res.send(resp);
+    } catch {
+      res.status(500).send("Internal Server Error")
+    }
     },
   );
   server.get("/api/img/identicon.png", async (req: Request, res: Response) => {
@@ -741,15 +750,21 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     const wsProxy = new WebSocket(target);
     // @ts-ignore
     wsProxy.addEventListener("message", (event) => {
+      try {
       ws.send(event.data);
+      } catch {ws.close()}
     });
     // @ts-ignore
     wsProxy.addEventListener("close", (event) => {
+
       ws.close();
+      
     });
     // @ts-ignore
     ws.addEventListener("message", (event) => {
+      try {
       wsProxy.send(event.data);
+    } catch {ws.close()}
     });
     // @ts-ignore
     ws.addEventListener("close", (event) => {
