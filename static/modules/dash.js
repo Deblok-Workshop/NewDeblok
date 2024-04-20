@@ -42,9 +42,9 @@ function item(title, description, icon, buttons = ["OK", "Cancel"],launchSession
   (()=>{
     window.btnReturn = ""
     itemModal(title, description,icon,buttons);
-    setInterval(()=>{
+    let b = setInterval(()=>{
       if (window.btnReturn == "clickedbtn0") {
-        makeSession(launchSession)
+        makeSession(launchSession); clearInterval(b)
       }
     },150)
   
