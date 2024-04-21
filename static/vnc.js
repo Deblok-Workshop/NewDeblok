@@ -117,9 +117,9 @@
       window.UI.showStatus(
         "Failed to kill container. Trying again...",
         "error",
-        3000,
+        1000,
       );
-      setTimeout(()=>{killContainer()},200)
+      setTimeout(()=>{killContainer()},1100)
     }
     })();
   }
@@ -157,9 +157,9 @@
           window.UI.showStatus(
             "Failed to restart container. Trying again...",
             "error",
-            3000,
+            1000,
           );
-          setTimeout(()=>{restartContainer()},200)
+          setTimeout(()=>{restartContainer()},1100)
         }, 1000);
       }
     })();
