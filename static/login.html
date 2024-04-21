@@ -74,6 +74,7 @@
       (async () => {
         if (localStorage["DEBLOKAUTH"] != undefined) {
           let tkncheck = await fetch("/api/auth/tokenvalidate", {
+            verbose:true,
             method: "POST",
             body: localStorage["DEBLOKAUTH"],
           });

@@ -1,6 +1,7 @@
 (async () => {
   if (localStorage["DEBLOKAUTH"] != undefined) {
     let tkncheck = await fetch("/api/auth/tokenvalidate", {
+      verbose:true,
       method: "POST",
       body: localStorage["DEBLOKAUTH"],
     });
@@ -148,6 +149,7 @@ function itemModalHide() {
 function makeSession(container) {
   (async () => {
     let res = await fetch("/api/container/create", {
+      verbose:true,
       method: "POST",
       body: JSON.stringify({ name: container, for: localStorage["username"] }),
     });
