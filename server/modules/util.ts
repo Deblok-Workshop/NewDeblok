@@ -1,4 +1,4 @@
-let endpoints: any = process.env.ENDPOINTS;
+var endpoints: any = process.env.ENDPOINTS;
 endpoints = endpoints.split(",");
 async function ping(url: string): Promise<string> {
   try {

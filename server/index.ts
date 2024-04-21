@@ -8,7 +8,7 @@ import cors from "cors";
 import fetch from "node-fetch";
 import wordlistsafe from "./modules/wordlistsafe";
 import util from "./modules/util.ts";
-let endpoints: any = process.env.ENDPOINTS;
+var endpoints: any = process.env.ENDPOINTS;
 endpoints = endpoints.split(",");
 let netaddr = "[::1]";
 netaddr = require("node:os").hostname();
@@ -17,7 +17,6 @@ var HTTPproxy = require("http-proxy");
 const WSocket = require("ws");
 var bodyParser = require("body-parser");
 server.use(bodyParser.raw({ type: "text/plain" }));
-
 // errors
 /*// idk if theres an express-quivulent to this, i dont care atm.
 server.onError(({ code, error, set }) => {
