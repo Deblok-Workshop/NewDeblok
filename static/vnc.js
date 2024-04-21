@@ -84,7 +84,7 @@
     if (!window.UI.rfb) {
       window.UI.connect();
     }
-  }, 5700);
+  }, 5200);
   setInterval(() => {
     let ele = document
       .querySelector("iframe")
@@ -97,17 +97,6 @@
       .contentDocument.querySelector("#noVNC_settings_button").style.display =
       "block";
   }, 500);
-  let showingClipboard = false;
-  function toggleClipboard() {
-    let UI = document.querySelector("iframe").contentWindow.novncui;
-    if (showingClipboard) {
-      showingClipboard = !showingClipboard;
-      window.UI.closeClipboardPanel();
-    } else {
-      showingClipboard = !showingClipboard;
-      window.UI.openClipboardPanel();
-    }
-  }
   function killContainer() {
     (async () => {
       let UI = document.querySelector("iframe").contentWindow.novncui;
@@ -167,3 +156,14 @@
       }
     })();
   }
+
+  function toggleFullScreen() {
+    try {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    } catch (e) {window.UI.showStatus(e,"error")}
+    }
+    

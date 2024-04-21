@@ -76,13 +76,23 @@
           <button
             class="align-middle items-center self-center flex flex-row w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700 hover:ring-2 ring-1 px-4 text-blue"
             title="Toggle Clipboard"
-            onclick="toggleClipboard()"
+            onclick="window.UI.toggleClipboardPanel()"
           >
             <i
               data-lucide="clipboard-type"
               class="inline text-blue w-5 h-5"
             ></i>
           </button>
+          <button
+          class="align-middle items-center self-center flex flex-row w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700 hover:ring-2 ring-1 px-4 text-blue"
+          title="Toggle Fullscreen"
+          onclick="toggleFullScreen()"
+        >
+          <i
+            data-lucide="maximize"
+            class="inline text-blue w-5 h-5"
+          ></i>
+        </button>
         </div>
       </div>
       <button
