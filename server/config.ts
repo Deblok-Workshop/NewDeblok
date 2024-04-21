@@ -2,12 +2,12 @@ export default {
   // Ratelimit config
   ratelimit: {
     windowMs: 300 * 1000,
-    limit: 100,
+    limit: 64,
     skipFailedRequests: true,
     message: "Global rate limit reached.",
     skip: (req: any) => {
-      console.log(req)
-      return false;
+      
+      return !req.path.includes("/api/");
     },
   },
   // Webserver config
