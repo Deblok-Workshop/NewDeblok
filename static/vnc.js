@@ -70,21 +70,19 @@
     document.querySelector("iframe").contentDocument.querySelector("#noVNC_control_bar").style.display = "none"
   }, 100);*/
   let UI;
-  setTimeout(() => {
-    UI = document.querySelector("iframe").contentWindow.novncui;
-    setTimeout(() => {
-      alert(
-        "Hello! If you get a failed to connect error, wait a few seconds and try again. I will automatically try and connect after 5 seconds.",
-      );
-    }, 1500);
-  }, 1000);
-  setTimeout(() => {
+  let autoconnect = setInterval(() => {
     let UI = document.querySelector("iframe").contentWindow.novncui;
     window.UI = UI;
     if (!window.UI.rfb) {
+      window.UI.closeConnectPanel();
       window.UI.connect();
+      setTimeout(()=>{
+        if (window.UI.connected || window.UI.rfb) {
+          clearInterval(autoconnect)
+        }
+      },800)
     }
-  }, 5200);
+  }, 2000);
   setInterval(() => {
     let ele = document
       .querySelector("iframe")
@@ -102,7 +100,7 @@
       let UI = document.querySelector("iframe").contentWindow.novncui;
       window.UI = UI;
       window.UI.closeConnectPanel();
-      await fetch("/api/container/kill", {
+      let res = await fetch("/api/container/kill", {
         verbose:true,
         method: "POST",
         body: JSON.stringify({
@@ -111,9 +109,18 @@
           for: localStorage.username,
         }),
       });
+      if (res.ok) {
       setTimeout(() => {
         document.location = "/";
-      }, 100);
+      }, 500);
+    } else {
+      window.UI.showStatus(
+        "Failed to kill container. Trying again...",
+        "error",
+        3000,
+      );
+      setTimeout(()=>{killContainer()},200)
+    }
     })();
   }
   function restartContainer() {
@@ -138,20 +145,21 @@
         window.UI.showStatus(
           "Restarted container, autoconnecting in 5 seconds...",
           "success",
-          3000,
+          4000,
         );
         setTimeout(() => {
           window.UI.connect();
-        }, 5700);
+        }, 4000);
       } else {
         window.UI.connect();
 
         setTimeout(() => {
           window.UI.showStatus(
-            "Failed to restart container. API buggy?",
+            "Failed to restart container. Trying again...",
             "error",
             3000,
           );
+          setTimeout(()=>{restartContainer()},200)
         }, 1000);
       }
     })();
