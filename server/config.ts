@@ -6,7 +6,8 @@ export default {
     skipFailedRequests: true,
     message: "Global rate limit reached.",
     skip: (req: any) => {
-      return !new URL(req.url).pathname.startsWith("/api");
+      console.log(req)
+      return false;
     },
   },
   // Webserver config
