@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="app.css" />
   </head>
   <body class="body">
+    <overlay class="connectingOverlay z-[999999] bg-base/70 backdrop-blur-md backdrop-brightness-75 flex items-center justify-center align-middle duration-300">
+      <h2 class="font-extrabold text-4xl">Connecting...</h2>
+    </overlay>
     <div class="sessionNavContainer flex flex-row h-full align-middle items-center">
       <div
         class="sessionNav items-center self-center align-middle justify-center py-2 session_collapsed bg-blue-950/60 backdrop-brightness-75 pr-2 p-0.5 backdrop-blur-md !z-[10000] rounded-md flex flex-row w-fit"
@@ -16,7 +19,7 @@
         <div class="row1 flex flex-col mx-2">
           <button
             class="w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 hover:ring-2 ring-1 ring-red px-4 text-red"
-            onclick="window.UI.disconnect()"
+            onclick="intentionalDisconnect = true;window.UI.disconnect()"
             title="Disconnect"
           >
             <i data-lucide="unplug" class="inline text-red w-5 h-5"></i>

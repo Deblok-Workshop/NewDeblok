@@ -1,3 +1,4 @@
+
 (async () => {
     if (localStorage["DEBLOKAUTH"] != undefined) {
       let tkncheck = await fetch("/api/auth/tokenvalidate", {
@@ -64,7 +65,9 @@
       "",
       `/#/student/dashboard?__jsession=${crypto.randomUUID()}`,
     );
-  })(); /*
+  })(); 
+  let intentionalDisconnect = false;
+  /*
   setInterval(() => {
     document.querySelector("iframe").contentDocument.querySelector("#noVNC_control_bar_anchor").style.display = "none"
     document.querySelector("iframe").contentDocument.querySelector("#noVNC_control_bar").style.display = "none"
@@ -76,6 +79,7 @@
     if (!window.UI.rfb) {
       window.UI.closeConnectPanel();
       window.UI.connect();
+      intentionalDisconnect = false;
       setTimeout(()=>{
         if (window.UI.connected || window.UI.rfb) {
           clearInterval(autoconnect)
@@ -83,6 +87,20 @@
       },800)
     }
   }, 2000);
+  let connectOverlay = setInterval(()=>{
+    let UI = document.querySelector("iframe").contentWindow.novncui;
+    window.UI = UI;
+    if (window.UI.rfb) {
+      intentionalDisconnect = false;
+      // clearInterval(connectOverlay)
+      document.querySelector(".connectingOverlay").style.transform = "scale(0)"
+      // setTimeout(()=>{document.querySelector(".connectingOverlay").remove()},500)
+    } else {
+      if (!intentionalDisconnect) {
+      document.querySelector(".connectingOverlay").style.transform = "scale(1)"
+      }
+    }
+  },300)
   setInterval(() => {
     let ele = document
       .querySelector("iframe")
@@ -96,6 +114,7 @@
       "block";
   }, 500);
   function killContainer() {
+    intentionalDisconnect = true;
     (async () => {
       let UI = document.querySelector("iframe").contentWindow.novncui;
       window.UI = UI;
@@ -125,6 +144,7 @@
   }
   function restartContainer() {
     (async () => {
+      document.querySelector(".connectingOverlay h2").innerText = "Restarting..."
       let UI = document.querySelector("iframe").contentWindow.novncui;
       window.UI = UI;
       setTimeout(() => {
@@ -142,6 +162,7 @@
         }),
       });
       if (res.ok) {
+        document.querySelector(".connectingOverlay h2").innerText = "Connecting..."
         window.UI.showStatus(
           "Restarted container, autoconnecting in 5 seconds...",
           "success",
@@ -149,11 +170,12 @@
         );
         setTimeout(() => {
           window.UI.connect();
-        }, 4000);
+        }, 3000);
       } else {
         window.UI.connect();
 
         setTimeout(() => {
+          document.querySelector(".connectingOverlay h2").innerText = "Failed to restart container. Trying again..."
           window.UI.showStatus(
             "Failed to restart container. Trying again...",
             "error",
