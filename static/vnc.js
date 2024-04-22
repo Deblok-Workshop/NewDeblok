@@ -80,11 +80,10 @@ document.querySelector(".connectingTip").innerText = tips[Math.floor(Math.random
     );
   })(); 
   let intentionalDisconnect = false;
-  /*
+  
   setInterval(() => {
-     document.querySelector("iframe.vnc").contentDocument.querySelector("#noVNC_control_bar_anchor").style.display = "none"
-     document.querySelector("iframe.vnc").contentDocument.querySelector("#noVNC_control_bar").style.display = "none"
-  }, 100);*/
+    document.querySelector("iframe.vnc").contentDocument.querySelector("#noVNC_control_bar_handle").style.transform = "translateY(-25px)"
+  }, 500);
   let UI;
   let autoconnect = setInterval(() => {
     let UI =  document.querySelector("iframe.vnc").contentWindow.novncui;
