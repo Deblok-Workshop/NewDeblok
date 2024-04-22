@@ -25,8 +25,12 @@
         <div class='circle'></div>
         <div class='circle'></div>
       </div>
+      <span class="loadingTxt font-light text-xl">
+        ...
+      </span>
     <script>
       ///*
+      document.querySelector(".loadingTxt").innerText = tips[Math.floor(Math.random() * tips.length)];
       setTimeout(() => {
         (async () => {
           if (localStorage["DEBLOKAUTH"] != undefined) {

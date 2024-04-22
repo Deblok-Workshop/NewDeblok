@@ -1,31 +1,6 @@
 
 
-let tips = [
-  "PROTIP: Please delete your sessions when you're finished using them!",
-  "TIP: You should join our discord, discord.gg/surfskip",
-  "PROTIP: Restart your session when you feel like its necessary to do so.",
-  "COMMON SENSE: Deblok is NOT your PC.",
-  "TIP: my cat doesnt want me to work",
-  "Hello World!",
-  `TIP: your ip: ${(()=>{const xhr=new XMLHttpRequest();xhr.open("GET","https://ip.jammingin.space",false);xhr.send();return xhr.responseText;})()}`,
-  "TIP: Don't mine at night!",
-  "CAUTION: DO NOT DUMB HERE! NO DUMB AREA.",
-  "CAUTION: FISH",
-  "watche me explod",
-  "",
-  "COMMON SENSE: go to school, dont be a loser",
-  "hambugers are tasteful",
-  "COMMON SENSE: never go to the school bathrooms",
-  "COMMON SENSE: dont be THOSE minecraft youtubers",
-  "PROTIP: don't put your phone in your microwave",
-  "dont try to fall down stairs",
-  "TIP: tide pods dont taste good",
-  "TIP: bribes are legal if the sum of money is big enough",
-  "this is government propaganda",
-  "dont hit people with marbles",
-  "TIP: if you have a 2013 Audi a5 convertible out in the parking lot its being towed",
-  "TIP: Do people even read these?"  
-]
+
 
 document.querySelector(".connectingTip").innerText = tips[Math.floor(Math.random() * tips.length)];
 
@@ -116,6 +91,9 @@ document.querySelector(".connectingTip").innerText = tips[Math.floor(Math.random
       },800)
     }
   }, 2000);
+  setInterval(()=>{
+    document.querySelector(".connectingTip").innerText = tips[Math.floor(Math.random() * tips.length)];
+  },10000)
   let connectOverlay = setInterval(()=>{
     let UI =  document.querySelector("iframe.vnc").contentWindow.novncui;
     window.UI = UI;
@@ -126,6 +104,7 @@ document.querySelector(".connectingTip").innerText = tips[Math.floor(Math.random
       // setTimeout(()=>{document.querySelector(".connectingOverlay").remove()},500)
     } else {
       if (!intentionalDisconnect) {
+      
       document.querySelector(".connectingOverlay").style.transform = "scale(1)"
       }
     }
