@@ -126,6 +126,9 @@ document.querySelector(".connectingTip").innerText = tips[Math.floor(Math.random
       .contentDocument.querySelector("#noVNC_settings_button").style.display ="block";
   }, 500);
   function killContainer() {
+    try {
+    document.querySelector(".connectCancelBtn").remove()
+    } catch {}
     document.querySelector(".connectingOverlay h2").innerText = "Deleting container..."
     intentionalDisconnect = false;
     (async () => {
