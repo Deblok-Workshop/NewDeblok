@@ -1,6 +1,6 @@
 ### The state of New Deblok:
 
-- Total: ~75% complete
+- Total: ~90% complete
 - DeblokManager: 100% complete, nothing needs work in this area
 - Backend: 100% complete, This probably says 100% but rare's still cookin the backend.
 - Frontend: 85% done, need finishing touches
