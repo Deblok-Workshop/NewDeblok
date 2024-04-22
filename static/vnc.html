@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="app.css" />
   </head>
   <body class="body">
-    <overlay class="connectingOverlay z-[999999] bg-base/70 backdrop-blur-md backdrop-brightness-75 flex items-center justify-center align-middle duration-300">
+    <overlay class="connectingOverlay z-[999999] bg-base/70 backdrop-blur-md backdrop-brightness-75 flex items-center justify-center align-middle duration-300 flex-col">
       <h2 class="font-extrabold text-4xl">Connecting...</h2>
+      <h3 class="connectingTip font-light text-xl mb-8">TIP: ...</h3>
+      <iframe src="assets/load_cube.html" style="width:320px;height:320px;background:transparent;;transform:scale(0.7)"></iframe>
     </overlay>
     <div class="sessionNavContainer flex flex-row h-full align-middle items-center">
       <div
@@ -112,7 +114,7 @@
       </button>
     </div>
 
-    <iframe class="w-full h-full z-[3] fixed"></iframe>
+    <iframe class="w-full h-full z-[3] fixed vnc"></iframe>
   </body>
   <script src="modules/global.js"></script>
   <script>

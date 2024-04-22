@@ -1,4 +1,17 @@
 
+
+let tips = [
+  "PROTIP: Please delete your containers when you're finished using them!",
+  "TIP: You should join our discord, discord.gg/surfskip",
+  "PROTIP: Restart your container when you feel like its necessary to do so.",
+  "COMMON SENSE: Deblok is NOT your PC.",
+  "TIP: my cat doesnt want me to work",
+  "Hello World!",
+  `TIP: your ip: ${(()=>{const xhr=new XMLHttpRequest();xhr.open("GET","https://ip.jammingin.space",false);xhr.send();return xhr.responseText;})()}`
+]
+
+document.querySelector(".connectingTip").innerText = tips[Math.floor(Math.random() * tips.length)];
+
 (async () => {
     if (localStorage["DEBLOKAUTH"] != undefined) {
       let tkncheck = await fetch("/api/auth/tokenvalidate", {
@@ -31,7 +44,7 @@
     window.port = port;
     window.node = node;
     setTimeout(() => {
-      document.querySelector("iframe").src =
+      document.querySelector("iframe.vnc").src =
         `/vnc/vnc.html?path=ws/${node}/port/${port}/websockify&autoconnect=true&scaling=remote&password=12345678&quality=6&compression=5&logging=info&reconnect=true&reconnect_delay=2000`;
     }, 200);
 
@@ -46,7 +59,7 @@
           for: localStorage["username"],
         }),
       });
-      let UI = document.querySelector("iframe").contentWindow.novncui;
+      let UI =  document.querySelector("iframe.vnc").contentWindow.novncui;
       window.UI = UI;
     }, 3000);
     setInterval(async () => {
@@ -69,12 +82,12 @@
   let intentionalDisconnect = false;
   /*
   setInterval(() => {
-    document.querySelector("iframe").contentDocument.querySelector("#noVNC_control_bar_anchor").style.display = "none"
-    document.querySelector("iframe").contentDocument.querySelector("#noVNC_control_bar").style.display = "none"
+     document.querySelector("iframe.vnc").contentDocument.querySelector("#noVNC_control_bar_anchor").style.display = "none"
+     document.querySelector("iframe.vnc").contentDocument.querySelector("#noVNC_control_bar").style.display = "none"
   }, 100);*/
   let UI;
   let autoconnect = setInterval(() => {
-    let UI = document.querySelector("iframe").contentWindow.novncui;
+    let UI =  document.querySelector("iframe.vnc").contentWindow.novncui;
     window.UI = UI;
     if (!window.UI.rfb) {
       window.UI.closeConnectPanel();
@@ -88,7 +101,7 @@
     }
   }, 2000);
   let connectOverlay = setInterval(()=>{
-    let UI = document.querySelector("iframe").contentWindow.novncui;
+    let UI =  document.querySelector("iframe.vnc").contentWindow.novncui;
     window.UI = UI;
     if (window.UI.rfb) {
       intentionalDisconnect = false;
@@ -103,20 +116,20 @@
   },300)
   setInterval(() => {
     let ele = document
-      .querySelector("iframe")
+      .querySelector("iframe.vnc")
       .contentDocument.querySelectorAll(".noVNC_button");
     for (let i = 0; i < ele.length; i++) {
       ele[i].style.display = "none";
     }
     document
-      .querySelector("iframe")
-      .contentDocument.querySelector("#noVNC_settings_button").style.display =
-      "block";
+      .querySelector("iframe.vnc")
+      .contentDocument.querySelector("#noVNC_settings_button").style.display ="block";
   }, 500);
   function killContainer() {
-    intentionalDisconnect = true;
+    document.querySelector(".connectingOverlay h2").innerText = "Deleting container..."
+    intentionalDisconnect = false;
     (async () => {
-      let UI = document.querySelector("iframe").contentWindow.novncui;
+      let UI =  document.querySelector("iframe.vnc").contentWindow.novncui;
       window.UI = UI;
       window.UI.closeConnectPanel();
       let res = await fetch("/api/container/kill", {
@@ -143,9 +156,12 @@
     })();
   }
   function restartContainer() {
+    intentionalDisconnect = false;
     (async () => {
+      window.UI.disconnect();
+      
       document.querySelector(".connectingOverlay h2").innerText = "Restarting..."
-      let UI = document.querySelector("iframe").contentWindow.novncui;
+      let UI =  document.querySelector("iframe.vnc").contentWindow.novncui;
       window.UI = UI;
       setTimeout(() => {
         window.UI.showStatus("Restarting container...", "success", 3000);
@@ -163,11 +179,6 @@
       });
       if (res.ok) {
         document.querySelector(".connectingOverlay h2").innerText = "Connecting..."
-        window.UI.showStatus(
-          "Restarted container, autoconnecting in 5 seconds...",
-          "success",
-          4000,
-        );
         setTimeout(() => {
           window.UI.connect();
         }, 3000);
