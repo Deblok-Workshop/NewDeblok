@@ -3,7 +3,8 @@
 
 
 document.querySelector(".connectingTip").innerText = tips[Math.floor(Math.random() * tips.length)];
-
+window.UI.rfb.resizeSession = true
+window.UI.rfb.scaleViewport = true
 (async () => {
     if (localStorage["DEBLOKAUTH"] != undefined) {
       let tkncheck = await fetch("/api/auth/tokenvalidate", {
@@ -98,6 +99,8 @@ document.querySelector(".connectingTip").innerText = tips[Math.floor(Math.random
     let UI =  document.querySelector("iframe.vnc").contentWindow.novncui;
     window.UI = UI;
     if (window.UI.rfb) {
+      window.UI.rfb.resizeSession = true
+      window.UI.rfb.scaleViewport = true
       intentionalDisconnect = false;
       // clearInterval(connectOverlay)
       document.querySelector(".connectingOverlay").style.transform = "scale(0)"
