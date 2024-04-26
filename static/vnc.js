@@ -3,8 +3,7 @@
 
 
 document.querySelector(".connectingTip").innerText = tips[Math.floor(Math.random() * tips.length)];
-window.UI.rfb.resizeSession = true
-window.UI.rfb.scaleViewport = true
+
 (async () => {
     if (localStorage["DEBLOKAUTH"] != undefined) {
       let tkncheck = await fetch("/api/auth/tokenvalidate", {
@@ -39,6 +38,7 @@ window.UI.rfb.scaleViewport = true
     setTimeout(() => {
       document.querySelector("iframe.vnc").src =
         `/vnc/vnc.html?path=ws/${node}/port/${port}/websockify&autoconnect=true&scaling=remote&password=12345678&quality=6&compression=5&logging=info&reconnect=true&reconnect_delay=2000`;
+      
     }, 200);
 
     // todo actually get from deblokmanager node, but for now we're gonna use slightly lower than inital default keepalive.
@@ -142,7 +142,7 @@ window.UI.rfb.scaleViewport = true
           for: localStorage.username,
         }),
       });
-      
+
       if (res.ok) {
       setTimeout(() => {
         document.location = "/";
