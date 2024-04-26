@@ -411,7 +411,7 @@ div.session_collapsed {
   margin: 0;
 }
 div.session_expanded {
-  min-width: 80px;
+  width:400px;
   overflow: clip;
   transition: all 0.3s;
   position: relative;
@@ -431,12 +431,14 @@ div.session_expanded {
   margin: 0;
 }
 .compression:hover .session_slider {
-  min-width: 40px;
-  max-width: 80px;
-  width: 80px;
+  min-width: 80px;
+  max-width: 120px;
+  width: 120px;
   overflow: clip;
   transition: all 0.3s;
 }
-.compression:hover svg {
-  display: none;
+.compression:hover span {
+  width:0px;overflow:clip;height:0px;transition: all 0.3s;
 }
+.sessionNav span {margin-left:8px;margin-right:8px;}
+.sessionNavContainer span {margin:auto;padding-left:8px;padding-right:8px;}

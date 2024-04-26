@@ -14,50 +14,56 @@
       <h3 class="connectingTip font-light text-xl mb-6">TIP: ...</h3>
       <iframe src="assets/load_cube.html" style="width:340px;height:340px;background:transparent;transform:scale(0.7)"></iframe>
       <button
-      class="connectCancelBtn w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 hover:ring-2 ring-1 ring-red px-4 text-red"
+      class="connectCancelBtn w-fit h-fit mb-2 p-2 px-6 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 hover:ring-2 ring-1 ring-red px-4 text-red"
       onclick="killContainer()"
       title="Cancel"
     >
-      Cancel
+      <span>Cancel</span>
     </button>
     
     </overlay>
     <div class="sessionNavContainer flex flex-row h-full align-middle items-center">
       <div
-        class="sessionNav items-center self-center align-middle justify-center py-2 session_collapsed bg-blue-950/60 backdrop-brightness-75 pr-2 p-0.5 backdrop-blur-md !z-[10000] rounded-md flex flex-row w-fit"
+        class="sessionNav h-full items-center self-center align-middle justify-center  session_collapsed bg-blue-950/60 backdrop-brightness-75 pr-2 p-0.5 backdrop-blur-md !z-[10000] rounded-md w-full flex flex-col px-8"
       >
-        <div class="row1 flex flex-col mx-2">
+        <div class="flex flex-row w-full">
           <button
-            class="w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 hover:ring-2 ring-1 ring-red px-4 text-red"
+            class="w-full text-center h-fit mb-2 p-2 py-2.5 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 hover:ring-2 ring-1 ring-red px-4 text-red"
             onclick="intentionalDisconnect = true;window.UI.disconnect()"
             title="Disconnect"
           >
             <i data-lucide="unplug" class="inline text-red w-5 h-5"></i>
+            <span>Disconnect</span>
           </button>
+        </div>
+        <div class="flex flex-row w-full ">
           <button
-            class="w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 ring-red hover:ring-2 ring-1 px-4 text-red"
+            class="w-full text-center h-fit mb-2 p-2 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 ring-red hover:ring-2 ring-1 px-4 text-red"
             onclick=";window.UI.showStatus('Deleting container...','warning',3000);killContainer();window.UI.disconnect();"
             title="Delete Session"
           >
             <i data-lucide="trash-2" class="inline text-red w-5 h-5"></i>
+            <span>Delete</span>
           </button>
           <button
-            class="w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 ring-red hover:ring-2 ring-1 px-4 text-red"
+            class="ml-2 text-center w-full h-fit mb-2 p-2 rounded-md duration-200 bg-red-900 hover:bg-red-800 active:bg-red-700 ring-red hover:ring-2 ring-1 px-4 text-red"
             onclick="window.UI.disconnect();restartContainer();"
             title="Restart Session"
           >
             <i data-lucide="rotate-ccw" class="inline text-red w-5 h-5"></i>
+            <span>Restart</span>
           </button>
         </div>
-        <div class="row2 flex flex-col mr-2">
+        <div class="flex flex-col w-full">
           <button
-            class="compression align-middle items-center self-center flex flex-row w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-slate-900 hover:bg-slate-800 active:bg-slate-900 hover:ring-2 ring-1 px-4 text-subtext1"
-            title="Compression"
+            class="compression text-center align-middle items-center self-center flex flex-row w-full h-fit mb-2 p-2 rounded-md duration-200 bg-slate-900 hover:bg-slate-800 active:bg-slate-900 hover:ring-2 ring-1 px-4 text-subtext1"
+            title="Compression (reconnect to apply)"
           >
             <i
               data-lucide="fold-vertical"
               class="inline text-subtext1 w-5 h-5"
             ></i>
+            <span>Compression Level</span>
             <div class="mx-2 session_slider">
               <input
                 type="range"
@@ -69,13 +75,14 @@
             </div>
           </button>
           <button
-            class="compression align-middle items-center self-center flex flex-row w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-slate-900 hover:bg-slate-800 active:bg-slate-900 hover:ring-2 ring-1 px-4 text-subtext1"
-            title="Picture Quality"
+            class="ml-2 compression text-center align-middle items-center self-center flex flex-row w-full h-fit mb-2 p-2 rounded-md duration-200 bg-slate-900 hover:bg-slate-800 active:bg-slate-900 hover:ring-2 ring-1 px-4 text-subtext1"
+            title="Picture Quality (reconnect to apply)"
           >
             <i
               data-lucide="image-play"
               class="inline text-subtext1 w-5 h-5"
             ></i>
+            <span>Picture Quality</span>
             <div class="mx-2 session_slider">
               <input
                 type="range"
@@ -86,8 +93,10 @@
               />
             </div>
           </button>
+        </div>
+        <div class="flex flex-row w-full">
           <button
-            class="align-middle items-center self-center flex flex-row w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700 hover:ring-2 ring-1 px-4 text-blue"
+            class="align-middle items-center self-center flex flex-row w-full h-fit mb-2 p-2 rounded-md duration-200 text-center bg-blue-900 hover:bg-blue-800 active:bg-blue-700 hover:ring-2 ring-1 px-4 text-blue"
             title="Toggle Clipboard"
             onclick="window.UI.toggleClipboardPanel()"
           >
@@ -95,9 +104,10 @@
               data-lucide="clipboard-type"
               class="inline text-blue w-5 h-5"
             ></i>
+            <span>Clipboard</span>
           </button>
           <button
-          class="align-middle items-center self-center flex flex-row w-fit h-fit mb-2 p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700 hover:ring-2 ring-1 px-4 text-blue"
+          class="ml-2 align-middle items-center self-center flex flex-row w-full h-fit mb-2 p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700 hover:ring-2 ring-1 px-4 text-blue"
           title="Toggle Fullscreen"
           onclick="toggleFullScreen()"
         >
@@ -105,11 +115,12 @@
             data-lucide="maximize"
             class="inline text-blue w-5 h-5"
           ></i>
+          <span>Fullscreen</span>
         </button>
-        </div>
+      </div>
       </div>
       <button
-        class="w-fit h-fit session_collapsed expandSessionNav !z-[10000] p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700"
+        class="w-fit h-fit py-4 session_collapsed expandSessionNav !z-[10000] p-2 rounded-md duration-200 bg-blue-900 hover:bg-blue-800 active:bg-blue-700"
         onclick="let nc=document.querySelector('.sessionNav');
       nc.classList.toggle('session_collapsed');nc.classList.toggle('session_expanded');
       this.classList.toggle('session_collapsed');this.classList.toggle('session_expanded');
