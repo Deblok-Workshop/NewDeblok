@@ -348,7 +348,7 @@ if (process.argv.includes("--unavailale") || process.argv.includes("-u")) {
       }
       selling.name = `newdeblok-${bjson.name}-${ports[0]}`;
       let fr = await fetch(`http://${back}/containers/create`, {
-        verbose:true,
+        
         method: "POST",
         body: JSON.stringify(selling),
         headers: {
@@ -412,7 +412,7 @@ if (process.argv.includes("--unavailale") || process.argv.includes("-u")) {
       back = endpoints[Number(bjson.node)];
     }
     let fr = await fetch(`http://${back}/containers/kill`, {
-      verbose:true,
+      
       method: "POST",
       body: JSON.stringify(bjson),
       headers: {
@@ -467,7 +467,7 @@ if (process.argv.includes("--unavailale") || process.argv.includes("-u")) {
       back = endpoints[Number(bjson.node)];
     }
     let fr = await fetch(`http://${back}/containers/restart`, {
-      verbose:true,
+      
       method: "POST",
       body: JSON.stringify(bjson),
       headers: {
@@ -595,7 +595,7 @@ if (process.argv.includes("--unavailale") || process.argv.includes("-u")) {
       return;
     }
     let fr = await fetch(`http://${back}/containers/delete`, {
-      verbose:true,
+      
       method: "POST",
       body: JSON.stringify(bjson),
       headers: {
@@ -649,7 +649,7 @@ if (process.argv.includes("--unavailale") || process.argv.includes("-u")) {
       return;
     }
     let fr = await fetch(`http://${back}/containers/pause`, {
-      verbose:true,
+      
       method: "POST",
       body: JSON.stringify(bjson),
       headers: {
@@ -704,7 +704,7 @@ if (process.argv.includes("--unavailale") || process.argv.includes("-u")) {
       return;
     }
     let fr = await fetch(`http://${back}/containers/unpause`, {
-      verbose:true,
+      
       method: "POST",
       body: JSON.stringify(bjson),
       headers: {
@@ -749,7 +749,7 @@ if (process.argv.includes("--unavailale") || process.argv.includes("-u")) {
       }
       try {
         let fr = await fetch(`http://${back}/containers/keepalive`, {
-          verbose:true,
+          
           method: "POST",
           body: req.body,
           headers: {

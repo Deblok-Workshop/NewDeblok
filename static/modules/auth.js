@@ -109,7 +109,7 @@ async function login(usr, pwd) {
     usr = "md5:" + (await md5(usr));
     pwd = "sha256:" + (await sha256(pwd));
     res = await fetch("/api/auth/login", {
-      verbose:true,
+      
       method: "POST",
       body: JSON.stringify({ usr: usr, pwd: pwd, em: " " }),
     });
@@ -130,7 +130,7 @@ async function signup(usr, pwd, em) {
   ) {
     // prevent bypassing captcha
     safe = await fetch("/api/auth/pwdsafe", {
-      verbose:true,
+      
       method: "POST",
       body: pwd,
     });
@@ -144,7 +144,7 @@ async function signup(usr, pwd, em) {
     pwd = "sha256:" + (await sha256(pwd));
 
     res = await fetch("/api/auth/signup", {
-      verbose:true,
+      
       method: "POST",
       body: JSON.stringify({ usr: usr, pwd: pwd, em: em }),
     });

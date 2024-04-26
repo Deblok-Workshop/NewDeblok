@@ -8,7 +8,7 @@ window.UI.rfb.scaleViewport = true
 (async () => {
     if (localStorage["DEBLOKAUTH"] != undefined) {
       let tkncheck = await fetch("/api/auth/tokenvalidate", {
-        verbose:true,
+        
         method: "POST",
         body: localStorage["DEBLOKAUTH"],
       });
@@ -44,7 +44,7 @@ window.UI.rfb.scaleViewport = true
     // todo actually get from deblokmanager node, but for now we're gonna use slightly lower than inital default keepalive.
     setTimeout(async () => {
       await fetch("/api/container/keepalive", {
-        verbose:true,
+        
         method: "POST",
         body: JSON.stringify({
           id: img.replace("#", ""),
@@ -57,7 +57,7 @@ window.UI.rfb.scaleViewport = true
     }, 3000);
     setInterval(async () => {
       await fetch("/api/container/keepalive", {
-        verbose:true,
+        
         method: "POST",
         body: JSON.stringify({
           id: img.replace("#", ""),
@@ -134,7 +134,7 @@ window.UI.rfb.scaleViewport = true
       window.UI = UI;
       window.UI.closeConnectPanel();
       let res = await fetch("/api/container/kill", {
-        verbose:true,
+        
         method: "POST",
         body: JSON.stringify({
           id: img.substring(1),
@@ -170,7 +170,7 @@ window.UI.rfb.scaleViewport = true
       }, 300);
 
       let res = await fetch("/api/container/restart", {
-        verbose:true,
+        
         method: "POST",
         body: JSON.stringify({
           id: img.substring(1),

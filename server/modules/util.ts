@@ -43,7 +43,7 @@ async function getBackPorts(server: string) {
   let hc = (await healthcheck()).backend;
   try {
     let res = await fetch("http://" + server + "/ports/list", {
-      verbose:true,
+      
       headers: { Authorization: getHTTPAuthHeader(server) },
     });
     return await res.json();
