@@ -409,6 +409,18 @@ div.session_collapsed {
   transition: all 0.3s;
   padding: 0;
   margin: 0;
+  
+}
+.sessionNav.session_collapsed {
+  transition: all 0.5s, filter 0.35s;
+}
+.sessionNav.session_collapsed * {
+  opacity:0;
+  transition: opacity 0.3s;
+}
+.sessionNav.session_expanded {
+  transition: all 0.5s, filter 0.35s;
+  
 }
 div.session_expanded {
   overflow: clip;
@@ -417,7 +429,7 @@ div.session_expanded {
   @apply sm:w-[98vw] md:w-[400px];
 }
 .sessionNav {
-  @apply sm:px-[12px] md:px-[25px];
+  @apply px-5 sm:px-[64px] md:px-[25px];
   border-radius: 0px;
 }
 
@@ -431,10 +443,11 @@ div.session_expanded {
 }
 .compression:hover .session_slider {
   min-width: 80px;
-  max-width: 120px;
-  width: 120px;
+  max-width: 140px;
+  width: 140px;
   overflow: clip;
   transition: all 0.3s;
+  margin:auto;
 }
 .compression:hover span {
   width:0px;overflow:clip;height:0px;transition: all 0.3s;

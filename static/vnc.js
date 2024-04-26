@@ -13,7 +13,9 @@ document.querySelector(".connectingTip").innerText = tips[Math.floor(Math.random
       });
       if (tkncheck.ok) {
       } else {
+        if (tkncheck.status = 429) {window.location.href = `/503_err.html#2`;} else {
         document.location = "login.html";
+        }
       }
     } else {
       document.location = "login.html";
@@ -148,6 +150,7 @@ document.querySelector(".connectingTip").innerText = tips[Math.floor(Math.random
         document.location = "/";
       }, 500);
     } else {
+      if (res.status = 429) {alert("You have reached your global rate limit.");document.location = "/"}
       window.UI.showStatus(
         "Failed to kill container. Trying again...",
         "error",
@@ -185,6 +188,7 @@ document.querySelector(".connectingTip").innerText = tips[Math.floor(Math.random
           window.UI.connect();
         }, 3000);
       } else {
+        if (res.status = 429) {alert("You have reached your global rate limit.");document.location = "/"}
         window.UI.connect();
 
         setTimeout(() => {
