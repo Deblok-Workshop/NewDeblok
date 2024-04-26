@@ -43,6 +43,7 @@ No error text was provided.
         `The healthcheck has failed. Are you sure the NewDeblok API is even running? 
 Cause: ${document.location.hash.substr(1).split("|")[1] ? decodeURIComponent(document.location.hash.substr(1).split("|")[1]) : "Unknown."}`,
         `The API is reporting that all DeblokManager endpoints are down.`,
+        `You have hit your global rate limit. Wait up to 5 minutes.`
       ];
       document.querySelector(".err_txt").innerText = reasons[
         document.location.hash.substr(1).split("|")[0]

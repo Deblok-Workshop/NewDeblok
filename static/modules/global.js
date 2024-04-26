@@ -60,10 +60,14 @@ setTimeout(() => {
           decodeURIComponent(response.headers.get("Content-Type")),
         ).startsWith("application/json")
       ) {
+        if (response.status != 429) {
         const reason = !response.ok
           ? `The NewDeblok API is down, responded with HTTP ${response.status}`
           : `An unexpected MIME type was received: ${encodeURIComponent(response.headers.get("Content-Type"))}, are you sure NewDeblok API is running? (Is NewDeblok running on a static host by accident?)`;
         window.location.href = `/503_err.html#0|${encodeURIComponent(reason)}`;
+        } else {
+          window.location.href = `/503_err.html#2`;
+        }
       }
     })
     .catch((error) => {
