@@ -159,7 +159,7 @@ function makeSession(container) {
     } else {
       itemModal(
         "Error",
-        `The session failed to start: \n<code style="max-width:480px;">${resp.returned}</code>\n`,
+        `The session failed to start: \n<br><b>HTTP ${resp.status} (ok? ${resp.ok})</b><br><code style="max-width:480px;">${resp.returned}</code>\n`,
         "",
         ["Close"],
       );

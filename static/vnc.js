@@ -142,6 +142,7 @@ window.UI.rfb.scaleViewport = true
           for: localStorage.username,
         }),
       });
+      
       if (res.ok) {
       setTimeout(() => {
         document.location = "/";
