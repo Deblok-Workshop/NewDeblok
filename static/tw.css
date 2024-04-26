@@ -411,14 +411,13 @@ div.session_collapsed {
   margin: 0;
 }
 div.session_expanded {
-  width:400px;
   overflow: clip;
   transition: all 0.3s;
   position: relative;
+  @apply sm:w-[98vw] md:w-[400px];
 }
 .sessionNav {
-  padding-left: 24px;
-  padding-right: 24px;
+  @apply sm:px-[12px] md:px-[25px];
   border-radius: 0px;
 }
 
