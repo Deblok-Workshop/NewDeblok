@@ -417,8 +417,8 @@ div.session_expanded {
   position: relative;
 }
 .sessionNav {
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 24px;
+  padding-right: 24px;
   border-radius: 0px;
 }
 
