@@ -5,7 +5,7 @@
       method: "POST",
       body: localStorage["DEBLOKAUTH"],
     });
-    if (tkncheck.status = 429) {window.location.href = `/503_err.html#2`;} else {
+    if (tkncheck.status == 429) {window.location.href = `/503_err.html#2`;} else {
       document.location = "login.html";
       }
   } else {
