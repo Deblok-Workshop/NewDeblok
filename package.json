@@ -5,7 +5,7 @@
     "preinstall": "npx only-allow bun",
     "watch": "tailwindcss -i static/tw.css -o static/app.css -m -w",
     "build": "tailwindcss -i static/tw.css -o static/app.css -m",
-    "start": "bun server/index.ts",
+    "start": "bash scripts/unattended.sh",
     "dev": "concurrently \"bun run watch\" \"bun run start\"",
     "deploy": "bash scripts/deploy.sh",
     "format": "prettier --write ."
