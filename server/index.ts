@@ -826,7 +826,9 @@ if (process.argv.includes("--unavailale") || process.argv.includes("-u")) {
         "/" +
         req.url.replace(`/ws/${req.url.split("/")[2]}/`, "");
       req.url = url;
+      try {
       proxy.ws(req, socket, head, { target: req.url });
+      } catch {}
     } else {
       socket.send("no");
     }
