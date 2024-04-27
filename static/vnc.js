@@ -150,7 +150,7 @@ document.querySelector(".connectingTip").innerText = tips[Math.floor(Math.random
         document.location = "/";
       }, 500);
     } else {
-      if (res.status = 429) {alert("You have reached your global rate limit.");document.location = "/"}
+      if (res.status == 429) {alert("You have reached your global rate limit.");document.location = "/"}
       window.UI.showStatus(
         "Failed to kill container. Trying again...",
         "error",
@@ -188,7 +188,7 @@ document.querySelector(".connectingTip").innerText = tips[Math.floor(Math.random
           window.UI.connect();
         }, 3000);
       } else {
-        if (res.status = 429) {alert("You have reached your global rate limit.");document.location = "/"}
+        if (res.status == 429) {alert("You have reached your global rate limit.");document.location = "/"}
         window.UI.connect();
 
         setTimeout(() => {
