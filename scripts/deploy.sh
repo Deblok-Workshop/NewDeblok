@@ -30,7 +30,8 @@ bun i
 bun run index.ts &
 sleep 1
 cd ..
-bun run server/index.ts &
+bun run build
+bun run start &
 sleep 1
-echo Deployed successfully. Both servers should be running!
+echo INFO: Deployed successfully. Both servers should be running!
                                                                                                    
