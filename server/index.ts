@@ -8,7 +8,19 @@ import cors from "cors";
 import fetch from "node-fetch";
 import wordlistsafe from "./modules/wordlistsafe";
 import util from "./modules/util.ts";
+import fs from "node:fs";
+if (!fs.existsSync(".env")) {
+  console.error("ERR: Your .env file is missing.")
+  process.exit(1);
+}
 var endpoints: any = process.env.ENDPOINTS;
+if (!endpoints) {
+  console.error("ERR: You're missing the ENDPOINTS field from your .env file.")
+  console.error("ERR: Make sure:")
+  console.error("ERR: - Your .env file exists and is valid")
+  console.error("ERR: - You aren't accidentally using the example env file.")
+  process.exit(1);
+}
 endpoints = endpoints.split(",");
 let netaddr = "[::1]";
 netaddr = require("node:os").hostname();
