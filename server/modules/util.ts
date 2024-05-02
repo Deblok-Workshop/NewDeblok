@@ -1,5 +1,13 @@
 var endpoints: any = process.env.ENDPOINTS;
+try {
 endpoints = endpoints.split(",");
+} catch {
+  console.error("ERR: You're missing the ENDPOINTS field from your .env file or it is invalid.")
+  console.error("ERR: Make sure:")
+  console.error("ERR: - Your .env file exists and is valid")
+  console.error("ERR: - You aren't accidentally using the example env file.")
+  process.exit(1);
+}
 async function ping(url: string): Promise<string> {
   try {
     let headers: { [key: string]: string } = {};

@@ -14,14 +14,15 @@ if (!fs.existsSync(".env")) {
   process.exit(1);
 }
 var endpoints: any = process.env.ENDPOINTS;
-if (!endpoints) {
-  console.error("ERR: You're missing the ENDPOINTS field from your .env file.")
+try {
+endpoints = endpoints.split(",");
+} catch {
+  console.error("ERR: You're missing the ENDPOINTS field from your .env file or it is invalid.")
   console.error("ERR: Make sure:")
   console.error("ERR: - Your .env file exists and is valid")
   console.error("ERR: - You aren't accidentally using the example env file.")
   process.exit(1);
 }
-endpoints = endpoints.split(",");
 let netaddr = "[::1]";
 netaddr = require("node:os").hostname();
 const server = express();
@@ -49,13 +50,14 @@ require("./modules/startupjob.ts");
 server.use("/", express.static("static/"));
 server.use(cors()); // Express cors plugin
 server.use(rateLimit(config.ratelimit));
-if (process.argv.includes("--unavailale") || process.argv.includes("-u")) {
+if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   require("./modules/unavailable.ts");
 } else {
   // server.use(staticPlugin({ assets: "static/", prefix: "/" }));
-
   let dbpwd: any = process.env.DBPWD;
+  if (dbpwd) {
   dbpwd = new Bun.CryptoHasher("sha256").update(dbpwd).digest("hex");
+  }
 
   // general
 
@@ -193,13 +195,11 @@ if (process.argv.includes("--unavailale") || process.argv.includes("-u")) {
       }
       // TODO: prevent email sharing
       try {
-        console.log(pwd);
         pwd = await Bun.password.hash(pwd, {
           algorithm: "argon2id", // "argon2id" | "argon2i" | "argon2d"
           memoryCost: 4096, // memory usage in kibibytes
           timeCost: 15, // the number of iterations
         });
-        console.log(pwd);
       } catch (e) {
         console.error(e);
         res.statusCode = 500;
