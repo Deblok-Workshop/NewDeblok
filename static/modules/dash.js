@@ -152,13 +152,14 @@ function makeSession(container) {
       method: "POST",
       body: JSON.stringify({ name: container, for: localStorage["username"] }),
     });
-    let resp = await res.json();
-    if (res.ok && !resp.returned.includes("{")) {
-      document.location = `vnc.html#${resp.returned};${resp.port.split(":")[0]};${resp.fromNode};`;
+    let resp = await res.text(); //this is for error handling
+    let rj = JSON.parse(res); 
+    if (res.ok && !rj.returned.includes("{")) {
+      document.location = `vnc.html#${rj.returned};${rj.port.split(":")[0]};${rj.fromNode};`;
     } else {
       itemModal(
         "Error",
-        `The session failed to start: \n<br><b>HTTP ${resp.status} (ok? ${resp.ok})</b><br><code style="max-width:480px;">${resp.returned}</code>\n`,
+        `The session failed to start: \n<br><b>HTTP ${res.status} (ok? ${res.ok})</b><br><code style="max-width:480px;">${resp}</code>\n`,
         "",
         ["Close"],
       );
