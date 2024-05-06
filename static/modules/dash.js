@@ -153,7 +153,7 @@ function makeSession(container) {
       body: JSON.stringify({ name: container, for: localStorage["username"] }),
     });
     let resp = await res.text(); //this is for error handling
-    let rj = JSON.parse(res); 
+    let rj = JSON.parse(resp); 
     if (res.ok && !rj.returned.includes("{")) {
       document.location = `vnc.html#${rj.returned};${rj.port.split(":")[0]};${rj.fromNode};`;
     } else {
