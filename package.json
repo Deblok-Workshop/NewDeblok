@@ -31,7 +31,6 @@
     "express-rate-limit": "^7.2.0",
     "flowbite": "^2.2.1",
     "http-proxy": "^1.18.1",
-    "node-fetch": "^3.3.2",
     "node-http-proxy": "^0.2.4",
     "prettier": "^3.2.5",
     "sharp": "^0.33.2",

@@ -5,7 +5,7 @@ import helper from "./modules/helper";
 import captcha from "./modules/captcha";
 import { rateLimit } from "express-rate-limit";
 import cors from "cors";
-import fetch from "node-fetch";
+
 import wordlistsafe from "./modules/wordlistsafe";
 import util from "./modules/util.ts";
 import fs from "node:fs";
