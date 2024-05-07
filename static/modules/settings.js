@@ -34,3 +34,7 @@ setTimeout((async ()=> {
 let res = await fetch(`/api/auth/getuserinfo/${localStorage.username}`)
 document.querySelector(".displaynameInput").value = (await res.json()).displayName
 }),50)
+setTimeout((async ()=> {
+  let res = await fetch(`/api/auth/getuserinfo/${localStorage.username}`)
+  document.querySelector(".displayName").innerText = (await res.json()).displayName
+  }),50)
