@@ -170,5 +170,5 @@ function makeSession(container) {
 
 setTimeout((async ()=> {
   let res = await fetch(`/api/auth/getuserinfo/${localStorage.username}`)
-  document.querySelector(".displayName").value = (await res.json()).displayName
+  document.querySelector(".displayName").innerText = (await res.json()).displayName
   }),50)

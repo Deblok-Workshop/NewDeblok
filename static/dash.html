@@ -42,17 +42,18 @@
         <div
           id="profile-dropdown"
           onblur="document.querySelector(`#profile-dropdown`).classList.toggle(`anim__dropdown`)"
-          class="hidden dropdown"
+          class="hidden dropdown flex flex-col z-[99999999] relative"
         >
+        <span class="displayName">display name here</span> <br>
           <ul class="py-2 text-sm text-text duration-[250ms]">
-            <li><span class="displayName">display name here</span></li>
+            
             <li>
 
               <a
                 href="dash.html"
-                class="block px-4 py-2 active-dropdown-color duration-[250ms]"
-                >Dashboard</a
-              >
+                class="block px-4 py-2 active-dropdown-color duration-[250ms]">
+                Dashboard
+                </a>
             </li>
             <li>
               <a
@@ -77,7 +78,7 @@
     </nav>
     <br />
     <div
-      class="z-10 mx-auto my-auto justify-center align-middle items-center grid gap-2"
+      class="z-[3] mx-auto my-auto justify-center align-middle items-center grid gap-2"
       id="cardContainer"
     ></div>
   </body>
