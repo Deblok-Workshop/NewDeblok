@@ -29,3 +29,8 @@ function cloakTab(iconUrl, title) {
   document.getElementsByTagName("head")[0].appendChild(l);
   document.title = title;
 }
+
+setTimeout((async ()=> {
+let res = await fetch(`/api/auth/getuserinfo/${localStorage.username}`)
+document.querySelector(".displaynameInput").value = (await res.json()).displayName
+}),50)
