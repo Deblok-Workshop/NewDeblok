@@ -87,7 +87,7 @@ html {
   from {
     display: hidden;
     max-height: 0px;
-    overflow-y: clip;
+    overflow-y: hidden;
   }
   1% {
     display: flex;
@@ -105,7 +105,7 @@ html {
 }
 .anim__dropdown {
   display: hidden;
-  overflow-y: clip;
+  overflow-y: hidden;
   animation: dropd 0.66s ease-in forwards;
   max-height: 0px;
 }
@@ -116,7 +116,13 @@ html {
   @apply hover:bg-black/20;
 }
 .dropdown {
-  @apply ml-2 pb-2 absolute bg-mantle rounded-t-none rounded-lg shadow w-44;
+  @apply pb-2 pt-2 absolute bg-mantle rounded-t-none rounded-lg shadow w-fit;
+  position: fixed !important;
+  top:62px !important;
+  margin-left:auto !important;
+  right:1px !important;
+  transform: none !important;
+  overflow:hidden !important
 }
 .if-section {
   @apply rounded-lg bg-black/20 p-2;
