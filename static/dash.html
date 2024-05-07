@@ -42,10 +42,10 @@
         <div
           id="profile-dropdown"
           onblur="document.querySelector(`#profile-dropdown`).classList.toggle(`anim__dropdown`)"
-          class="hidden dropdown flex flex-col z-[99999999] relative"
+          class="hidden dropdown !max-w-[190px] flex flex-col z-[99999999] relative"
         >
-        <div class="flex flex-row align-middle self-center justify-center mx-auto ">
-          <img src="/api/img/identicon.png" class="w-6 h-6 rounded-full"/> <span class="mx-1 opacity-50">|</span> <span class="displayName w-24 overflow-hidden text-ellipsis">display name here</span> 
+        <div class="flex flex-row align-middle self-center justify-center mx-auto px-2 !max-w-[200px] w-full">
+          <img src="/api/img/identicon.png" class="w-6 h-6 rounded-full"/> <span class="mx-1 opacity-50">|</span> <span class="displayName w-fit overflow-hidden text-ellipsis">display name here</span> 
         </div><br>
           <ul class="py-2 text-sm text-text duration-[250ms]">
             
