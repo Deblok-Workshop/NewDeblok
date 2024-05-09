@@ -31,13 +31,13 @@ function cloakTab(iconUrl, title) {
 }
 
 function updateDisplayName() {
-  let displayName = document.querySelector(".displaynameInput").value;
-  document.querySelector(".displayName").innerText = displayName
+  let display = document.querySelector(".displaynameInput").value;
+  document.querySelector(".displayName").innerText = display;
 (async()=>{
   await fetch("/api/auth/updatedisplayname",{
     "method":"POST",
     "body": JSON.stringify({
-      "newname":displayName,
+      "newname":display,
       "for": localStorage.username,
       "auth": localStorage.DEBLOKAUTH
     })
