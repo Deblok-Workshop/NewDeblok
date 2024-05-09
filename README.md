@@ -10,20 +10,11 @@
 
 # <img src="assets/banner.png" alt="banner" width="448">
 
-> [!IMPORTANT]
-> ❗ Please read
-> [the message from rare](https://s.deblok.me/shutdownmessage.html)
-
 The New Deblok is a project ditching what Deblok used to run off of, Kasm Workspaces; and using a DIY solution with the help of [DeblokManager](https://github.com/Deblok-Workshop/DeblokManager) to dynamically spawn and kill Docker containers easily, also using [noVNC](https://github.com/noVNC/noVNC) for remote control.
 
 ## What is Deblok?
 
 Deblok is a selfhostable website that allows you to browse and stream apps, games, and operating systems safely, remotely, and securely. Completely for free, with minimal paywalls.
-
-> [!NOTE]
-> There is some additional things you can buy which are **supplementary** on the Deblok Discord.
-> Deblok+ is **optional**, and your free experience is not effected by not having Deblok+.
-> Buy Deblok+ on the discord: [discord.gg/surfskip](https://discord.gg/surfskip)
 
 ## For chromebook skids
 
