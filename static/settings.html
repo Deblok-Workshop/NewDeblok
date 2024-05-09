@@ -105,7 +105,7 @@ class="hidden dropdown !max-w-[190px] flex flex-col z-[99999999] relative"
                 <br>
                 
                     <li class="settings-item ml-1">
-                        Tab Cloaking Presets (todo):
+                        Tab Cloaking Presets (not implemented, todo):
                         <div class="rounded-lg p-2 bg-black/60 flex flex-row ">
                            <select class="text-white active:bg-black">
                             <option disabled selected>Select...</option>
@@ -115,8 +115,8 @@ class="hidden dropdown !max-w-[190px] flex flex-col z-[99999999] relative"
                         </div>
                     </li><br>
                     <li class="settings-item ml-1">
-                        Display Name: (todo)
-                        <input type="text" class="py-2 input displaynameInput" maxlength="32">
+                        Display Name:
+                        <input type="text" onblur="updateDisplayName()" class="py-2 input displaynameInput" maxlength="32">
                     </li>
                </ul>   
     </div>

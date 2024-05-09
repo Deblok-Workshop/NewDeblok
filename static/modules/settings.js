@@ -30,6 +30,21 @@ function cloakTab(iconUrl, title) {
   document.title = title;
 }
 
+function updateDisplayName() {
+  let displayName = document.querySelector(".displaynameInput").value;
+  document.querySelector(".displayName").innerText = displayName
+(async()=>{
+  await fetch("/api/auth/updatedisplayname",{
+    "method":"POST",
+    "body": JSON.stringify({
+      "newname":displayName,
+      "for": localStorage.username,
+      "auth": localStorage.DEBLOKAUTH
+    })
+  })
+})();
+}
+
 setTimeout((async ()=> {
 let res = await fetch(`/api/auth/getuserinfo/${localStorage.username}`)
 document.querySelector(".displaynameInput").value = (await res.json()).displayName
