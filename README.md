@@ -3,7 +3,7 @@
 - Total: ~90% complete
 - DeblokManager: 100% complete, nothing needs work in this area
 - Backend: 100% complete, This probably says 100% but rare's still cookin the backend.
-- Frontend: 85% done, need finishing touches
+- Frontend: 85% done, need finishing touches & settings needs work
 - Backend Proxies: 100% done, nothing needs work in this area
 
 ---
@@ -49,4 +49,4 @@ Deblok is a selfhostable website that allows you to browse and stream apps, game
 
 Deblok is licensed under GNU General Public License v3.0 (GPLv3). By using, forking, or modifying the code, you agree to comply with the terms of this license.
 
-# Made with love from everyone at Deblok-Workshop ❤️
+## Made with love from everyone at Deblok-Workshop ❤️ (realistically mostly rare)
