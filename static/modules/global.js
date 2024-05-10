@@ -164,3 +164,5 @@ function logout() {
   localStorage["DEBLOKAUTH"] = undefined;
   document.location = "index.html";
 }
+
+document.body.style.backgroundImage = `url(${localStorage.bgUrl ?? "assets/bg.webp"})`

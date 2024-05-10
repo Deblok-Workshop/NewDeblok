@@ -1,3 +1,4 @@
+
 function checkbox_check(ele) {
   let ifsect = ele.parentElement.querySelector(".if-section");
   if (ifsect != undefined) {
@@ -45,6 +46,24 @@ function updateDisplayName() {
 })();
 }
 
+async function updateBG() {
+  try {
+  let __ = await fetch(document.querySelector(".bgURL").value, {"mode":"no-cors"})
+  } catch {
+    localStorage.bgUrl = "assets/bg.webp"
+    document.querySelector(".bgURL").value = "assets/bg.webp"
+    return;
+  }
+  if (!document.querySelector(".bgURL").value.trim() == "") {
+    localStorage.bgUrl = document.querySelector(".bgURL").value
+    document.body.style.backgroundImage = `url(${document.querySelector(".bgURL").value})`
+  } else {
+    localStorage.bgUrl = "assets/bg.webp"
+    document.querySelector(".bgURL").value = "assets/bg.webp"
+  }
+
+}
+
 setTimeout((async ()=> {
 let res = await fetch(`/api/auth/getuserinfo/${localStorage.username}`)
 document.querySelector(".displaynameInput").value = (await res.json()).displayName
@@ -52,4 +71,5 @@ document.querySelector(".displaynameInput").value = (await res.json()).displayNa
 setTimeout((async ()=> {
   let res = await fetch(`/api/auth/getuserinfo/${localStorage.username}`)
   document.querySelector(".displayName").innerText = (await res.json()).displayName
+  document.querySelector(".bgURL").value = localStorage.bgUrl ?? "assets/bg.webp"
   }),50)
