@@ -564,10 +564,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         res.statusCode = 400;
         res.send("ERR: Must provide userid or it is invalid.");
         return;
-      } } catch {
-        res.statusCode = 400;
-        res.send("ERR: User does not exist.");
-      }
+      } 
       let sessionsDBentry: any = helper.sql.read(
         db,
         "userinfo",
@@ -581,6 +578,10 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         "md5:" + bjson.for,
         btoa(JSON.stringify(uinfo)), // don't know real username
       );
+    } catch {
+      res.statusCode = 400;
+      res.send("ERR: User does not exist.");
+    }
       res.send("OK!");
       return;
     },
