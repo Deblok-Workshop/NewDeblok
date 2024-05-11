@@ -189,7 +189,7 @@ async function signupForm() {
             "method":"POST",
             "body": JSON.stringify({
               "newname":usrEle.value,
-              "for": "md5:" + (await md5(usrEle.value)),
+              "for": (await md5(usrEle.value)),
               "auth": localStorage.DEBLOKAUTH
             })
           })

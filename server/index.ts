@@ -558,11 +558,15 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         return;
       }
       let db = helper.sql.open("db.sql");
+      try {
       let dbEntry: any = helper.sql.read(db, "userinfo", "md5:" + bjson.for);
       if (!dbEntry["value"]) {
         res.statusCode = 400;
         res.send("ERR: Must provide userid or it is invalid.");
         return;
+      } } catch {
+        res.statusCode = 400;
+        res.send("ERR: User does not exist.");
       }
       let sessionsDBentry: any = helper.sql.read(
         db,
