@@ -177,6 +177,8 @@ async function loginForm() {
       usrPwd.value = "";
       usrEle.value = "";
     }
+  } else {
+    alert("You seem to not meet requirements.")
   }
   return res;
 }
@@ -214,6 +216,9 @@ async function signupForm() {
       usrEle.value = "";
     }
   } else {
+
+      alert("You seem to not meet requirements.")
+    
   }
   return res;
 }
