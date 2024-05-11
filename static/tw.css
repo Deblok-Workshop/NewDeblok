@@ -342,18 +342,18 @@ hidden,
 }
 @keyframes animModalRoot {
   from {
-    backdrop-filter: brightness(0.8) blur(0px);
+    backdrop-filter: blur(0px) brightness(0.8);
   }
   to {
-    backdrop-filter: brightness(0.5) blur(10px);
+    backdrop-filter: blur(2px) brightness(0.5);
   }
 }
 @keyframes animModalRoot-bw {
   to {
-    backdrop-filter: brightness(1) blur(0px);
+    backdrop-filter: blur(0px) brightness(1);
   }
   from {
-    backdrop-filter: brightness(0.5) blur(10px);
+    backdrop-filter: blur(2px) brightness(0.5);
   }
 }
 @keyframes animModal {
