@@ -18,6 +18,16 @@ function changeTheme(ele) {
   console.log(themetxt);
   localStorage["themeSelected"] = themetxt;
   updateTheme();
+  if (document.querySelector("html").classList.contains("windowsxp")) {
+    document.querySelector(".bgURL").value = "Overriden by theme."
+    document.querySelector(".bgURL").disabled = true
+  } else {
+    document.querySelector(".bgURL").disabled = false
+    if (document.querySelector(".bgURL").value == "Overriden by theme.") {
+      document.querySelector(".bgURL").value = localStorage.bgUrl ?? "assets/bg.webp"
+      document.body.style.backgroundImage = `url(${document.querySelector(".bgURL").value})`
+    }
+  }
 }
 
 function cloakTab(iconUrl, title) {
@@ -61,7 +71,16 @@ async function updateBG() {
     localStorage.bgUrl = "assets/bg.webp"
     document.querySelector(".bgURL").value = "assets/bg.webp"
   }
-
+  if (document.querySelector("html").classList.contains("windowsxp")) {
+    document.querySelector(".bgURL").value = "Overriden by theme."
+    document.querySelector(".bgURL").disabled = true
+  } else {
+    document.querySelector(".bgURL").disabled = false
+    if (document.querySelector(".bgURL").value == "Overriden by theme.") {
+      document.querySelector(".bgURL").value = localStorage.bgUrl ?? "assets/bg.webp"
+      document.body.style.backgroundImage = `url(${document.querySelector(".bgURL").value})`
+    }
+  }
 }
 
 setTimeout((async ()=> {
@@ -72,4 +91,8 @@ setTimeout((async ()=> {
   let res = await fetch(`/api/auth/getuserinfo/${localStorage.username}`)
   document.querySelector(".displayName").innerText = (await res.json()).displayName
   document.querySelector(".bgURL").value = localStorage.bgUrl ?? "assets/bg.webp"
+  if (document.querySelector("html").classList.contains("windowsxp")) {
+    document.querySelector(".bgURL").value = "Overriden by theme."
+    document.querySelector(".bgURL").disabled = true
+  }
   }),50)

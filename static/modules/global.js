@@ -158,6 +158,7 @@ function updateTheme() {
     document.querySelector("html").className = localStorage["themeSelected"];
     document.querySelector("body").classList.remove("horrible");
   }
+  
 }
 updateTheme();
 function logout() {
