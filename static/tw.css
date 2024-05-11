@@ -506,4 +506,5 @@ html.windowsxp body {
   backdrop-filter: blur(4px) !important;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
