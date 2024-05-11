@@ -515,7 +515,14 @@ html.windowsxp body {
   background: linear-gradient(180deg,#fff,#ecebe5 86%,#d8d0c4) !important; 
 }
 .windowsxp nav {
-  background:#e9e8e1 !important;
+  background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAeCAIAAABi9+OQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gMCFwQbjZEbbwAAAFJJREFUCNdVyjsOgCAQhOFhWOg9Edfw6NY2NkihiY8grsUmGosv/xQD9IUpdcwnOIwg1oVtP4irGcA4fvsVrF6MeiIKnYAuht/3rkpUJeaJ2PIDMCMYTcViFPMAAAAASUVORK5CYII=");
+  background-size:contain;
+}
+.windowsxp .settingsBtn {
+  border: 1px solid #003c74 !important;
+  background: linear-gradient(180deg,#fff,#ecebe5 86%,#d8d0c4) !important; 
+  color:black;
+  border-radius:6px; padding-top:6px;padding-bottom:6px;
 }
 .windowsxp .__modalContent {
   background:#e9e8e1 !important;
