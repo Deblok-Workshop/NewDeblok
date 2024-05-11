@@ -479,6 +479,7 @@ div.session_expanded {
 select,option {@apply rounded-lg p-2 bg-crust/20 flex flex-row duration-300 active:bg-crust active:rounded-b-none focus:bg-crust/50}
 
 .windowsxp {
+  @apply latte;
   --ctp-rosewater: 220, 138, 120;
   --ctp-flamingo: 221, 120, 120;
   --ctp-pink: 234, 118, 203;
@@ -493,17 +494,16 @@ select,option {@apply rounded-lg p-2 bg-crust/20 flex flex-row duration-300 acti
   --ctp-sapphire: 32, 159, 181;
   --ctp-blue: 30, 102, 245;
   --ctp-lavender: 114, 135, 253;
-  --ctp-text: 76, 79, 105;
-  --ctp-subtext1: 92, 95, 119;
-  --ctp-subtext0: 108, 111, 133;
-  --ctp-overlay2: 124, 127, 147;
-  --ctp-overlay1: 140, 143, 161;
-  --ctp-overlay0: 156, 160, 176;
-  --ctp-surface2: 172, 176, 190;
-  --ctp-surface1: 188, 192, 204;
-  --ctp-surface0: 204, 208, 218;
-  --ctp-base: 239, 241, 245;
-  --ctp-mantle: 230, 233, 239;
-  --ctp-crust: 220, 224, 232;
-  font-family: "Tahoma","Verdana","Arial",sans-serif;
+  --ctp-text: 0,0,0;
+  --ctp-base: 216,228,248;
+  --ctp-mantle: 206,218,238;
+  --ctp-crust: 186,198,218;
+  font-family: "Tahoma","Verdana","Arial",sans-serif !important;
+}
+html.windowsxp, html.windowsxp body {font-family: "Tahoma","Verdana","Arial",sans-serif !important;}
+html.windowsxp body {
+  background-image: url("assets/bliss.png") !important;
+  backdrop-filter: blur(4px) !important;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
