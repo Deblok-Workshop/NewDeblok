@@ -89,10 +89,17 @@ document.addEventListener("DOMContentLoaded", () => {
           document.querySelector(".loginButton").disabled = true;
         }
       }
+      
       input.addEventListener("blur", (e) => {
         eventTriggered(e);
       });
       input.addEventListener("click", (e) => {
+        eventTriggered(e);
+      });
+      input.addEventListener("hover", (e) => {
+        eventTriggered(e);
+      });
+      document.querySelector(".loginButton").addEventListener("hover", (e) => {
         eventTriggered(e);
       });
     });
