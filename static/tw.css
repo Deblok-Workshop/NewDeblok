@@ -500,6 +500,7 @@ select,option {@apply rounded-lg p-2 bg-crust/20 flex flex-row duration-300 acti
   --ctp-crust: 186,198,218;
   font-family: "Tahoma","Verdana","Arial",sans-serif !important;
 }
+.font-xp {font-family: "Tahoma","Verdana","Arial",sans-serif !important;}
 html.windowsxp, html.windowsxp body {font-family: "Tahoma","Verdana","Arial",sans-serif !important;}
 html.windowsxp body {
   background-image: url("assets/bliss.png") !important;

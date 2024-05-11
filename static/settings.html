@@ -83,13 +83,12 @@ class="hidden dropdown !max-w-[190px] flex flex-col z-[99999999] relative"
         <ul>
             <li class="settings-item ml-1">
                 Theme:
-                <div class="rounded-lg p-2 bg-black/20 flex flex-row">
+                <div class="rounded-lg p-2 bg-black/20 flex flex-col">
+                  <div class="flex flex-row">
                     <div onclick="changeTheme(this)"
-                         class="latte theme-btn-base rounded-lg rounded-r-none bg-[#eff1f5] text-[#4c4f69] px-2 py-1">Latte
+                         class="latte theme-btn-base rounded-lg rounded-bl-none rounded-r-none bg-[#eff1f5] text-[#4c4f69] px-2 py-1">Latte
                     </div>
-                    <div onclick="changeTheme(this)"
-                         class="windowsxp theme-btn-base bg-[#eff1f5] text-[#4c4f69] px-2 py-1">WindowsXP
-                    </div>
+
                     <div onclick="changeTheme(this)"
                          class="frappe theme-btn-base bg-[#303446] text-[#c6d0f5] px-2 py-1">Frappe
                     </div>
@@ -97,13 +96,20 @@ class="hidden dropdown !max-w-[190px] flex flex-col z-[99999999] relative"
                          class="macchiato theme-btn-base bg-[#24273a] text-[#cad3f5] px-2 py-1">Macchiato
                     </div>
                     <div onclick="changeTheme(this)"
-                         class="mocha theme-btn-base  bg-[#1e1e2e] text-[#cdd6f4] px-2 py-1">Mocha
+                         class="mocha theme-btn-base rounded-r-lg bg-[#1e1e2e] text-[#cdd6f4] px-2 py-1">Mocha
                     </div>
-                    <div onclick="changeTheme(this)"
-                         class="mocha theme-btn-base rounded-r-lg font-serif bg-[green] text-[#cdd6f4] px-2 py-1">Horrible Latte
-                    </div>
+                  </div>
+                  <div class="flex flex-row">
+                  <div onclick="changeTheme(this)"
+                             class="theme-btn-base rounded-l-lg rounded-tl-none font-serif bg-[green] text-[#cdd6f4] px-2 py-1">Horrible Latte
+                        </div>
+                        <div onclick="changeTheme(this)"
+                        class="windowsxp theme-btn-base rounded-tr-none bg-[rgb(0,78,152)] text-[#fff] px-2 py-1 rounded-r-lg font-xp">WindowsXP
+                   </div>
+                  </div>
+                  </div>
+                    
 
-                </div>
             </li>
                 <br>
                 
