@@ -524,9 +524,14 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         return;
         return;
       }
+      try {
       let db = helper.sql.open("db.sql");
       let sessionsDBentry: any = helper.sql.read(db, "userinfo", "md5:" + b);
       res.json(JSON.parse(atob(sessionsDBentry["value"] || btoa("{}"))));
+      } catch {
+        res.statusCode = 400;
+        res.send("ERR: User does not exist.");
+      }
     },
   );
   server.post(

@@ -122,7 +122,7 @@ async function login(usr, pwd) {
   }
 }
 async function signup(usr, pwd, em) {
-  // DO NOT deal with any credentials before hashing them
+
   if (
     checkCaptchaIfr(document.querySelector(".captchaIframe")) &&
     validateCreds(usr, pwd)
@@ -138,6 +138,7 @@ async function signup(usr, pwd, em) {
       );
       return undefined;
     }
+    display = usr
     usr = "md5:" + (await md5(usr));
     pwd = "sha256:" + (await sha256(pwd));
 
@@ -181,7 +182,18 @@ async function signupForm() {
     if (res.ok) {
       let lres = await login(usrEle.value, usrPwd.value);
       if (lres != undefined && lres.ok) {
+        
         localStorage["DEBLOKAUTH"] = await lres.text();
+        (async()=>{
+          await fetch("/api/auth/updatedisplayname",{
+            "method":"POST",
+            "body": JSON.stringify({
+              "newname":usrEle.value,
+              "for": "md5:" + (await md5(usrEle.value)),
+              "auth": localStorage.DEBLOKAUTH
+            })
+          })
+        })();
         let redirect =
           new URLSearchParams(window.location.search).get("redirect_to") || "/";
         document.location = redirect
