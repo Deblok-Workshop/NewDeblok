@@ -509,3 +509,20 @@ html.windowsxp body {
   background-repeat: no-repeat;
   background-position: center;
 }
+.windowsxp .card {
+  border-radius:6px !important;
+  border: 1px solid #003c74 !important;
+  background: linear-gradient(180deg,#fff,#ecebe5 86%,#d8d0c4) !important; 
+}
+.windowsxp nav {
+  background:#e9e8e1 !important;
+}
+.windowsxp .__modalContent {
+  background:#e9e8e1 !important;
+}
+.windowsxp .xpbtn-if-theme {
+  border: 1px solid #003c74 !important;
+  background: linear-gradient(180deg,#fff,#ecebe5 86%,#d8d0c4) !important; 
+  color:black;
+  border-radius:6px; padding-top:6px;padding-bottom:6px;
+}

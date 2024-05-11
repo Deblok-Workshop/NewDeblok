@@ -108,7 +108,7 @@ function itemModal(title, description, icon, buttons = ["OK", "Cancel"]) {
             <button
               onclick="window.btnReturn = 'clickedbtn0';itemModalHide();"
               type="button"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center s:ring-blue-800"
+              class="text-white xpbtn-if-theme bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center s:ring-blue-800"
             >
               ${buttons[0]}
             </button>
@@ -118,7 +118,7 @@ function itemModal(title, description, icon, buttons = ["OK", "Cancel"]) {
             <button
               type="button"
               onclick="window.btnReturn = 'clickedbtn1';itemModalHide();"
-              class="py-2.5 px-5 ms-3 text-sm font-medium text-text focus:outline-none bg-base rounded-lg border border-black/40 hover:bg-surface0 hover:text-blue focus:z-10 focus:ring-4 focus:ring-gray-100 s:ring-gray-700"
+              class="py-2.5 xpbtn-if-theme px-5 ms-3 text-sm font-medium text-text focus:outline-none bg-base rounded-lg border border-black/40 hover:bg-surface0 hover:text-blue focus:z-10 focus:ring-4 focus:ring-gray-100 s:ring-gray-700"
             >
               ${buttons[1]}
             </button>
