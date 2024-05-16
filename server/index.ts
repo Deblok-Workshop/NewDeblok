@@ -504,15 +504,14 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
     },
   );
   server.get("/api/policy/:node/get", async (req: Request, res: Response) => {
-    const b: any = req.params.user;
+    const b: any = req.params.node;
     if (!b || b == "") {
       res.statusCode = 400;
-      res.send("ERR: The user field is required.");
+      res.send("ERR: The node field is required or is invalid.");
       return;
     }
-    let db = helper.sql.open("db.sql");
-    let sessionsDBentry: any = helper.sql.read(db, "sessions", "md5:" + b);
-    res.json(JSON.parse(sessionsDBentry["value"] || "{}"));
+    let resp = await fetch("http://"+endpoints[b]+"/policy/")
+    res.json(await resp.json());
   });
   server.get(
     "/api/auth/getuserinfo/:user/",
