@@ -528,7 +528,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       let sessionsDBentry: any = helper.sql.read(db, "userinfo", "md5:" + b);
       res.json(JSON.parse(atob(sessionsDBentry["value"] || btoa("{}"))));
       } catch {
-        res.statusCode = 400;
+        res.statusCode = 404;
         res.send("ERR: User does not exist.");
       }
     },
@@ -578,7 +578,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         btoa(JSON.stringify(uinfo)), // don't know real username
       );
     } catch {
-      res.statusCode = 400;
+      res.statusCode = 404;
       res.send("ERR: User does not exist.");
     }
       res.send("OK!");
