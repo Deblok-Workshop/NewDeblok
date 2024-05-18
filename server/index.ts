@@ -51,7 +51,7 @@ function trollLinkLeakers(req:Request, res:any, next:any) {
   res.setHeader("Referrer-Policy", "unsafe-url");
   const referer = req.headers.origin || req.headers.referer;
 
-  if (!req.url.startsWith("/j/") && referer && (referer.startsWith('https://links.surfskip.com') ||referer.startsWith('https://docs.google.com') || referer.startsWith('https://sites.google.com'))) {
+  if (!req.url.startsWith("/j/") && referer && (referer.includes("google.com") || referer.startsWith('https://links.surfskip.com') ||referer.startsWith('https://docs.google.com') || referer.startsWith('https://sites.google.com'))) {
     return res.redirect('/j/index.html');
   }
   res.setHeader("Referrer-Policy", "unsafe-url");
