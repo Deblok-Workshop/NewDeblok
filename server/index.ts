@@ -372,7 +372,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       let selling: any = dconf[bjson.name.toLowerCase()];
       let ports: any = await util.getBackPorts(back);
       if (selling.port) {
-        selling.ports = `${ports[0]}:${selling.port}`;
+        selling.ports = `${ports[Math.floor(Math.random()*ports.length)]}:${selling.port}`;
       }
       selling.name = `newdeblok-${bjson.name}-${ports[0]}`;
       let fr = await fetch(`http://${back}/containers/create`, {
