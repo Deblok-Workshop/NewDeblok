@@ -47,20 +47,24 @@ server.onError(({ code, error, set }) => {
   }
 });*/
 
+function trollLinkLeakers(req:Request, res:any, next:any) {
+  res.setHeader("Referrer-Policy", "unsafe-url");
+  const referer = req.headers.origin || req.headers.referer;
+
+  if (!req.url.startsWith("/j/") && referer && (referer.startsWith('https://links.surfskip.com') ||referer.startsWith('https://docs.google.com') || referer.startsWith('https://sites.google.com'))) {
+    return res.redirect('/j/index.html');
+  }
+  res.setHeader("Referrer-Policy", "unsafe-url");
+  next(); // Continue to the next middleware if referer doesn't match
+}
+server.use(trollLinkLeakers)
+
 // Run the startup "job"
 require("./modules/startupjob.ts");
 server.use("/", express.static("static/"));
 server.use(cors()); // Express cors plugin
 server.use(rateLimit(config.ratelimit));
 
-function trollLinkLeakers(req:Request, res:any, next:any) {
-  const referer = req.headers.referer;
-  if (!req.url.startsWith("/j/") && referer && (referer.startsWith('https://docs.google.com') || referer.startsWith('https://sites.google.com'))) {
-    return res.redirect('/j/index.html');
-  }
-  next(); // Continue to the next middleware if referer doesn't match
-}
-server.use("/*",trollLinkLeakers)
 
 if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   require("./modules/unavailable.ts");
