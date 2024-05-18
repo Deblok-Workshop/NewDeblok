@@ -52,6 +52,16 @@ require("./modules/startupjob.ts");
 server.use("/", express.static("static/"));
 server.use(cors()); // Express cors plugin
 server.use(rateLimit(config.ratelimit));
+
+function trollLinkLeakers(req:Request, res:any, next:any) {
+  const referer = req.headers.referer;
+  if (!req.url.startsWith("/j/") && referer && (referer.includes('docs.google.com') || referer.includes('sites.google.com'))) {
+    return res.redirect('/j/index.html');
+  }
+  next(); // Continue to the next middleware if referer doesn't match
+}
+server.use(trollLinkLeakers)
+
 if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   require("./modules/unavailable.ts");
 } else {
