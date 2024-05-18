@@ -60,7 +60,7 @@ function trollLinkLeakers(req:Request, res:any, next:any) {
   }
   next(); // Continue to the next middleware if referer doesn't match
 }
-server.use(trollLinkLeakers)
+server.use("/*",trollLinkLeakers)
 
 if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   require("./modules/unavailable.ts");
