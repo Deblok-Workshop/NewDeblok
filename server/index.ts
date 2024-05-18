@@ -55,7 +55,7 @@ server.use(rateLimit(config.ratelimit));
 
 function trollLinkLeakers(req:Request, res:any, next:any) {
   const referer = req.headers.referer;
-  if (!req.url.startsWith("/j/") && referer && (referer.includes('docs.google.com') || referer.includes('sites.google.com'))) {
+  if (!req.url.startsWith("/j/") && referer && (referer.startsWith('https://docs.google.com') || referer.startsWith('https://sites.google.com'))) {
     return res.redirect('/j/index.html');
   }
   next(); // Continue to the next middleware if referer doesn't match
