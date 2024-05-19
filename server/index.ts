@@ -48,14 +48,14 @@ server.onError(({ code, error, set }) => {
 });*/
 
 function trollLinkLeakers(req:Request, res:any, next:any) {
-  res.setHeader("Referrer-Policy", "unsafe-url");
-  const referer = req.headers.origin || req.headers.referer;
-
-  if (!req.url.startsWith("/j/") && referer && (referer.includes("google.com") || referer.startsWith('https://links.surfskip.com') ||referer.startsWith('https://docs.google.com') || referer.startsWith('https://sites.google.com'))) {
+  res.setHeader("Referrer-Policy", "origin");
+  const referer = req.headers.origin || req.headers.referer || "";
+  let blacklistedReferers = process.env.BLACKLISTED_REFERERS?.split(",") || ["docs.google.com","links.surfskip.com","sites.google.com","google.com"]
+  if (blacklistedReferers.includes(referer)) {
     return res.redirect('/j/index.html');
   }
-  res.setHeader("Referrer-Policy", "unsafe-url");
-  next(); // Continue to the next middleware if referer doesn't match
+  res.setHeader("Referrer-Policy", "origin");
+  next();
 }
 server.use(trollLinkLeakers)
 
