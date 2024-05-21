@@ -59,6 +59,32 @@ function trollLinkLeakers(req:Request, res:any, next:any) {
 }
 server.use(trollLinkLeakers)
 
+function dockerFirewall(req: Request, res: Response, next: any) {
+  const privateIPs: RegExp[] = [
+      /^10\./, // 10.0.0.0/8 range
+      /^172\.(1[6-9]|2[0-9]|3[0-1])\./ // 172.16.0.0/12 range
+  ];
+
+  const ip: string | undefined = req.ip || req.connection.remoteAddress;
+  const isPrivate: boolean = privateIPs.some(pattern => pattern.test(ip || ''));
+
+  if (isPrivate && req.path.startsWith('/ws/')) {
+      const acceptHeader: string | string[] | undefined = req.headers.accept;
+      if (acceptHeader && (acceptHeader.includes('text/html') || acceptHeader.includes('*/*'))) {
+          res.status(403).send('<h1>403 Forbidden</h1><p>Docker IPs cannot access Deblok reverse proxies.</p>');
+      } else if (acceptHeader && acceptHeader.includes('text/plain')) {
+          res.status(403).send('403 Forbidden\nDocker IPs cannot access Deblok reverse proxies.');
+      } else if (acceptHeader && acceptHeader.includes('application/json')) {
+          res.status(403).json({ blocked: true, reason: 'Docker IPs cannot access Deblok reverse proxies.' });
+      } else {
+          res.status(403).send('<h1>403 Forbidden</h1><p>Docker IPs cannot access Deblok reverse proxies.</p>');
+      }
+  } else {
+      next();
+  }
+}
+server.use(dockerFirewall)
+
 // Run the startup "job"
 require("./modules/startupjob.ts");
 server.use("/", express.static("static/"));
