@@ -5,13 +5,15 @@ import * as cgraphy from "node:crypto";
 function dbopen(addr: string, create: boolean = true): sqllite {
   return new sqllite(addr, { create: create });
 }
-function dbmaketable(db: sqllite, table: string) {
+function dbmaketable(db: sqllite, table: string, errorExist: boolean = false) {
   const sql = `SELECT name FROM sqlite_master WHERE type='table' AND name=?`;
   const stmt = db.prepare(sql);
   const result = stmt.get(table);
 
   if (!result) {
     db.exec(`CREATE TABLE ${table} (name TEXT PRIMARY KEY, value TEXT)`);
+  } else if (result && errorExist) {
+    throw new Error("Table exists")
   }
 }
 function dbdroptable(db: sqllite, table: string) {
