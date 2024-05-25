@@ -20,7 +20,7 @@ function dbdroptable(db: sqllite, table: string) {
   const stmt = db.prepare(sql);
   const result = stmt.get(table);
 
-  if (!result) {
+  if (result) {
     db.exec(`DROP TABLE IF EXISTS ${table}`);
   }
 }
