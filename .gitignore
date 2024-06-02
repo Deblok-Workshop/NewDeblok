@@ -177,3 +177,4 @@ dist
 
 static/app.css
 server/modules/wordlists/*
+build/
