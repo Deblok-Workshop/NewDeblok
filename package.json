@@ -3,10 +3,11 @@
   "module": "server/index.ts",
   "scripts": {
     "preinstall": "npx only-allow bun",
-    "watch": "tailwindcss -i static/tw.css -o static/app.css -m -w",
-    "build": "tailwindcss -i static/tw.css -o static/app.css -m",
+		"dev": "cd frontend && vite dev",
+		"build": "cd frontend &&  vite build",
+		"preview": "cd frontend &&  vite preview",
+		"lint": "prettier --check . && eslint .",
     "start": "bash scripts/unattended.sh",
-    "dev": "concurrently \"bun run watch\" \"bun run start\"",
     "deploy": "bash scripts/deploy.sh",
     "format": "prettier --write ."
   },
