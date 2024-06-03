@@ -26,6 +26,7 @@
     "@sveltejs/vite-plugin-svelte": "^3.1.1",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "autoprefixer": "^10.4.19",
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
     "elysia": "^0.8.15",
@@ -36,9 +37,11 @@
     "http-proxy": "^1.18.1",
     "m3-svelte": "^3.2.6",
     "node-http-proxy": "^0.2.4",
+    "postcss": "^8.4.38",
     "prettier": "^3.2.5",
     "sharp": "^0.33.2",
-    "tailwindcss": "^3.4.1",
+    "svelte-google-materialdesign-icons": "^1.0.3",
+    "tailwindcss": "^3.4.3",
     "yaml": "2.2.2"
   }
 }
