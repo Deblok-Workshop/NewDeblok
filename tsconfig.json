@@ -22,4 +22,5 @@
       "$lib/*": ["./frontend/src/lib/*"]
     }
   },
+  "extends": "./frontend/.svelte-kit/tsconfig.json"
 }

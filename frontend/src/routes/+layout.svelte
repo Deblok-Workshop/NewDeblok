@@ -1,6 +1,5 @@
 <script>
     import "../app.pcss"
-    import { Menu, More_vert, Settings } from "svelte-google-materialdesign-icons";
     
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" />
