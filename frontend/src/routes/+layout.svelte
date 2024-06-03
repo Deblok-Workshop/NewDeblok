@@ -1,28 +1,12 @@
 <script>
     import "../app.css"
-    import { StyleFromScheme } from "m3-svelte";
     import { Menu, More_vert, Settings } from "svelte-google-materialdesign-icons";
-    import { Button } from "m3-svelte";
     
 </script>
-<StyleFromScheme
-  lightScheme={{"primary":4283980178,"onPrimary":4294967295,"primaryContainer":4293058559,"onPrimaryContainer":4279505738,"inversePrimary":4290888191,"secondary":4284308594,"onSecondary":4294967295,"secondaryContainer":4293058809,"onSecondaryContainer":4279900716,"tertiary":4286141289,"onTertiary":4294967295,"tertiaryContainer":4294957291,"onTertiaryContainer":4281274660,"error":4290386458,"onError":4294967295,"errorContainer":4294957782,"onErrorContainer":4282449922,"background":4294768895,"onBackground":4279966497,"surface":4294768895,"onSurface":4279966497,"surfaceVariant":4293190124,"onSurfaceVariant":4282861135,"inverseSurface":4281348150,"inverseOnSurface":4294176759,"outline":4286019200,"outlineVariant":4291347920,"shadow":4278190080,"scrim":4278190080,"surfaceDim":4292663776,"surfaceBright":4294768895,"surfaceContainerLowest":4294967295,"surfaceContainerLow":4294374138,"surfaceContainer":4293979380,"surfaceContainerHigh":4293584879,"surfaceContainerHighest":4293190121,"surfaceTint":4283980178}}
-  darkScheme={{"primary":4290888191,"onPrimary":4280953440,"primaryContainer":4282401144,"onPrimaryContainer":4293058559,"inversePrimary":4283980178,"secondary":4291216605,"onSecondary":4281282370,"secondaryContainer":4282729817,"onSecondaryContainer":4293058809,"tertiary":4293507539,"onTertiary":4282787386,"tertiaryContainer":4284431441,"onTertiaryContainer":4294957291,"error":4294948011,"onError":4285071365,"errorContainer":4287823882,"onErrorContainer":4294957782,"background":4279440152,"onBackground":4293190121,"surface":4279440152,"onSurface":4293190121,"surfaceVariant":4282861135,"onSurfaceVariant":4291347920,"inverseSurface":4293190121,"inverseOnSurface":4281348150,"outline":4287729562,"outlineVariant":4282861135,"shadow":4278190080,"scrim":4278190080,"surfaceDim":4279440152,"surfaceBright":4281940031,"surfaceContainerLowest":4279111187,"surfaceContainerLow":4279966497,"surfaceContainer":4280229669,"surfaceContainerHigh":4280953135,"surfaceContainerHighest":4281676858,"surfaceTint":4290888191}} />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" />
 <!-- Implement Top app bar myself -->
-<div class="top-app-bar w-screen mx-auto px-4 fixed top-0 !max-h-[64px] !h-[64px] bg-on-primary  flex flex-row align-middle items-center">
-  <Button type="text" iconType="full">
-    <Menu size="24"/>
-  </Button>
-  <h1 class="text-2xl px-4 mx-auto font-semibold">Deblok</h1>
-  <div class="pr-2">
-  <Button type="text" iconType="full" >
-    <Settings size="24" />
-  </Button>
-</div>
-  <Button type="text" iconType="full" >
-    <More_vert size="24" />
-  </Button>
+<div class="top-app-bar w-screen mx-auto px-4 fixed top-0 !max-h-[64px] !h-[64px] flex flex-row align-middle items-center">
+ 
 </div>
 <break class="block w-full h-20"></break>
 <slot />
