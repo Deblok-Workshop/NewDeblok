@@ -1,11 +1,17 @@
 <script>
     import "../app.pcss"
-    
+    import { ellipsisVertical,Menu,Settings } from "lucide-svelte";
+    import { Button } from "$lib/components/ui/button";
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" />
-<!-- Implement Top app bar myself -->
-<div class="top-app-bar w-screen mx-auto px-4 fixed top-0 !max-h-[64px] !h-[64px] flex flex-row align-middle items-center">
- 
-</div>
+
+<div class="top-app-bar">
+ <img src="./assets/favicon.png" class="w-10 mr-4" alt="Deblok"/>
+ <a href={undefined} >
+<Button variant="text"> 
+  <Menu />
+</Button>
+</a>
+</div> 
 <break class="block w-full h-20"></break>
 <slot />
