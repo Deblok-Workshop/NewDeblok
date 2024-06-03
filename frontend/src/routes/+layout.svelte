@@ -1,5 +1,5 @@
 <script>
-    import "../app.css"
+    import "../app.pcss"
     import { Menu, More_vert, Settings } from "svelte-google-materialdesign-icons";
     
 </script>

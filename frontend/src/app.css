@@ -1,8 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-body {
-  --m3-font: "Inter", system-ui, sans-serif;
-    background-color: rgb(var(--m3-scheme-background));
-    color: rgb(var(--m3-scheme-on-background));
-  }

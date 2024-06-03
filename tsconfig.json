@@ -6,7 +6,6 @@
     "moduleDetection": "force",
     "jsx": "react-jsx",
     "allowJs": true,
-
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -17,6 +16,10 @@
     "skipLibCheck": true,
     "strict": true,
     "noFallthroughCasesInSwitch": true,
-    "forceConsistentCasingInFileNames": true
-  }
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "$lib": ["./frontend/src/lib"],
+      "$lib/*": ["./frontend/src/lib/*"]
+    }
+  },
 }

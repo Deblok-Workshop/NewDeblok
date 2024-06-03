@@ -17,7 +17,11 @@ const config = {
 			fallback: undefined,
 			precompress: false,
 			strict: true
-		})
+		}),
+		"alias": {
+			"@/*": "./src/lib/*",
+			"$lib/*": "./src/lib/*",
+		  },
 	}
 };
 
