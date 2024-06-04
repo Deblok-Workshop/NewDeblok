@@ -1,1 +1,0 @@
-frontend/svelte.config.ts
