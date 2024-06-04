@@ -1,5 +1,5 @@
 <script>
-    import "../app.pcss"
+    import "../app.css"
     import { EllipsisVertical,Menu,Settings } from "lucide-svelte";
     import { Button } from "$lib/components/ui/button";
 </script>

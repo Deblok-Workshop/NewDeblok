@@ -1,10 +1,11 @@
 import { fontFamily } from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
-
+import catppuccin from "@catppuccin/tailwindcss"
 const config: Config = {
 	darkMode: ["class"],
 	content: ["./src/**/*.{html,js,svelte,ts}"],
 	safelist: ["dark"],
+	plugins: [catppuccin],
 	theme: {
 		container: {
 			center: true,
