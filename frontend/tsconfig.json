@@ -6,10 +6,11 @@
       "moduleDetection": "force",
       "jsx": "react-jsx",
       "allowJs": true,
+      "checkJs": true,
       /* Bundler mode */
       "moduleResolution": "bundler",
       "allowImportingTsExtensions": true,
-      "verbatimModuleSyntax": true,
+      "verbatimModuleSyntax": false,
       "noEmit": true,
   
       /* Linting */

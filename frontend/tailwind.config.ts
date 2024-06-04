@@ -1,11 +1,10 @@
 import { fontFamily } from "tailwindcss/defaultTheme";
-import type { Config } from "tailwindcss";
-import catppuccin from "@catppuccin/tailwindcss"
-const config: Config = {
+//import catppuccin from "@catppuccin/tailwindcss"
+export default {
 	darkMode: ["class"],
 	content: ["./src/**/*.{html,js,svelte,ts}"],
 	safelist: ["dark"],
-	plugins: [catppuccin],
+	plugins: [require("@catppuccin/tailwindcss")],
 	theme: {
 		container: {
 			center: true,
@@ -61,5 +60,3 @@ const config: Config = {
 		}
 	},
 };
-
-export default config;

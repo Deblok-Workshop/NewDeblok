@@ -1,15 +1,16 @@
-<script lang="ts">
+<script lang="js">
+	// @ts-nocheck
 	import { Button as ButtonPrimitive } from "bits-ui";
-	import { type Events, type Props, buttonVariants } from "./index.ts";
-	import { cn } from "$lib/utils.js";
+	import { buttonVariants } from "./index.ts";
+	import { cn } from "$lib/utils.ts";
 
-	type $$Props = Props;
-	type $$Events = Events;
+	//type $$Props = Props;
+	//type $$Events = Events;
 
-	let className: $$Props["class"] = undefined;
-	export let variant: $$Props["variant"] = "default";
-	export let size: $$Props["size"] = "default";
-	export let builders: $$Props["builders"] = [];
+	let className = undefined;
+	export let variant = "default";
+	export let size = "default";
+	export let builders = [];
 	export { className as class };
 </script>
 
