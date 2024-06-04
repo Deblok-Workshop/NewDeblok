@@ -8,7 +8,7 @@
 <div class="top-app-bar">
  <img src="./assets/favicon.png" class="w-10 mr-4" alt="Deblok"/>
  <a href={undefined} >
-<Button variant="ghost" class="p-2 duration-300 hover:bg-blue/30"> 
+<Button variant="ghost" class="p-2 duration-300"> 
   <Menu />
 </Button>
 </a>

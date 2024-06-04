@@ -3,7 +3,7 @@
   "module": "server/index.ts",
   "scripts": {
     "preinstall": "npx only-allow bun",
-    "dev": "cd frontend && bunx vite dev",
+    "dev": "cd frontend && bunx --trace-warnings vite dev",
     "build": "cd frontend && bunx vite build",
     "preview": "cd frontend && bunx  vite preview",
     "lint": "prettier --check . && eslint .",
@@ -19,6 +19,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@catppuccin/palette": "^1.2.0",
     "@catppuccin/tailwindcss": "^0.1.6",
     "@elysiajs/cors": "^0.8.0",
     "@elysiajs/static": "^0.8.1",
