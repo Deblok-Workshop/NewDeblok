@@ -22,11 +22,11 @@
     
 <DropdownMenu.Root>
   <DropdownMenu.Trigger asChild let:builder>
-    <Button builders={[builder]} variant="outline" >
+    <Button builders={[builder]} variant="outline" class="p-2 border-none" >
     <EllipsisVertical />
     </Button>
   </DropdownMenu.Trigger>
-  <DropdownMenu.Content class="w-56">
+  <DropdownMenu.Content class="w-48">
     hi guys welcome to my youtube channel
     </DropdownMenu.Content>
     </DropdownMenu.Root>
