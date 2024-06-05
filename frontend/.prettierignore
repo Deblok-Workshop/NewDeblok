@@ -2,3 +2,14 @@
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
+
+# exclude
+frontend/static/j/*
+frontend/static/j
+frontend/static/j/
+frontend/static/vnc/*
+frontend/static/vnc
+frontend/static/vnc/
+frontend/.svelte-kit/*
+frontend/.svelte-kit
+frontend/.svelte-kit/
