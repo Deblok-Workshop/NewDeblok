@@ -3,10 +3,11 @@
     import { Label } from "$lib/components/ui/label";
     import { Input } from "$lib/components/ui/input";
     let open = true
+    import "$lib/components/auth.ts";
   </script>
 
 <AlertDialog.Root bind:open={open}>
-    <AlertDialog.Trigger>Open</AlertDialog.Trigger>
+    <AlertDialog.Trigger class="auth-dialog-trigger">Open</AlertDialog.Trigger>
     <AlertDialog.Content class="shadow-lg shadow-black/30 p-0">
       <AlertDialog.Header class="p-6">
         <AlertDialog.Title>Log In</AlertDialog.Title>
@@ -24,7 +25,7 @@
         </AlertDialog.Description>
       </AlertDialog.Header>
       <AlertDialog.Footer class="mt-2 bg-muted/30 p-4 border-t-2 border-muted/60">
-        <AlertDialog.Action>Log In</AlertDialog.Action>
+        <AlertDialog.Action class="authtrigger">Log In</AlertDialog.Action>
         <a href="/signup"><AlertDialog.Cancel>Sign Up</AlertDialog.Cancel></a>
       </AlertDialog.Footer>
     </AlertDialog.Content>
