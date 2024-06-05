@@ -7,14 +7,14 @@
     <AlertDialog.Trigger>Open</AlertDialog.Trigger>
     <AlertDialog.Content>
       <AlertDialog.Header>
-        <AlertDialog.Title>Log In</AlertDialog.Title>
+        <AlertDialog.Title>Sign Up</AlertDialog.Title>
         <AlertDialog.Description>
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </AlertDialog.Description>
       </AlertDialog.Header>
       <AlertDialog.Footer>
-        <AlertDialog.Action>Log In</AlertDialog.Action>
-        <a href="/signup"><AlertDialog.Cancel>Sign Up</AlertDialog.Cancel></a>
+        <AlertDialog.Action>Sign Up</AlertDialog.Action>
+        <a href="/login"><AlertDialog.Cancel>Log In</AlertDialog.Cancel></a>
       </AlertDialog.Footer>
     </AlertDialog.Content>
   </AlertDialog.Root>
