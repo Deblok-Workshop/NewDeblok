@@ -21,8 +21,6 @@
   "dependencies": {
     "@catppuccin/palette": "^1.2.0",
     "@catppuccin/tailwindcss": "^0.1.6",
-    "@elysiajs/cors": "^0.8.0",
-    "@elysiajs/static": "^0.8.1",
     "@eslint/js": "^9.4.0",
     "@sveltejs/adapter-static": "^3.0.1",
     "@sveltejs/vite-plugin-svelte": "^3.1.1",
