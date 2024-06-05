@@ -27,7 +27,9 @@
     </Button>
   </DropdownMenu.Trigger>
   <DropdownMenu.Content class="w-48">
-    hi guys welcome to my youtube channel
+    <DropdownMenu.Item class="duration-200">Dashboard</DropdownMenu.Item>
+    <DropdownMenu.Item class="duration-200">Settings</DropdownMenu.Item>
+    <DropdownMenu.Item class="!bg-destructive/40 hover:!bg-destructive/60 duration-200">Logout</DropdownMenu.Item>
     </DropdownMenu.Content>
     </DropdownMenu.Root>
     
