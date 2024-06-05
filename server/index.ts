@@ -28,7 +28,7 @@ try {
 let netaddr = "[::1]";
 netaddr = require("node:os").hostname();
 const server = express();
-server.set('trust proxy', true)
+server.set("trust proxy", true);
 var HTTPproxy = require("http-proxy");
 const WSocket = require("ws");
 var bodyParser = require("body-parser");
@@ -48,25 +48,28 @@ server.onError(({ code, error, set }) => {
   }
 });*/
 
-function trollLinkLeakers(req:Request, res:any, next:any) {
+function trollLinkLeakers(req: Request, res: any, next: any) {
   res.setHeader("Referrer-Policy", "origin");
   const referer = req.headers.origin || req.headers.referer || "";
-  let blacklistedReferers = process.env.BLACKLISTED_REFERERS?.split(",") || ["docs.google.com","links.surfskip.com","sites.google.com","google.com"]
+  let blacklistedReferers = process.env.BLACKLISTED_REFERERS?.split(",") || [
+    "docs.google.com",
+    "links.surfskip.com",
+    "sites.google.com",
+    "google.com",
+  ];
   if (blacklistedReferers.includes(referer)) {
-    return res.redirect('/j/index.html');
+    return res.redirect("/j/index.html");
   }
   res.setHeader("Referrer-Policy", "origin");
   next();
 }
-server.use(trollLinkLeakers)
-
+server.use(trollLinkLeakers);
 
 // Run the startup "job"
 require("./modules/startupjob.ts");
 server.use("/", express.static("static/"));
 server.use(cors()); // Express cors plugin
 server.use(rateLimit(config.ratelimit));
-
 
 if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
   require("./modules/unavailable.ts");
@@ -374,7 +377,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       let selling: any = dconf[bjson.name.toLowerCase()];
       let ports: any = await util.getBackPorts(back);
       if (selling.port) {
-        selling.ports = `${ports[Math.floor(Math.random()*ports.length)]}:${selling.port}`;
+        selling.ports = `${ports[Math.floor(Math.random() * ports.length)]}:${selling.port}`;
       }
       selling.name = `newdeblok-${bjson.name}-${ports[0]}`;
       let fr = await fetch(`http://${back}/containers/create`, {
@@ -526,7 +529,7 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       res.send("ERR: The node field is required or is invalid.");
       return;
     }
-    let resp = await fetch("http://"+endpoints[b]+"/policy/")
+    let resp = await fetch("http://" + endpoints[b] + "/policy/");
     res.json(await resp.json());
   });
   server.get(
@@ -540,9 +543,9 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
         return;
       }
       try {
-      let db = helper.sql.open("db.sql");
-      let sessionsDBentry: any = helper.sql.read(db, "userinfo", "md5:" + b);
-      res.json(JSON.parse(atob(sessionsDBentry["value"] || btoa("{}"))));
+        let db = helper.sql.open("db.sql");
+        let sessionsDBentry: any = helper.sql.read(db, "userinfo", "md5:" + b);
+        res.json(JSON.parse(atob(sessionsDBentry["value"] || btoa("{}"))));
       } catch {
         res.statusCode = 404;
         res.send("ERR: User does not exist.");
@@ -574,29 +577,29 @@ if (process.argv.includes("--unavailable") || process.argv.includes("-u")) {
       }
       let db = helper.sql.open("db.sql");
       try {
-      let dbEntry: any = helper.sql.read(db, "userinfo", "md5:" + bjson.for);
-      if (!dbEntry["value"]) {
-        res.statusCode = 400;
-        res.send("ERR: Must provide userid or it is invalid.");
-        return;
-      } 
-      let sessionsDBentry: any = helper.sql.read(
-        db,
-        "userinfo",
-        "md5:" + bjson.for,
-      );
-      let uinfo = JSON.parse(atob(sessionsDBentry["value"] || btoa("{}")));
-      uinfo.displayName = bjson.newname;
-      helper.sql.write(
-        db,
-        "userinfo",
-        "md5:" + bjson.for,
-        btoa(JSON.stringify(uinfo)), // don't know real username
-      );
-    } catch {
-      res.statusCode = 404;
-      res.send("ERR: User does not exist.");
-    }
+        let dbEntry: any = helper.sql.read(db, "userinfo", "md5:" + bjson.for);
+        if (!dbEntry["value"]) {
+          res.statusCode = 400;
+          res.send("ERR: Must provide userid or it is invalid.");
+          return;
+        }
+        let sessionsDBentry: any = helper.sql.read(
+          db,
+          "userinfo",
+          "md5:" + bjson.for,
+        );
+        let uinfo = JSON.parse(atob(sessionsDBentry["value"] || btoa("{}")));
+        uinfo.displayName = bjson.newname;
+        helper.sql.write(
+          db,
+          "userinfo",
+          "md5:" + bjson.for,
+          btoa(JSON.stringify(uinfo)), // don't know real username
+        );
+      } catch {
+        res.statusCode = 404;
+        res.send("ERR: User does not exist.");
+      }
       res.send("OK!");
       return;
     },

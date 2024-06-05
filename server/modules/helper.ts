@@ -13,7 +13,7 @@ function dbmaketable(db: sqllite, table: string, errorExist: boolean = false) {
   if (!result) {
     db.exec(`CREATE TABLE ${table} (name TEXT PRIMARY KEY, value TEXT)`);
   } else if (result && errorExist) {
-    throw new Error("Table exists")
+    throw new Error("Table exists");
   }
 }
 function dbdroptable(db: sqllite, table: string) {

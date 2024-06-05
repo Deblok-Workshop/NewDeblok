@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AlertDialog as AlertDialogPrimitive } from "bits-ui";
+	import { AlertDialog as AlertDialogPrimitive } from 'bits-ui';
 </script>
 
 <AlertDialogPrimitive.Portal {...$$restProps}>

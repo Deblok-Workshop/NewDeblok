@@ -1,3 +1,3 @@
 <script>
-    document.location = "/dash"
+	document.location = '/dash';
 </script>

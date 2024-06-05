@@ -1,25 +1,23 @@
 {
-    "compilerOptions": {
-      "lib": ["ESNext"],
-      "target": "ESNext",
-      "module": "ESNext",
-      "moduleDetection": "force",
-      "jsx": "react-jsx",
-      "allowJs": true,
-      "checkJs": true,
-      /* Bundler mode */
-      "moduleResolution": "bundler",
-      "allowImportingTsExtensions": true,
-      "verbatimModuleSyntax": false,
-      "noEmit": true,
-  
-      /* Linting */
-      "skipLibCheck": true,
-      "strict": true,
-      "noFallthroughCasesInSwitch": true,
-      "forceConsistentCasingInFileNames": true,
-      
-    },
-    "extends": "./.svelte-kit/tsconfig.json"
-  }
-  
+	"compilerOptions": {
+		"lib": ["ESNext"],
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleDetection": "force",
+		"jsx": "react-jsx",
+		"allowJs": true,
+		"checkJs": true,
+		/* Bundler mode */
+		"moduleResolution": "bundler",
+		"allowImportingTsExtensions": true,
+		"verbatimModuleSyntax": false,
+		"noEmit": true,
+
+		/* Linting */
+		"skipLibCheck": true,
+		"strict": true,
+		"noFallthroughCasesInSwitch": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"extends": "./.svelte-kit/tsconfig.json"
+}

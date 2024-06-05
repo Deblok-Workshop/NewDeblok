@@ -18,10 +18,10 @@ const config = {
 			precompress: false,
 			strict: true
 		}),
-		"alias": {
-			"@/*": "./src/lib/*",
-			"$lib/*": "./src/lib/*",
-		  },
+		alias: {
+			'@/*': './src/lib/*',
+			'$lib/*': './src/lib/*'
+		}
 	}
 };
 
