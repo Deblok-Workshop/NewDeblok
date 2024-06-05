@@ -40,6 +40,7 @@
     "node-http-proxy": "^0.2.4",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
+    "prettier-plugin-svelte": "^3.2.3",
     "shadcn-svelte": "^0.10.6",
     "sharp": "^0.33.2",
     "tailwind-merge": "^2.3.0",
