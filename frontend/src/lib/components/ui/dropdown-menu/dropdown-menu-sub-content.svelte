@@ -5,7 +5,7 @@
 	//type $$Props = DropdownMenuPrimitive.SubContentProps;
 	//type $$Events = DropdownMenuPrimitive.SubContentEvents;
 
-	let className = undefined;
+	let className = "undefined";
 	export let transition = flyAndScale;
 	export let transitionConfig = {
 		x: -10,

@@ -7,8 +7,8 @@
 	//type $$Props = DropdownMenuPrimitive.CheckboxItemProps;
 	//type $$Events = DropdownMenuPrimitive.CheckboxItemEvents;
 
-	let className = undefined;
-	export let checked= undefined;
+	let className = "undefined";
+	export let checked= "undefined";
 	export { className as class };
 </script>
 

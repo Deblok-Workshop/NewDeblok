@@ -4,7 +4,7 @@
 
 	//type $$Props = DropdownMenuPrimitive.SeparatorProps;
 
-	let className = undefined;
+	let className ="undefined";
 	export { className as class };
 </script>
 

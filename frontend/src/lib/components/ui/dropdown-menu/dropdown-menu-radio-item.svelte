@@ -6,7 +6,7 @@
 	//type $$Props = DropdownMenuPrimitive.RadioItemProps;
 	//type $$Events = DropdownMenuPrimitive.RadioItemEvents;
 
-	let className = undefined;
+	let className = "undefined";
 	export let value;
 	export { className as class };
 </script>

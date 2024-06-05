@@ -8,8 +8,8 @@
 	};
 	type $$Events = DropdownMenuPrimitive.SubTriggerEvents;
 	*/
-	let className= undefined;
-	export let inset = undefined;
+	let className= "undefined";
+	export let inset = "undefined";
 	export { className as class };
 </script>
 

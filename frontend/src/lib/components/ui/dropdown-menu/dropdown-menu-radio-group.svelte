@@ -4,7 +4,7 @@
 
 	//type $$Props = DropdownMenuPrimitive.RadioGroupProps;
 
-	export let value = undefined;
+	export let value = "undefined";
 </script>
 
 <DropdownMenuPrimitive.RadioGroup {...$$restProps} bind:value>

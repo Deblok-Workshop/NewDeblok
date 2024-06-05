@@ -4,7 +4,7 @@
 
 	//type $$Props = HTMLAttributes<HTMLSpanElement>;
 
-	let className = undefined;
+	let className = "undefined";
 	export { className as class };
 </script>
 
