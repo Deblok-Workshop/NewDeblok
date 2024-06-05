@@ -8,11 +8,6 @@
 
 <div class="top-app-bar">
  <img src="./assets/favicon.png" class="w-10 mr-4" alt="Deblok"/>
- <a href={undefined} >
-<Button variant="outline" class="p-2 border-0"> 
-  <Menu />
-</Button>
-</a>
 <span class="ml-auto">
   <a href={undefined} >
     <Button variant="outline" class="p-2 border-0"> 
