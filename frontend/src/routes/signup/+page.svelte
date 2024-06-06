@@ -3,7 +3,8 @@
     import { Label } from "$lib/components/ui/label";
     import { Input } from "$lib/components/ui/input";
     let open = true
-    import "$lib/components/auth.ts";
+    import auth from "$lib/components/auth.ts";
+    auth();
   </script>
 
 <AlertDialog.Root bind:open={open}>

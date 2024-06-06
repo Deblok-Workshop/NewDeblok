@@ -1,10 +1,17 @@
-document.querySelector(".authtrigger")?.addEventListener("click",(e)=>{
-    e.preventDefault()
-})
+async function onAuthClick() {}
 
-setInterval(()=>{
-    if (!document.querySelector("[role=\"alertdialog\"]")) {
+export default (async()=>{
+    setInterval(()=>{
+        
+        if (!document.querySelector("[role=\"alertdialog\"]")) {
+        // @ts-expect-error
+        document.querySelector(".auth-dialog-trigger").click()
+        } else {
     // @ts-expect-error
-    document.querySelector(".auth-dialog-trigger").click()
+    document.querySelector(".authtrigger").onclick = async (e:any)=>{
+        e.preventDefault();
+        await onAuthClick();
     }
-},500)
+        }
+    },500)
+})
