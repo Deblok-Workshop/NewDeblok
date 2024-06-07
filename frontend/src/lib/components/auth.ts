@@ -1,4 +1,22 @@
-async function onAuthClick() {}
+import { toast } from "svelte-sonner";
+
+let passwordRegex = new RegExp("^(?=.*\\d)(?=.*[a-z])[A-Za-z\\d]{10,}$")
+
+async function onAuthClick() {
+	// @ts-expect-error
+	let pwd = document.querySelector("input[type=\"password\"]").value
+	// @ts-expect-error
+	let usr = document.querySelector("input[type=\"username\"]").value
+	if (pwd.trim() == "" || usr.trim() == "") {
+		toast.error("All fields are required.");
+		return
+	}
+	if (!passwordRegex.test(pwd)) {
+		toast.error("Password does not meet requirements.", {
+			description: "A password must be 10 characters long, have atleast 1 lowercase letter, and atleast 1 number.",
+		  });return;
+	}
+}
 
 export default async () => {
 	setInterval(() => {
