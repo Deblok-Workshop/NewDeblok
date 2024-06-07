@@ -3,8 +3,9 @@
 	import { EllipsisVertical, Menu, Settings } from 'lucide-svelte';
 	import { Button } from '$lib/components/ui/button';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import { Toaster } from "$lib/components/ui/sonner";
 </script>
-
+<Toaster />
 <link
 	rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
