@@ -18,6 +18,8 @@ async function onAuthClick() {
 			description: "A password must be 10 characters long, have atleast 1 lowercase letter, and atleast 1 number.",
 		  });
 		// @ts-expect-error
+		document.querySelector("input[type=\"password\"]").value = ""
+		// @ts-expect-error
 		document.querySelector('.auth-dialog-trigger').click();
 		  return;
 	}
