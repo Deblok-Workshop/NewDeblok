@@ -8,5 +8,12 @@ export default defineConfig({
 			strict: false,
 			allow: ['.', 'node_modules', 'node_modules/@sveltejs/kit/src/runtime/client']
 		}
-	}
+		
+	},
+	esbuild: {
+		jsxFactory: 'h',
+		jsxFragment: 'Fragment',
+		// Add TypeScript support
+		loader: 'tsx',
+	  },
 });

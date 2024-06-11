@@ -3,7 +3,7 @@ import md5 from "md5";
 import sha256 from "sha256";
 let passwordRegex = new RegExp("^(?=.*[a-z])(?=.*\\d).{10,}$")
 
-async function onAuthClick() {
+async function onAuthClick(action:"signup" | "login") {
 	// @ts-expect-error
 	let pwd = document.querySelector("input[type=\"password\"]").value
 	// @ts-expect-error
@@ -27,7 +27,10 @@ async function onAuthClick() {
 	}
 	usr = "md5:"+md5(usr)
 	pwd = "sha256:"+sha256.x2(pwd)
-	
+	switch (action) {
+		case "signup": {break;}
+		case "login": {break;}
+	}
 }
 
 export default async () => {
@@ -39,7 +42,9 @@ export default async () => {
 			// @ts-expect-error
 			document.querySelector('.authtrigger').onclick = async (e: any) => {
 				e.preventDefault();
-				await onAuthClick();
+				let action = document.location.pathname.slice(1)
+				if (action != "signup" && action != "login") {return;}
+				await onAuthClick(action);
 			};
 		}
 	}, 500);
