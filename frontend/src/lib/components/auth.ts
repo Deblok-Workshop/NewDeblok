@@ -1,5 +1,6 @@
 import { toast } from "svelte-sonner";
-
+import md5 from "md5";
+import sha256 from "sha256";
 let passwordRegex = new RegExp("^(?=.*\\d)(?=.*[a-z])[A-Za-z\\d]{10,}$")
 
 async function onAuthClick() {
@@ -23,6 +24,8 @@ async function onAuthClick() {
 		document.querySelector('.auth-dialog-trigger').click();
 		  return;
 	}
+	usr = md5(usr)
+	pwd = sha256.x2(usr)
 }
 
 export default async () => {
