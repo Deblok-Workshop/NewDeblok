@@ -1,13 +1,14 @@
 import { toast } from "svelte-sonner";
 import md5 from "md5";
 import sha256 from "sha256";
-let passwordRegex = new RegExp("^(?=.*\\d)(?=.*[a-z])[A-Za-z\\d]{10,}$")
+let passwordRegex = new RegExp("^(?=.*[a-z])(?=.*\\d).{10,}$")
 
 async function onAuthClick() {
 	// @ts-expect-error
 	let pwd = document.querySelector("input[type=\"password\"]").value
 	// @ts-expect-error
 	let usr = document.querySelector("input[type=\"username\"]").value
+	//console.log(pwd,usr)
 	if (pwd.trim() == "" || usr.trim() == "") {
 		toast.error("All fields are required.");
 		// @ts-expect-error
@@ -24,8 +25,9 @@ async function onAuthClick() {
 		document.querySelector('.auth-dialog-trigger').click();
 		  return;
 	}
-	usr = md5(usr)
-	pwd = sha256.x2(usr)
+	usr = "md5:"+md5(usr)
+	pwd = "sha256:"+sha256.x2(pwd)
+	
 }
 
 export default async () => {
