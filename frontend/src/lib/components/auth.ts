@@ -43,7 +43,7 @@ export default async () => {
 			document.querySelector('.authtrigger').onclick = async (e: any) => {
 				e.preventDefault();
 				let action = document.location.pathname.slice(1)
-				if (action != "signup" && action != "login") {return;}
+				if (action != "signup" && action != "login") {return}
 				await onAuthClick(action);
 			};
 		}
