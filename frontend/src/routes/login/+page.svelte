@@ -16,7 +16,7 @@
 				<div class="flex w-full max-w-sm flex-col gap-1.5">
 					<Label>Username</Label>
 					<Input
-						type="username"
+						type="deblok_usr"
 						placeholder="johndoe1234"
 						class="placeholder:text-muted-foreground/40"
 					/>
@@ -24,15 +24,15 @@
 					<Label class="mt-2">Password</Label>
 
 					<Input
-						type="password"
+						type="deblok_pw"
 						placeholder="************"
 						class="placeholder:text-muted-foreground/40"
 					/>
 				</div>
 				<br>
 				<Label
-						class="mt-0.5 text-xs  text-destructive-foreground/60 hover:text-destructive-foreground duration-300"
-						><b>Security warning:</b>&nbsp;Do not use your browser's password manager as it is easy for malware to get it.</Label
+						class="mt-0.5 text-xs  text-destructive/60 hover:text-destructive duration-300 security_warning"
+						><b>Security warning:</b>&nbsp;Do not use your browser's password manager as it is easy for malware to get all your passwords.</Label
 					>
 				<br />
 			</AlertDialog.Description>

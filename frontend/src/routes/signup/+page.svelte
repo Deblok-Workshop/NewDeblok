@@ -41,8 +41,8 @@
 						>Must be 10 characters long, have 1 number, and 1 lowercase letter.</Label
 					><br>
 					<Label
-						class="mt-0.5 text-xs  text-destructive-foreground/60 hover:text-destructive-foreground duration-300"
-						><b>Security warning:</b>&nbsp;Do not use your browser's password manager as it is easy for malware to get it.</Label
+						class="mt-0.5 text-xs text-destructive/60 hover:text-destructive duration-300 security_warning"
+						><b>Security warning:</b>&nbsp;Do not use your browser's password manager as it is easy for malware to get all your passwords.</Label
 					>
 				</div>
 			</AlertDialog.Description>
