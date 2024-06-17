@@ -49,3 +49,10 @@
 .top-app-bar {
 	@apply w-screen mx-auto backdrop-blur bg-secondary/50 hover:bg-secondary/70 duration-300 border-b-2 border-b-black/40 p-2 fixed top-0 !max-h-[56px] !h-[56px] flex flex-row align-middle items-center;
 }
+
+input[type="deblok_pw"] {
+	color:transparent; text-shadow:0 0 3px rgba(0,0,0,0.6);
+	text-security: disc;
+   -webkit-text-security: disc;
+   -moz-text-security: disc;
+}

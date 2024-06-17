@@ -29,6 +29,11 @@
 						class="placeholder:text-muted-foreground/40"
 					/>
 				</div>
+				<br>
+				<Label
+						class="mt-0.5 text-xs  text-destructive-foreground/60 hover:text-destructive-foreground duration-300"
+						><b>Security warning:</b>&nbsp;Do not use your browser's password manager as it is easy for malware to get it.</Label
+					>
 				<br />
 			</AlertDialog.Description>
 		</AlertDialog.Header>
